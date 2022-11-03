@@ -1,3 +1,9 @@
+import { PageSEO } from '~/components/SEO';
+
 export default function Home() {
-  return <div></div>;
+  return (
+    <>
+      <PageSEO title="Home" />
+    </>
+  );
 }
