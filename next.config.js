@@ -5,6 +5,10 @@ const nextConfig = {
   experimental: {
     fontLoaders: [{ loader: '@next/font/google', options: { subsets: ['latin'] } }],
   },
+  images: {
+    loader: 'akamai',
+    path: '/',
+  },
 };
 
 module.exports = nextConfig;
