@@ -1,5 +1,5 @@
 module.exports = {
-  extends: ['next/core-web-vitals', 'plugin:prettier/recommended'],
+  extends: ['next/core-web-vitals', 'plugin:prettier/recommended', 'plugin:mdx/recommended'],
   plugins: ['unused-imports', 'simple-import-sort'],
   rules: {
     // https://github.com/sweepline/eslint-plugin-unused-imports
@@ -26,10 +26,7 @@ module.exports = {
         'simple-import-sort/imports': [
           'error',
           {
-            groups: [
-              ['^\\u0000', '^@?\\w'],
-              ['^~/', '^\\.'],
-            ],
+            groups: [['^\\u0000'], ['^@?\\w'], ['^~/', '^\\.']],
           },
         ],
       },

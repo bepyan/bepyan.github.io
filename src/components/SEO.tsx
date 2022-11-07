@@ -1,17 +1,17 @@
 import { ArticleJsonLd, NextSeo } from 'next-seo';
 
-import { config } from '~/config';
+import { siteConfig } from '~/config';
 
 const getTitle = (title?: string) => {
-  if (!title) return config.title;
+  if (!title) return siteConfig.title;
 
-  return `${title} – ${config.title}`;
+  return `${title} – ${siteConfig.title}`;
 };
 
 const getRelativeUrl = (url?: string) => {
-  if (!url) return config.url;
+  if (!url) return siteConfig.url;
 
-  return `${config.url}${url.replace(/^\/s*/g, '')}`;
+  return `${siteConfig.url}${url.replace(/^\/s*/g, '')}`;
 };
 
 /**
@@ -29,7 +29,7 @@ export const PageSEO = ({
   return (
     <NextSeo
       title={getTitle(title)}
-      description={description ?? config.description}
+      description={description ?? siteConfig.description}
       canonical={getRelativeUrl(url)}
     />
   );
@@ -75,7 +75,7 @@ export const BlogSEO = ({
           article: {
             publishedTime,
             modifiedTime,
-            authors: [`${config.url}/about`],
+            authors: [`${siteConfig.url}/about`],
             tags,
           },
           url,
@@ -97,9 +97,9 @@ export const BlogSEO = ({
         url={url}
         title={title}
         description={summary}
-        authorName={config.author.name}
-        publisherName={config.author.name}
-        publisherLogo={`${config.url}/favicon.ico`}
+        authorName={siteConfig.author.name}
+        publisherName={siteConfig.author.name}
+        publisherLogo={`${siteConfig.url}/favicon.ico`}
       />
     </>
   );

@@ -1,42 +1,65 @@
 import { DefaultSeoProps } from 'next-seo';
 
-export const config = {
-  url: 'htpp://bepyan.github.io/',
+export const headerConfig = {};
+
+export const siteConfig = {
+  url: 'https://bepyan.github.io',
   title: 'bepyan',
   description: 'bepyan blog',
   copyright: 'bepyan © All rights reserved.',
+  since: 2022,
   googleAnalyticsId: '',
   author: {
-    name: 'bepyan',
+    name: 'edward kim',
     photo: '/profile.png',
     bio: 'frontend engineer',
     contacts: {
-      email: 'bepyan@naver.com',
+      email: 'mailto:bepyan@naver.com',
       twitter: 'https://twitter.com/__pyungan',
-      github: 'https://github.com/bepyan',
+      velog: 'https://velog.io/@bepyan',
       linkedin: '',
-      instagram: '',
-      gitlab: '',
-      codepen: '',
       youtube: '',
+      github: 'https://github.com/bepyan',
     },
   },
+  menus: [
+    {
+      label: 'Home',
+      path: '/',
+    },
+    {
+      label: 'Blog',
+      path: '/blog',
+    },
+    {
+      label: 'Notebooks',
+      path: '/notebooks',
+    },
+    {
+      label: 'Snippets',
+      path: '/snippets',
+    },
+    {
+      label: 'Keywords',
+      path: '/keywords',
+    },
+  ],
 };
 
 export const seoConfig: DefaultSeoProps = {
-  title: config.title,
-  description: config.description,
-  canonical: config.url,
+  title: siteConfig.title,
+  description: siteConfig.description,
+  canonical: siteConfig.url,
   openGraph: {
     type: 'website',
     locale: 'ko-KR',
-    url: config.url,
-    siteName: config.title,
+    url: siteConfig.url,
+    siteName: siteConfig.title,
   },
   additionalMetaTags: [
     {
       name: 'author',
-      content: config.author.name,
+      content: siteConfig.author.name,
     },
   ],
 };
