@@ -1,7 +1,11 @@
 import { useTheme } from 'next-themes';
+import { useEffect, useState } from 'react';
 
 export default function ThemeSwitch() {
+  const [mounted, setMounted] = useState(false);
   const { resolvedTheme, setTheme } = useTheme();
+
+  useEffect(() => setMounted(true), []);
 
   return (
     <button
@@ -17,7 +21,9 @@ export default function ThemeSwitch() {
         stroke="currentColor"
         className="h-5 w-5 text-gray-800 dark:text-gray-200"
       >
-        {resolvedTheme === 'dark' ? (
+        {!mounted ? (
+          <></>
+        ) : resolvedTheme === 'dark' ? (
           <path
             strokeLinecap="round"
             strokeLinejoin="round"
