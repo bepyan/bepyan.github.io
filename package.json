@@ -6,6 +6,7 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build && next export && next-export-optimize-images",
+    "serve": "npx http-server out",
     "lint": "eslint src/**/*.{ts,tsx} --fix"
   },
   "dependencies": {
