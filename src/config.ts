@@ -40,8 +40,8 @@ export const siteConfig = {
       path: '/snippets',
     },
     {
-      label: 'Keywords',
-      path: '/keywords',
+      label: 'Tags',
+      path: '/tags',
     },
   ],
 };

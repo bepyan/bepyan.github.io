@@ -33,7 +33,7 @@ export default function PostPage({ posts }: Props) {
               <p className="text-xl font-bold">{post.data.title}</p>
             </Link>
             <div>
-              {post.data.keywords.map((keyword, i) => (
+              {post.data.tags.map((keyword, i) => (
                 <Link key={i} href={`/keyword/${keyword}`}>
                   {keyword}
                 </Link>

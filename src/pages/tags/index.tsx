@@ -10,11 +10,11 @@ export const getStaticProps = () => {
   };
 };
 
-export default function Keywords() {
+export default function Tags() {
   return (
     <Layout>
-      <PageSEO title="Keywords" description="" url="/keywords" />
-      <Title>Keywords</Title>
+      <PageSEO title="Tags" description="" url="/tags" />
+      <Title>Tags</Title>
     </Layout>
   );
 }
