@@ -1,22 +1,12 @@
+import Link from 'next/link';
+
 import Title from '~/components/common/Title';
 import Layout from '~/components/Layout';
 import { PageSEO } from '~/components/SEO';
-import { getAllPosts } from '~/utils/post';
+import { posts } from '~/utils/post';
 
 export function getStaticProps() {
-  // const posts = postFilePaths.map((filePath) => {
-  //   const file = readPost(filePath);
-  //   const { content, data } = matter(file);
-
-  //   return {
-  //     content,
-  //     data: data as TPostMatters,
-  //     filePath,
-  //   };
-  // });
-  const posts = getAllPosts();
-
-  return { props: { posts: [] } };
+  return { props: { posts } };
 }
 
 type Props = Awaited<ReturnType<typeof getStaticProps>>['props'];
@@ -27,21 +17,21 @@ export default function PostPage({ posts }: Props) {
       <PageSEO title="Blog" description="" url="/blog" />
       <Title>Blog</Title>
       <ul>
-        {/* {posts.map((post) => (
-          <li key={post.filePath} className="py-4">
-            <Link as={`/blog/${post.filePath.replace(/\.mdx?$/, '')}`} href={`/blog/[slug]`}>
-              <p className="text-xl font-bold">{post.data.title}</p>
+        {posts.map((post) => (
+          <li key={post.slug} className="py-4">
+            <Link as={`/blog/${post.slug.replace(/\.mdx?$/, '')}`} href={`/blog/[...slug]`}>
+              <p className="text-xl font-bold">{post.title}</p>
             </Link>
             <div>
-              {post.data.tags.map((keyword, i) => (
-                <Link key={i} href={`/keyword/${keyword}`}>
-                  {keyword}
+              {post.tags.map((tag, i) => (
+                <Link key={i} href={`/tags/${tag}`}>
+                  {tag}
                 </Link>
               ))}
             </div>
-            <p className="text-gray-800 dark:text-gray-400">{post.data.description}</p>
+            <p className="text-gray-800 dark:text-gray-400">{post.description}</p>
           </li>
-        ))} */}
+        ))}
       </ul>
     </Layout>
   );

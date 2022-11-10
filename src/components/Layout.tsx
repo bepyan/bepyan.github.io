@@ -5,6 +5,7 @@ import title from 'title';
 
 import { siteConfig } from '~/config';
 import ExternalLink from './common/ExternalLink';
+import Hr from './common/Hr';
 import NavItem from './common/NavItem';
 import ThemeSwitch from './ThemeSwitch';
 
@@ -45,8 +46,8 @@ export default function Layout({ children }: { children: ReactNode }) {
       {/* --- */}
       <main className="pb-16">{children}</main>
       {/* --- */}
-      <footer className="text-sm text-gray-800 dark:text-gray-400">
-        <hr className="border-1 mb-8 w-full border-gray-200 transition-all dark:border-gray-800"></hr>
+      <footer className="pb-8 text-sm text-gray-800 dark:text-gray-400">
+        <Hr className="mb-8" />
 
         <div className="flex flex-col items-end space-y-1">
           <div className="flex space-x-2">
@@ -69,9 +70,6 @@ export default function Layout({ children }: { children: ReactNode }) {
             <span>, </span>
             <ExternalLink href="https://pages.github.com/">Github Pages</ExternalLink>
           </p>
-        </div>
-        <div>
-          <span></span>
         </div>
       </footer>
     </div>

@@ -46,8 +46,8 @@ export const BlogSEO = ({
 }: {
   title: string;
   summary: string;
-  date: string;
-  updatedAt: string;
+  createdDate: string;
+  updatedDate: string;
   url: string;
   tags: string[];
   images: string[];
@@ -55,8 +55,8 @@ export const BlogSEO = ({
   const title = getTitle(props.title);
   const url = getRelativeUrl(props.url);
 
-  const publishedTime = new Date(props.date).toISOString();
-  const modifiedTime = new Date(props.updatedAt || props.date).toISOString();
+  const publishedTime = new Date(props.createdDate).toISOString();
+  const modifiedTime = new Date(props.updatedDate || props.createdDate).toISOString();
 
   const featuredImages = images.map((img) => {
     return {

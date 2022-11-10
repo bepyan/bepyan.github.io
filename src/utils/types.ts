@@ -11,4 +11,5 @@ export type Post = GrayMatter & {
   slug: string;
   content: string;
   readingTime: string;
+  wordCount: number;
 };
