@@ -1,5 +1,14 @@
-export type TPostMatters = {
+export type GrayMatter = {
   title: string;
   description: string;
-  keywords: string[];
+  tags: string[];
+  published: boolean;
+  createdDate: string;
+  updatedDate: string;
+};
+
+export type Post = GrayMatter & {
+  slug: string;
+  content: string;
+  readingTime: string;
 };
