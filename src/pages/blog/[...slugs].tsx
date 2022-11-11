@@ -61,7 +61,7 @@ export default function PostPage({
             <p className="ml-2 text-sm text-gray-700 dark:text-gray-300">{post.date}</p>
           </div>
           <p className="min-w-32 mt-2 text-sm text-gray-600 dark:text-gray-400 md:mt-0">
-            {post.readingTime}
+            {post.readingMinutes}
             {` • `}
             {post.wordCount} words
           </p>

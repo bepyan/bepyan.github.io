@@ -5,16 +5,22 @@ import matter from 'gray-matter';
 import path from 'path';
 import readingTime from 'reading-time';
 
-import { GrayMatter, Post } from './types';
+import { GrayMatter, Post, Serize } from './types';
 
 const BASE_PATH = '/posts';
 const POSTS_PATH = path.join(process.cwd(), BASE_PATH);
 
+const pathToSlug = (filePath: string) =>
+  filePath
+    .slice(filePath.indexOf(BASE_PATH) + BASE_PATH.length + 1)
+    .replace('.mdx', '')
+    .replace('/index', '');
+
 /**
  *
  */
-export const getAllPosts = () => {
-  const postPaths = sync(`${POSTS_PATH}/**/!(snippets)/!(index).mdx`);
+export const getAllPosts = (subPath = '') => {
+  const postPaths = sync(`${POSTS_PATH}/**/!(snippets)${subPath}/!(index).mdx`);
 
   return postPaths
     .reduce<Post[]>((ac, filePath) => {
@@ -22,17 +28,17 @@ export const getAllPosts = () => {
       const { content, data } = matter(file);
       const grayMatter = data as GrayMatter;
 
-      const slug = filePath
-        .slice(filePath.indexOf(BASE_PATH) + BASE_PATH.length + 1)
-        .replace('.mdx', '');
+      if (grayMatter.draft) {
+        return ac;
+      }
 
       const post: Post = {
         ...grayMatter,
         tags: grayMatter.tags.filter(Boolean),
         date: dayjs(grayMatter.date).format('YYYY-MM-DD (ddd)'),
         content,
-        slug,
-        readingTime: readingTime(content).text,
+        slug: pathToSlug(filePath),
+        readingMinutes: Math.ceil(readingTime(content).minutes),
         wordCount: content.split(/\s+/gu).length,
       };
 
@@ -44,8 +50,29 @@ export const getAllPosts = () => {
 /**
  *
  */
-// const notebookPaths = sync(`${POSTS_PATH}/**/!(snippets)/index.mdx`);
-// console.log(notebookPaths);
+export const getAllSerizes = () => {
+  const serizePaths = sync(`${POSTS_PATH}/**/!(snippets)/index.mdx`);
+
+  return serizePaths.reduce<Serize[]>((ac, serizePath) => {
+    const file = fs.readFileSync(serizePath, { encoding: 'utf8' });
+    const { data } = matter(file);
+    const grayMatter = data as GrayMatter;
+
+    const slug = pathToSlug(serizePath);
+    const posts = getAllPosts(slug);
+
+    const serize: Serize = {
+      ...grayMatter,
+      tags: grayMatter.tags.filter(Boolean),
+      date: dayjs(grayMatter.date).format('YYYY-MM-DD (ddd)'),
+      posts,
+      readingMinutes: posts.reduce((ac, post) => ac + post.readingMinutes, 0),
+      slug,
+    };
+
+    return [...ac, serize];
+  }, []);
+};
 
 // /**
 //  *
