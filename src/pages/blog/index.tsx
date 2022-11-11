@@ -26,9 +26,8 @@ export default function PostPage({ serizes, posts }: { serizes: Serize[]; posts:
       <div className="pb-4">
         <Title>Blog</Title>
         <p className="mb-4 text-gray-600 dark:text-gray-400">
-          {`I've been writing online since 2014, mostly about web development and tech careers.
-            In total, I've written ${posts.length} articles on my blog.
-            Use the search below to filter by title.`}
+          개발하면서 탐구한 것을 소소하게 기록하는 공간입니다. <br />
+          {`시리즈로 연재된 포스트는 아래 시리즈북으로 편리하게 열람할 수 있습니다 🧐`}
         </p>
       </div>
 
@@ -47,7 +46,10 @@ export default function PostPage({ serizes, posts }: { serizes: Serize[]; posts:
       </Suspense>
 
       <Suspense fallback={null}>
-        <SubTitle className="mt-16 mb-4">All Posts</SubTitle>
+        <div className="mt-16 mb-4 flex items-end gap-2">
+          <SubTitle>All Posts</SubTitle>
+          <span className="font-bold">({posts.length})</span>
+        </div>
 
         <ul className="space-y-4">
           {posts.map((post) => (

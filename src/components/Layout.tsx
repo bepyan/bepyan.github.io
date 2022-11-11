@@ -36,7 +36,7 @@ export default function Layout({ children }: { children: ReactNode }) {
             {link.label}
           </NavItem>
         ))}
-        <div className="ml-auto">
+        <div className="ml-auto mb-1">
           <ThemeSwitch />
         </div>
       </nav>

@@ -1,7 +1,9 @@
+import dayjs from 'dayjs';
 import { GetStaticPaths, GetStaticProps } from 'next';
 
 import IconText from '~/components/common/IconText';
 import PostListItem from '~/components/common/PostListItem';
+import CalanderIcon from '~/components/icons/CalanderIcon';
 import ClockIcon from '~/components/icons/ClockIcon';
 import ListIcon from '~/components/icons/ListIcon';
 import Layout from '~/components/Layout';
@@ -50,6 +52,7 @@ export default function PostPage({ serize }: { serize: Serize }) {
           <div className="rounded-lg bg-gray-150 px-5 py-4 dark:bg-gray-800">
             <p>{serize.description}</p>
             <div className="mt-1 flex gap-2 text-gray-600 dark:text-gray-400">
+              <IconText Icon={CalanderIcon} text={dayjs(serize.date).format('YY.MM.DD')} />
               <IconText Icon={ListIcon} text={`${serize.posts.length}편`} />
               <IconText Icon={ClockIcon} text={`${serize.readingMinutes}분`} />
             </div>

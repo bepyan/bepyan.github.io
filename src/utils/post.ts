@@ -35,7 +35,7 @@ export const getAllPosts = (subPath = '') => {
       const post: Post = {
         ...grayMatter,
         tags: grayMatter.tags.filter(Boolean),
-        date: dayjs(grayMatter.date).format('YYYY-MM-DD (ddd)'),
+        date: dayjs(grayMatter.date).format('YYYY-MM-DD'),
         content,
         slug: pathToSlug(filePath),
         readingMinutes: Math.ceil(readingTime(content).minutes),
@@ -64,7 +64,7 @@ export const getAllSerizes = () => {
     const serize: Serize = {
       ...grayMatter,
       tags: grayMatter.tags.filter(Boolean),
-      date: dayjs(grayMatter.date).format('YYYY-MM-DD (ddd)'),
+      date: dayjs(grayMatter.date).format('YYYY-MM-DD'),
       posts,
       readingMinutes: posts.reduce((ac, post) => ac + post.readingMinutes, 0),
       slug,

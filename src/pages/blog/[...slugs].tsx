@@ -1,7 +1,11 @@
+import dayjs from 'dayjs';
 import { GetStaticPaths, GetStaticProps } from 'next';
 import { MDXRemote, MDXRemoteSerializeResult } from 'next-mdx-remote';
 
 import Hr from '~/components/common/Hr';
+import IconText from '~/components/common/IconText';
+import CalanderIcon from '~/components/icons/CalanderIcon';
+import ClockIcon from '~/components/icons/ClockIcon';
 import Layout from '~/components/Layout';
 import { serializeMdx } from '~/utils/mdx';
 import { getAllPosts } from '~/utils/post';
@@ -52,19 +56,15 @@ export default function PostPage({
       {/* <BlogSEO {...post} url={`/blog/${slug}`} summary={post.description} images={[]} /> */}
 
       <div>
-        <h1 className="mb-4 text-3xl font-bold tracking-tight text-black dark:text-white md:text-5xl">
+        <h1 className="mb-4 text-center text-3xl font-bold tracking-tight text-black dark:text-white md:text-5xl">
           {post.title}
         </h1>
 
-        <div className="mt-2 flex w-full flex-col items-start justify-between md:flex-row md:items-center">
-          <div className="flex items-center">
-            <p className="ml-2 text-sm text-gray-700 dark:text-gray-300">{post.date}</p>
+        <div className="mt-2 flex w-full flex-col justify-between md:flex-row md:items-center">
+          <div className="mx-auto flex gap-2 text-gray-600 dark:text-gray-400">
+            <IconText Icon={CalanderIcon} text={dayjs(post.date).format('YY.MM.DD')} />
+            <IconText Icon={ClockIcon} text={`${post.readingMinutes}분`} />
           </div>
-          <p className="min-w-32 mt-2 text-sm text-gray-600 dark:text-gray-400 md:mt-0">
-            {post.readingMinutes}
-            {` • `}
-            {post.wordCount} words
-          </p>
         </div>
         <Hr className="mt-4" />
       </div>
