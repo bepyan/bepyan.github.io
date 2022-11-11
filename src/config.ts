@@ -32,8 +32,8 @@ export const siteConfig = {
       path: '/snippets',
     },
     {
-      label: 'Tags',
-      path: '/tags',
+      label: 'Archives',
+      path: '/archives',
     },
   ],
 };

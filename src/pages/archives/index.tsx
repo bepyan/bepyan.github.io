@@ -5,16 +5,16 @@ import { PageSEO } from '~/components/SEO';
 export const getStaticProps = () => {
   return {
     props: {
-      keywordList: [],
+      tags: [],
     },
   };
 };
 
-export default function Tags() {
+export default function Archives() {
   return (
     <Layout>
-      <PageSEO title="Tags" description="" url="/tags" />
-      <Title>Tags</Title>
+      <PageSEO title="Archives" description="" url="/archives" />
+      <Title>Archives</Title>
     </Layout>
   );
 }
