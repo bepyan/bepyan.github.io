@@ -44,7 +44,7 @@ export const getAllPosts = (subPath = '') => {
 
       return [...ac, post];
     }, [])
-    .sort((a, b) => new Date(a.date).getTime() - new Date(b.date).getTime());
+    .sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
 };
 
 /**
@@ -53,25 +53,27 @@ export const getAllPosts = (subPath = '') => {
 export const getAllSerizes = () => {
   const serizePaths = sync(`${POSTS_PATH}/**/!(snippets)/index.mdx`);
 
-  return serizePaths.reduce<Serize[]>((ac, serizePath) => {
-    const file = fs.readFileSync(serizePath, { encoding: 'utf8' });
-    const { data } = matter(file);
-    const grayMatter = data as GrayMatter;
+  return serizePaths
+    .reduce<Serize[]>((ac, serizePath) => {
+      const file = fs.readFileSync(serizePath, { encoding: 'utf8' });
+      const { data } = matter(file);
+      const grayMatter = data as GrayMatter;
 
-    const slug = pathToSlug(serizePath);
-    const posts = getAllPosts(slug);
+      const slug = pathToSlug(serizePath);
+      const posts = getAllPosts(slug);
 
-    const serize: Serize = {
-      ...grayMatter,
-      tags: grayMatter.tags.filter(Boolean),
-      date: dayjs(grayMatter.date).format('YYYY-MM-DD'),
-      posts,
-      readingMinutes: posts.reduce((ac, post) => ac + post.readingMinutes, 0),
-      slug,
-    };
+      const serize: Serize = {
+        ...grayMatter,
+        tags: grayMatter.tags.filter(Boolean),
+        date: dayjs(grayMatter.date).format('YYYY-MM-DD'),
+        posts,
+        readingMinutes: posts.reduce((ac, post) => ac + post.readingMinutes, 0),
+        slug,
+      };
 
-    return [...ac, serize];
-  }, []);
+      return [...ac, serize];
+    }, [])
+    .sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
 };
 
 // /**
