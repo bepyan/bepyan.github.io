@@ -11,6 +11,7 @@
   },
   "dependencies": {
     "@next/font": "^13.0.2",
+    "dayjs": "^1.11.6",
     "glob": "^8.0.3",
     "gray-matter": "^4.0.3",
     "next": "13.0.2",

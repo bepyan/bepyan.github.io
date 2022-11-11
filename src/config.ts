@@ -32,10 +32,6 @@ export const siteConfig = {
       path: '/blog',
     },
     {
-      label: 'Notebooks',
-      path: '/notebooks',
-    },
-    {
       label: 'Snippets',
       path: '/snippets',
     },

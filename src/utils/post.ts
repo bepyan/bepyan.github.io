@@ -1,3 +1,4 @@
+import dayjs from 'dayjs';
 import fs from 'fs';
 import { sync } from 'glob';
 import matter from 'gray-matter';
@@ -27,6 +28,8 @@ export const posts = postPaths
 
     const post: Post = {
       ...grayMatter,
+      tags: grayMatter.tags.filter(Boolean),
+      date: dayjs(grayMatter.date).format('YYYY-MM-DD (ddd)'),
       content,
       slug,
       readingTime: readingTime(content).text,
@@ -35,7 +38,7 @@ export const posts = postPaths
 
     return [...ac, post];
   }, [])
-  .sort((a, b) => new Date(a.createdDate).getTime() - new Date(b.createdDate).getTime());
+  .sort((a, b) => new Date(a.date).getTime() - new Date(b.date).getTime());
 
 /**
  *

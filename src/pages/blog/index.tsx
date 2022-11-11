@@ -4,14 +4,13 @@ import Title from '~/components/common/Title';
 import Layout from '~/components/Layout';
 import { PageSEO } from '~/components/SEO';
 import { posts } from '~/utils/post';
+import { Post } from '~/utils/types';
 
 export function getStaticProps() {
   return { props: { posts } };
 }
 
-type Props = Awaited<ReturnType<typeof getStaticProps>>['props'];
-
-export default function PostPage({ posts }: Props) {
+export default function PostPage({ posts }: { posts: Post[] }) {
   return (
     <Layout>
       <PageSEO title="Blog" description="" url="/blog" />

@@ -39,7 +39,6 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
 
 export default function PostPage({
   post,
-  slug,
   mdx,
 }: {
   post: Post;
@@ -57,9 +56,7 @@ export default function PostPage({
 
         <div className="mt-2 flex w-full flex-col items-start justify-between md:flex-row md:items-center">
           <div className="flex items-center">
-            <p className="ml-2 text-sm text-gray-700 dark:text-gray-300">
-              {/* {format(parseISO(post.date), 'MMMM dd, yyyy')} */}
-            </p>
+            <p className="ml-2 text-sm text-gray-700 dark:text-gray-300">{post.date}</p>
           </div>
           <p className="min-w-32 mt-2 text-sm text-gray-600 dark:text-gray-400 md:mt-0">
             {post.readingTime}
