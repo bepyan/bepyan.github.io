@@ -41,7 +41,7 @@ export default function PostPage({ serize }: { serize: Serize }) {
       <div className="grid grid-cols-3 gap-32">
         <div className="col-span-1">
           <div className="h-[336px] w-[240px] select-none rounded-lg bg-gray-200 px-11 pb-16 pt-12 dark:bg-gray-800">
-            <div className="flex h-full break-keep bg-white px-3 py-4 text-xl font-semibold dark:bg-gray-700 dark:text-white">
+            <div className="flex h-full break-keep bg-gray-50 px-3 py-4 text-xl font-semibold dark:bg-gray-700 dark:text-white">
               {serize.title}
             </div>
           </div>

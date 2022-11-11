@@ -24,10 +24,6 @@ export const siteConfig = {
   },
   menus: [
     {
-      label: 'Home',
-      path: '/',
-    },
-    {
       label: 'Blog',
       path: '/blog',
     },
