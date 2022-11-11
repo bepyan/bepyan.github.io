@@ -1,17 +1,12 @@
-import { ReactNode } from 'react';
+import { $ } from '~/utils/core';
 
-export interface ExternalLinkProps {
-  href: string;
-  children?: ReactNode;
-}
-
-export default function ExternalLink({ href, children }: ExternalLinkProps) {
+export default function ExternalLink({ children, className, ...props }: React.ComponentProps<'a'>) {
   return (
     <a
-      className="text-gray-500 transition hover:text-gray-600"
+      {...props}
+      className={$('text-gray-500 transition hover:text-gray-600', className)}
       target="_blank"
       rel="noopener noreferrer"
-      href={href}
     >
       {children}
     </a>
