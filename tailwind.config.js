@@ -24,6 +24,7 @@ module.exports = {
       },
       dropShadow: {
         base: '0px 0px 10px rgba(234, 179, 8, 0.3)',
+        'base-bold': '0px 0px 7px rgba(234, 179, 8, 0.7)',
       },
       fontFamily: {
         sans: ['Inter', ...fontFamily.sans],
