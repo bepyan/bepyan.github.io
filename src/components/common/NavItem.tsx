@@ -3,21 +3,22 @@ import { useRouter } from 'next/router';
 
 import { $ } from '~/utils/core';
 
-export default function NavItem({ href, text }: { href: string; text: string }) {
+export default function NavItem({ href, children, className }: React.ComponentProps<'a'>) {
   const router = useRouter();
   const isActive = router.asPath === href;
 
   return (
     <Link
-      href={href}
+      href={href ?? '/'}
       className={$(
         isActive
           ? 'font-semibold text-gray-800 dark:text-gray-200'
           : 'font-normal text-gray-600 dark:text-gray-400',
-        'rounded-lg px-3 py-1.5 transition-all hover:bg-gray-200 dark:hover:bg-gray-800',
+        'rounded-lg transition-all hover:bg-gray-200 dark:hover:bg-gray-800',
+        className,
       )}
     >
-      <span>{text}</span>
+      {children}
     </Link>
   );
 }

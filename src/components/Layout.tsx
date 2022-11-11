@@ -1,5 +1,4 @@
 import Image from 'next/image';
-import Link from 'next/link';
 import { ReactNode, useMemo } from 'react';
 import title from 'title';
 
@@ -20,26 +19,24 @@ export default function Layout({ children }: { children: ReactNode }) {
 
   return (
     <div className="mx-auto max-w-2xl px-4 sm:px-6 xl:max-w-3xl xl:px-0">
-      <nav className="flex items-end pt-8 pb-12">
-        <Link href="/" aria-label="Tailwind CSS Blog">
-          <div className="mr-2 flex items-end justify-between rounded-lg transition-all hover:bg-gray-200 dark:hover:bg-gray-800">
-            <Image
-              src="/favicon.png"
-              blurDataURL="/favicon.png"
-              alt="logo"
-              width={40}
-              height={40}
-              placeholder="blur"
-              className="h-auto w-10 rounded-full"
-            />
-          </div>
-        </Link>
-        <div className="relative flex w-full items-center justify-between text-base leading-5 text-gray-800 dark:text-gray-400">
-          <div>
-            {siteConfig.menus.map((link) => (
-              <NavItem key={link.label} href={link.path} text={link.label} />
-            ))}
-          </div>
+      <nav className="flex w-full items-end pt-8 pb-12 text-gray-800 dark:text-gray-400">
+        <NavItem href="/" className="mr-2">
+          <Image
+            src="/favicon.png"
+            blurDataURL="/favicon.png"
+            alt="logo"
+            width={40}
+            height={40}
+            placeholder="blur"
+            className="block h-auto"
+          />
+        </NavItem>
+        {siteConfig.menus.map((link) => (
+          <NavItem key={link.label} href={link.path} className="px-3 py-1.5">
+            {link.label}
+          </NavItem>
+        ))}
+        <div className="ml-auto">
           <ThemeSwitch />
         </div>
       </nav>
