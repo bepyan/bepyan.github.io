@@ -13,41 +13,42 @@ const POSTS_PATH = path.join(process.cwd(), BASE_PATH);
 /**
  *
  */
-const postPaths = sync(`${POSTS_PATH}/**/!(snippets)/!(index).mdx`);
-console.log(postPaths);
+export const getAllPosts = () => {
+  const postPaths = sync(`${POSTS_PATH}/**/!(snippets)/!(index).mdx`);
 
-export const posts = postPaths
-  .reduce<Post[]>((ac, filePath) => {
-    const file = fs.readFileSync(filePath, { encoding: 'utf8' });
-    const { content, data } = matter(file);
-    const grayMatter = data as GrayMatter;
+  return postPaths
+    .reduce<Post[]>((ac, filePath) => {
+      const file = fs.readFileSync(filePath, { encoding: 'utf8' });
+      const { content, data } = matter(file);
+      const grayMatter = data as GrayMatter;
 
-    const slug = filePath
-      .slice(filePath.indexOf(BASE_PATH) + BASE_PATH.length + 1)
-      .replace('.mdx', '');
+      const slug = filePath
+        .slice(filePath.indexOf(BASE_PATH) + BASE_PATH.length + 1)
+        .replace('.mdx', '');
 
-    const post: Post = {
-      ...grayMatter,
-      tags: grayMatter.tags.filter(Boolean),
-      date: dayjs(grayMatter.date).format('YYYY-MM-DD (ddd)'),
-      content,
-      slug,
-      readingTime: readingTime(content).text,
-      wordCount: content.split(/\s+/gu).length,
-    };
+      const post: Post = {
+        ...grayMatter,
+        tags: grayMatter.tags.filter(Boolean),
+        date: dayjs(grayMatter.date).format('YYYY-MM-DD (ddd)'),
+        content,
+        slug,
+        readingTime: readingTime(content).text,
+        wordCount: content.split(/\s+/gu).length,
+      };
 
-    return [...ac, post];
-  }, [])
-  .sort((a, b) => new Date(a.date).getTime() - new Date(b.date).getTime());
-
-/**
- *
- */
-const notebookPaths = sync(`${POSTS_PATH}/**/!(snippets)/index.mdx`);
-console.log(notebookPaths);
+      return [...ac, post];
+    }, [])
+    .sort((a, b) => new Date(a.date).getTime() - new Date(b.date).getTime());
+};
 
 /**
  *
  */
-const snippetsPaths = sync(`${POSTS_PATH}/**/snippets/*.mdx`);
-console.log(snippetsPaths);
+// const notebookPaths = sync(`${POSTS_PATH}/**/!(snippets)/index.mdx`);
+// console.log(notebookPaths);
+
+// /**
+//  *
+//  */
+// const snippetsPaths = sync(`${POSTS_PATH}/**/snippets/*.mdx`);
+// console.log(snippetsPaths);

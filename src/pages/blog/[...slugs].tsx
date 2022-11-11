@@ -4,10 +4,12 @@ import { MDXRemote, MDXRemoteSerializeResult } from 'next-mdx-remote';
 import Hr from '~/components/common/Hr';
 import Layout from '~/components/Layout';
 import { serializeMdx } from '~/utils/mdx';
-import { posts } from '~/utils/post';
+import { getAllPosts } from '~/utils/post';
 import { Post } from '~/utils/types';
 
 export const getStaticPaths: GetStaticPaths = () => {
+  const posts = getAllPosts();
+
   return {
     paths: posts.map((post) => `/blog/${post.slug}`),
     fallback: 'blocking',
@@ -18,7 +20,7 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
   const { slugs } = params as { slugs: string[] };
 
   const slug = [...slugs].join('/');
-  const post = posts.find((v) => v.slug === slug);
+  const post = getAllPosts().find((v) => v.slug === slug);
 
   if (!post) {
     return {

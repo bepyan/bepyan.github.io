@@ -1,14 +1,15 @@
 import Link from 'next/link';
+import { Suspense } from 'react';
 
 import Title from '~/components/common/Title';
 import Layout from '~/components/Layout';
 import { PageSEO } from '~/components/SEO';
 import { $ } from '~/utils/core';
-import { posts } from '~/utils/post';
+import { getAllPosts } from '~/utils/post';
 import { Post } from '~/utils/types';
 
 export function getStaticProps() {
-  return { props: { posts } };
+  return { props: { posts: getAllPosts() } };
 }
 
 export default function PostPage({ posts }: { posts: Post[] }) {
@@ -25,16 +26,22 @@ export default function PostPage({ posts }: { posts: Post[] }) {
         </p>
       </div>
 
-      <h3 className="mt-8 mb-4 text-2xl font-bold tracking-tight text-black dark:text-white md:text-4xl">
-        All Posts
-      </h3>
+      <Suspense>
+        <h3 className="mt-8 mb-4 text-2xl font-bold tracking-tight text-black dark:text-white md:text-4xl">
+          All Posts
+        </h3>
 
-      <ul className="space-y-4">
-        {posts.map((post) => (
-          <li key={post.slug} className="text-ye group py-4 hover:drop-shadow-base">
-            <Link as={`/blog/${post.slug.replace(/\.mdx?$/, '')}`} href={`/blog/[...slug]`}>
-              <p className="text-xl font-bold transition-colors">{post.title}</p>
-              <p className="text-gray-600 dark:text-gray-400">{post.description}</p>
+        <ul className="space-y-4">
+          {posts.map((post) => (
+            <li key={post.slug} className="text-ye py-4 hover:drop-shadow-base">
+              <Link
+                as={`/blog/${post.slug.replace(/\.mdx?$/, '')}`}
+                href={`/blog/[...slug]`}
+                className="hover:drop-shadow-base"
+              >
+                <p className="text-xl font-bold">{post.title}</p>
+                <p className="text-gray-600 dark:text-gray-400">{post.description}</p>
+              </Link>
               <div className="mt-2 flex items-center space-x-2 text-sm">
                 {post.tags.map((tag, i) => (
                   <Link key={i} href={`/tags/${tag}`}>
@@ -49,10 +56,10 @@ export default function PostPage({ posts }: { posts: Post[] }) {
                   </Link>
                 ))}
               </div>
-            </Link>
-          </li>
-        ))}
-      </ul>
+            </li>
+          ))}
+        </ul>
+      </Suspense>
     </Layout>
   );
 }
