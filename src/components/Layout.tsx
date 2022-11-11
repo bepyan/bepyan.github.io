@@ -20,7 +20,7 @@ export default function Layout({ children }: { children: ReactNode }) {
 
   return (
     <div className="mx-auto max-w-2xl px-4 sm:px-6 xl:max-w-3xl xl:px-0">
-      <nav className="flex items-end pt-8 pb-16">
+      <nav className="flex items-end pt-8 pb-12">
         <Link href="/" aria-label="Tailwind CSS Blog">
           <div className="mr-2 flex items-center justify-between">
             <Image

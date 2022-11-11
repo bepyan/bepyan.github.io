@@ -20,6 +20,9 @@ module.exports = {
           900: '#111111',
         },
       },
+      dropShadow: {
+        base: '0px 0px 10px rgba(234, 179, 8, 0.3)',
+      },
       fontFamily: {
         sans: ['Inter', ...fontFamily.sans],
       },
