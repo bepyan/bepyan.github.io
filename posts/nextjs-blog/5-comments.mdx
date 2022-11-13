@@ -1,8 +1,10 @@
 ---
 title: 'Next.js 블로그 댓글 기능 추가하기 (feat. giscus)'
-description: ''
+description: 'Giscus를 활용하여 Next.js 블로그에 댓글 기능을 추가해주자 💎'
 tags:
-  -
+  - Next.js
+  - Blog
+  - giscus
 draft: false
 date: 2022-11-13 22:21:24
 ---
@@ -19,26 +21,27 @@ giscus는 기존 장점을 그대로 가져가면서 아래 추가적인 기능�
 - 대댓글 작성
 - 댓글 시간순 정렬
 - 댓글 인기순 정렬
-- 글에 리액션 달기
+- 페이지에 리액션 달기
 - 귀여운 로딩 UI 제공
-- 강력한 [config](https://github.com/giscus/giscus/blob/main/ADVANCED-USAGE.md#advanced-usage)
+- 강력한 [config](https://github.com/giscus/giscus/blob/main/ADVANCED-USAGE.md#advanced-usage) 제공
 - (덤으로) github에서 전체 댓글들을 더 직관적으로 쉽게 관리
 - (덤으로) 잘 번역된 한글 공식문서 ✨
 
-https://giscus.app/ko 
+💎 https://giscus.app/ko 
 
 ## giscus 연동
 
-공식문서 가이드 그대로 따라하면 됩니다.
-https://giscus.app/ko 
+Github Discussion을 연동하기 위해 사전 세팅을 해야합니다.
 
-#### 사전 준비
 1. 레포는 `Public`이여야 합니다.
     - 만약 `private`을 유지하고 싶다면 별도의 `public` 레포(ex. `myusername/comment`)를 생성하면 됩니다.
 2. github 계정에 [giscus](https://github.com/apps/giscus) 앱을 설치합니다.
 3. Settings에서 [discussions]((https://docs.github.com/en/repositories/managing-your-repositorys-settings-and-features/enabling-features-for-your-repository/enabling-or-disabling-github-discussions-for-a-repository). ) 기능을 활성화 합니다.
 
-#### 설정 생성
+<br/>
+
+[공식문서 가이드](https://giscus.app/ko) 따라 `script config`를 생성합니다.
+
 1. 레포 이름 `myusername/myrepo` 입력
 2. Discussion 카테고리 선택
     - 일반적으로 General 선택하면 됩니다.
@@ -95,21 +98,21 @@ export default function Giscus() {
 }
 ```
 
-- 테마를 [직접 제작](https://github.com/giscus/giscus/blob/main/CONTRIBUTING.md#creating-new-themes)할 수도 있습니다.
+- `theme`을 [직접 제작](https://github.com/giscus/giscus/blob/main/CONTRIBUTING.md#creating-new-themes)할 수도 있습니다.
 - `id` 값들은 어짜피 공개 접근이 가능하기 때문에 따로 `env`로 숨기지 않았습니다.
 - `data-lang`가 `ko`도 지원해주지만 ~~영어가 더 간지나기 때문에~~ 저는 `en`을 선택했습니다.
 - 만약 utterances를 사용하고 싶다면 [여기 코드](https://github.com/bepyan/bepyan.github.io/blob/main/src/components/Utterances.tsx)를 참고하시면 됩니다.
+- 참고
+    - https://github.com/utterance/utterances/issues/161#issuecomment-820722906
+    - https://github.com/utterance/utterances/issues/549#issuecomment-913070158
+
 
 ## Trouble Shooting
 
-### github 로그인시 home으로 리다이랙팅되는 문제
+### 💥 github 로그인시 home으로 리다이랙팅되는 문제
 
-utterances 처럼 canonical link를 활용하여 로그인 리다이랙팅을 진행합니다.
-따라서 SEO에서 canonical link를 현재 블로그 주소로 설정해주면 됩니다.
+giscus는 utterances 처럼 canonical link를 활용하여 로그인 리다이랙팅을 진행합니다.   
+
+따라서 SEO에서 canonical link를 **현재 글 주소**로 잘 설정해주면 됩니다.
 
 https://github.com/utterance/utterances/issues/474#issuecomment-774887936
-
-## 참고
-
-https://github.com/utterance/utterances/issues/161#issuecomment-820722906
-https://github.com/utterance/utterances/issues/549#issuecomment-913070158
