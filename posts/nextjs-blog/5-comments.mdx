@@ -35,7 +35,7 @@ Github Discussion을 연동하기 위해 사전 세팅을 해야합니다.
 
 1. 레포는 `Public`이여야 합니다.
     - 만약 `private`을 유지하고 싶다면 별도의 `public` 레포(ex. `myusername/comment`)를 생성하면 됩니다.
-2. github 계정에 [giscus](https://github.com/apps/giscus) 앱을 설치합니다.
+2. Github 계정에 [giscus](https://github.com/apps/giscus) 앱을 설치합니다.
 3. Settings에서 [discussions]((https://docs.github.com/en/repositories/managing-your-repositorys-settings-and-features/enabling-features-for-your-repository/enabling-or-disabling-github-discussions-for-a-repository). ) 기능을 활성화 합니다.
 
 <br/>
@@ -52,7 +52,8 @@ Github Discussion을 연동하기 위해 사전 세팅을 해야합니다.
 
 ## 코드 작성
 
-생성된 script config 바탕으로 Next.js에서 활용할 수 있는 컴포넌트를 구현합니다.
+생성된 script config 바탕으로 Next.js에서 활용할 수 있는 컴포넌트를 구현합니다.   
+Next.js 테마에 따라 자동으로 반응하도록 구현했습니다.
 
 ```tsx
 import { useTheme } from 'next-themes';
