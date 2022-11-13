@@ -11,7 +11,7 @@ const getTitle = (title?: string) => {
 const getRelativeUrl = (url?: string) => {
   if (!url) return siteConfig.url;
 
-  return `${siteConfig.url}${url.replace(/^\/s*/g, '')}`;
+  return `${siteConfig.url}/${url.replace(/^\/s*/g, '')}`;
 };
 
 /**
@@ -46,17 +46,14 @@ export const BlogSEO = ({
 }: {
   title: string;
   summary: string;
-  createdDate: string;
-  updatedDate: string;
+  date: string;
   url: string;
   tags: string[];
   images: string[];
 }) => {
   const title = getTitle(props.title);
   const url = getRelativeUrl(props.url);
-
-  const publishedTime = new Date(props.createdDate).toISOString();
-  const modifiedTime = new Date(props.updatedDate || props.createdDate).toISOString();
+  const dateTime = new Date(props.date).toISOString();
 
   const featuredImages = images.map((img) => {
     return {
@@ -73,9 +70,9 @@ export const BlogSEO = ({
         openGraph={{
           type: 'article',
           article: {
-            publishedTime,
-            modifiedTime,
-            authors: [`${siteConfig.url}/about`],
+            publishedTime: dateTime,
+            modifiedTime: dateTime,
+            authors: [`${siteConfig.url}`],
             tags,
           },
           url,
@@ -91,8 +88,8 @@ export const BlogSEO = ({
         ]}
       />
       <ArticleJsonLd
-        datePublished={publishedTime}
-        dateModified={modifiedTime}
+        datePublished={dateTime}
+        dateModified={dateTime}
         images={images}
         url={url}
         title={title}

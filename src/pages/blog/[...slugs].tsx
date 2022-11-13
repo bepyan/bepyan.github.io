@@ -7,6 +7,7 @@ import IconText from '~/components/common/IconText';
 import CalanderIcon from '~/components/icons/CalanderIcon';
 import ClockIcon from '~/components/icons/ClockIcon';
 import Layout from '~/components/Layout';
+import { BlogSEO } from '~/components/SEO';
 import Utterances from '~/components/Utterances';
 import { serializeMdx } from '~/utils/mdx';
 import { getAllPosts } from '~/utils/post';
@@ -46,6 +47,7 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
 
 export default function PostPage({
   post,
+  slug,
   mdx,
 }: {
   post: Post;
@@ -54,7 +56,7 @@ export default function PostPage({
 }) {
   return (
     <Layout>
-      {/* <BlogSEO {...post} url={`/blog/${slug}`} summary={post.description} images={[]} /> */}
+      <BlogSEO {...post} url={`/blog/${slug}`} summary={post.description} images={[]} />
 
       <div>
         <h1 className="mb-4 text-center text-3xl font-bold tracking-tight text-black dark:text-white md:text-5xl">
