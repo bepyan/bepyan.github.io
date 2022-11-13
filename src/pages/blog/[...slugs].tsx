@@ -4,11 +4,11 @@ import { MDXRemote, MDXRemoteSerializeResult } from 'next-mdx-remote';
 
 import Hr from '~/components/common/Hr';
 import IconText from '~/components/common/IconText';
+import Giscus from '~/components/Giscus';
 import CalanderIcon from '~/components/icons/CalanderIcon';
 import ClockIcon from '~/components/icons/ClockIcon';
 import Layout from '~/components/Layout';
 import { BlogSEO } from '~/components/SEO';
-import Utterances from '~/components/Utterances';
 import { serializeMdx } from '~/utils/mdx';
 import { getAllPosts } from '~/utils/post';
 import { Post } from '~/utils/types';
@@ -78,7 +78,7 @@ export default function PostPage({
 
       <div>
         <Hr className="my-8" />
-        <Utterances />
+        <Giscus />
       </div>
     </Layout>
   );
