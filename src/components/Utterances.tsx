@@ -19,7 +19,7 @@ export default function Utterances() {
     scriptElem.crossOrigin = 'anonymous';
     scriptElem.setAttribute('repo', REPO_NAME);
     scriptElem.setAttribute('issue-term', 'pathname');
-    scriptElem.setAttribute('label', 'comment :speech_balloon:');
+    scriptElem.setAttribute('label', ':speech_balloon:');
     scriptElem.setAttribute('theme', theme);
 
     ref.current.appendChild(scriptElem);
