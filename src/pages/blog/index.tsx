@@ -51,7 +51,7 @@ export default function PostPage({ serizes, posts }: { serizes: Serize[]; posts:
           <span className="font-bold">({posts.length})</span>
         </div>
 
-        <ul className="w-2/3 space-y-4">
+        <ul className="w-3/4 space-y-4">
           {posts.map((post) => (
             <PostListItem key={post.slug} post={post} />
           ))}

@@ -60,7 +60,7 @@ export const getAllSerizes = () => {
       const grayMatter = data as GrayMatter;
 
       const slug = pathToSlug(serizePath);
-      const posts = getAllPosts(slug);
+      const posts = getAllPosts(slug).sort((a, b) => (a.slug > b.slug ? 1 : -1));
 
       const serize: Serize = {
         ...grayMatter,
