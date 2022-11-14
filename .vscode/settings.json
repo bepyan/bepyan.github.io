@@ -1,0 +1,11 @@
+{
+    "editor.defaultFormatter": "esbenp.prettier-vscode",
+    "editor.codeActionsOnSave": {
+      "source.fixAll.eslint": true
+    },
+    "pasteImage.basePath": "${projectRoot}/public",
+    "pasteImage.path": "${projectRoot}/public/${currentFileNameWithoutExt}",
+    "pasteImage.insertPattern": "![${imageFileNameWithoutExt}](${imageFilePath})",
+    "pasteImage.forceUnixStyleSeparator": true,
+    "pasteImage.prefix": "/"
+}
