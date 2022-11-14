@@ -65,7 +65,7 @@ export default function PostPage({
 
         <div className="mt-2 flex w-full flex-col justify-between md:flex-row md:items-center">
           <div className="mx-auto flex gap-2 text-gray-600 dark:text-gray-400">
-            <IconText Icon={CalanderIcon} text={dayjs(post.date).format('YY.MM.DD')} />
+            <IconText Icon={CalanderIcon} text={dayjs(post.date).format('YYYY.MM.DD')} />
             <IconText Icon={ClockIcon} text={`${post.readingMinutes}분`} />
           </div>
         </div>
