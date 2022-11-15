@@ -1,0 +1,9 @@
+# *
+User-agent: *
+Allow: /
+
+# Host
+Host: https://bepyan.github.io
+
+# Sitemaps
+Sitemap: https://bepyan.github.io/sitemap.xml
