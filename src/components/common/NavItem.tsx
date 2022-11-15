@@ -1,7 +1,7 @@
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 
-import { $ } from '~/utils/core';
+import { $ } from '~/libs/core';
 
 export default function NavItem({ href, children, className }: React.ComponentProps<'a'>) {
   const router = useRouter();

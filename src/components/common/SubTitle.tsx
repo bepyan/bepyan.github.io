@@ -1,4 +1,4 @@
-import { $ } from '~/utils/core';
+import { $ } from '~/libs/core';
 
 export default function SubTitle({ className, ...props }: React.ComponentProps<'h3'>) {
   return (

@@ -2,8 +2,8 @@ import dayjs from 'dayjs';
 import Link from 'next/link';
 import title from 'title';
 
-import { $ } from '~/utils/core';
-import { Post } from '~/utils/types';
+import { $ } from '~/libs/core';
+import { Post } from '~/libs/types';
 import CalanderIcon from '../icons/CalanderIcon';
 import ClockIcon from '../icons/ClockIcon';
 import IconText from './IconText';

@@ -1,4 +1,4 @@
-import { $ } from '~/utils/core';
+import { $ } from '~/libs/core';
 
 export default function Hr({ className, ...props }: React.ComponentProps<'hr'>) {
   return (

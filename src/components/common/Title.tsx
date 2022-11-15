@@ -1,4 +1,4 @@
-import { $ } from '~/utils/core';
+import { $ } from '~/libs/core';
 
 export default function Title({ className, ...props }: React.ComponentProps<'h1'>) {
   return (

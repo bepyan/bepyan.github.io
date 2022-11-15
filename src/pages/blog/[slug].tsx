@@ -7,8 +7,8 @@ import CalanderIcon from '~/components/icons/CalanderIcon';
 import ClockIcon from '~/components/icons/ClockIcon';
 import ListIcon from '~/components/icons/ListIcon';
 import Layout from '~/components/Layout';
-import { getAllSerizes } from '~/utils/post';
-import { Serize } from '~/utils/types';
+import { getAllSerizes } from '~/libs/post';
+import { Serize } from '~/libs/types';
 
 export const getStaticPaths: GetStaticPaths = () => {
   const serizes = getAllSerizes();

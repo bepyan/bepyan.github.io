@@ -9,9 +9,9 @@ import CalanderIcon from '~/components/icons/CalanderIcon';
 import ClockIcon from '~/components/icons/ClockIcon';
 import Layout from '~/components/Layout';
 import { BlogSEO } from '~/components/SEO';
-import { serializeMdx } from '~/utils/mdx';
-import { getAllPosts } from '~/utils/post';
-import { Post } from '~/utils/types';
+import { serializeMdx } from '~/libs/mdx';
+import { getAllPosts } from '~/libs/post';
+import { Post } from '~/libs/types';
 
 export const getStaticPaths: GetStaticPaths = () => {
   const posts = getAllPosts();

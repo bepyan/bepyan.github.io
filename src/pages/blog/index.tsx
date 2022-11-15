@@ -6,8 +6,8 @@ import SubTitle from '~/components/common/SubTitle';
 import Title from '~/components/common/Title';
 import Layout from '~/components/Layout';
 import { PageSEO } from '~/components/SEO';
-import { getAllPosts, getAllSerizes } from '~/utils/post';
-import { Post, Serize } from '~/utils/types';
+import { getAllPosts, getAllSerizes } from '~/libs/post';
+import { Post, Serize } from '~/libs/types';
 
 export function getStaticProps() {
   return {

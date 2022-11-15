@@ -1,4 +1,4 @@
-import { $ } from '~/utils/core';
+import { $ } from '~/libs/core';
 
 export default function ExternalLink({ children, className, ...props }: React.ComponentProps<'a'>) {
   return (
