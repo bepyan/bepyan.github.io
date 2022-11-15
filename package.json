@@ -6,6 +6,7 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build && next export && next-export-optimize-images",
+    "postbuild": "next-sitemap",
     "serve": "npx http-server out",
     "lint": "eslint src/**/*.{ts,tsx} --fix"
   },
@@ -47,6 +48,7 @@
     "eslint-plugin-simple-import-sort": "^8.0.0",
     "eslint-plugin-unused-imports": "^2.0.0",
     "next-export-optimize-images": "^1.9.0",
+    "next-sitemap": "^3.1.31",
     "postcss": "^8.4.18",
     "prettier": "^2.7.1",
     "prettier-plugin-tailwindcss": "^0.1.13",
