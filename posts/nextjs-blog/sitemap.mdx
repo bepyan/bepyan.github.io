@@ -1,17 +1,18 @@
 ---
-title: 'Next.js 블로그 sitemap 생성 및 검색엔진 등록'
-description: '`next-sitemap` 라이브러리를 사용해서 쉽게 sitemap 만들고 검색 엔진에 등록하자.'
+title: 'Next.js 블로그 sitemap 생성, 검색엔진 등록'
+description: '`next-sitemap` 라이브러리를 사용해서 쉽게 sitemap 만들고 검색엔진에 등록하자.'
 tags:
   - Next.js
   - Blog
+  - SEO
 draft: false
 date: 2022-11-15 22:24:41
 ---
 
 검색엔진에 노출되기 위해선 봇들에게 우리 블로그에 어떤 페이지가 있는지 알려줘야 합니다.  
-라이브러리를 통해서 모든 정적 페이지 정보가 담긴 `sitemap.xml`를 만들어 봅시다.
+✨ [**next-sitemap**](https://github.com/iamvishnusankar/next-sitemap) 라이브러리를 통해서 모든 정적 페이지 정보가 담긴 `sitemap.xml`를 만들어 봅시다.
 
-✨ [**next-sitemap**](https://github.com/iamvishnusankar/next-sitemap)
+# sitemap 생성
 
 ```shell
 yarn add -D next-sitemap
@@ -49,8 +50,8 @@ module.exports = {
 참고로 `postbuild` 스크립트는 `build` 실행이후 자동으로 실행됩니다.
 
 기본적으로 아래와 같은 파일들이 생성되는데요.  
-`public/robots.text` `public/sitemap.xml` `public/sitemap-0.xml`   
-이들이 push되지 않도록 `.gitignore`에 추가해주도록 합니다.   
+`public/robots.text` `public/sitemap.xml` `public/sitemap-0.xml`  
+이들이 push되지 않도록 `.gitignore`에 추가해주도록 합니다.
 
 ```
 # production
@@ -73,9 +74,61 @@ github action에서도 잘 실행된 것을 확인할 수 있습니다.
 
 ```html
 <url>
-    <loc>https://bepyan.github.io</loc>
-    <lastmod>2022-11-15T15:18:54.289Z</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.7</priority>
+  <loc>https://bepyan.github.io</loc>
+  <lastmod>2022-11-15T15:18:54.289Z</lastmod>
+  <changefreq>daily</changefreq>
+  <priority>0.7</priority>
 </url>
 ```
+
+# 검색엔진 등록
+
+sitemap을 만든다고해서 끝이 나는 것이 아닙니다.   
+검색엔진에 사이트를 등록해줘야 크롤러, 봇이 블로그 글들을 수집하여 검색됩니다.
+
+## Google Search Console
+
+Google은 [Google Search Console](https://search.google.com/search-console/welcome?utm_source=about-page)에 등록하면 됩니다.
+
+URL 접두어에 블로그 도메인 주소를 입력해줍니다.  
+`https://bepyan.github.io/`
+
+![221116-011827](/posts/sitemap/221116-011827.png)
+
+편의상 HTML 태그 방법을 활용하도록 합니다.  
+`_document.tsx` 파일에 `meta` 태그를 추가해주면 됩니다.
+
+```tsx
+import { Head, Html } from 'next/document';
+
+export default function MyDocument() {
+  return (
+    <Html lang="ko">
+      <Head>
+        <meta name="google-site-verification" content="" />
+        {/* ... */}
+      </Head>
+      {/* ... */}
+    </Html>
+  );
+}
+```
+
+배포이후 `확인`을 클릭해 본인 사이트 인증을 합니다.   
+인증이 성공된다면 사이트의 통계를 볼 수 있게 됩니다.
+
+![221116-012421](/posts/sitemap/221116-012421.png)
+
+## Naver Search Advisor
+
+Naver는 [네이버 웹마스터](https://searchadvisor.naver.com/console/board)로 위와 똑같이 진행하면 됩니다.
+
+1. 사이트 도메인을 등록합니다.
+2. `meta` 태그를 삽입하여 본인 사이트임을 인증합니다.
+3. 요청 -> 사이트맵 제출 -> sitemap.xml 주소를 입력해줍니다.
+4. 검증 -> robots.txt -> 잘 수집이 되었는지 확인합니다.
+5. 설정 -> 수집 주기 설정 -> `빠르게`로 설정해줍니다.
+
+![221116-010832](/posts/sitemap/221116-010832.png)
+
+시간이 지난 후 통계가 쌓이는지 확인해보도록 합시다!
