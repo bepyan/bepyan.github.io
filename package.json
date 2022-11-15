@@ -5,8 +5,8 @@
   "homepage": "https://bepyan.github.io/",
   "scripts": {
     "dev": "next dev",
-    "build": "next build && next export && next-export-optimize-images",
-    "postbuild": "next-sitemap",
+    "build": "next build && next-sitemap && next export",
+    "postbuild": "next-export-optimize-images",
     "serve": "npx http-server out",
     "lint": "eslint src/**/*.{ts,tsx} --fix"
   },
