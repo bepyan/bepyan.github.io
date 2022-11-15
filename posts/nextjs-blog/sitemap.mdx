@@ -1,0 +1,81 @@
+---
+title: 'Next.js 블로그 sitemap 생성 및 검색엔진 등록'
+description: '`next-sitemap` 라이브러리를 사용해서 쉽게 sitemap 만들고 검색 엔진에 등록하자.'
+tags:
+  - Next.js
+  - Blog
+draft: false
+date: 2022-11-15 22:24:41
+---
+
+검색엔진에 노출되기 위해선 봇들에게 우리 블로그에 어떤 페이지가 있는지 알려줘야 합니다.  
+라이브러리를 통해서 모든 정적 페이지 정보가 담긴 `sitemap.xml`를 만들어 봅시다.
+
+✨ [**next-sitemap**](https://github.com/iamvishnusankar/next-sitemap)
+
+```shell
+yarn add -D next-sitemap
+```
+
+`next-sitemap.config.js`
+
+```js
+/** @type {import('next-sitemap').IConfig} */
+module.exports = {
+  siteUrl: 'https://bepyan.github.io',
+  changefreq: 'daily',
+  priority: 0.7,
+  sitemapSize: 7000,
+  generateRobotsTxt: true,
+  exclude: [],
+};
+```
+
+`package.json`
+
+```json
+{
+  "scripts": {
+    "build": "next build && next-sitemap && next export",
+    "postbuild": "next-export-optimize-images",
+    "serve": "npx http-server out"
+  }
+}
+```
+
+여기서 주의할 점은 `next build` 실행 후 `next export` 전에 `next-sitemap` 실행 해줘야 한다는 것입니다.  
+그래야 `public`에 생성된 파일들이 최종적으로 `out`에 export됩니다.
+
+참고로 `postbuild` 스크립트는 `build` 실행이후 자동으로 실행됩니다.
+
+기본적으로 아래와 같은 파일들이 생성되는데요.  
+`public/robots.text` `public/sitemap.xml` `public/sitemap-0.xml`   
+이들이 push되지 않도록 `.gitignore`에 추가해주도록 합니다.   
+
+```
+# production
+/build
+/public/robots.txt
+/public/sitemap*.xml
+```
+
+## 실행 결과 확인
+
+`yarn build`를 실행하면 `out` 디랙토리에도 sitemap 관련 파일들이 추가된 것을 확인할 수 있습니다.
+
+![221116-000505](/posts/sitemap/221116-000505.png)
+
+github action에서도 잘 실행된 것을 확인할 수 있습니다.
+
+![221115-231937](/posts/sitemap/221115-231937.png)
+
+[sitemap-0.xml](https://bepyan.github.io/sitemap-0.xml)
+
+```html
+<url>
+    <loc>https://bepyan.github.io</loc>
+    <lastmod>2022-11-15T15:18:54.289Z</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.7</priority>
+</url>
+```
