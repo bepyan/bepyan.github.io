@@ -29,12 +29,14 @@ date: 2022-11-16 12:15:23
 ```
 
 위 예시를 Next.js에 맞게 주입시켜 주면 됩니다.   
-Next.js에서 GA를 사용하는 공식 예시가 있어 그대로 참고하면 됩니다.   
+Next.js에서 GA를 사용하는 [공식 예시](https://github.com/vercel/next.js/tree/canary/examples/with-google-analytics)가 있어 그대로 참고하면 됩니다.   
 하지만 js로 작성되어 있어 ts에 호환되도록 추가 작업이 진행되어야 합니다.
 
 ```shell
 yarn add -D @types/gtag.js
 ```
+
+<br />
 
 `types.d.ts`
 ```ts
@@ -44,17 +46,13 @@ declare module 'gtag.js';
 ```
 eslint typescript에서 에러를 던질 수 있는데 `.eslintignore`에 `*.d.ts`를 추가하여 무시해주도록 합니다.
 
-`.env.local`   
-repo secrets에도 추가해주는 것을 잊지 말아요!
-```
-NEXT_PUBLIC_GA_ID=###
-```
+<br />
 
-이제 3 파일을 수정하면 됩니다.
+이제 예시대로 3 파일을 수정하면 됩니다.
 
 [libs/gtags.ts](https://github.com/vercel/next.js/blob/canary/examples/with-google-analytics/lib/gtag.js)
 ```ts
-export const GA_TRACKING_ID = process.env.NEXT_PUBLIC_GA_ID ?? '';
+export const GA_TRACKING_ID = '<어짜피 HTML에 노출된다>';
 
 // https://developers.google.com/analytics/devguides/collection/gtagjs/pages
 export const pageview = (url: URL) => {
@@ -80,8 +78,10 @@ export const event = (
 
 [_document.tsx](https://github.com/vercel/next.js/blob/canary/examples/with-google-analytics/pages/_document.js)
 
-https://andrew-simpson-ross.medium.com/strongly-typed-google-analytics-v4-with-next-js-aad6c6a5e383
+참고
+- https://andrew-simpson-ross.medium.com/strongly-typed-google-analytics-v4-with-next-js-aad6c6a5e383
 
+<br />
 <br />
 
 Firebase Analytics vs Google Analytics
