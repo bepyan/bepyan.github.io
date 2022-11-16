@@ -1,0 +1,77 @@
+.prose .rehype-code-title {
+  font-family: PT Mono, Consolas, Monaco, 'Andale Mono', 'Ubuntu Mono', monospace;
+  color: var(--foreground);
+  background-color: #22222c;
+  border-color: var(--background-40);
+  @apply rounded-t-lg border border-b-0 px-5 py-3 text-sm font-bold;
+}
+
+.prose .dark .rehype-code-title {
+  background-color: #1a1b1f;
+}
+
+.prose .rehype-code-title + pre {
+  @apply mt-0 rounded-t-none;
+}
+
+.prose .highlight-line {
+  background-color: var(--selection);
+  border-color: var(--pink);
+  @apply -mx-4 block border-l-4 px-4;
+}
+
+.prose pre::-webkit-scrollbar {
+  display: none;
+}
+
+.prose pre {
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none; /* Firefox */
+}
+
+.prose :not(pre) code {
+  font-family: PT Mono, Consolas, Monaco, 'Andale Mono', 'Ubuntu Mono', monospace;
+  @apply rounded-lg border border-gray-800 px-2 py-1 text-gray-800 dark:border-[var(--foreground-40)] dark:text-[var(--foreground)];
+}
+
+.prose :not(pre) code::before,
+.prose :not(pre) code::after {
+  content: none;
+}
+
+.prose img {
+  /* Don't apply styles to next/image */
+  @apply m-0;
+}
+
+.prose > :first-child {
+  /* Override removing top margin, causing layout shift */
+  margin-top: 1.25em !important;
+}
+
+.prose h1 {
+  margin-top: 2em;
+  font-size: 2em;
+}
+
+.prose a {
+  @apply transition-all;
+}
+
+.prose .anchor {
+  @apply invisible absolute no-underline;
+
+  margin-left: -1em;
+  padding-right: 0.5em;
+  cursor: pointer;
+}
+
+.prose .anchor:after {
+  @apply text-gray-300 dark:text-gray-700;
+  content: '#';
+}
+
+.anchor:hover,
+.prose *:hover > .anchor {
+  @apply visible;
+}
