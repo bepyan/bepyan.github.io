@@ -1,0 +1,92 @@
+---
+title: 'Next.js 블로그 Google Analytics 연동하기'
+description: ''
+tags:
+  - Next.js
+  - Blog
+draft: false
+date: 2022-11-16 12:15:23
+---
+
+[google analytics](https://analytics.google.com/analytics/web/)
+
+관리 > 속성 만들기  
+관리 > 데이터 스트림 > 스트림 추가  
+관리 > 데이터 스트림 > 스트림 선택 > 태그 안내 보기 > 직접 설치
+
+```html
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=###"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag() {
+    dataLayer.push(arguments);
+  }
+  gtag('js', new Date());
+
+  gtag('config', '###');
+</script>
+```
+
+위 예시를 Next.js에 맞게 주입시켜 주면 됩니다.   
+Next.js에서 GA를 사용하는 공식 예시가 있어 그대로 참고하면 됩니다.   
+하지만 js로 작성되어 있어 ts에 호환되도록 추가 작업이 진행되어야 합니다.
+
+```shell
+yarn add -D @types/gtag.js
+```
+
+`types.d.ts`
+```ts
+/// <reference types="gtag.js" />
+
+declare module 'gtag.js';
+```
+eslint typescript에서 에러를 던질 수 있는데 `.eslintignore`에 `*.d.ts`를 추가하여 무시해주도록 합니다.
+
+`.env.local`   
+repo secrets에도 추가해주는 것을 잊지 말아요!
+```
+NEXT_PUBLIC_GA_ID=###
+```
+
+이제 3 파일을 수정하면 됩니다.
+
+[libs/gtags.ts](https://github.com/vercel/next.js/blob/canary/examples/with-google-analytics/lib/gtag.js)
+```ts
+export const GA_TRACKING_ID = process.env.NEXT_PUBLIC_GA_ID ?? '';
+
+// https://developers.google.com/analytics/devguides/collection/gtagjs/pages
+export const pageview = (url: URL) => {
+  window.gtag('config', GA_TRACKING_ID, {
+    page_path: url,
+  });
+};
+
+// https://developers.google.com/analytics/devguides/collection/gtagjs/events
+export const event = (
+  action: Gtag.EventNames,
+  { event_category, event_label, value }: Gtag.EventParams,
+) => {
+  window.gtag('event', action, {
+    event_category,
+    event_label,
+    value,
+  });
+};
+```
+
+[_app.tsx](https://github.com/vercel/next.js/blob/canary/examples/with-google-analytics/pages/_app.js)
+
+[_document.tsx](https://github.com/vercel/next.js/blob/canary/examples/with-google-analytics/pages/_document.js)
+
+https://andrew-simpson-ross.medium.com/strongly-typed-google-analytics-v4-with-next-js-aad6c6a5e383
+
+<br />
+
+Firebase Analytics vs Google Analytics
+
+Firebase is a mobile-focused app  
+GA is developed more for web-based sites
+
+https://www.webfx.com/martech/tech/firebase-vs-google/

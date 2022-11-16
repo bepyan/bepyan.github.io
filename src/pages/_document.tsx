@@ -15,6 +15,17 @@ export default function MyDocument() {
       <body className="bg-gray-50 text-black transition-[background] dark:bg-gray-900 dark:text-white">
         <Main />
         <NextScript />
+
+        {/* Global Site Tag (gtag.js) - Google Analytics */}
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+          `,
+          }}
+        />
       </body>
     </Html>
   );
