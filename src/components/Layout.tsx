@@ -19,7 +19,7 @@ export default function Layout({ children }: { children: ReactNode }) {
 
   return (
     <div className="mx-auto max-w-2xl px-4 sm:px-6 xl:max-w-3xl xl:px-0">
-      <nav className="flex w-full items-end pt-8 pb-12 text-gray-800 dark:text-gray-400">
+      <nav className="flex w-full select-none items-end pt-8 pb-12 text-gray-800 dark:text-gray-400">
         <NavItem href="/" className="mr-2">
           <Image
             src="/favicon.png"

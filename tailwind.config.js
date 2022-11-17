@@ -33,12 +33,14 @@ module.exports = {
         DEFAULT: {
           css: {
             color: theme('colors.gray.700'),
+            strong: { color: theme('colors.gray.800') },
             a: {
-              color: theme('colors.yellow.500'),
+              color: theme('colors.gray.500'),
               '&:hover': {
-                color: theme('colors.yellow.600'),
+                color: theme('colors.gray.700'),
               },
-              code: { color: theme('colors.yellow.400') },
+              code: { color: theme('colors.gray.500') },
+              strong: { color: theme('colors.gray.800') },
             },
             'h1,h2,h3,h4': {
               'scroll-margin-top': spacing[32],
@@ -54,12 +56,14 @@ module.exports = {
         dark: {
           css: {
             color: theme('colors.gray.200'),
+            strong: { color: theme('colors.gray.100') },
             a: {
-              color: theme('colors.yellow.500'),
+              color: theme('colors.gray.500'),
               '&:hover': {
-                color: theme('colors.yellow.600'),
+                color: theme('colors.gray.600'),
               },
-              code: { color: theme('colors.yellow.400') },
+              code: { color: theme('colors.gray.500') },
+              strong: { color: theme('colors.gray.100') },
             },
             blockquote: {
               borderLeftColor: theme('colors.gray.700'),
@@ -80,7 +84,6 @@ module.exports = {
                 '&:before': { backgroundColor: theme('colors.gray.500') },
               },
             },
-            strong: { color: theme('colors.gray.100') },
             thead: {
               th: {
                 color: theme('colors.gray.100'),

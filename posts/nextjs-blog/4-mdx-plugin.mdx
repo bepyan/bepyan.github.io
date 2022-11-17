@@ -1,15 +1,16 @@
 ---
-title: mdx plugin
-description: next-mdx-remote 에서 플로그인 쓰는 법
+title: 'Next.js mdx plugin'
+description: '`next-mdx-remote`에서 플로그인으로 이쁜 결과물을 만들자.'
 tags:
-  - nextjs
+  - next.js
   - blog
-date: 2022-11-11
+draft: false
+date: 2022-11-16 22:00:41
 ---
 
 # 기본 사용법
 
-```ts
+```ts:libs/mdx.ts
 const mdxSource = await serialize(content, {
   mdxOptions: {
     remarkPlugins: [],
@@ -18,6 +19,9 @@ const mdxSource = await serialize(content, {
   scope: data,
 });
 ```
+
+https://tailwindcss.com/docs/typography-plugin#customizing-the-css
+
 
 ## 필수 플러그인
 
@@ -80,7 +84,17 @@ tailwind 기반으로 mdx 스타일링
 
 ### code-highlighting
 
+https://github.com/rehypejs/rehype-highlight
+
 https://github.com/rockchalkwushock/rehype-code-titles
+
+```js {1,3-4}
+function fancyAlert(arg) {
+  if (arg) {
+    $.facebox({ div: '#foo' });
+  }
+}
+```
 
 ## 참고 플로그인
 
@@ -92,10 +106,13 @@ https://github.com/remarkjs/remark-math
 
 https://github.com/ngryman/reading-time
 
+[remark plugins](https://github.com/remarkjs/remark/blob/main/doc/plugins.md)   
+[rehype plugins](https://github.com/rehypejs/rehype/blob/main/doc/plugins.md)
+
 ## 참고
 
 https://yceffort.kr/2020/10/migrate-gatsby-from-nextjs
 https://colinhemphill.com/blog/fast-static-syntax-highlighting-for-mdx-in-nextjs
 
-Project Level Snippets
+Project Level Snippets   
 https://code.visualstudio.com/updates/v1_28#_project-level-snippets

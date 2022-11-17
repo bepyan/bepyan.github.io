@@ -6,6 +6,10 @@
   @apply rounded-t-lg border border-b-0 px-5 py-3 text-sm font-bold;
 }
 
+.prose .rehype-code-title::selection {
+  background-color: var(--selection);
+}
+
 .prose .dark .rehype-code-title {
   background-color: #1a1b1f;
 }
@@ -18,6 +22,11 @@
   background-color: var(--selection);
   border-color: var(--pink);
   @apply -mx-4 block border-l-4 px-4;
+}
+
+.prose .highlight-line::selection,
+.prose .highlight-line *::selection {
+  background-color: var(--comment);
 }
 
 .prose pre::-webkit-scrollbar {
