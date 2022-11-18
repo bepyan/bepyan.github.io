@@ -5,31 +5,163 @@ tags:
   - next.js
   - blog
 draft: false
-date: 2022-11-16 22:00:41
 ---
+
+✨ [**next-mdx-remote**](https://github.com/hashicorp/next-mdx-remote)를 활용하여 markdown파일을 이쁜 HTML 코드로 변환해줍니다.   
+markdown과 Custom React Component를 연결해주는 것이 특징입니다.
 
 # 기본 사용법
 
-```ts:libs/mdx.ts
-const mdxSource = await serialize(content, {
-  mdxOptions: {
-    remarkPlugins: [],
-    rehypePlugins: [],
-  },
-  scope: data,
-});
+```shell
+yarn add next-mdx-remote
 ```
 
-https://tailwindcss.com/docs/typography-plugin#customizing-the-css
+<br />
 
+1. mdx 파일을 `serialize`하여 필요한 데이터를 추출하고 가공합니다.
 
-## 필수 플러그인
+```ts:libs/mdx.ts
+import { serialize } from 'next-mdx-remote/serialize';
+
+export const serializeMdx = (source: string) => {
+  return serialize(source, {
+    parseFrontmatter: false,
+    mdxOptions: {
+      remarkPlugins: [],
+      rehypePlugins: [],
+      format: 'mdx',
+    },
+  });
+};
+```
+
+- [`remark plugins`](https://github.com/remarkjs/remark/blob/main/doc/plugins.md)과 [`rehype plugins`](https://github.com/rehypejs/rehype/blob/main/doc/plugins.md)를 활용해서 다양한 기능을 추가할 수 있습니다.
+
+<br />
+
+2. `getStaticProps`(빌드시점)에서 필요한 데이터를 모두 가공합니다.
+
+```ts:[...slugs].tsx {21}
+import { GetStaticPaths, GetStaticProps } from 'next';
+import { serializeMdx } from '~/libs/mdx';
+import { getAllPosts } from '~/libs/post';
+
+export const getStaticPaths: GetStaticPaths = () => {
+  const posts = getAllPosts();
+
+  return {
+    paths: posts.map((post) => `/blog/${post.slug}`),
+    fallback: 'blocking',
+  };
+};
+
+export const getStaticProps: GetStaticProps = async ({ params }) => {
+  const { slugs } = params as { slugs: string[] };
+
+  const slug = [...slugs].join('/');
+  const post = getAllPosts().find((v) => v.slug === slug);
+  //...
+
+  const mdx = await serializeMdx(post.content);
+
+  return {
+    props: { mdx },
+  };
+};
+```
+
+3. 브라우저는 `<MDXRemote />`를 활용하여 데이터를 HTML로 변환합니다.
+
+```tsx
+export default function PostPage({ mdx }: { mdx: MDXRemoteSerializeResult }) {
+  return (
+    <div className="prose mt-4 w-full max-w-none dark:prose-dark">
+      <MDXRemote {...mdx} />
+    </div>
+  );
+}
+```
+
+# 필수 플러그인
+
+모두 `server-side`에서 사용하게 될 것이기에 모두 `devDependency`로 설치해줍니다.
+
+```shell
+yarn add -D remark-gfm remark-toc rehype-prism-plus
+yarn add -D @tailwindcss/typography
+```
+
+---
+
+### remark-gfm
+
+https://github.com/remarkjs/remark-gfm
+
+`GFM`(autolink literals, footnotes, strikethrough, tables, tasklists...) 문법들을 해석해주는 도구 입니다.
+
+---
 
 ### remark-toc
 
 https://github.com/remarkjs/remark-toc
 
-### rehype-slug
+`Tabel of Content` 목차를 만들어 주는 도구 입니다.   
+다른 포스트에서 집중적으로 활용해보도록 합시다.
+
+---
+
+### rehype-prism-plus
+
+https://github.com/timlrx/rehype-prism-plus
+
+[`prism`](https://prismjs.com/) 기반으로 코드블럭을 `syntax highlighting`해주는 도구 입니다.   
+highlighting, showLineNumbers, line inserted, line deleted 등 기능도 제공해줍니다.   
+
+```diff-js {1} showLineNumbers
+function fancyAlert(arg) {
+  if (arg) {
++    $.facebox({ div: '#foo' })
+-    alert('#roo')
+  }
+}
+```
+
+하지만 코드 토큰만 해석해줄 뿐이지 스타일은 직접 씌워줘야합니다.   
+prism기반의 [다양한 테마](https://github.com/PrismJS/prism-themes)를 적용할 수 있으니 취향 것 선택하면 됩니다.   
+저는 [dracular](https://draculatheme.com/prism)에서 받아왔습니다.
+
+자세한 설정은 [제 레포지토리](https://github.com/bepyan/bepyan.github.io/blob/main/src/styles/code.css)를 참고해주시면 될 것 같습니다. ~~생각보다 복잡합니다...~~
+
+---
+
+### @tailwindcss/typography
+
+https://tailwindcss.com/docs/typography-plugin
+
+tailwind 기반으로 mdx 마크업을 스타일링합니다.   
+쉽게 [커스터마이징](https://tailwindcss.com/docs/typography-plugin#customizing-the-css)을 할 수 있습니다.
+
+---
+
+# 추천 플로그인
+
+```shell
+yarn add -D rehype-slug rehype-autolink-headings rehype-code-titles
+```
+
+### remark-math
+
+https://github.com/remarkjs/remark-math
+
+---
+
+### reading-time
+
+https://github.com/ngryman/reading-time
+
+---
+
+### rehype-slug + rehype-autolink-headings
 
 https://github.com/rehypejs/rehype-slug
 
@@ -70,49 +202,47 @@ span.icon.icon-link {
 }
 ```
 
-### remark-gfm
+---
 
-https://github.com/remarkjs/remark-gfm
+# 최종 코드
 
-support GFM (autolink literals, footnotes, strikethrough, tables, tasklists).
+```ts:libs/mdx.ts
+import { serialize } from 'next-mdx-remote/serialize';
+import rehypeAutolinkHeadings from 'rehype-autolink-headings';
+import rehypeCodeTitles from 'rehype-code-titles';
+import rehypePrism from 'rehype-prism-plus';
+import rehypeSlug from 'rehype-slug';
+import remarkGfm from 'remark-gfm';
+import remarkToc from 'remark-toc';
 
-### @tailwindcss/typography
-
-https://tailwindcss.com/docs/typography-plugin
-
-tailwind 기반으로 mdx 스타일링
-
-### code-highlighting
-
-https://github.com/rehypejs/rehype-highlight
-
-https://github.com/rockchalkwushock/rehype-code-titles
-
-```js {1,3-4}
-function fancyAlert(arg) {
-  if (arg) {
-    $.facebox({ div: '#foo' });
-  }
-}
+export const serializeMdx = (source: string) => {
+  return serialize(source, {
+    parseFrontmatter: true,
+    mdxOptions: {
+      remarkPlugins: [remarkToc, remarkGfm],
+      rehypePlugins: [
+        rehypeSlug,
+        rehypeCodeTitles,
+        rehypePrism,
+        [
+          rehypeAutolinkHeadings,
+          {
+            properties: {
+              className: ['anchor'],
+            },
+          },
+        ],
+      ],
+      format: 'mdx',
+    },
+  });
+};
 ```
-
-## 참고 플로그인
-
-### remark-math
-
-https://github.com/remarkjs/remark-math
-
-### reading-time
-
-https://github.com/ngryman/reading-time
-
-[remark plugins](https://github.com/remarkjs/remark/blob/main/doc/plugins.md)   
-[rehype plugins](https://github.com/rehypejs/rehype/blob/main/doc/plugins.md)
 
 ## 참고
 
-https://yceffort.kr/2020/10/migrate-gatsby-from-nextjs
+https://yceffort.kr/2020/10/migrate-gatsby-from-nextjs  
 https://colinhemphill.com/blog/fast-static-syntax-highlighting-for-mdx-in-nextjs
 
-Project Level Snippets   
+Project Level Snippets  
 https://code.visualstudio.com/updates/v1_28#_project-level-snippets

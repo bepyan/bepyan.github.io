@@ -1,5 +1,6 @@
 @import url(./dracula.css);
 
+/* rehype-code-title */
 .prose .rehype-code-title {
   font-family: PT Mono, Consolas, Monaco, 'Andale Mono', 'Ubuntu Mono', monospace;
   color: var(--foreground);
@@ -20,17 +21,45 @@
   @apply mt-0 rounded-t-none;
 }
 
-.prose .highlight-line {
-  background-color: var(--selection);
-  border-color: var(--pink);
-  @apply -mx-4 block border-l-4 px-4;
+/* rehype-prism-plus */
+.prose .code-line.inserted,
+.prose .code-line.deleted,
+.prose .code-line.highlight-line {
+  @apply -mx-4 block px-4;
 }
 
-.prose .highlight-line::selection,
-.prose .highlight-line *::selection {
+.prose .code-line.highlight-line {
+  background-color: var(--selection);
+  border-color: var(--pink);
+  border-left-width: 4px;
+}
+.prose .code-line.highlight-line::selection,
+.prose .code-line.highlight-line *::selection {
   background-color: var(--comment);
 }
 
+.prose .code-line.inserted {
+  background-color: rgba(16, 185, 129, 0.2); /* Set inserted line (+) color */
+}
+.prose .code-line.deleted {
+  background-color: rgba(239, 68, 68, 0.2); /* Set deleted line (-) color */
+}
+
+.prose .line-number::before {
+  display: inline-block;
+  width: 1rem;
+  text-align: right;
+  margin-right: 16px;
+  margin-left: -8px;
+  color: var(--foreground-40);
+  content: attr(line);
+}
+
+.prose .highlight-line.line-number::before{
+  margin-left: -12px;
+}
+
+/* Code blocks */
 .prose pre::-webkit-scrollbar {
   display: none;
 }
@@ -40,6 +69,7 @@
   scrollbar-width: none; /* Firefox */
 }
 
+/* Inline code */
 .prose :not(pre) code {
   font-family: PT Mono, Consolas, Monaco, 'Andale Mono', 'Ubuntu Mono', monospace;
   @apply rounded-lg border border-gray-800 px-2 py-1 text-gray-800 dark:border-[var(--foreground-40)] dark:text-[var(--foreground)];
@@ -48,41 +78,4 @@
 .prose :not(pre) code::before,
 .prose :not(pre) code::after {
   content: none;
-}
-
-.prose img {
-  /* Don't apply styles to next/image */
-  @apply m-0;
-}
-
-.prose > :first-child {
-  /* Override removing top margin, causing layout shift */
-  margin-top: 1.25em !important;
-}
-
-.prose h1 {
-  margin-top: 2em;
-  font-size: 2em;
-}
-
-.prose a {
-  @apply transition-all;
-}
-
-.prose .anchor {
-  @apply invisible absolute no-underline;
-
-  margin-left: -1em;
-  padding-right: 0.5em;
-  cursor: pointer;
-}
-
-.prose .anchor:after {
-  @apply text-gray-300 dark:text-gray-700;
-  content: '#';
-}
-
-.anchor:hover,
-.prose *:hover > .anchor {
-  @apply visible;
 }

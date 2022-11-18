@@ -1,0 +1,42 @@
+/* rehype-autolink-headings */
+.prose .anchor {
+  @apply invisible absolute no-underline;
+
+  margin-left: -1em;
+  padding-right: 0.5em;
+  cursor: pointer;
+}
+
+.prose .anchor:after {
+  @apply text-gray-300 dark:text-gray-700;
+  content: '#';
+}
+
+.anchor:hover,
+.prose *:hover > .anchor {
+  @apply visible;
+}
+
+/* common markdown */
+.prose img {
+  /* Don't apply styles to next/image */
+  @apply m-0;
+}
+
+.prose > :first-child {
+  /* Override removing top margin, causing layout shift */
+  margin-top: 1.25em !important;
+}
+
+.prose h1 {
+  margin-top: 2em;
+  font-size: 2em;
+}
+
+.prose a {
+  @apply transition-all;
+}
+
+.prose del {
+  @apply text-gray-300 dark:text-gray-600;
+}

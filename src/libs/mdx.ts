@@ -8,7 +8,7 @@ import remarkToc from 'remark-toc';
 
 export const serializeMdx = (source: string) => {
   return serialize(source, {
-    parseFrontmatter: true,
+    parseFrontmatter: false,
     mdxOptions: {
       remarkPlugins: [remarkToc, remarkGfm],
       rehypePlugins: [

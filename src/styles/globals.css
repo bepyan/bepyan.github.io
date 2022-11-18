@@ -3,6 +3,7 @@
 @tailwind utilities;
 
 @import url(./code.css);
+@import url(./prose.css);
 
 html,
 body,
