@@ -2,7 +2,6 @@
 @tailwind components;
 @tailwind utilities;
 
-@import url(./dracula.css);
 @import url(./code.css);
 
 html,

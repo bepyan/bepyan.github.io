@@ -1,3 +1,5 @@
+@import url(./dracula.css);
+
 .prose .rehype-code-title {
   font-family: PT Mono, Consolas, Monaco, 'Andale Mono', 'Ubuntu Mono', monospace;
   color: var(--foreground);
