@@ -9,6 +9,7 @@ import CalanderIcon from '~/components/icons/CalanderIcon';
 import ClockIcon from '~/components/icons/ClockIcon';
 import Layout from '~/components/Layout';
 import { BlogSEO } from '~/components/SEO';
+import TocBanner from '~/components/TocBanner';
 import { serializeMdx } from '~/libs/mdx';
 import { getAllPosts } from '~/libs/post';
 import { Post } from '~/libs/types';
@@ -69,7 +70,12 @@ export default function PostPage({
             <IconText Icon={ClockIcon} text={`${post.readingMinutes}분`} />
           </div>
         </div>
+
         <Hr className="mt-4" />
+      </div>
+
+      <div className="absolute left-full">
+        <TocBanner source={post.content} />
       </div>
 
       <div className="prose mt-4 w-full max-w-none dark:prose-dark">

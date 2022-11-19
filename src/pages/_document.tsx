@@ -1,5 +1,7 @@
 import { Head, Html, Main, NextScript } from 'next/document';
 
+import { $ } from '~/libs/core';
+
 export default function MyDocument() {
   return (
     <Html lang="ko">
@@ -12,7 +14,12 @@ export default function MyDocument() {
         <meta content="#ffffff" name="theme-color" />
         <meta content="#ffffff" name="msapplication-TileColor" />
       </Head>
-      <body className="bg-gray-50 text-black transition-[background] dark:bg-gray-900 dark:text-white">
+      <body
+        className={$(
+          'bg-gray-50 text-black transition-[background] dark:bg-gray-900 dark:text-white',
+          '[--scroll-mt:2rem]',
+        )}
+      >
         <Main />
         <NextScript />
 

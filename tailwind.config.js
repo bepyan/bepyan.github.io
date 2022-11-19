@@ -42,8 +42,8 @@ module.exports = {
               code: { color: theme('colors.gray.500') },
               strong: { color: theme('colors.gray.800') },
             },
-            'h1,h2,h3,h4': {
-              'scroll-margin-top': spacing[32],
+            'h2,h3,h4': {
+              'scroll-margin-top': 'var(--scroll-mt)',
             },
             thead: {
               borderBottomColor: theme('colors.gray.200'),
@@ -69,9 +69,8 @@ module.exports = {
               borderLeftColor: theme('colors.gray.700'),
               color: theme('colors.gray.300'),
             },
-            'h1,h2,h3,h4': {
+            'h1,h2,h3,h4,h5,h6': {
               color: theme('colors.gray.100'),
-              'scroll-margin-top': spacing[32],
             },
             hr: { borderColor: theme('colors.gray.700') },
             ol: {

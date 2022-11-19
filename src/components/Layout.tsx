@@ -41,7 +41,7 @@ export default function Layout({ children }: { children: ReactNode }) {
         </div>
       </nav>
       {/* --- */}
-      <main className="pb-16">{children}</main>
+      <main className="relative pb-16">{children}</main>
       {/* --- */}
       <footer className="pb-8 text-sm text-gray-800 dark:text-gray-400">
         <Hr className="mb-8" />
