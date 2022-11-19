@@ -2,8 +2,8 @@
 @tailwind components;
 @tailwind utilities;
 
-@import url(./code.css);
-@import url(./prose.css);
+@import 'prism.css';
+@import 'prose.css';
 
 html,
 body,
