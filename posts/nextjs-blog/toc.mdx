@@ -1,0 +1,24 @@
+---
+title: 'Next.js 블로그 TOC 배너 만들기'
+description: '목차를 만들자.'
+tags:
+  - Next.js
+  - Blog
+  - Toc
+draft: true
+date: 2022-11-19 16:33:14
+---
+
+1. 배너 위치 산정하기
+   - absolute로 위치를 잡아주고 fixed로 스크롤에 고정되도록 한다.
+2. Content에서 Toc 추출하기
+3. slug 만들기
+   - tailwind에서는 https://github.com/sindresorhus/slugify 라이브러리를 사용하고 있었다.
+   - 한글도 파싱되기 위해선 https://gist.github.com/codeguy/6684588 참고하여 직접 투박하게 작업했다.
+   - 유니코드가 해석이 안되는 문제가 있다. 추후게 https://github.com/simov/slugify/blob/master/slugify.js 참고해서 작업해보자.
+4. 마크업 구성하기
+   - `<a href="#..."/>`를 활용해서 링크를 연동한다.
+   - slug # 개수에 따라 깊이를 부여하고 [tailwind docs](https://tailwindcss.com/docs/typography-plugin)처럼 스타일를 부여해보자.
+5. 스타일 조정하기
+   - scroll-margin-top을 element margin-top에 맞추면 보기 좋게
+6. 스크롤에 따라 현재 headings에 하이라이트한다.

@@ -1,9 +1,52 @@
 ---
-title: Next.js mdx 디랙토리 기반으로 
-description: Next.js 블로그를 제작기 - Next.js static html에서 이미지를 최적화해보자 🤔
+title: Next.js 블로그 글 리스트 만들기
+description: 디랙토리 기반을 글 리스트를 만들자 🤔
 tags:
-  - nextjs
-  - blog
+  - Next.js
+  - Blog
 date: 2022-11-11
 ---
 
+# Table of Contents
+
+---
+
+## reading-time
+
+https://github.com/ngryman/reading-time
+
+---
+
+## grayMatter
+
+https://github.com/jonschlinkert/gray-matter
+
+텍스트 중 [`front-matter`](https://jekyllrb.com/docs/front-matter/)를 파싱해주는 도구입니다.
+
+```yaml
+---
+title: 포스트 제목
+---
+```
+
+사실 `options.parseFrontmatter` 옵션을 활성화하여 `serialize` 단계에서 파싱할 수도 있습니다.  
+하지만 `front-matter`만 알고 싶은데 일일이 content를 파싱하는 것은 너무 비효율적인 작업입니다.
+
+따라서 전체 포스트 리스트를 조회할 때는 아래와 같이 파일들의 `front-matter`만을 파싱하면 됩니다.
+
+```ts {10}
+import { sync } from 'glob';
+import matter from 'gray-matter';
+import path from 'path';
+
+export const getAllPosts = () => {
+  const postPaths = sync(`/**/*.mdx`);
+
+  return postPaths.reduce<Post[]>((ac, filePath) => {
+    const file = fs.readFileSync(filePath, { encoding: 'utf8' });
+    const { content, data } = matter(file);
+
+    return [...ac, { content, data }];
+  }, []);
+};
+```
