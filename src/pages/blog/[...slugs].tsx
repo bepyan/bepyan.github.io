@@ -1,6 +1,6 @@
 import dayjs from 'dayjs';
 import { GetStaticPaths, GetStaticProps } from 'next';
-import { MDXRemote, MDXRemoteSerializeResult } from 'next-mdx-remote';
+import { MDXRemote } from 'next-mdx-remote';
 
 import Hr from '~/components/common/Hr';
 import IconText from '~/components/common/IconText';
@@ -10,9 +10,9 @@ import ClockIcon from '~/components/icons/ClockIcon';
 import Layout from '~/components/Layout';
 import { BlogSEO } from '~/components/SEO';
 import TocBanner from '~/components/TocBanner';
-import { serializeMdx } from '~/libs/mdx';
+import { parseMdx } from '~/libs/mdx';
 import { getAllPosts } from '~/libs/post';
-import { Post } from '~/libs/types';
+import { Post, TableOfContents } from '~/libs/types';
 
 export const getStaticPaths: GetStaticPaths = () => {
   const posts = getAllPosts();
@@ -35,13 +35,14 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
     };
   }
 
-  const mdx = await serializeMdx(post.content);
+  const { compiledSource, tableOfContents } = await parseMdx(post.content);
 
   return {
     props: {
       post,
       slug,
-      mdx,
+      compiledSource,
+      tableOfContents,
     },
   };
 };
@@ -49,11 +50,13 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
 export default function PostPage({
   post,
   slug,
-  mdx,
+  compiledSource,
+  tableOfContents,
 }: {
   post: Post;
   slug: string;
-  mdx: MDXRemoteSerializeResult;
+  compiledSource: string;
+  tableOfContents: TableOfContents;
 }) {
   return (
     <Layout>
@@ -75,11 +78,11 @@ export default function PostPage({
       </div>
 
       <div className="absolute left-full">
-        <TocBanner source={post.content} />
+        <TocBanner tableOfContents={tableOfContents} />
       </div>
 
       <div className="prose mt-4 w-full max-w-none dark:prose-dark">
-        <MDXRemote {...mdx} />
+        <MDXRemote compiledSource={compiledSource} />
       </div>
 
       <div>

@@ -1,47 +1,10 @@
-import { Fragment, useEffect, useMemo, useState } from 'react';
+import { Fragment, useEffect, useState } from 'react';
 
 import { $ } from '~/libs/core';
-import { Optional } from '~/libs/types';
+import { Section, SubSection, TableOfContents } from '~/libs/types';
 
-type Section = SubSection & { subSections: SubSection[] };
-type SubSection = { slug: string; text: string };
-type TableOfContents = Section[];
-
-const useTableOfContents = (source: string) => {
-  const tableOfContents = useMemo(
-    () =>
-      source
-        .split('\n')
-        .filter((line) => line.match(/(^#{1,3})\s/))
-        .filter((line) => line.toLowerCase().match(/^(?!.*(#*\stoc$|#*\stable of contents$)).*$/g))
-        .reduce<TableOfContents>((ac, rawHeading) => {
-          const nac = [...ac];
-          const section = {
-            slug: rawHeading
-              .trim()
-              .toLowerCase()
-              .replace(/[^a-z0-9ㄱ-ㅎ|ㅏ-ㅣ|가-힣 -]/g, '')
-              .replace(/\s+/g, '-')
-              .replace(/-+/g, '-')
-              .replace(/^-+/, '')
-              .replace(/-+$/, ''),
-            text: rawHeading.replace(/^##*\s/, ''),
-          };
-
-          const isSubTitle = rawHeading.split('#').length - 1 === 3;
-
-          if (ac.length && isSubTitle) {
-            nac.at(-1)?.subSections.push(section);
-          } else {
-            nac.push({ ...section, subSections: [] });
-          }
-
-          return nac;
-        }, []),
-    [source],
-  );
-
-  const [currentSectionSlug, setCurrentSectionSlug] = useState(tableOfContents[0]?.slug);
+const useScroll = (tableOfContents: TableOfContents) => {
+  const [currentSectionSlug, setCurrentSectionSlug] = useState(tableOfContents?.[0].slug);
 
   useEffect(() => {
     if (tableOfContents.length === 0) return;
@@ -88,19 +51,22 @@ const useTableOfContents = (source: string) => {
   return { tableOfContents, currentSectionSlug };
 };
 
-export default function TocBanner({ source }: { source: string }) {
-  const { tableOfContents, currentSectionSlug } = useTableOfContents(source);
+export default function TocBanner({ tableOfContents }: { tableOfContents: TableOfContents }) {
+  const { currentSectionSlug } = useScroll(tableOfContents);
 
-  const isActiveSection = (section: Optional<Section, 'subSections'>) => {
-    if (section.slug === currentSectionSlug) {
-      return true;
-    }
+  const isSubSectionActive = (subSection: SubSection) => {
+    return subSection.slug === currentSectionSlug;
+  };
 
-    return Boolean(section.subSections?.some((v) => v.slug === currentSectionSlug));
+  const isSectionActive = (section: Section) => {
+    return (
+      section.slug === currentSectionSlug ||
+      section.subSections.some((v) => v.slug === currentSectionSlug)
+    );
   };
 
   return (
-    <div className="fixed ml-8 overflow-y-auto px-8">
+    <div className="fixed ml-8 mt-8 overflow-y-auto px-8">
       <p className="mb-4 text-sm font-semibold leading-6 text-gray-900 dark:text-gray-100">
         On this page
       </p>
@@ -113,9 +79,9 @@ export default function TocBanner({ source }: { source: string }) {
                 className={$(
                   'group block py-1 transition-colors',
                   section.subSections && 'font-medium',
-                  isActiveSection(section)
+                  isSectionActive(section)
                     ? 'font-medium text-yellow-500 drop-shadow-base dark:text-yellow-400'
-                    : 'text-gray-700 hover:text-gray-900 dark:text-gray-400 dark:hover:text-gray-300',
+                    : 'text-gray-700 hover:text-gray-900 hover:drop-shadow-base dark:text-gray-400 dark:hover:text-gray-300',
                 )}
               >
                 {section.text}
@@ -127,9 +93,9 @@ export default function TocBanner({ source }: { source: string }) {
                   href={`#${subSection.slug}`}
                   className={$(
                     'group flex items-start py-1 transition-colors',
-                    isActiveSection(subSection)
+                    isSubSectionActive(subSection)
                       ? 'text-yellow-500 drop-shadow-base dark:text-yellow-400'
-                      : 'text-gray-700 hover:text-gray-900 dark:text-gray-400 dark:hover:text-gray-300',
+                      : 'text-gray-700 hover:text-gray-900 hover:drop-shadow-base dark:text-gray-400 dark:hover:text-gray-300',
                   )}
                 >
                   <svg

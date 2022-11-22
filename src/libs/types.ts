@@ -22,3 +22,12 @@ export type Serize = Omit<GrayMatter, 'date'> & {
   readingMinutes: number;
   posts: Post[];
 };
+
+export type SubSection = {
+  slug: string;
+  text: string;
+};
+export type Section = SubSection & {
+  subSections: SubSection[];
+};
+export type TableOfContents = Section[];
