@@ -55,7 +55,7 @@ module.exports = {
         },
         dark: {
           css: {
-            color: theme('colors.gray.200'),
+            color: theme('colors.gray.250'),
             strong: { color: theme('colors.gray.100') },
             a: {
               color: theme('colors.gray.500'),
