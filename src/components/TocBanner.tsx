@@ -4,7 +4,7 @@ import { $ } from '~/libs/core';
 import { Section, SubSection, TableOfContents } from '~/libs/types';
 
 const useScroll = (tableOfContents: TableOfContents) => {
-  const [currentSectionSlug, setCurrentSectionSlug] = useState(tableOfContents?.[0].slug);
+  const [currentSectionSlug, setCurrentSectionSlug] = useState(tableOfContents?.[0]?.slug);
 
   useEffect(() => {
     if (tableOfContents.length === 0) return;
@@ -64,6 +64,10 @@ export default function TocBanner({ tableOfContents }: { tableOfContents: TableO
       section.subSections.some((v) => v.slug === currentSectionSlug)
     );
   };
+
+  if (tableOfContents.length === 0) {
+    return <></>;
+  }
 
   return (
     <div className="fixed ml-8 mt-8 overflow-y-auto px-8">

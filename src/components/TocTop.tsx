@@ -2,8 +2,12 @@ import { TableOfContents } from '~/libs/types';
 import Hr from './common/Hr';
 
 export default function TocTop({ tableOfContents }: { tableOfContents: TableOfContents }) {
+  if (tableOfContents.length === 0) {
+    return <></>;
+  }
+
   return (
-    <div>
+    <>
       <h2 id="table-of-contents">Table of contents</h2>
       <ul>
         {tableOfContents.map((section) => (
@@ -21,8 +25,7 @@ export default function TocTop({ tableOfContents }: { tableOfContents: TableOfCo
           </li>
         ))}
       </ul>
-
       <Hr />
-    </div>
+    </>
   );
 }
