@@ -10,6 +10,7 @@ import ClockIcon from '~/components/icons/ClockIcon';
 import Layout from '~/components/Layout';
 import { BlogSEO } from '~/components/SEO';
 import TocBanner from '~/components/TocBanner';
+import TocTop from '~/components/TocTop';
 import { parseMdx } from '~/libs/mdx';
 import { getAllPosts } from '~/libs/post';
 import { Post, TableOfContents } from '~/libs/types';
@@ -82,6 +83,7 @@ export default function PostPage({
       </div>
 
       <div className="prose mt-4 w-full max-w-none dark:prose-dark">
+        <TocTop tableOfContents={tableOfContents} />
         <MDXRemote compiledSource={compiledSource} />
       </div>
 
