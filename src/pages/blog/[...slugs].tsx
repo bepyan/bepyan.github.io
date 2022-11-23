@@ -3,11 +3,13 @@ import { GetStaticPaths, GetStaticProps } from 'next';
 import { MDXRemote } from 'next-mdx-remote';
 
 import Hr from '~/components/common/Hr';
+import IconButton from '~/components/common/IconButton';
 import IconText from '~/components/common/IconText';
 import Title from '~/components/common/Title';
 import Giscus from '~/components/Giscus';
 import CalanderIcon from '~/components/icons/CalanderIcon';
 import ClockIcon from '~/components/icons/ClockIcon';
+import UpIcon from '~/components/icons/UpIcon';
 import Layout from '~/components/Layout';
 import { BlogSEO } from '~/components/SEO';
 import ThemeSwitch from '~/components/ThemeSwitch';
@@ -86,8 +88,11 @@ export default function PostPage({
           'right-[max(0px,calc(50%-42rem))] w-64 2xl:right-[max(calc(50%-46rem),calc(50%-48rem))] 2xl:w-80',
         )}
       >
-        <TocBanner tableOfContents={tableOfContents} className="" />
-        <div className="mt-4 flex items-center">
+        <TocBanner tableOfContents={tableOfContents} />
+        <div className="mt-4 flex items-center justify-end pr-16">
+          <IconButton onClick={() => window.scrollTo({ top: 0 })}>
+            <UpIcon width={20} />
+          </IconButton>
           <ThemeSwitch />
         </div>
       </div>
