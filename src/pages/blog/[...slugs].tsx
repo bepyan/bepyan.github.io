@@ -4,13 +4,16 @@ import { MDXRemote } from 'next-mdx-remote';
 
 import Hr from '~/components/common/Hr';
 import IconText from '~/components/common/IconText';
+import Title from '~/components/common/Title';
 import Giscus from '~/components/Giscus';
 import CalanderIcon from '~/components/icons/CalanderIcon';
 import ClockIcon from '~/components/icons/ClockIcon';
 import Layout from '~/components/Layout';
 import { BlogSEO } from '~/components/SEO';
+import ThemeSwitch from '~/components/ThemeSwitch';
 import TocBanner from '~/components/TocBanner';
 import TocTop from '~/components/TocTop';
+import { $ } from '~/libs/core';
 import { parseMdx } from '~/libs/mdx';
 import { getAllPosts } from '~/libs/post';
 import { Post, TableOfContents } from '~/libs/types';
@@ -64,9 +67,7 @@ export default function PostPage({
       <BlogSEO {...post} url={`/blog/${slug}`} summary={post.description} images={[]} />
 
       <div>
-        <h1 className="mb-4 text-center text-3xl font-bold tracking-tight text-black dark:text-white md:text-5xl">
-          {post.title}
-        </h1>
+        <Title className="mb-4 text-center">{post.title}</Title>
 
         <div className="mt-2 flex w-full flex-col justify-between md:flex-row md:items-center">
           <div className="mx-auto flex gap-2 text-gray-600 dark:text-gray-400">
@@ -78,8 +79,17 @@ export default function PostPage({
         <Hr className="mt-4" />
       </div>
 
-      <div className="absolute left-full">
-        <TocBanner tableOfContents={tableOfContents} />
+      <div
+        className={$(
+          'fixed top-[120px] bottom-0 hidden overflow-y-auto px-8 pb-10 xl:block',
+          // 자연스럽게 사라지는 시점: 3xl(768) + 2 * width(256) = xl(1280)
+          'right-[max(0px,calc(50%-42rem))] w-64 2xl:right-[max(calc(50%-46rem),calc(50%-48rem))] 2xl:w-80',
+        )}
+      >
+        <TocBanner tableOfContents={tableOfContents} className="" />
+        <div className="mt-4 flex items-center">
+          <ThemeSwitch />
+        </div>
       </div>
 
       <div className="prose mt-4 w-full max-w-none dark:prose-dark">

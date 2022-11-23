@@ -51,7 +51,13 @@ const useScroll = (tableOfContents: TableOfContents) => {
   return { tableOfContents, currentSectionSlug };
 };
 
-export default function TocBanner({ tableOfContents }: { tableOfContents: TableOfContents }) {
+export default function TocBanner({
+  tableOfContents,
+  className,
+}: {
+  tableOfContents: TableOfContents;
+  className?: string;
+}) {
   const { currentSectionSlug } = useScroll(tableOfContents);
 
   const isSubSectionActive = (subSection: SubSection) => {
@@ -70,7 +76,7 @@ export default function TocBanner({ tableOfContents }: { tableOfContents: TableO
   }
 
   return (
-    <div className="fixed ml-8 mt-8 overflow-y-auto px-8">
+    <div className={className}>
       <p className="mb-4 text-sm font-semibold leading-6 text-gray-900 dark:text-gray-100">
         On this page
       </p>
