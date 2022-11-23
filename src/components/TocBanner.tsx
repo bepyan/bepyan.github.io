@@ -1,10 +1,13 @@
-import { Fragment, useEffect, useState } from 'react';
+import { Fragment, useEffect, useRef, useState } from 'react';
 
 import { $ } from '~/libs/core';
 import { Section, SubSection, TableOfContents } from '~/libs/types';
+import IconButton from './common/IconButton';
+import UpIcon from './icons/UpIcon';
+import ThemeSwitch from './ThemeSwitch';
 
 const useScroll = (tableOfContents: TableOfContents) => {
-  const [currentSectionSlug, setCurrentSectionSlug] = useState(tableOfContents?.[0]?.slug);
+  const [currentSectionSlug, setCurrentSectionSlug] = useState<string | undefined>();
 
   useEffect(() => {
     if (tableOfContents.length === 0) return;
@@ -29,7 +32,7 @@ const useScroll = (tableOfContents: TableOfContents) => {
       const NAV_TOP = 120;
       const top = window.pageYOffset + scrollMt - NAV_TOP + 1;
 
-      let current = headings[0].id;
+      let current: typeof currentSectionSlug = undefined;
       for (let i = 0; i < headings.length; i++) {
         if (top >= headings[i].top) {
           current = headings[i].id;
@@ -51,6 +54,50 @@ const useScroll = (tableOfContents: TableOfContents) => {
   return { tableOfContents, currentSectionSlug };
 };
 
+const useObserver = () => {
+  const rootRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const $toc = document.querySelector('#table-of-contents');
+    if (!$toc) return;
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (!rootRef.current) return;
+
+        const $root = rootRef.current;
+        $root.style.display = 'block';
+
+        const $header = $root.querySelector<HTMLElement>('#toc-header');
+        const $list = Array.from($root.querySelectorAll<HTMLElement>('#toc-content > li'));
+        const $footer = $root.querySelector<HTMLElement>('#toc-footer');
+        const elementList = [$header, $footer, ...$list].filter(Boolean) as HTMLElement[];
+
+        if (entry.isIntersecting) {
+          elementList.reverse().forEach((element, i) => {
+            element.style.opacity = '0';
+            element.style.pointerEvents = 'none';
+            element.style.transition = '200ms ease-out';
+            element.style.transitionDelay = `${i * 10}ms`;
+          });
+        } else {
+          elementList.forEach((element, i) => {
+            element.style.opacity = '1';
+            element.style.pointerEvents = 'auto';
+            element.style.transition = '150ms ease-out';
+            element.style.transitionDelay = `${i * 5}ms`;
+          });
+        }
+      },
+      { threshold: 0.7 },
+    );
+
+    observer.observe($toc);
+  }, []);
+
+  return rootRef;
+};
+
 export default function TocBanner({
   tableOfContents,
   className,
@@ -58,6 +105,7 @@ export default function TocBanner({
   tableOfContents: TableOfContents;
   className?: string;
 }) {
+  const rootRef = useObserver();
   const { currentSectionSlug } = useScroll(tableOfContents);
 
   const isSubSectionActive = (subSection: SubSection) => {
@@ -76,11 +124,14 @@ export default function TocBanner({
   }
 
   return (
-    <div className={className}>
-      <p className="mb-4 text-sm font-semibold leading-6 text-gray-900 dark:text-gray-100">
+    <div ref={rootRef} className={$('hidden', className)}>
+      <p
+        id="toc-header"
+        className="mb-4 text-sm font-semibold leading-6 text-gray-900 dark:text-gray-100"
+      >
         On this page
       </p>
-      <ul className="flex flex-col items-start justify-start text-sm">
+      <ul id="toc-content" className="flex flex-col items-start justify-start text-sm">
         {tableOfContents.map((section) => (
           <Fragment key={section.slug}>
             <li>
@@ -132,6 +183,12 @@ export default function TocBanner({
           </Fragment>
         ))}
       </ul>
+      <div id="toc-footer" className="mt-4 flex items-center justify-end pr-16">
+        <IconButton onClick={() => window.scrollTo({ top: 0 })}>
+          <UpIcon width={20} />
+        </IconButton>
+        <ThemeSwitch />
+      </div>
     </div>
   );
 }
