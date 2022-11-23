@@ -18,7 +18,7 @@ export default function ThemeSwitch() {
         xmlns="http://www.w3.org/2000/svg"
         viewBox="0 0 24 24"
         fill="currentColor"
-        className="h-6 w-6 text-yellow-500 dark:text-yellow-400"
+        className="h-6 w-6 text-yellow-400 drop-shadow-base"
       >
         {!mounted ? (
           <></>
