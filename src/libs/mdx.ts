@@ -4,6 +4,7 @@ import rehypeCodeTitles from 'rehype-code-titles';
 import rehypeExternalLinks from 'rehype-external-links';
 import rehypePrism from 'rehype-prism-plus';
 import rehypeSlug from 'rehype-slug';
+import remarkBreaks from 'remark-breaks';
 import remarkGfm from 'remark-gfm';
 
 import { TableOfContents } from './types';
@@ -43,7 +44,7 @@ const serializeMdx = (source: string) => {
   return serialize(source, {
     parseFrontmatter: false,
     mdxOptions: {
-      remarkPlugins: [remarkGfm],
+      remarkPlugins: [remarkGfm, remarkBreaks],
       rehypePlugins: [
         rehypeSlug,
         rehypeCodeTitles,
