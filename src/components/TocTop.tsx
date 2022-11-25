@@ -12,9 +12,7 @@ export default function TocTop({ tableOfContents }: { tableOfContents: TableOfCo
       <ul>
         {tableOfContents.map((section) => (
           <li key={section.slug}>
-            <p>
-              <a href={`#${section.slug}`}>{section.text}</a>
-            </p>
+            <a href={`#${section.slug}`}>{section.text}</a>
             <ul>
               {section.subSections.map((subSection) => (
                 <li key={subSection.slug}>

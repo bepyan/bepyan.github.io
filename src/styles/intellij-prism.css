@@ -7,7 +7,7 @@
 
 code[class*='language-'],
 pre[class*='language-'] {
-  color: #a9b7c6;
+  color: var(--prism-foreground);
   font-family: Consolas, Monaco, 'Andale Mono', monospace;
   direction: ltr;
   text-align: left;
@@ -221,6 +221,10 @@ pre[class*='language-'] {
 }
 
 /* Inline code */
-:not(pre) code {
+.prose :not(pre) code {
   @apply text-gray-800 dark:text-gray-200;
+}
+
+.prose pre {
+  @apply bg-[var(--prism-background)] text-[var(--prism-foreground)];
 }
