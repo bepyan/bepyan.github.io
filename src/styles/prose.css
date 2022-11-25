@@ -1,20 +1,22 @@
 /* rehype-autolink-headings */
 .prose .anchor {
-  @apply invisible absolute no-underline;
-
-  margin-left: -1em;
-  padding-right: 0.5em;
-  cursor: pointer;
+  @apply absolute -ml-10 mt-1 flex h-6 w-6 items-center justify-center opacity-0 transition-all;
+  @apply rounded-md border-none no-underline ring-1 ring-gray-700/10;
+  @apply hover:shadow hover:ring-gray-700/30 dark:bg-gray-700 dark:text-gray-400;
 }
 
 .prose .anchor:after {
-  @apply text-gray-300 dark:text-gray-700;
-  content: '#';
+  content: ' ';
+  mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' fill='none' aria-hidden='true'%3E%3Cpath d='M3.75 1v10M8.25 1v10M1 3.75h10M1 8.25h10' stroke='currentColor' strokeWidth='1.5' strokeLinecap='round' /%3E%3C/svg%3E");
+  mask-repeat: no-repeat;
+  mask-position: center;
+
+  @apply h-4 w-4 bg-gray-700 dark:bg-gray-300;
 }
 
-.anchor:hover,
+.prose .anchor:hover,
 .prose *:hover > .anchor {
-  @apply visible;
+  @apply md:opacity-100;
 }
 
 /* common markdown */
