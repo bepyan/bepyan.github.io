@@ -1,4 +1,4 @@
-@import url(./dracula.css);
+@import "dracula.css";
 
 /* rehype-code-title */
 .prose .rehype-code-title {
@@ -59,23 +59,8 @@
   margin-left: -12px;
 }
 
-/* Code blocks */
-.prose pre::-webkit-scrollbar {
-  display: none;
-}
-
-.prose pre {
-  -ms-overflow-style: none; /* IE and Edge */
-  scrollbar-width: none; /* Firefox */
-}
-
 /* Inline code */
 .prose :not(pre) code {
   font-family: PT Mono, Consolas, Monaco, 'Andale Mono', 'Ubuntu Mono', monospace;
-  @apply rounded-lg border border-gray-800 px-2 py-1 text-gray-800 dark:border-[var(--foreground-40)] dark:text-[var(--foreground)];
-}
-
-.prose :not(pre) code::before,
-.prose :not(pre) code::after {
-  content: none;
+  @apply px-2 py-1 text-gray-800 dark:text-[var(--foreground)];
 }

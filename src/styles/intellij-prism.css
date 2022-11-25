@@ -1,0 +1,226 @@
+:root {
+  --prism-background: #2b2b2b;
+  --prism-comment: #808080;
+  --prism-foreground: #a9b7c6;
+  --prism-selection: #484848;
+}
+
+code[class*='language-'],
+pre[class*='language-'] {
+  color: #a9b7c6;
+  font-family: Consolas, Monaco, 'Andale Mono', monospace;
+  direction: ltr;
+  text-align: left;
+  white-space: pre;
+  word-spacing: normal;
+  word-break: normal;
+  line-height: 1.5;
+
+  -moz-tab-size: 4;
+  -o-tab-size: 4;
+  tab-size: 4;
+
+  -webkit-hyphens: none;
+  -moz-hyphens: none;
+  -ms-hyphens: none;
+  hyphens: none;
+}
+
+pre[class*='language-']::-moz-selection,
+pre[class*='language-'] ::-moz-selection,
+code[class*='language-']::-moz-selection,
+code[class*='language-'] ::-moz-selection {
+  color: inherit;
+  background: var(--prism-selection);
+}
+
+pre[class*='language-']::selection,
+pre[class*='language-'] ::selection,
+code[class*='language-']::selection,
+code[class*='language-'] ::selection {
+  color: inherit;
+  background: var(--prism-selection);
+}
+
+/* Code blocks */
+pre[class*='language-'] {
+  padding: 1em;
+  margin: 0.5em 0;
+  overflow: auto;
+}
+
+:not(pre) > code[class*='language-'],
+pre[class*='language-'] {
+  background: var(--prism-background);
+}
+
+/* Inline code */
+:not(pre) > code[class*='language-'] {
+  padding: 0.1em;
+  border-radius: 0.3em;
+}
+
+.token.comment,
+.token.prolog,
+.token.cdata {
+  color: #808080;
+}
+
+.token.delimiter,
+.token.boolean,
+.token.keyword,
+.token.selector,
+.token.important,
+.token.atrule {
+  color: #cc7832;
+}
+
+.token.operator,
+.token.punctuation,
+.token.attr-name {
+  color: #a9b7c6;
+}
+
+.token.tag,
+.token.tag .punctuation,
+.token.doctype,
+.token.builtin {
+  color: #e8bf6a;
+}
+
+.token.entity,
+.token.number,
+.token.symbol {
+  color: #6897bb;
+}
+
+.token.property,
+.token.constant,
+.token.variable {
+  color: #9876aa;
+}
+
+.token.string,
+.token.char {
+  color: #6a8759;
+}
+
+.token.attr-value,
+.token.attr-value .punctuation {
+  color: #a5c261;
+}
+
+.token.attr-value .punctuation:first-child {
+  color: #a9b7c6;
+}
+
+.token.url {
+  color: #287bde;
+  text-decoration: underline;
+}
+
+.token.function {
+  color: #ffc66d;
+}
+
+.token.regex {
+  background: #364135;
+}
+
+.token.bold {
+  font-weight: bold;
+}
+
+.token.italic {
+  font-style: italic;
+}
+
+.token.inserted {
+  background: #294436;
+}
+
+.token.deleted {
+  background: #484a4a;
+}
+
+code.language-css .token.property,
+code.language-css .token.property + .token.punctuation {
+  color: #a9b7c6;
+}
+
+code.language-css .token.id {
+  color: #ffc66d;
+}
+
+code.language-css .token.selector > .token.class,
+code.language-css .token.selector > .token.attribute,
+code.language-css .token.selector > .token.pseudo-class,
+code.language-css .token.selector > .token.pseudo-element {
+  color: #ffc66d;
+}
+
+.code-line {
+  color: var(--prism-foreground);
+}
+
+/* rehype-code-title */
+.rehype-code-title {
+  color: #bbbbbb;
+  background-color: #3c3f41;
+  @apply rounded-t-lg px-5 py-3 text-sm font-bold;
+}
+
+.rehype-code-title,
+pre[class*='language-'] {
+  @apply dark:ring-1 dark:ring-inset dark:ring-white/10;
+}
+
+.rehype-code-title + pre {
+  @apply mt-0 rounded-t-none;
+}
+
+/* rehype-prism-plus */
+.code-line.inserted,
+.code-line.deleted,
+.code-line.highlight-line {
+  @apply -mx-4 block px-4;
+}
+
+.code-line.highlight-line {
+  background-color: var(--prism-selection);
+  border-color: #cc7832;
+  border-left-width: 6px;
+}
+.highlight-line > *:first-of-type {
+  margin-left: -6px;
+}
+.highlight-line.line-number::before {
+  margin-left: -14px;
+}
+
+.code-line.highlight-line::selection,
+.code-line.highlight-line *::selection {
+  background-color: var(--prism-selection);
+}
+
+.code-line.inserted {
+  background-color: rgba(16, 185, 129, 0.2);
+}
+.code-line.deleted {
+  background-color: rgba(239, 68, 68, 0.2);
+}
+
+.line-number::before {
+  display: inline-block;
+  width: 1rem;
+  text-align: right;
+  margin-right: 16px;
+  margin-left: -8px;
+  color: var(--prism-comment);
+  content: attr(line);
+}
+
+/* Inline code */
+:not(pre) code {
+  @apply text-gray-800 dark:text-gray-200;
+}

@@ -2,7 +2,7 @@
 @tailwind components;
 @tailwind utilities;
 
-@import 'prism.css';
+@import 'intellij-prism.css';
 @import 'prose.css';
 
 html,
@@ -18,9 +18,9 @@ body,
 }
 
 ::selection {
-  @apply bg-gray-250;
+  @apply bg-gray-250/30;
 }
 
 .dark ::selection {
-  @apply bg-gray-700;
+  @apply bg-gray-500/30;
 }

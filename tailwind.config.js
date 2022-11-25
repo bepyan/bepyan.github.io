@@ -12,7 +12,7 @@ module.exports = {
           100: '#fafafa',
           150: '#f0f0f0',
           200: '#eaeaea',
-          250: '#dadada',
+          250: '#acacac',
           300: '#999999',
           400: '#888888',
           500: '#666666',
@@ -35,12 +35,22 @@ module.exports = {
             color: theme('colors.gray.700'),
             strong: { color: theme('colors.gray.800') },
             a: {
-              color: theme('colors.gray.500'),
-              '&:hover': {
-                color: theme('colors.gray.700'),
+              fontWeight: theme('fontWeight.normal'),
+              textDecoration: 'none',
+              borderBottom: `1px solid #333333`,
+              code: {
+                paddingBottom: '2px',
+                borderBottom: `1px solid #33333370`,
+                '&:hover': {
+                  borderBottomWidth: '2px',
+                },
               },
-              code: { color: theme('colors.gray.500') },
-              strong: { color: theme('colors.gray.800') },
+              strong: {
+                borderBottom: `1px solid #33333390`,
+                '&:hover': {
+                  borderBottomWidth: '2px',
+                },
+              },
             },
             'h2,h3,h4': {
               'scroll-margin-top': 'var(--scroll-mt)',
@@ -48,7 +58,6 @@ module.exports = {
             thead: {
               borderBottomColor: theme('colors.gray.200'),
             },
-            code: { color: theme('colors.pink.500') },
             'blockquote p:first-of-type::before': false,
             'blockquote p:last-of-type::after': false,
           },
@@ -56,21 +65,28 @@ module.exports = {
         dark: {
           css: {
             color: theme('colors.gray.250'),
-            strong: { color: theme('colors.gray.100') },
+            strong: { color: theme('colors.gray.200') },
+            'h1,h2,h3,h4,h5,h6': {
+              color: theme('colors.gray.200'),
+            },
             a: {
-              color: theme('colors.gray.500'),
-              '&:hover': {
-                color: theme('colors.gray.600'),
+              color: theme('colors.gray.400'),
+              code: {
+                borderBottom: `1px solid ${theme('colors.yellow.300')}`,
+                '&:hover': {
+                  borderBottomWidth: '2px',
+                },
               },
-              code: { color: theme('colors.gray.500') },
-              strong: { color: theme('colors.gray.100') },
+              strong: {
+                borderBottom: `1px solid ${theme('colors.yellow.300')}`,
+                '&:hover': {
+                  borderBottomWidth: '2px',
+                },
+              },
             },
             blockquote: {
               borderLeftColor: theme('colors.gray.700'),
               color: theme('colors.gray.300'),
-            },
-            'h1,h2,h3,h4,h5,h6': {
-              color: theme('colors.gray.100'),
             },
             hr: { borderColor: theme('colors.gray.700') },
             ol: {

@@ -35,3 +35,12 @@
 .prose del {
   @apply text-gray-300 dark:text-gray-600;
 }
+
+.prose pre::-webkit-scrollbar {
+  display: none;
+}
+
+.prose pre {
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none; /* Firefox */
+}
