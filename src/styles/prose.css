@@ -31,7 +31,18 @@
 }
 
 .prose a {
-  @apply transition-all;
+  @apply border-b border-[#333333] font-normal no-underline transition-all;
+  @apply text-gray-700 dark:text-gray-400;
+}
+.prose a:not(:has(code, strong)) {
+  @apply hover:text-gray-400 dark:hover:text-gray-500;
+}
+
+.prose a:has(code, strong) {
+  @apply border-opacity-90 hover:border-b-2 dark:border-yellow-300;
+}
+.prose a:has(code) {
+  @apply pb-1;
 }
 
 .prose del {

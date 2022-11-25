@@ -34,24 +34,6 @@ module.exports = {
           css: {
             color: theme('colors.gray.700'),
             strong: { color: theme('colors.gray.800') },
-            a: {
-              fontWeight: theme('fontWeight.normal'),
-              textDecoration: 'none',
-              borderBottom: `1px solid #333333`,
-              code: {
-                paddingBottom: '2px',
-                borderBottom: `1px solid #33333370`,
-                '&:hover': {
-                  borderBottomWidth: '2px',
-                },
-              },
-              strong: {
-                borderBottom: `1px solid #33333390`,
-                '&:hover': {
-                  borderBottomWidth: '2px',
-                },
-              },
-            },
             'h2,h3,h4': {
               'scroll-margin-top': 'var(--scroll-mt)',
             },
@@ -68,21 +50,6 @@ module.exports = {
             strong: { color: theme('colors.gray.200') },
             'h1,h2,h3,h4,h5,h6': {
               color: theme('colors.gray.200'),
-            },
-            a: {
-              color: theme('colors.gray.400'),
-              code: {
-                borderBottom: `1px solid ${theme('colors.yellow.300')}`,
-                '&:hover': {
-                  borderBottomWidth: '2px',
-                },
-              },
-              strong: {
-                borderBottom: `1px solid ${theme('colors.yellow.300')}`,
-                '&:hover': {
-                  borderBottomWidth: '2px',
-                },
-              },
             },
             blockquote: {
               borderLeftColor: theme('colors.gray.700'),
