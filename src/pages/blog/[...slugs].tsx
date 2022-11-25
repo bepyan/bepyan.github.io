@@ -41,17 +41,23 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
   }
 
   const post = posts[postIndex];
-  const prevPost = posts.at(postIndex - 1) ?? null;
-  const nextPost = posts.at(postIndex + 1) ?? null;
+  const postFooterProps: PostFooterProps = {
+    prevPost: posts.at(postIndex - 1) ?? null,
+    nextPost: posts.at(postIndex + 1) ?? null,
+  };
+
   const serize = getSerizeBySlug(post.slug) ?? null;
+  if (serize) {
+    const postI = serize.posts.findIndex((v) => v.slug === slug);
+    postFooterProps.prevPost = postI - 1 >= 0 ? serize.posts.at(postI - 1) ?? null : null;
+    postFooterProps.nextPost = serize.posts.at(postI + 1) ?? null;
+  }
+
   const { compiledSource, tableOfContents } = await parseMdx(post.content);
 
   const props: Props = {
     post,
-    postFooterProps: {
-      prevPost,
-      nextPost,
-    },
+    postFooterProps,
     serize,
     slug,
     compiledSource,
