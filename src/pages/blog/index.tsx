@@ -13,7 +13,7 @@ export function getStaticProps() {
   return {
     props: {
       serizes: getAllSerizes(),
-      posts: getAllPosts(),
+      posts: getAllPosts().sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime()),
     },
   };
 }

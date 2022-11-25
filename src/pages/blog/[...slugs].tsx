@@ -9,13 +9,14 @@ import Giscus from '~/components/Giscus';
 import CalanderIcon from '~/components/icons/CalanderIcon';
 import ClockIcon from '~/components/icons/ClockIcon';
 import Layout from '~/components/Layout';
+import PostFooter, { PostFooterProps } from '~/components/PostFooter';
 import { BlogSEO } from '~/components/SEO';
 import TocBanner from '~/components/TocBanner';
 import TocTop from '~/components/TocTop';
 import { $ } from '~/libs/core';
 import { parseMdx } from '~/libs/mdx';
-import { getAllPosts } from '~/libs/post';
-import { Post, TableOfContents } from '~/libs/types';
+import { getAllPosts, getSerizeBySlug } from '~/libs/post';
+import { Post, Serize, TableOfContents } from '~/libs/types';
 
 export const getStaticPaths: GetStaticPaths = () => {
   const posts = getAllPosts();
@@ -30,37 +31,55 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
   const { slugs } = params as { slugs: string[] };
 
   const slug = [...slugs].join('/');
-  const post = getAllPosts().find((v) => v.slug === slug);
+  const posts = getAllPosts();
+  const postIndex = posts.findIndex((v) => v.slug === slug);
 
-  if (!post) {
+  if (postIndex === -1) {
     return {
       notFound: true,
     };
   }
 
+  const post = posts[postIndex];
+  const prevPost = posts.at(postIndex - 1) ?? null;
+  const nextPost = posts.at(postIndex + 1) ?? null;
+  const serize = getSerizeBySlug(post.slug) ?? null;
   const { compiledSource, tableOfContents } = await parseMdx(post.content);
 
-  return {
-    props: {
-      post,
-      slug,
-      compiledSource,
-      tableOfContents,
+  const props: Props = {
+    post,
+    postFooterProps: {
+      prevPost,
+      nextPost,
     },
+    serize,
+    slug,
+    compiledSource,
+    tableOfContents,
   };
+
+  return {
+    props,
+  };
+};
+
+type Props = {
+  post: Post;
+  postFooterProps: PostFooterProps;
+  serize: Serize | null;
+  slug: string;
+  compiledSource: string;
+  tableOfContents: TableOfContents;
 };
 
 export default function PostPage({
   post,
+  postFooterProps,
+  serize,
   slug,
   compiledSource,
   tableOfContents,
-}: {
-  post: Post;
-  slug: string;
-  compiledSource: string;
-  tableOfContents: TableOfContents;
-}) {
+}: Props) {
   return (
     <Layout>
       <BlogSEO {...post} url={`/blog/${slug}`} summary={post.description} images={[]} />
@@ -93,7 +112,8 @@ export default function PostPage({
         <MDXRemote compiledSource={compiledSource} />
       </div>
 
-      <div>
+      <div className="mt-12">
+        <PostFooter {...postFooterProps} />
         <Hr className="my-8" />
         <Giscus />
       </div>

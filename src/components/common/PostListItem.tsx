@@ -8,7 +8,7 @@ import CalanderIcon from '../icons/CalanderIcon';
 import ClockIcon from '../icons/ClockIcon';
 import IconText from './IconText';
 
-export default function PostListItem({ post }: { post: Post }) {
+export default function PostListItem({ post }: { post: Omit<Post, 'content'> }) {
   return (
     <li className="text-ye group w-full py-4 hover:drop-shadow-base">
       <Link as={`/blog/${post.slug}`} href={`/blog/[...slug]`} className="hover:drop-shadow-base">

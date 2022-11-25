@@ -17,63 +17,91 @@ const pathToSlug = (filePath: string) =>
     .replace('/index', '');
 
 /**
- *
+ * 글
  */
+const parsePost = (postPath: string): Post | undefined => {
+  try {
+    const file = fs.readFileSync(postPath, { encoding: 'utf8' });
+    const { content, data } = matter(file);
+    const grayMatter = data as GrayMatter;
+
+    if (grayMatter.draft) {
+      return;
+    }
+
+    return {
+      ...grayMatter,
+      tags: grayMatter.tags.filter(Boolean),
+      date: dayjs(grayMatter.date).format('YYYY-MM-DD'),
+      content,
+      slug: pathToSlug(postPath),
+      readingMinutes: Math.ceil(readingTime(content).minutes),
+      wordCount: content.split(/\s+/gu).length,
+    };
+  } catch (e) {
+    console.error(e);
+    return;
+  }
+};
+
 export const getAllPosts = (subPath = '') => {
   const postPaths = sync(`${POSTS_PATH}/**/!(snippets)${subPath}/!(index).mdx`);
 
-  return postPaths
-    .reduce<Post[]>((ac, filePath) => {
-      const file = fs.readFileSync(filePath, { encoding: 'utf8' });
-      const { content, data } = matter(file);
-      const grayMatter = data as GrayMatter;
+  return postPaths.reduce<Post[]>((ac, filePath) => {
+    const post = parsePost(filePath);
+    if (!post) return ac;
 
-      if (grayMatter.draft) {
-        return ac;
-      }
-
-      const post: Post = {
-        ...grayMatter,
-        tags: grayMatter.tags.filter(Boolean),
-        date: dayjs(grayMatter.date).format('YYYY-MM-DD'),
-        content,
-        slug: pathToSlug(filePath),
-        readingMinutes: Math.ceil(readingTime(content).minutes),
-        wordCount: content.split(/\s+/gu).length,
-      };
-
-      return [...ac, post];
-    }, [])
-    .sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
+    return [...ac, post];
+  }, []);
 };
 
 /**
- *
+ * 시리즈
  */
+const parseSerize = (serizePath: string): Serize | undefined => {
+  try {
+    const file = fs.readFileSync(serizePath, { encoding: 'utf8' });
+    const { data } = matter(file);
+    const grayMatter = data as GrayMatter;
+
+    const slug = pathToSlug(serizePath);
+    const posts = getAllPosts(slug)
+      // eslint-disable-next-line @typescript-eslint/no-unused-vars
+      .map(({ content, ...v }) => v)
+      .sort((a, b) => (a.slug > b.slug ? 1 : -1));
+
+    return {
+      ...grayMatter,
+      tags: grayMatter.tags.filter(Boolean),
+      date: dayjs(grayMatter.date).format('YYYY-MM-DD'),
+      posts,
+      readingMinutes: posts.reduce((ac, post) => ac + post.readingMinutes, 0),
+      slug,
+    };
+  } catch (e) {
+    console.error(e);
+  }
+};
+
 export const getAllSerizes = () => {
   const serizePaths = sync(`${POSTS_PATH}/**/!(snippets)/index.mdx`);
 
   return serizePaths
     .reduce<Serize[]>((ac, serizePath) => {
-      const file = fs.readFileSync(serizePath, { encoding: 'utf8' });
-      const { data } = matter(file);
-      const grayMatter = data as GrayMatter;
-
-      const slug = pathToSlug(serizePath);
-      const posts = getAllPosts(slug).sort((a, b) => (a.slug > b.slug ? 1 : -1));
-
-      const serize: Serize = {
-        ...grayMatter,
-        tags: grayMatter.tags.filter(Boolean),
-        date: dayjs(grayMatter.date).format('YYYY-MM-DD'),
-        posts,
-        readingMinutes: posts.reduce((ac, post) => ac + post.readingMinutes, 0),
-        slug,
-      };
+      const serize = parseSerize(serizePath);
+      if (!serize) return ac;
 
       return [...ac, serize];
     }, [])
     .sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
+};
+
+export const getSerizeBySlug = (slug: string) => {
+  const commonSlug = slug.split('/').slice(0, -1).join('/');
+  const serizePath = `.${BASE_PATH}/${commonSlug}/index.mdx`;
+  if (!fs.existsSync(`${serizePath}`)) return undefined;
+
+  return parseSerize(serizePath);
 };
 
 // /**
