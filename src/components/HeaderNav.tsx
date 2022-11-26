@@ -1,13 +1,22 @@
 import Image from 'next/image';
 import Link from 'next/link';
+import { useRouter } from 'next/router';
 import { useState } from 'react';
 
 import { siteConfig } from '~/config';
+import { $ } from '~/libs/core';
+import useDelayedRender from '~/libs/useDelayedRender';
 import NavItem from './common/NavItem';
 import ThemeSwitch from './ThemeSwitch';
 
 export default function HeaderNav() {
+  const router = useRouter();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+
+  const { mounted: isMenuMounted, rendered: isMenuRendered } = useDelayedRender(isMenuOpen, {
+    enterDelay: 20,
+    exitDelay: 300,
+  });
 
   const toggleMenu = () => {
     if (isMenuOpen) {
@@ -53,13 +62,23 @@ export default function HeaderNav() {
             className="block h-auto"
           />
         </button>
-        {isMenuOpen && (
-          <ul className="fixed top-[108px] z-50 flex h-full w-full flex-col bg-gray-100 dark:bg-gray-900">
-            {siteConfig.menus.map((link) => (
+        {isMenuMounted && (
+          <ul
+            className={$(
+              'fixed top-[108px] z-50 flex h-full w-full flex-col bg-gray-100 transition-all dark:bg-gray-900',
+              isMenuRendered ? 'opacity-100' : 'opacity-0',
+            )}
+          >
+            {[{ label: 'Home', path: '/' }, ...siteConfig.menus].map((link, i) => (
               <Link
                 key={link.label}
                 href={link.path}
-                className="mr-8 border-b border-gray-200 py-4 font-semibold dark:border-gray-700 dark:text-gray-200"
+                className={$(
+                  'mr-8 border-b border-gray-200 py-4 font-semibold transition-all dark:border-gray-700',
+                  isMenuRendered ? 'translate-x-0 opacity-100' : '-translate-x-4 opacity-0',
+                  router.asPath === link.path ? 'text-yellow-400' : 'dark:text-gray-200',
+                )}
+                style={{ transitionDelay: `${150 + i * 25}ms` }}
               >
                 {link.label}
               </Link>
