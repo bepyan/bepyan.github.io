@@ -1,7 +1,7 @@
 import Image from 'next/image';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 import { siteConfig } from '~/config';
 import { $ } from '~/libs/core';
@@ -27,6 +27,12 @@ export default function HeaderNav() {
       document.body.style.overflow = 'hidden';
     }
   };
+
+  useEffect(() => {
+    return function cleanup() {
+      document.body.style.overflow = '';
+    };
+  }, []);
 
   return (
     <nav className="flex w-full select-none items-end pt-8 pb-12 text-gray-800 dark:text-gray-400">
@@ -65,7 +71,7 @@ export default function HeaderNav() {
         {isMenuMounted && (
           <ul
             className={$(
-              'fixed top-[108px] z-50 flex h-full w-full flex-col bg-gray-100 transition-all dark:bg-gray-850',
+              'absolute inset-x-0 top-[108px] -bottom-4 z-50 flex flex-col bg-gray-100 px-6 transition-all dark:bg-gray-850',
               isMenuRendered ? 'opacity-100' : 'opacity-0',
             )}
           >
@@ -74,7 +80,7 @@ export default function HeaderNav() {
                 key={link.label}
                 href={link.path}
                 className={$(
-                  'mr-8 border-b border-gray-200 py-4 font-semibold transition-all dark:border-gray-700',
+                  'border-b border-gray-200 py-4 font-semibold transition-all dark:border-gray-700',
                   isMenuRendered ? 'translate-x-0 opacity-100' : '-translate-x-4 opacity-0',
                   router.asPath === link.path ? 'text-yellow-400' : 'dark:text-gray-200',
                 )}

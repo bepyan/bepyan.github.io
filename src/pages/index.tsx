@@ -13,7 +13,7 @@ export default function Home() {
         {title(siteConfig.author.name)}
       </div>
 
-      <div className="flex select-none items-start gap-3">
+      <div className="flex select-none flex-wrap items-start gap-3">
         <Image
           src="/forest.jpg"
           alt="forest"
