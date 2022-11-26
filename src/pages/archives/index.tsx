@@ -116,7 +116,7 @@ export default function Archives({
                     <li key={post.slug}>
                       <Link
                         href={`/blog/${post.slug}`}
-                        className="dark:text-gary-500 text-gray-500 transition hover:text-gray-900 dark:text-gray-400"
+                        className="text-gray-500 transition hover:text-gray-900 dark:text-gray-400 dark:hover:text-gray-500"
                       >
                         {post.title}
                       </Link>
