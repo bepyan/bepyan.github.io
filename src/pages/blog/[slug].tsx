@@ -40,15 +40,15 @@ export const getStaticProps: GetStaticProps = ({ params }) => {
 export default function PostPage({ serize }: { serize: Serize }) {
   return (
     <Layout>
-      <div className="grid grid-cols-3 gap-32">
-        <div className="col-span-1">
-          <div className="h-[336px] w-[240px] select-none rounded-lg bg-gray-200 px-11 pb-16 pt-12 dark:bg-gray-800">
+      <div className="grid gap-8 sm:grid-cols-3 sm:gap-32">
+        <div className="col-span-3 sm:col-span-1">
+          <div className="mx-auto h-[336px] w-[240px] select-none rounded-lg bg-gray-200 px-11 pb-16 pt-12 dark:bg-gray-800">
             <div className="flex h-full break-keep bg-gray-50 px-3 py-4 text-xl font-semibold dark:bg-gray-700 dark:text-white">
               {serize.title}
             </div>
           </div>
         </div>
-        <div className="col-span-2">
+        <div className="col-span-3 sm:col-span-2">
           <div className="rounded-lg bg-gray-150 px-5 py-4 dark:bg-gray-800">
             <p>{serize.description}</p>
             <div className="mt-1 flex gap-2 text-gray-600 dark:text-gray-400">
