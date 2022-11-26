@@ -29,7 +29,7 @@ export default function HeaderNav() {
   };
 
   return (
-    <nav className="relative flex w-full select-none items-end pt-8 pb-12 text-gray-800 dark:text-gray-400">
+    <nav className="flex w-full select-none items-end pt-8 pb-12 text-gray-800 dark:text-gray-400">
       {/* PC */}
       <div className="hidden items-end sm:flex">
         <NavItem href="/" className="mr-2">
@@ -65,7 +65,7 @@ export default function HeaderNav() {
         {isMenuMounted && (
           <ul
             className={$(
-              'fixed top-[108px] z-50 flex h-full w-full flex-col bg-gray-100 transition-all dark:bg-gray-900',
+              'fixed top-[108px] z-50 flex h-full w-full flex-col bg-gray-100 transition-all dark:bg-gray-850',
               isMenuRendered ? 'opacity-100' : 'opacity-0',
             )}
           >
@@ -86,7 +86,6 @@ export default function HeaderNav() {
           </ul>
         )}
       </div>
-
       <div className="ml-auto mb-1">
         <ThemeSwitch />
       </div>
