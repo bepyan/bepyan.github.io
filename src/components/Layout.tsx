@@ -1,12 +1,10 @@
-import Image from 'next/image';
 import { ReactNode, useMemo } from 'react';
 import title from 'title';
 
 import { siteConfig } from '~/config';
 import ExternalLink from './common/ExternalLink';
 import Hr from './common/Hr';
-import NavItem from './common/NavItem';
-import ThemeSwitch from './ThemeSwitch';
+import HeaderNav from './HeaderNav';
 
 export default function Layout({ children }: { children: ReactNode }) {
   const since = useMemo(() => {
@@ -19,27 +17,7 @@ export default function Layout({ children }: { children: ReactNode }) {
 
   return (
     <div className="mx-auto max-w-3xl px-4 lg:px-0">
-      <nav className="flex w-full select-none items-end pt-8 pb-12 text-gray-800 dark:text-gray-400">
-        <NavItem href="/" className="mr-2">
-          <Image
-            src="/favicon.png"
-            blurDataURL="/favicon.png"
-            alt="logo"
-            width={40}
-            height={40}
-            placeholder="blur"
-            className="block h-auto"
-          />
-        </NavItem>
-        {siteConfig.menus.map((link) => (
-          <NavItem key={link.label} href={link.path} className="px-3 py-1.5">
-            {link.label}
-          </NavItem>
-        ))}
-        <div className="ml-auto mb-1">
-          <ThemeSwitch />
-        </div>
-      </nav>
+      <HeaderNav />
       {/* --- */}
       <main className="relative pb-16">{children}</main>
       {/* --- */}

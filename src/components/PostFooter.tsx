@@ -28,7 +28,7 @@ export default function PostFooter({ prevPost, nextPost }: PostFooterProps) {
         </HoverLink>
       )}
       {nextPost && (
-        <HoverLink href={nextPost.slug} className="group ml-auto gap-3 px-4 py-2">
+        <HoverLink href={nextPost.slug} className="group ml-auto gap-3 px-4 py-2 text-right">
           <span>{nextPost.title}</span>
           <svg
             viewBox="0 0 3 6"

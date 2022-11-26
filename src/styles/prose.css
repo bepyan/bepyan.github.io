@@ -31,7 +31,7 @@
 }
 
 .prose a {
-  @apply border-b border-[#333333] font-normal no-underline transition-all;
+  @apply border-b border-[#333333] font-normal no-underline transition-all break-words;
   @apply text-gray-700 dark:text-gray-400;
 }
 .prose a:not(:has(code, strong)) {
