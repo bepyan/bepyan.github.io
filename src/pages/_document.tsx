@@ -9,8 +9,9 @@ export default function MyDocument() {
           content="IW87tE2IQja7BjGV4qw19t6Wk6Kcnmf-x-K5lrYWa28"
         />
         <meta name="naver-site-verification" content="3763a796b024affc5b7513ac77c47e6e03c8bdcf" />
-        <meta content="#ffffff" name="theme-color" />
-        <meta content="#ffffff" name="msapplication-TileColor" />
+
+        <meta name="theme-color" content="#fafafa" media="(prefers-color-scheme: light)" />
+        <meta name="theme-color" content="#131313" media="(prefers-color-scheme: dark)" />
       </Head>
       <body className="bg-gray-100 text-gray-900 transition-[background] dark:bg-gray-850 dark:text-gray-200">
         <Main />
