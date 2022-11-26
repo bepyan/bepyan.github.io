@@ -28,7 +28,7 @@ module.exports = {
         'base-bold': '0px 0px 7px rgba(234, 179, 8, 0.7)',
       },
       fontFamily: {
-        sans: ['Inter', ...fontFamily.sans],
+        sans: ['var(--font-inter)', ...fontFamily.sans],
       },
       typography: (theme) => ({
         DEFAULT: {
