@@ -25,7 +25,7 @@ const parseToc = (source: string) => {
           .replace(/-+/g, '-')
           .replace(/^-+/, '')
           .replace(/-+$/, ''),
-        text: rawHeading.replace(/^##*\s/, ''),
+        text: rawHeading.replace(/^##*\s/, '').replace(/[\*,\~]{2,}/g, ''),
       };
 
       const isSubTitle = rawHeading.split('#').length - 1 === 3;
