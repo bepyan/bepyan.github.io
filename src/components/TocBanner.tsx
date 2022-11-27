@@ -71,21 +71,21 @@ const useObserver = () => {
         const $header = $root.querySelector<HTMLElement>('#toc-header');
         const $list = Array.from($root.querySelectorAll<HTMLElement>('#toc-content > li'));
         const $footer = $root.querySelector<HTMLElement>('#toc-footer');
-        const elementList = [$header, $footer, ...$list].filter(Boolean) as HTMLElement[];
+        const elementList = [$root, $header, $footer, ...$list].filter(Boolean) as HTMLElement[];
 
         if (entry.isIntersecting) {
           elementList.reverse().forEach((element, i) => {
             element.style.opacity = '0';
             element.style.pointerEvents = 'none';
             element.style.transition = '200ms ease-out';
-            element.style.transitionDelay = `${i * 10}ms`;
+            element.style.transitionDelay = `${i * 15}ms`;
           });
         } else {
           elementList.forEach((element, i) => {
             element.style.opacity = '1';
             element.style.pointerEvents = 'auto';
             element.style.transition = '150ms ease-out';
-            element.style.transitionDelay = `${i * 5}ms`;
+            element.style.transitionDelay = `${i * 10}ms`;
           });
         }
       },
@@ -124,7 +124,13 @@ export default function TocBanner({
   }
 
   return (
-    <div ref={rootRef} className={$('hidden', className)}>
+    <div
+      ref={rootRef}
+      className={$(
+        'hidden rounded-xl border border-gray-250/50 p-4 dark:border-gray-700',
+        className,
+      )}
+    >
       <p
         id="toc-header"
         className="mb-4 text-sm font-semibold leading-6 text-gray-900 dark:text-gray-100"
@@ -183,7 +189,7 @@ export default function TocBanner({
           </Fragment>
         ))}
       </ul>
-      <div id="toc-footer" className="mt-4 flex items-center justify-end pr-16">
+      <div id="toc-footer" className="mt-4 flex items-center justify-end">
         <IconButton onClick={() => window.scrollTo({ top: 0 })}>
           <UpIcon width={20} />
         </IconButton>

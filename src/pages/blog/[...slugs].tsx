@@ -109,7 +109,7 @@ export default function PostPage({
 
       <div
         className={$(
-          'fixed top-[120px] bottom-0 hidden overflow-y-auto px-8 pb-10 xl:block',
+          'fixed top-[120px] bottom-0 hidden overflow-y-auto px-4 pb-10 xl:block 2xl:px-8',
           // 자연스럽게 사라지는 시점: 3xl(768) + 2 * width(256) = xl(1280)
           'right-[max(0px,calc(50%-42rem))] w-64 2xl:right-[max(calc(50%-46rem),calc(50%-48rem))] 2xl:w-80',
         )}
