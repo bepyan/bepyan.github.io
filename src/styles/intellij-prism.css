@@ -165,16 +165,24 @@ code.language-css .token.selector > .token.pseudo-element {
 
 /* rehype-code-wrap */
 .rehype-code-wrap {
-  @apply relative mt-2 overflow-hidden rounded-lg dark:ring-1 dark:ring-inset dark:ring-white/10;
+  @apply relative my-2 overflow-hidden rounded-lg;
 }
 .rehype-code-wrap > pre {
   margin: 0;
 }
 
 .rehype-code-wrap--title {
+  @apply flex;
+}
+.rehype-code-wrap--title-text {
   color: #bbbbbb;
   background-color: #3c3f41;
-  @apply px-5 py-3 text-sm font-bold;
+  @apply flex-none px-4 py-3 border-b border-[#bbbbbb] text-sm font-bold rounded-t-lg;
+  @apply ring-1 ring-inset ring-white/10;
+}
+.rehype-code-wrap--title-blank {
+  background-color: #3c3f41;
+  @apply flex-auto mt-3 rounded-tr-lg;
 }
 
 .rehype-code-wrap--title + pre {
@@ -183,7 +191,7 @@ code.language-css .token.selector > .token.pseudo-element {
 
 .rehype-code-wrap--copy {
   @apply absolute right-2 bottom-2 flex h-8 w-8 items-center justify-center;
-  @apply rounded-lg bg-gray-600 text-xs transition-all hover:text-gray-300 opacity-0;
+  @apply rounded-lg bg-gray-600 text-xs opacity-0 transition-all text-gray-250 hover:text-gray-300;
 }
 .rehype-code-wrap:hover .rehype-code-wrap--copy {
   @apply opacity-100;
