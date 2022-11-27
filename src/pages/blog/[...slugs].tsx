@@ -16,6 +16,7 @@ import TocTop from '~/components/TocTop';
 import { $ } from '~/libs/core';
 import { parseMdx } from '~/libs/mdx';
 import { getAllPosts, getSerizeBySlug } from '~/libs/post';
+import { useRehypeCodeCoppy } from '~/libs/rehypeCodeWrap';
 import { Post, Serize, TableOfContents } from '~/libs/types';
 
 export const getStaticPaths: GetStaticPaths = () => {
@@ -86,6 +87,9 @@ export default function PostPage({
   compiledSource,
   tableOfContents,
 }: Props) {
+  // eslint-disable-next-line @typescript-eslint/no-unsafe-call
+  useRehypeCodeCoppy();
+
   return (
     <Layout>
       <BlogSEO {...post} url={`/blog/${slug}`} summary={post.description} images={[]} />

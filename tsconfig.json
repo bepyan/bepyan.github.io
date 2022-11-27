@@ -21,6 +21,6 @@
       "~/*": ["src/*"]
     }
   },
-  "include": ["next-env.d.ts", "**/*.d.ts", "**/*.ts", "**/*.tsx"],
+  "include": ["next-env.d.ts", "**/*.d.ts", "**/*.ts", "**/*.tsx", "src/libs/rehypeCopyButton.js"],
   "exclude": ["node_modules"]
 }

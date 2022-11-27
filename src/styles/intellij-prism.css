@@ -163,20 +163,33 @@ code.language-css .token.selector > .token.pseudo-element {
   color: var(--prism-foreground);
 }
 
-/* rehype-code-title */
-.rehype-code-title {
+/* rehype-code-wrap */
+.rehype-code-wrap {
+  @apply relative mt-2 overflow-hidden rounded-lg dark:ring-1 dark:ring-inset dark:ring-white/10;
+}
+.rehype-code-wrap > pre {
+  margin: 0;
+}
+
+.rehype-code-wrap--title {
   color: #bbbbbb;
   background-color: #3c3f41;
-  @apply rounded-t-lg px-5 py-3 text-sm font-bold;
+  @apply px-5 py-3 text-sm font-bold;
 }
 
-.rehype-code-title,
-pre[class*='language-'] {
-  @apply dark:ring-1 dark:ring-inset dark:ring-white/10;
-}
-
-.rehype-code-title + pre {
+.rehype-code-wrap--title + pre {
   @apply mt-0 rounded-t-none;
+}
+
+.rehype-code-wrap--copy {
+  @apply absolute right-2 bottom-2 flex h-8 w-8 items-center justify-center;
+  @apply rounded-lg bg-gray-600 text-xs transition-all hover:text-gray-300 opacity-0;
+}
+.rehype-code-wrap:hover .rehype-code-wrap--copy {
+  @apply opacity-100;
+}
+.rehype-code-wrap--check-icon {
+  @apply hidden;
 }
 
 /* rehype-prism-plus */
