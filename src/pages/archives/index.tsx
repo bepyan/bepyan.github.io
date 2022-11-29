@@ -9,7 +9,7 @@ import Title from '~/components/common/Title';
 import ListIcon from '~/components/icons/ListIcon';
 import Layout from '~/components/Layout';
 import { PageSEO } from '~/components/SEO';
-import { getAllPosts, getAllSerizes } from '~/libs/post';
+import { getAllPosts, getAllSerizes, getTagsByPosts } from '~/libs/post';
 import { Post, Serize } from '~/libs/types';
 
 type ClassifiedPosts = {
@@ -18,15 +18,8 @@ type ClassifiedPosts = {
 
 export const getStaticProps = () => {
   const serizes = getAllSerizes();
-
   const posts = getAllPosts();
-
-  const tags = Array.from(
-    posts.reduce((ac, v) => {
-      v.tags.forEach((tag) => ac.add(tag));
-      return ac;
-    }, new Set<string>([])),
-  );
+  const tags = getTagsByPosts(posts);
 
   const classifiedPosts = [...posts]
     .sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime())

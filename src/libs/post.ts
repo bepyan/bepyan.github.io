@@ -55,6 +55,15 @@ export const getAllPosts = (subPath = '') => {
   }, []);
 };
 
+export const getTagsByPosts = (posts: Post[]) => {
+  return Array.from(
+    posts.reduce((ac, v) => {
+      v.tags.forEach((tag) => ac.add(tag));
+      return ac;
+    }, new Set<string>([])),
+  );
+};
+
 /**
  * 시리즈
  */

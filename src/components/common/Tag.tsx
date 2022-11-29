@@ -5,7 +5,7 @@ import { $ } from '~/libs/core';
 
 export default function Tag({ tag }: { tag: string }) {
   return (
-    <Link href={`/tags/${tag}`}>
+    <Link href={`/archives/tags/${tag}`}>
       <div
         className={$(
           'rounded-lg bg-gray-200 px-1.5 py-0.5 text-gray-600 dark:bg-gray-700 dark:text-gray-300',
