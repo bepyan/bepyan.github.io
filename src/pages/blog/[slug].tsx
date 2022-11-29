@@ -58,12 +58,11 @@ export default function PostPage({ serize }: { serize: Serize }) {
               <IconText Icon={ClockIcon} text={`${serize.readingMinutes}분`} />
             </div>
           </div>
-
           <ul className="mt-4 space-y-4">
             {serize.posts.map((post, i) => (
               <div key={post.slug} className="flex space-x-6">
                 <div className="pt-4 font-bold">{i + 1}.</div>
-                <PostListItem post={post} />
+                <PostListItem post={post} noBorder />
               </div>
             ))}
           </ul>

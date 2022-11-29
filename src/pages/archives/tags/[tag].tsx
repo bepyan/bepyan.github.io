@@ -40,7 +40,7 @@ export default function TagPage({ tag, posts }: { tag: string; posts: Post[] }) 
       <Title className="flex items-end gap-4">
         Tags - {tag} <span className="text-2xl">({posts.length})</span>
       </Title>
-      <ul>
+      <ul className="mt-12 space-y-4">
         {posts.map((post) => (
           <PostListItem key={post.slug} post={post} />
         ))}
