@@ -10,7 +10,7 @@ draft: false
 ## 기본 사용법
 
 ✨ [**next-mdx-remote**](https://github.com/hashicorp/next-mdx-remote)를 활용하여 markdown파일을 이쁜 HTML 코드로 변환해줍니다.  
-markdown과 Custom React Component를 연결해주는 것이 특징입니다.
+추가로 markdown 파일에서 React 컴포넌트를 사용할 수 있는 이점이 있습니다.
 
 ```shell
 yarn add next-mdx-remote
@@ -71,7 +71,7 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
 
 <br />
 
-3. 브라우저는 `<MDXRemote />`가 마운트되면서 데이터는 HTML로 변환됩니다.
+3. 브라우저는 `<MDXRemote />`가 마운트되면서 데이터를 HTML로 변환합니다.
 
 ```tsx
 export default function PostPage({ mdx }: { mdx: MDXRemoteSerializeResult }) {
@@ -80,6 +80,52 @@ export default function PostPage({ mdx }: { mdx: MDXRemoteSerializeResult }) {
       <MDXRemote {...mdx} />
     </div>
   );
+}
+```
+
+---
+
+## tailwind를 통안 기본 스타일링
+
+### @tailwindcss/typography
+
+https://tailwindcss.com/docs/typography-plugin
+
+tailwind 기반으로 mdx 마크업을 스타일링하는데 기본 설정만 사용해도 충분히 이쁩니다!
+
+```js:tailwind.config.js
+module.exports = {
+  theme: {
+    // ...
+  },
+  variants: {
+    typography: ['dark'],
+  },
+  plugins: [require('@tailwindcss/typography')],
+}
+```
+
+마크다운 컴포넌트 상위에 `prose`를 꼭 씌워줘야하는 것을 잊지 않길 바랍니다!
+
+```tsx
+<div className="prose dark:prose-dark">
+  <MDXRemote {...mdx} />
+</div>
+```
+
+`tailwind.config.js`에서 [커스터마이징](https://tailwindcss.com/docs/typography-plugin#customizing-the-css)을 할수도 있고 `globals.css`에서도 스타일을 정의 할 수 있습니다.  
+관심사에 따라 css 코드들을 분리하면 좋은 것 같습니다.
+
+```css:globals.css
+/* ... */
+@import url(./code.css);
+@import url(./prose.css);
+/* ... */
+```
+
+```css:prose.css
+.prose a {
+  @apply transition-all;
 }
 ```
 
@@ -101,6 +147,7 @@ yarn add -D @tailwindcss/typography
 https://github.com/remarkjs/remark-gfm
 
 `GFM`(autolink literals, footnotes, strikethrough, tables, tasklists...) 문법들을 해석해주는 도구 입니다.
+굉장히 기본적인 마크다운 문법을 HTML로 변환해주기에 필수로 사용해야 합니다.
 
 ---
 
@@ -121,10 +168,11 @@ function fancyAlert(arg) {
 ```
 
 하지만 코드 토큰만 해석해줄 뿐이지 스타일은 직접 씌워줘야합니다.  
-prism기반의 [다양한 테마](https://github.com/PrismJS/prism-themes)를 적용할 수 있으니 취향 것 선택하면 됩니다.  
-저는 [dracular](https://draculatheme.com/prism)에서 받아왔습니다.
+prism기반의 [**다양한 테마**](https://github.com/PrismJS/prism-themes)를 적용할 수 있으니 취향 것 선택하면 됩니다.  
+추가적으로 [**dracular**](https://draculatheme.com/prism) [**intellij**](https://github.com/bulenkov/Darcula) 테마를 추천드립니다.
 
-자세한 설정은 [제 레포지토리](https://github.com/bepyan/bepyan.github.io/blob/main/src/styles/code.css)를 참고해주시면 될 것 같습니다. ~~생각보다 복잡합니다...~~
+자세한 설정은 [제 레포지토리](https://github.com/bepyan/bepyan.github.io/blob/main/src/styles/intellij-prism.css)를 참고해주시면 될 것 같습니다. ~~생각보다 복잡합니다...~~
+vscode와 완벽히 똑같이 스타일링 되지 않는 점은 감안하셔야 합니다.
 
 ---
 
@@ -208,49 +256,12 @@ module.exports = {
 }
 ```
 
----
+### remark-breaks
 
-### @tailwindcss/typography
+https://github.com/remarkjs/remark-breaks
 
-https://tailwindcss.com/docs/typography-plugin
-
-tailwind 기반으로 mdx 마크업을 스타일링하는데 기본 설정만 사용해도 충분히 이쁩니다!
-
-```js:tailwind.config.js
-module.exports = {
-  theme: {
-    // ...
-  },
-  variants: {
-    typography: ['dark'],
-  },
-  plugins: [require('@tailwindcss/typography')],
-}
-```
-
-마크다운 컴포넌트 상위에 `prose`를 꼭 씌워줘야하는 것을 잊지 않길 바랍니다!
-
-```tsx
-<div className="prose dark:prose-dark">
-  <MDXRemote {...mdx} />
-</div>
-```
-
-`tailwind.config.js`에서 [커스터마이징](https://tailwindcss.com/docs/typography-plugin#customizing-the-css)을 할수도 있고 `globals.css`에서도 스타일을 정의 할 수 있습니다.  
-관심사에 따라 css 코드들을 분리하면 좋은 것 같습니다.
-
-```css:globals.css
-/* ... */
-@import url(./code.css);
-@import url(./prose.css);
-/* ... */
-```
-
-```css:prose.css
-.prose a {
-  @apply transition-all;
-}
-```
+기존 마크다운 문법에서는 문장 끝에 ` ` 2개 이상 입력해야 줄바꿈이 되는데 개인적으로 꽤나 불편했습니다.
+해당 플러그인을 사용하면 마크다운에서 작성한대로 줄바꿈이 적용됩니다.
 
 ---
 
