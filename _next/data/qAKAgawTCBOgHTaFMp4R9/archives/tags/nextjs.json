@@ -1,1 +1,0 @@
-{"pageProps":{"tag":"nextjs","posts":[{"title":"Project Boilerplate 세팅하기","description":"next-mdx-remote 에서 플로그인 쓰는 법","tags":["nextjs","blog"],"date":"2022-11-11","content":"\n블로그의 스택은 아래와 같다.\n\n- NextJS\n- Typescript\n- TailwindCSS\n- next-mdx-remote\n","slug":"nextjs-blog/1-boilerplate","readingMinutes":1,"wordCount":14}]},"__N_SSG":true}
