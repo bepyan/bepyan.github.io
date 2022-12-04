@@ -12,6 +12,8 @@ import ListIcon from './icons/ListIcon';
 export default function SerizeCard({ currentPost, serize }: { currentPost: Post; serize: Serize }) {
   const [open, setOpen] = useState(false);
 
+  const currentPostIndex = serize.posts.findIndex((post) => post.slug === currentPost.slug);
+
   const onClickCard = () => {
     !open && setOpen(!open);
   };
@@ -26,9 +28,9 @@ export default function SerizeCard({ currentPost, serize }: { currentPost: Post;
     >
       <p className="text-base font-medium sm:text-lg">{serize.title}</p>
       <div className="mt-1 flex gap-3">
+        <IconText Icon={ListIcon} text={`${currentPostIndex + 1} / ${serize.posts.length}`} />
         <IconText Icon={CalanderIcon} text={dayjs(serize.date).format('YY.MM.DD')} />
         <IconText Icon={ClockIcon} text={`${serize.readingMinutes}분`} />
-        <IconText Icon={ListIcon} text={`${serize.posts.length}편`} />
       </div>
       <div className="mt-3 whitespace-pre-wrap text-sm">
         <div className="">

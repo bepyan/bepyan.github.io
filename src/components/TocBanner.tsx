@@ -127,7 +127,7 @@ export default function TocBanner({
     <div
       ref={rootRef}
       className={$(
-        'hidden rounded-xl border border-gray-250/50 p-4 dark:border-gray-700',
+        'hidden rounded-xl bg-gray-150 p-4 dark:border-gray-700 dark:bg-gray-800',
         className,
       )}
     >
