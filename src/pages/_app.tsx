@@ -65,6 +65,12 @@ export default function App({ Component, pageProps }: AppProps) {
           `,
           }}
         />
+        {/* google adsense */}
+        <Script
+          async
+          src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2820184336962070"
+          crossOrigin="anonymous"
+        />
       </>
     </ThemeProvider>
   );
