@@ -11,6 +11,7 @@ import ClockIcon from '~/components/icons/ClockIcon';
 import Layout from '~/components/Layout';
 import PostFooter, { PostFooterProps } from '~/components/PostFooter';
 import { BlogSEO } from '~/components/SEO';
+import SerizeCard from '~/components/SerizeCard';
 import TocBanner from '~/components/TocBanner';
 import TocTop from '~/components/TocTop';
 import { $ } from '~/libs/core';
@@ -122,9 +123,10 @@ export default function PostPage({
         <MDXRemote compiledSource={compiledSource} />
       </div>
 
-      <div className="mt-12">
+      <div className="mt-12 space-y-8">
+        {serize && <SerizeCard currentPost={post} serize={serize} />}
         <PostFooter {...postFooterProps} />
-        <Hr className="my-8" />
+        <Hr />
         <Giscus />
       </div>
     </Layout>
