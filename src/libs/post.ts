@@ -14,6 +14,7 @@ const pathToSlug = (filePath: string) =>
   filePath
     .slice(filePath.indexOf(BASE_PATH) + BASE_PATH.length + 1)
     .replace('.mdx', '')
+    .replace('snippets', '/snippets')
     .replace('/index', '');
 
 /**
@@ -113,8 +114,16 @@ export const getSerizeBySlug = (slug: string) => {
   return parseSerize(serizePath);
 };
 
-// /**
-//  *
-//  */
-// const snippetsPaths = sync(`${POSTS_PATH}/**/snippets/*.mdx`);
-// console.log(snippetsPaths);
+/**
+ * Snippets
+ */
+export const getAllSnippets = () => {
+  const snippetsPaths = sync(`${POSTS_PATH}/**/snippets/*.mdx`);
+
+  return snippetsPaths.reduce<Post[]>((ac, filePath) => {
+    const post = parsePost(filePath);
+    if (!post) return ac;
+
+    return [...ac, post];
+  }, []);
+};

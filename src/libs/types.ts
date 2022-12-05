@@ -9,6 +9,8 @@ export type GrayMatter = {
   tags: string[];
   draft?: boolean;
   date: Date;
+  image?: string;
+  icon?: string;
 };
 
 export type Post = Omit<GrayMatter, 'date'> & {

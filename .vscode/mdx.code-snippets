@@ -6,6 +6,8 @@
       "---",
       "title: '$1'",
       "description: '$2'",
+      "icon: ''",
+      "image: ''",
       "tags:",
       "  - $3",
       "draft: false",
