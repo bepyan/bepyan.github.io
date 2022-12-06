@@ -10,19 +10,15 @@ import Title from '~/components/common/Title';
 import ListIcon from '~/components/icons/ListIcon';
 import Layout from '~/components/Layout';
 import { PageSEO } from '~/components/SEO';
-import { getAllPosts, getAllSerizes, getTagsByPosts } from '~/libs/post';
+import { getAllPosts, getAllSerizes, getAllSnippets, getTagsByPosts } from '~/libs/post';
 import { Post, Serize } from '~/libs/types';
 
 type ClassifiedPosts = {
   [key: string]: Post[];
 };
 
-export const getStaticProps = () => {
-  const serizes = getAllSerizes();
-  const posts = getAllPosts();
-  const tags = getTagsByPosts(posts);
-
-  const classifiedPosts = [...posts]
+const classifyPosts = (posts: Post[]) => {
+  return [...posts]
     .sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime())
     .reduce<ClassifiedPosts>((ac, v) => {
       const year = new Date(v.date).getFullYear();
@@ -34,12 +30,20 @@ export const getStaticProps = () => {
 
       return ac;
     }, {});
+};
+
+export const getStaticProps = () => {
+  const serizes = getAllSerizes();
+  const posts = getAllPosts();
+  const snippets = getAllSnippets();
+  const tags = getTagsByPosts(posts);
 
   return {
     props: {
       serizes,
       tags,
-      classifiedPosts,
+      classifiedPosts: classifyPosts(posts),
+      classifiedSnippets: classifyPosts(snippets),
     },
   };
 };
@@ -48,10 +52,12 @@ export default function Archives({
   serizes,
   tags,
   classifiedPosts,
+  classifiedSnippets,
 }: {
   serizes: Serize[];
   tags: string[];
   classifiedPosts: ClassifiedPosts;
+  classifiedSnippets: ClassifiedPosts;
 }) {
   return (
     <Layout>
@@ -92,33 +98,45 @@ export default function Archives({
         </div>
       </div>
       <Hr className="my-8" />
-      <div>
-        <SubTitle>Posts</SubTitle>
-        <div className="mt-4 grid grid-cols-1 gap-4 sm:grid-cols-2">
-          {Object.keys(classifiedPosts)
-            .reverse()
-            .map((year) => (
-              <div key={year}>
-                <div className="text-lg font-bold">
-                  {year}
-                  <span className="ml-1 text-sm">({classifiedPosts[year].length})</span>
-                </div>
-                <ul>
-                  {classifiedPosts[year].map((post) => (
-                    <li key={post.slug}>
-                      <Link
-                        href={`/blog/${post.slug}`}
-                        className="text-gray-500 transition hover:text-gray-900 dark:text-gray-400 dark:hover:text-gray-500"
-                      >
-                        {post.title}
-                      </Link>
-                    </li>
-                  ))}
-                </ul>
-              </div>
-            ))}
+      <div className="mt-4 grid grid-cols-1 gap-8 sm:grid-cols-2">
+        <div>
+          <SubTitle>Posts</SubTitle>
+          <PostSection classifiedPosts={classifiedPosts} />
+        </div>
+        <div>
+          <SubTitle>Snippets</SubTitle>
+          <PostSection classifiedPosts={classifiedSnippets} />
         </div>
       </div>
     </Layout>
   );
 }
+
+const PostSection = ({ classifiedPosts }: { classifiedPosts: ClassifiedPosts }) => {
+  return (
+    <>
+      {Object.keys(classifiedPosts)
+        .reverse()
+        .map((year) => (
+          <div key={year} className="mt-4">
+            <div className="text-lg font-bold">
+              {year}
+              <span className="ml-1 text-sm">({classifiedPosts[year].length})</span>
+            </div>
+            <ul>
+              {classifiedPosts[year].map((post) => (
+                <li key={post.slug}>
+                  <Link
+                    href={`/blog/${post.slug}`}
+                    className="text-gray-500 transition hover:text-gray-900 dark:text-gray-400 dark:hover:text-gray-500"
+                  >
+                    {post.title}
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </div>
+        ))}
+    </>
+  );
+};
