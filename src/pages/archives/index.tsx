@@ -36,7 +36,7 @@ export const getStaticProps = () => {
   const serizes = getAllSerizes();
   const posts = getAllPosts();
   const snippets = getAllSnippets();
-  const tags = getTagsByPosts(posts);
+  const tags = getTagsByPosts([...posts, ...snippets]);
 
   return {
     props: {
