@@ -1,0 +1,66 @@
+---
+title: '(JS) console.log 추가 기능'
+description: ''
+icon: ''
+image: ''
+tags:
+  - javascript
+draft: false
+date: 2022-09-23 20:09:57
+---
+
+### CSS style
+
+```jsx
+console.log('%cfatfish', 'color: red;');
+```
+
+```jsx
+const getLogStyle = (code) => {
+  const style = 'padding: 4px 8px;';
+
+  if (code >= 200 && code < 300) {
+    return `${style} background: #C2E0C6; color: #000000;`;
+  }
+
+  if (code >= 400 && code < 600) {
+    return `${style} background: #FEF0F0; color: #FF0000;`;
+  }
+
+  return `${style} background: #FEF2C0; color: #000000;`;
+};
+
+console.log(`%c${message}`, getLogStyle(code));
+```
+
+### `console.time() & console.timeEnd()`
+
+```jsx
+let count = 0;
+
+console.time();
+for (let i = 0; i < 1000000000; i++) {
+  count++;
+}
+console.timeEnd();
+```
+
+### `console.table()`
+
+array 로그를 찍어 볼 때 유용한 것 같다!
+
+### `groupCollapsed`
+
+```jsx
+console.groupCollapsed(`%c${groupTitle}`, getLogStyle(data.code));
+console.log('>>> response', response);
+params && console.log('>>> params', params);
+
+if (data.code !== 200) {
+  console.log('>>> data', data);
+} else {
+  console.log('>>> data', data.data);
+}
+
+console.groupEnd();
+```

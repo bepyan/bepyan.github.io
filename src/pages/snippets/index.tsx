@@ -17,13 +17,14 @@ export const getStaticProps: GetStaticProps = () => {
   const snippets = getAllSnippets();
 
   const tagSnippets = snippets.reduce<{ [key: string]: Post[] }>((ac, snippet) => {
-    snippet.tags.forEach((tag) => {
-      if (!ac[tag]) {
-        ac[tag] = [];
-      }
+    const key = snippet.snippetSlug;
+    if (!key) return ac;
 
-      ac[tag].push(snippet);
-    });
+    if (!ac[key]) {
+      ac[key] = [];
+    }
+
+    ac[key].push(snippet);
     return ac;
   }, {});
 
@@ -45,11 +46,11 @@ export default function Snippets({ snippetList }: { snippetList: Snippet[] }) {
       <PageSEO title="Snippets" description="" url="/snippets" />
       <Title>Code Snippets</Title>
 
-      <div className="mt-8">
+      <div className="mt-8 space-y-16">
         {snippetList.map(({ tag, snippets }) => (
           <div key={tag}>
             <p className="text-xl font-bold">{title(tag)}</p>
-            <ul className="mt-4 grid grid-cols-2">
+            <ul className="mt-4 grid grid-cols-2 gap-4">
               {snippets.slice(0, 6).map((snippet) => (
                 <div key={snippet.slug} className="">
                   <SnippetListItem post={snippet} />

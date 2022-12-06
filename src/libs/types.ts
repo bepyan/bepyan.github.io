@@ -19,6 +19,8 @@ export type Post = Omit<GrayMatter, 'date'> & {
   content: string;
   readingMinutes: number;
   wordCount: number;
+  serizeSlug?: string;
+  snippetSlug?: string;
 };
 
 export type Serize = Omit<GrayMatter, 'date'> & {

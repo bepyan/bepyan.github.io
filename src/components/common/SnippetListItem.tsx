@@ -15,7 +15,7 @@ export default function SnippetListItem({
   noBorder?: boolean;
 }) {
   return (
-    <Link as={post.slug} href={`/snippets/[...slug]`} className="hover:drop-shadow-base">
+    <Link as={`/${post.slug}`} href={`/snippets/[...slug]`} className="hover:drop-shadow-base">
       <div
         className={$(
           'text-ye group w-full py-4 hover:drop-shadow-base',

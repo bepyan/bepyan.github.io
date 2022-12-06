@@ -14,7 +14,6 @@ const pathToSlug = (filePath: string) =>
   filePath
     .slice(filePath.indexOf(BASE_PATH) + BASE_PATH.length + 1)
     .replace('.mdx', '')
-    .replace('snippets', '/snippets')
     .replace('/index', '');
 
 /**
@@ -30,7 +29,7 @@ const parsePost = (postPath: string): Post | undefined => {
       return;
     }
 
-    return {
+    const post: Post = {
       ...grayMatter,
       tags: grayMatter.tags.filter(Boolean),
       date: dayjs(grayMatter.date).format('YYYY-MM-DD'),
@@ -39,6 +38,24 @@ const parsePost = (postPath: string): Post | undefined => {
       readingMinutes: Math.ceil(readingTime(content).minutes),
       wordCount: content.split(/\s+/gu).length,
     };
+
+    const [fristSlug, middleSlug] = post.slug.split('/');
+
+    const isSerizePost = sync(`${POSTS_PATH}/${fristSlug}/index.mdx`).length > 0;
+
+    if (isSerizePost) {
+      post.serizeSlug = fristSlug;
+      console.log(post.slug);
+    }
+
+    if (fristSlug === 'snippets') {
+      post.snippetSlug = middleSlug;
+      console.log(post.slug);
+    }
+
+    console.log(post.slug);
+
+    return post;
   } catch (e) {
     console.error(e);
     return;
@@ -46,7 +63,7 @@ const parsePost = (postPath: string): Post | undefined => {
 };
 
 export const getAllPosts = (subPath = '') => {
-  const postPaths = sync(`${POSTS_PATH}/**/!(snippets)${subPath}/!(index).mdx`);
+  const postPaths = sync(`${POSTS_PATH}/!(snippets)${subPath}/!(index).mdx`);
 
   return postPaths.reduce<Post[]>((ac, filePath) => {
     const post = parsePost(filePath);
@@ -117,8 +134,33 @@ export const getSerizeBySlug = (slug: string) => {
 /**
  * Snippets
  */
+const parseSnippets = (postPath: string): Post | undefined => {
+  try {
+    const file = fs.readFileSync(postPath, { encoding: 'utf8' });
+    const { content, data } = matter(file);
+    const grayMatter = data as GrayMatter;
+
+    if (grayMatter.draft) {
+      return;
+    }
+
+    return {
+      ...grayMatter,
+      tags: grayMatter.tags.filter(Boolean),
+      date: dayjs(grayMatter.date).format('YYYY-MM-DD'),
+      content,
+      slug: pathToSlug(postPath),
+      readingMinutes: Math.ceil(readingTime(content).minutes),
+      wordCount: content.split(/\s+/gu).length,
+    };
+  } catch (e) {
+    console.error(e);
+    return;
+  }
+};
+
 export const getAllSnippets = () => {
-  const snippetsPaths = sync(`${POSTS_PATH}/**/snippets/*.mdx`);
+  const snippetsPaths = sync(`${POSTS_PATH}/**/snippets/**/*.mdx`);
 
   return snippetsPaths.reduce<Post[]>((ac, filePath) => {
     const post = parsePost(filePath);

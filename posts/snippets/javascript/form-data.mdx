@@ -1,10 +1,12 @@
 ---
-title: 'FormData'
-description: ''
+title: '(JS) FormData로 submit 다루기'
+description: 'form event를 쉽게 다룰 수 있습니다.'
+icon: ''
+image: ''
 tags:
   - javascript
 draft: false
-date: 2022-12-05 11:37:23
+date: 2022-12-06 20:00:26
 ---
 
 기본적인 활용법
@@ -16,7 +18,7 @@ const submitHandle = (e) => {
   const formDataObj = Object.fromEntries(myFormData.entries());
 
   console.log(formDataObj);
-}
+};
 ```
 
 `checkbox` 같이 여러 값이 있는 경우가 있습니다.
@@ -27,10 +29,10 @@ const submitHandle = (e) => {
   e.preventDefault();
   const formData = new FormData(e.target);
   const formDataObj = Object.fromEntries(myFormData.entries());
-  formDataObj.checkboxList = formData.getAll('checkboxList')
+  formDataObj.checkboxList = formData.getAll('checkboxList');
 
   console.log(formDataObj);
-}
+};
 ```
 
 ---
@@ -41,13 +43,12 @@ const submitHandle = (e) => {
 const submitHandle = (e) => {
   e.preventDefault();
   const formData = new FormData(e.target);
-  const formDataObj  = Array.from(formData.keys()).reduce((ac, key) => {
-      const dataList = formData.getAll(key);
-      ac[key] = dataList.length > 1 ? dataList : dataList[0];
-      return { ...ac };
+  const formDataObj = Array.from(formData.keys()).reduce((ac, key) => {
+    const dataList = formData.getAll(key);
+    ac[key] = dataList.length > 1 ? dataList : dataList[0];
+    return { ...ac };
   }, {});
 
   console.log(formDataObj);
-}
+};
 ```
-

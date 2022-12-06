@@ -1,0 +1,33 @@
+---
+title: '(JS) .txt File 만들기'
+description: ''
+icon: ''
+image: ''
+tags:
+  - javascript
+draft: false
+date: 2022-09-03 19:14:23
+---
+
+blob을 활용
+
+```tsx
+const blob = new Blob([JSON.stringify(data)], { type: 'text/plain' });
+const textFile = window.URL.createObjectURL(blob);
+
+window.open(textFile, '_blank');
+```
+
+File
+
+```tsx
+const fileName = `${moment(new Date()).format('YYYY-MM-DD HH:mm:ss')}.txt`;
+const file = new File([JSON.stringify(data)], fileName, {
+  type: 'text/plain;charset=UTF-8',
+});
+```
+
+하지만 한글이 깨지는 문제가 있다.
+
+https://www.thecodehubs.com/generate-text-file-using-plain-javascript/
+

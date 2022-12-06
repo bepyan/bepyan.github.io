@@ -1,0 +1,58 @@
+---
+title: '(JS) regex로 버전 추출하기'
+description: ''
+icon: ''
+image: ''
+tags:
+  - javascript
+  - regex
+draft: false
+date: 2022-06-30 20:12:44
+---
+
+```jsx
+const REGEX = /\d+(\.\d+)+/gi;
+console.log(''.match(REGEX));
+```
+
+https://stackoverflow.com/questions/8955657/regex-pattern-to-extract-version-number-from-string)
+
+네이버 userAgent에서 네이버 버전 추출하기
+
+```jsx
+const NAVER_USERAGENT_REGEX = /\d+(\.\d+)+/gi;
+const agent =
+  'Mozilla/5.0 (iPhone; CPU iPhone OS 15_5 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/15.5 Mobile/15E148 Safari/605.1 NAVER(inapp; search; 1010; 11.12.7; 12MINI)';
+const version = agent.match(NAVER_USERAGENT_REGEX);
+
+console.log(version);
+```
+
+정규식 문법
+[https://heropy.blog/2018/10/28/regexp/](https://heropy.blog/2018/10/28/regexp/)
+
+`^naver` 문자열이 naver로 시작해야 한다.
+
+`$naver` 문자열이 naver로 끝나야 한다.
+
+`\d{5}` 숫자 5개가 있어야 한다. ⇒ `\d\d\d\d\d`
+
+`\d{3,5}` 숫자가 3~5개 있어야 한다.
+
+`\d+` 1개 이상이 있어야 한다. ⇒ `\d{1,}`
+
+`\d*` 0개 이상 있어야 한다. ⇒ `\d{0, }`
+
+`\d?` 0, 1개 있어야 한다. ⇒ `\d{0,1}`
+
+`\d$` 줄 끝에서 일치 한다.
+
+`.` 임의의 한 문자와 일치
+
+`[ab]` a 혹은 b와 일치여부 ⇒ `a | b`
+
+테스트 공간
+[https://regexr.com/](https://regexr.com/)
+
+**`match()`**
+메서드는 문자열이 정규식과 매치되는 부분을 검색합니다.
