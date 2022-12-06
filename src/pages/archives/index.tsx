@@ -3,6 +3,7 @@ import Link from 'next/link';
 import HoverLink from '~/components/common/HoverLink';
 import Hr from '~/components/common/Hr';
 import IconText from '~/components/common/IconText';
+import PlainText from '~/components/common/PlainText';
 import SubTitle from '~/components/common/SubTitle';
 import Tag from '~/components/common/Tag';
 import Title from '~/components/common/Title';
@@ -56,9 +57,7 @@ export default function Archives({
     <Layout>
       <PageSEO title="Archives" description="" url="/archives" />
       <Title>Archives</Title>
-      <p className="mb-4 text-gray-600 dark:text-gray-400">
-        모든 기록물들을 한곳에 저장하는 장소입니다.
-      </p>
+      <PlainText>모든 기록물들을 한곳에 저장하는 장소입니다.</PlainText>
       <div className="mt-12">
         <SubTitle>
           Serizes<span className="ml-2 text-sm">({serizes.length})</span>

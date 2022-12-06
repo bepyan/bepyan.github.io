@@ -1,6 +1,7 @@
 import { GetStaticProps } from 'next';
 import title from 'title';
 
+import PlainText from '~/components/common/PlainText';
 import SnippetListItem from '~/components/common/SnippetListItem';
 import Title from '~/components/common/Title';
 import Layout from '~/components/Layout';
@@ -45,6 +46,11 @@ export default function Snippets({ snippetList }: { snippetList: Snippet[] }) {
     <Layout>
       <PageSEO title="Snippets" description="" url="/snippets" />
       <Title>Code Snippets</Title>
+      <PlainText>
+        개발하면서 실제 사용되었던 코드조각들을 기록했습니다.
+        <br />
+        간단한 JS 유틸 함수, CSS 꼼수에서부터 프레임워크 사용 꿀팁까지 정리되어 있습니다 🍯
+      </PlainText>
 
       <div className="mt-8 space-y-16">
         {snippetList.map(({ tag, snippets }) => (

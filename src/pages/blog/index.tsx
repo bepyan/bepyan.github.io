@@ -1,6 +1,7 @@
 import Link from 'next/link';
 import { Suspense } from 'react';
 
+import PlainText from '~/components/common/PlainText';
 import PostListItem from '~/components/common/PostListItem';
 import SubTitle from '~/components/common/SubTitle';
 import Title from '~/components/common/Title';
@@ -25,10 +26,10 @@ export default function PostPage({ serizes, posts }: { serizes: Serize[]; posts:
 
       <div className="pb-4">
         <Title>Blog</Title>
-        <p className="mb-4 text-gray-600 dark:text-gray-400">
+        <PlainText>
           개발하면서 탐구한 것을 소소하게 기록하는 공간입니다. <br />
           {`시리즈로 연재된 포스트는 아래 시리즈북으로 편리하게 열람할 수 있습니다 🧐`}
-        </p>
+        </PlainText>
       </div>
 
       <Suspense fallback={null}>
