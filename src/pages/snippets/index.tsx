@@ -47,17 +47,17 @@ export default function Snippets({ snippetList }: { snippetList: Snippet[] }) {
       <PageSEO title="Snippets" description="" url="/snippets" />
       <Title>Code Snippets</Title>
       <PlainText>
-        개발하면서 실제 사용되었던 코드조각들을 기록했습니다.
+        개발하면서 실제 사용되었던 코드 조각들 입니다.
         <br />
-        간단한 JS 유틸 함수, CSS 꼼수에서부터 프레임워크 사용 꿀팁까지 정리되어 있습니다 🍯
+        간단한 Javavscript 유틸 함수, CSS 꼼수에서부터 Framework 사용 꿀팁까지 정리되어 있습니다 🍯
       </PlainText>
 
-      <div className="mt-8 space-y-16">
+      <div className="mt-16 space-y-16">
         {snippetList.map(({ tag, snippets }) => (
           <div key={tag}>
             <p className="text-xl font-bold">{title(tag)}</p>
             <ul className="mt-4 grid grid-cols-2 gap-4">
-              {snippets.slice(0, 6).map((snippet) => (
+              {snippets.slice(0, 4).map((snippet) => (
                 <div key={snippet.slug} className="">
                   <SnippetListItem post={snippet} />
                 </div>
