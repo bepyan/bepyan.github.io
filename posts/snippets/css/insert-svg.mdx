@@ -1,0 +1,61 @@
+---
+title: '(css) svg 넣기'
+description: ''
+icon: ''
+image: ''
+tags:
+  - css.js
+draft: false
+date: 2022-11-25 21:22:31
+---
+
+기본적으로 `content` 속성에 url로 svg 이미지를 넣을 수 있다.
+
+https://stackoverflow.com/questions/19255296/is-there-a-way-to-use-svg-as-content-in-a-pseudo-element-before-or-after
+
+```tsx
+#test::before {
+  content: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg'%3E%3Ccircle cx='100' cy='50' r='40' stroke='black' stroke-width='2' fill='red'/%3E%3Cpolyline points='20,20 40,25 60,40 80,120 120,140 200,180' style='fill:none;stroke:black;stroke-width:3'/%3E%3C/svg%3E ");
+  width: 200px;
+  height: 200px;
+}
+```
+
+기존 svg를 url형태로 파싱을 해야하는데 아래 사이트에서 도움을 받을 수 있다.
+
+https://yoksel.github.io/url-encoder/
+
+하지만 만약 색상을 동적으로 변경을 해야한다면?
+
+`mask-image`을 활용한다.
+
+https://codepen.io/noahblon/post/coloring-svgs-in-css-background-images
+
+```tsx
+.icon {
+    background-color: red;
+    -webkit-mask-image: url(icon.svg);
+    mask-image: url(icon.svg);
+}
+```
+
+https://developer.mozilla.org/en-US/docs/Web/CSS/mask-image#browser_compatibility
+
+브라우저 호환성이 조..금 빡세다.
+
+위치를 조정하고 싶다면?
+
+`mask-position` 을 활용하자.
+
+https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_Backgrounds_and_Borders/Resizing_background_images
+
+```tsx
+.prose .anchor:after {
+  content: ' ';
+  mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' fill='none' aria-hidden='true'%3E%3Cpath d='M3.75 1v10M8.25 1v10M1 3.75h10M1 8.25h10' stroke='currentColor' strokeWidth='1.5' strokeLinecap='round' /%3E%3C/svg%3E");
+  mask-repeat: no-repeat;
+  mask-position: center;
+
+  @apply h-4 w-4 bg-gray-700 dark:bg-gray-300;
+}
+```

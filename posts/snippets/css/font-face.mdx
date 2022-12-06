@@ -1,0 +1,80 @@
+---
+title: '(css) font-face 적용'
+description: ''
+icon: ''
+image: ''
+tags:
+  - css
+draft: false
+date: 2022-12-06 21:24:10
+---
+
+stitches에서 font-face를 적용하려하는데 계속 실패를했다...
+
+[시키는 대로](https://stitches.dev/docs/styling#font-face-rules) 했는데 말이다 🥲
+
+webpack 관련 문제일까... 결국 css파일로 문제를 해결했다!
+
+[webpack](https://webpack.js.org/guides/asset-management/)에서 말하는 폰트를 가져오는 법
+
+```jsx
+module: {
+  rules: [
+    {
+      test: /\.css$/i,
+      use: ['style-loader', 'css-loader'],
+    },
+		{
+      test: /\.(woff|woff2|eot|ttf|otf)$/i,
+      type: 'asset/resource',
+    },
+  ],
+},
+```
+
+css
+
+```jsx
+@font-face {
+  font-family: 'Noto Sans KR';
+  src: local('Noto Sans KR'), url('../assets/fonts/NotoSansKR-Regular.otf');
+}
+```
+
+`local`
+
+로컬 컴퓨터에서 해당 폰트가 있으면 그것을 사용
+
+`url`
+
+링크할 url 경로
+
+**폰트의 weight을 적용시키는 법**
+
+---
+
+```css
+@font-face {
+  font-family: 'Noto Sans KR';
+  src: local('Noto Sans KR'), url('../assets/fonts/NotoSansKR-Regular.otf');
+  font-weight: 400;
+}
+
+@font-face {
+  font-family: 'Noto Sans KR';
+  src: url('../assets/fonts/NotoSansKR-Medium.otf');
+  font-weight: 500;
+}
+
+@font-face {
+  font-family: 'Noto Sans KR';
+  src: url('../assets/fonts/NotoSansKR-Bold.otf');
+  font-weight: 700;
+}
+```
+
+글씨 폰트를 하나의 font-family에 묶을 수 있다.
+
+**참고**
+
+- https://developer.mozilla.org/ko/docs/Web/CSS/@font-face

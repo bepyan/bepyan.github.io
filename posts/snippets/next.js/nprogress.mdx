@@ -1,0 +1,80 @@
+---
+title: '(Next.js) nprogress'
+description: ''
+icon: ''
+image: ''
+tags:
+  - Next.js
+draft: false
+date: 2022-12-06 21:28:25
+---
+
+✨[**nprogress**](https://github.com/rstacruz/nprogress)를 활용하여 route가 변경될시 로딩 UI를 표시할 수 있습니다.
+
+```bash
+yarn add nprogress
+yarn add -D @types/nprogress
+```
+
+<br />
+
+```tsx:_app.tsx
+useEffect(() => {
+  const handleStart = (url: string) => {
+    NProgress.start();
+  };
+
+  const handleStop = () => {
+    NProgress.done();
+  };
+
+  router.events.on('routeChangeStart', handleStart);
+  router.events.on('routeChangeComplete', handleStop);
+  router.events.on('routeChangeError', handleStop);
+
+  return () => {
+    router.events.off('routeChangeStart', handleStart);
+    router.events.off('routeChangeComplete', handleStop);
+    router.events.off('routeChangeError', handleStop);
+  };
+}, [router]);
+```
+
+- Next13 기준으로 동작한 코드입니다.
+- https://nextjs.org/docs/api-reference/next/router#routerevents
+  <br />
+
+```tsx:_document.tsx
+<Head>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/nprogress/0.2.0/nprogress.min.css"
+    />
+</Head>
+```
+
+<br />
+
+```css:global.css
+/* nprogress */
+:root {
+  --nprogress-color: rgb(168 85 247);
+}
+
+#nprogress .bar {
+  background: var(--nprogress-color) !important;
+  padding: 0 10px !important;
+  height: 3px !important;
+}
+
+#nprogress .spinner .spinner-icon {
+  border-top-color: var(--nprogress-color) !important;
+  border-left-color: var(--nprogress-color) !important;
+}
+```
+
+---
+
+레거시 코드 참고
+
+- https://dev.to/debosthefirst/how-to-show-a-loading-bar-when-changing-routes-in-nextjs-304e
