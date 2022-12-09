@@ -45,15 +45,11 @@ const parsePost = (postPath: string): Post | undefined => {
 
     if (isSerizePost) {
       post.serizeSlug = fristSlug;
-      console.log(post.slug);
     }
 
     if (fristSlug === 'snippets') {
       post.snippetSlug = middleSlug;
-      console.log(post.slug);
     }
-
-    console.log(post.slug);
 
     return post;
   } catch (e) {
@@ -134,31 +130,6 @@ export const getSerizeBySlug = (slug: string) => {
 /**
  * Snippets
  */
-const parseSnippets = (postPath: string): Post | undefined => {
-  try {
-    const file = fs.readFileSync(postPath, { encoding: 'utf8' });
-    const { content, data } = matter(file);
-    const grayMatter = data as GrayMatter;
-
-    if (grayMatter.draft) {
-      return;
-    }
-
-    return {
-      ...grayMatter,
-      tags: grayMatter.tags.filter(Boolean),
-      date: dayjs(grayMatter.date).format('YYYY-MM-DD'),
-      content,
-      slug: pathToSlug(postPath),
-      readingMinutes: Math.ceil(readingTime(content).minutes),
-      wordCount: content.split(/\s+/gu).length,
-    };
-  } catch (e) {
-    console.error(e);
-    return;
-  }
-};
-
 export const getAllSnippets = () => {
   const snippetsPaths = sync(`${POSTS_PATH}/**/snippets/**/*.mdx`);
 
