@@ -1,6 +1,9 @@
 import { GetStaticProps } from 'next';
+import Link from 'next/link';
+import { useRouter } from 'next/router';
 import title from 'title';
 
+import Pill from '~/components/common/Pill';
 import PlainText from '~/components/common/PlainText';
 import SnippetListItem from '~/components/common/SnippetListItem';
 import Title from '~/components/common/Title';
@@ -10,8 +13,8 @@ import { getAllSnippets } from '~/libs/post';
 import { Post } from '~/libs/types';
 
 type Snippet = {
-  tag: string;
-  snippets: Post[];
+  key: string;
+  postList: Post[];
 };
 
 export const getStaticProps: GetStaticProps = () => {
@@ -30,11 +33,11 @@ export const getStaticProps: GetStaticProps = () => {
   }, {});
 
   const snippetList = Object.keys(tagSnippets)
-    .map<Snippet>((tag) => ({
-      tag,
-      snippets: tagSnippets[tag],
+    .map<Snippet>((key) => ({
+      key,
+      postList: tagSnippets[key],
     }))
-    .sort((a, b) => b.snippets.length - a.snippets.length);
+    .sort((a, b) => b.postList.length - a.postList.length);
 
   return {
     props: { snippetList },
@@ -42,6 +45,18 @@ export const getStaticProps: GetStaticProps = () => {
 };
 
 export default function Snippets({ snippetList }: { snippetList: Snippet[] }) {
+  const router = useRouter();
+  const selectedKey = router.query?.key;
+
+  const isAll = !selectedKey || selectedKey === 'all';
+  const allSnippetsCnt = snippetList.reduce((ac, snippet) => ac + snippet.postList.length, 0);
+  const postList = snippetList.reduce<Post[]>((ac, v) => {
+    if (selectedKey && selectedKey !== 'all' && selectedKey !== v.key) {
+      return [...ac];
+    }
+    return [...ac, ...v.postList];
+  }, []);
+
   return (
     <Layout>
       <PageSEO title="Snippets" description="" url="/snippets" />
@@ -52,20 +67,43 @@ export default function Snippets({ snippetList }: { snippetList: Snippet[] }) {
         간단한 Javavscript 유틸 함수, CSS 꼼수에서부터 Framework 사용 꿀팁까지 정리되어 있습니다 🍯
       </PlainText>
 
-      <div className="mt-16 space-y-16">
-        {snippetList.map(({ tag, snippets }) => (
-          <div key={tag}>
-            <p className="text-xl font-bold">{title(tag)}</p>
-            <ul className="mt-4 grid grid-cols-2 gap-4">
-              {snippets.slice(0, 4).map((snippet) => (
-                <div key={snippet.slug} className="">
-                  <SnippetListItem post={snippet} />
-                </div>
-              ))}
-            </ul>
-            <span></span>
-          </div>
+      <div className="flex items-center gap-2">
+        <Link href="?key=all">
+          <Pill selected={isAll} className="cursor-pointer">
+            All <span className="text-xs">{allSnippetsCnt}</span>
+          </Pill>
+        </Link>
+        {snippetList.map(({ key, postList }) => (
+          <Link key={key} href={`?key=${key}`}>
+            <Pill className="cursor-pointer" selected={key === selectedKey}>
+              {title(key)} <span className="text-xs">{postList.length}</span>
+            </Pill>
+          </Link>
         ))}
+      </div>
+
+      <div className="mt-16 space-y-16">
+        {isAll ? (
+          snippetList.map(({ key, postList }) => {
+            return (
+              <ul key={key} className="mt-4 grid grid-cols-2 gap-4">
+                {postList.map((post) => (
+                  <div key={post.slug} className="">
+                    <SnippetListItem post={post} />
+                  </div>
+                ))}
+              </ul>
+            );
+          })
+        ) : (
+          <ul className="mt-4 grid grid-cols-2 gap-4">
+            {postList.map((post) => (
+              <div key={post.slug} className="">
+                <SnippetListItem post={post} />
+              </div>
+            ))}
+          </ul>
+        )}
       </div>
     </Layout>
   );
