@@ -7,6 +7,7 @@ import { siteConfig } from '~/config';
 import { $ } from '~/libs/core';
 import useDelayedRender from '~/libs/useDelayedRender';
 import NavItem from './common/NavItem';
+import LogoIcon from './icons/LogoIcon';
 import ThemeSwitch from './ThemeSwitch';
 
 export default function HeaderNav() {
@@ -39,15 +40,7 @@ export default function HeaderNav() {
       {/* PC */}
       <div className="hidden items-end sm:flex">
         <NavItem href="/" className="mr-2">
-          <Image
-            src="/favicon.png"
-            blurDataURL="/favicon.png"
-            alt="logo"
-            width={40}
-            height={40}
-            placeholder="blur"
-            className="block h-auto"
-          />
+          <LogoIcon width={40} />
         </NavItem>
         {siteConfig.menus.map((link) => (
           <NavItem key={link.label} href={link.path} className="px-3 py-1.5">
