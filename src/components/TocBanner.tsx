@@ -3,6 +3,7 @@ import { Fragment, useEffect, useRef, useState } from 'react';
 import { $ } from '~/libs/core';
 import { Section, SubSection, TableOfContents } from '~/libs/types';
 import IconButton from './common/IconButton';
+import ChatIcon from './icons/ChatIcon';
 import UpIcon from './icons/UpIcon';
 import ThemeSwitch from './ThemeSwitch';
 
@@ -192,6 +193,9 @@ export default function TocBanner({
       <div id="toc-footer" className="mt-4 flex items-center justify-end">
         <IconButton onClick={() => window.scrollTo({ top: 0 })}>
           <UpIcon width={20} />
+        </IconButton>
+        <IconButton onClick={() => document.querySelector('.giscus')?.scrollIntoView()}>
+          <ChatIcon width={20} />
         </IconButton>
         <ThemeSwitch />
       </div>
