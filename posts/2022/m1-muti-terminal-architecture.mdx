@@ -1,0 +1,105 @@
+---
+title: 'M1 터미널 아키텍처 설정 (arm64, x86_64)'
+description: ''
+icon: ''
+image: ''
+tags:
+  - infra
+draft: false
+date: 2022-04-27 16:52:28
+---
+
+모듈을 다운 받다가 아래 에러를 마주쳤다..
+
+```
+Error: Your platform and architecture (Darwin-arm64) is unsupported.
+```
+
+Intel 프로세서 아키텍처는 x86_64 이고 Apple Silicon M1은 arm64 아키텍처를 사용한다.
+해당 모듈은 arm64 아키텍처를 지원하지 않아 발생한 에러다.
+~~M1,,, 또 너냐,,,~~
+
+---
+
+## 터미널 아키텍처 바꾸기
+
+```shell
+arch -arch x86_64 /bin/zsh
+```
+
+터미널에서 아키텍처를 바꿀 수 있다.
+
+```shell
+arch -arch arm64e /bin/zsh
+```
+
+계속 x86_64 아키텍처를 사용할 수도 없고 해당 커멘드를 매번 입력하기 버겁다...
+~~아무래도 x86_64환경이 더 느리다.~~
+
+---
+
+## 커멘드 alias 설정
+
+```jsx
+vi ~/.zshrc
+```
+
+빠르게 터미널 환경을 변경할 수 있도록 설정
+
+```jsx
+alias za="arch -arch arm64e /bin/zsh"
+alias zx="arch -arch x86_64 /bin/zsh"
+```
+
+```jsx
+source ~/.zshrc
+```
+
+이제 터미널에 `za` `zx`만 입력해도 아키텍처를 바꿀 수 있다.
+하지만 뭔가 불편하다.. 내 터미널은 지금 어떤 아키텍처를 사용하고 있지..?
+
+---
+
+## 터미널에서 현 아키텍처 표시하기
+
+> Powerlevel10k에서 커스텀 프롬프트를 만들면 된다.
+
+```jsx
+open ~/.p10k.zsh
+```
+
+prompt_example 찾아 밑에 아래 코드를 복사 한다.
+
+```jsx
+function prompt_arch() {
+  if [[ $(arch) == "i386" ]]; then
+   p10k segment -t '🐢'
+  fi
+}
+
+function instant_prompt_arch() {
+  prompt_arch
+}
+```
+
+`POWERLEVEL9K_LEFT_PROMPT_ELEMENTS`를 찾아 `arch`를 추가한다.
+
+```jsx
+typeset -g POWERLEVEL9K_LEFT_PROMPT_ELEMENTS=(
+  # os_icon               # os identifier
+  dir                     # current directory
+  vcs                     # git status
+  prompt_char             # prompt symbol
+  **arch**
+)
+```
+
+![](https://velog.velcdn.com/images/bepyan/post/e059e686-2f8b-45ae-a78f-12970de067d3/image.png)
+
+뚜벅 뚜벅 귀엽다 🥰
+
+---
+
+**참고 자료**
+
+- [https://xo.dev/m1-terminal-environment-setup/](https://xo.dev/m1-terminal-environment-setup/)
