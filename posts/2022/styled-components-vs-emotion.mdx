@@ -1,0 +1,198 @@
+---
+title: 'styled-components 과 emotion, 도대체 차이가 뭔가?'
+description: 'styled-components vs emotion 💥 도대체 차이가 뭘까??'
+icon: ''
+image: ''
+tags:
+  - styled-components
+  - emotion
+draft: false
+date: 2022-02-10 16:30:09
+---
+
+React에서는 보통 CSS-in-JS을 통해 스타일 작업을 진행한다.
+그중에서 styled-components, emotion이 가장 유명하고 많이 사용된다.
+
+하지만 도대체 차이가 뭘까?
+
+<br />
+<br />
+<br />
+
+### 제공하는 기능 비교
+
+---
+
+| library           | Attaching Props | Media Queries | Global Styles | Nested Selectors | Server Side Rendering | Theming Support | Composition |
+| ----------------- | --------------- | ------------- | ------------- | ---------------- | --------------------- | --------------- | ----------- |
+| styled-components | Yes             | Yes           | Yes           | Yes              | Yes                   | Yes             | Yes         |
+| emotion           | Yes             | Yes           | Yes           | Yes              | Yes                   | Yes             | Yes         |
+
+- 전반적인 스타일 기능은 똑같다.
+- 둘다 sass문법을 사용하기에 스타일 문법에도 차이가 없다.
+- [참고](https://github.com/jsjoeio/styled-components-vs-emotion)
+
+<br />
+<br />
+<br />
+<br />
+
+### 사용 트랜드
+
+---
+
+![](https://images.velog.io/images/bepyan/post/3d77564b-92a7-46c3-843c-325af34ef765/image.png)
+
+![](https://images.velog.io/images/bepyan/post/ce8b2326-f3a4-4834-935f-affb3e194a2b/image.png)
+
+- styled-componets가 더 많이 사용되고 있으나 npm 다운로드 횟수를 보면 emotion이 더 많다.
+- 근래 emotion의 만족도가 떨어지고 있다.
+- [https://2021.stateofcss.com/en-US/technologies/css-in-js/](https://2021.stateofcss.com/en-US/technologies/css-in-js/)
+- [https://www.npmtrends.com/@emotion/core-vs-styled-components](https://www.npmtrends.com/@emotion/core-vs-styled-components)
+
+<br />
+<br />
+<br />
+<br />
+
+### 용량? 성능?
+
+---
+
+블로그, 사이트들을 참고하면 대게 emotion이 styled-components보다 조금 가볍고 빠르다고 한다.
+
+먼저 https://bundlephobia.com/ 를 참고해서 최신 라이브러리 번들 사이즈를 살펴보자.
+
+![](https://images.velog.io/images/bepyan/post/a702e482-5850-48af-aea8-dd37522a4bd2/image.png)
+
+![](https://images.velog.io/images/bepyan/post/2cbaf6aa-3e4c-4fc9-8495-91eb3ebfc807/image.png)
+
+![](https://images.velog.io/images/bepyan/post/7b926716-1280-4530-a272-bda929c9c518/image.png)
+
+보통 emotion을 사용한다면 위 두가지 라이브러리를 모두 사용한다.
+emotion 패키지 차이는 [여기](https://emotion.sh/docs/package-summary) 참고.
+
+눈대중으로 보면 라이브러리 용량이 비슷해보인다. (1~2 kb 차이)
+다만 `@emotion/react`만 사용한다면 용량이 1.5배 정도 차이가 난다.
+
+<br />
+<br />
+
+그렇다면 속도 차이는 어떨까?
+
+다양한 자료를 참고해보면 emotion이 근소하게 더 빠르다.
+[참고 1](https://stitches.dev/docs/benchmarks), [참고 2](https://dev.to/meetdave3/styled-components-vs-emotion-js-a-performance-perspective-4eia), [참고 3](https://github.com/A-gambit/CSS-IN-JS-Benchmarks/blob/master/RESULT.md)
+
+하지만 [2020 styled-component v5](https://styled-components.com/releases#v5.0.0) ?
+[여기](https://medium.com/styled-components/announcing-styled-components-v5-beast-mode-389747abd987) 참고에 따르면 styled-components가 조금 더 빠르다고 한다.
+
+**결론. 성능상 둘은 유의미하게 차이가 나지 않는다.**
+emotion의 퍼포먼스가 전반적으로 더 좋게 나오고 있고 라이브러리 버전에 따라서 차이가 발생할 수 있다.
+
+<br />
+<br />
+<br />
+<br />
+
+### emotion의 차별점
+
+---
+
+[**css props**](https://emotion.sh/docs/css-prop) 기능
+
+- 인라인 스타일을 작성하지만 클래스가 되는 매직 ✨
+
+```html
+<div style={{color: "red"}}/>
+```
+
+기존 style 속성은 HTML 인라인 스타일로 주입이 된다.
+스타일 우선순위를 다루기 어렵고 스타일 재활용도 힘들다.
+
+```html
+<div css={{color: "red"}} /> {/* 혹은 */}
+<div css="{css`color:" red`} />
+```
+
+emotion jsx에서 제공해주는 css 속성을 활용하면 이를 클래스로 변환해준다.
+기존 인라인으로 사용할 수 없었던 media query, pseudo selector, nested selector 등을 사용할 수 있다.
+
+<br />
+- [css props를 결합](https://velog.io/@velopert/create-your-own-design-system-with-storybook#%EB%B2%84%ED%8A%BC%EC%9D%98-theme-%EB%A7%8C%EB%93%A4%EA%B8%B0)하여 복잡한 스타일링을 진행할 수 있다.
+  ```js
+  <div css={[style, themes[theme], sizes[size]]} />
+    
+  const themes = {
+    primary: css`
+      color: red;
+    `,  
+    secondary: css`
+      color: blue;
+    `
+  }
+  const sizes = {
+    small: css`
+      fontSize: 0.75rem;
+    `,
+    medium: css`
+      fontSize: 1rem;
+    `
+  }
+  ```
+  위와 같이 css 변수를 조립하여 컴포넌트 스타일링을 진행할 수 있다.
+  ```ts
+  type ThemeType = keyof typeof themes;
+  type SizeType = keyof typeof size;
+  ```
+  typescript로 자동 타입지정까지 할 수 있는 이점이 있다.
+  
+  css override는 덤
+
+<br />
+<br />
+
+**SSR**
+
+- SSR에서 [별도의 설정 없이](https://emotion.sh/docs/ssr#gatsby-focus-wrapper) 동작이 된다.
+- 반면 styled-components 같은 경우 [ServerStyleSheet](https://styled-components.com/docs/advanced#streaming-rendering)을 설정 해야 한다.
+
+<br />
+<br />
+
+개인적으로 생각하는 단점
+
+- 파일마다 `/** @jsx jsx */` 라는 [JSX Pragma](https://emotion.sh/docs/css-prop#jsx-pragma)를 작성해야하는데 이를 설정하기 귀찮다.
+- 이는 React의 jsx와 똑같은 원리이다.
+  `import React from "react"`을 해줘야 컴파일이 된다.
+  ![](https://images.velog.io/images/bepyan/post/4214bfb7-8caa-4086-a4c3-48e98aaf408f/image.png)
+  emotion의 jsx로 변환되어야 emotion의 css props 문법을 사용할 수 있다.
+  `<img src="avatar.png" />` → `jsx('img', { src: 'avatar.png' })`
+  <br />
+react처럼 webpack단에서 이를 자동으로 주입시킬 수 있지만 역시 설정하기 귀찮다...
+개인적으론 storybook 웹팩 설정에서 꽤나 골머리 아팠다...
+
+<br />
+<br />
+<br />
+<br />
+
+### 결론
+
+---
+
+- 유의미한 성능차이가 있는 것이 아니다. 라이브러리 버전에 따라 달라질 수 있다.
+
+- 개발팀에서 더 익숙한 것을 사용하면 될 것 같다.
+
+- emotion의 css props로 css를 더 활용도 높게 조립할 수 있다. 하지만 안쓰면 그만이다.
+
+- SSR에서는 emotion 세팅시 더 간편하다.
+
+<br />
+<br />
+
+참고
+
+https://ideveloper2.dev/blog/2019-05-05--thinking-about-emotion-js-vs-styled-component/
+https://github.com/andreipfeiffer/css-in-js/blob/main/README.md#styled-components
+https://brunch.co.kr/@kmongdev/17

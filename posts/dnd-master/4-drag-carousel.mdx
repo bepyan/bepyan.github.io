@@ -1,0 +1,271 @@
+---
+title: 'Drag Carousel 뽀개기'
+description: '라이브러리 없이 React에서 터치로 캐러셀을 만들어 보자!!!'
+icon: ''
+image: ''
+tags:
+  - Next.js
+  - React
+  - DOM
+draft: false
+date: 2022-10-08 15:02:55
+---
+
+## TL;DR
+
+> 캐러셀을 **일정 거리이상** drag시키면 화면을 넘긴다.
+
+---
+
+## 기본 원리 — Carousel 동작
+
+여러 방식으로 Carousel를 구현할 수 있지만 아래와 같은 형태로 간편하게 마크업을 짜자.
+css는 편의상 [**tailwindcss**](https://tailwindcss.com/)를 같이 사용했다.
+
+```tsx
+const imageList = [...];
+
+const SLIDER_WIDTH = 400;
+const SLIDER_HEIGHT = 400;
+
+export default function CarouselExample() {
+  const [currentIndex, setCurrentIndex] = useState(0);
+  const [transX, setTransX] = useState(0);
+
+  return (
+    <>
+      {/* Viewer */}
+      <div
+        className="overflow-hidden"
+        style={{
+          width: SLIDER_WIDTH,
+          height: SLIDER_HEIGHT,
+        }}
+      >
+        {/* Slider */}
+        <div
+          className="flex"
+          style={{
+            transform: `translateX(${-currentIndex * SLIDER_WIDTH + transX}px)`,
+          }}
+        >
+          {/* Slide */}
+          {imageList.map((url, i) => (
+            <div key={i} className="flex-shrink-0">
+              <img src={url} alt="img" width={SLIDER_WIDTH} draggable={false} />
+            </div>
+          ))}
+        </div>
+      </div>
+    </>
+  );
+}
+```
+
+마크업을 그림으로 정리하자면 아래와 같다
+
+![](https://velog.velcdn.com/images/bepyan/post/9c60a2a9-a65b-444b-bd66-0504dcf3fc14/image.png)
+
+`Viewer`는 **액자**와 같은 역할을 수행하고
+실질적으로 `Slider`가 좌우로 `transform`하여 캐러셀 움직임을 구현한다.
+
+따라서 사전에 `Slide`의 크기를 알고 있어야 한다.
+동적으로 크기를 맞출려면 `ref`로 `element.getBoundingClientRect`을 호출하면 된다.
+
+---
+
+## 기본 응용 — Carousel Drag
+
+캐러셀을 **일정 거리이상 drag**하면 화면을 넘긴다.
+~~참 쉽죠잉?~~
+
+![](https://velog.velcdn.com/images/bepyan/post/d73cc634-2819-4264-ae72-704a0252f24d/image.gif)
+
+1. [이전 글](https://velog.io/@bepyan/Drag-Touch-뽀개기#심화-응용--최종-코드)을 참고하여 드래그 이벤트를 등록한다.
+2. drag된 거리에 만큼 `transX`를 이동시킨다.
+   한번의 drag로 한 슬라이드 이상으로 이동할 수 없도록 하자.
+3. 손을 땠을 때 일정 거리이상 움직이면 `currentIndex`를 변경해준다.
+4. drag된 `transX`를 초기화 해준다.
+
+```tsx
+const inrange = (v: number, min: number, max: number) => {
+  if (v < min) return min;
+  if (v > max) return max;
+  return v;
+};
+```
+
+```jsx
+<div
+  className="flex"
+  style={{
+    transform: `translateX(${-currentIndex * SLIDER_WIDTH + transX}px)`,
+    // 🏄🏻‍♂️  drag를 초기화할 때 부드럽게 이동시켜 주자. 꼼수입니다...
+    transition: `transform ${transX ? 0 : 300}ms ease-in-out 0s`,
+  }}
+  // 1️⃣
+  {...registDragEvent({
+    onDragChange: (deltaX) => {
+      // 2️⃣
+      setTransX(inrange(deltaX, -SLIDER_WIDTH, SLIDER_WIDTH));
+    },
+    onDragEnd: (deltaX) => {
+      const maxIndex = imageList.length - 1;
+
+      // 3️⃣
+      if (deltaX < -100) setCurrentIndex(inrange(currentIndex + 1, 0, maxIndex));
+      if (deltaX > 100) setCurrentIndex(inrange(currentIndex - 1, 0, maxIndex));
+
+      // 4️⃣
+      setTransX(0);
+    },
+  })}
+>
+  //...
+</div>
+```
+
+---
+
+## 심화 응용 — Infinite Carousel
+
+단골로 사용되는 기능 중에 하나이다.
+무한으로 돌아가는 트릭은 생각보다 간단하다.
+
+> 첫 슬라이드 좌측으로 이동시 마지막 슬라이드로,
+> 마지막 슬라이드 우측으로 이동시 첫 슬라이드로 이동하면 캐러셀이 무한으로 돌아갈 것이다.
+
+자, 구현 해보자!
+
+기존 `[0, 1, 2, 3]` 번 슬라이드를 `[3, 0, 1, 2, 3, 0]`로 만든다.
+그리고 `index`를 `1`부터 시작하는 것을 잊지 말자.
+
+```tsx
+const slideList = [imageList.at(-1), ...imageList, imageList.at(0)];
+const [currentIndex, setCurrentIndex] = useState(1);
+```
+
+<br />
+
+자연스럽게 **무한루프** 되기 위해선 `currentIndex`가 아래와 같이 동작해야 한다.
+
+```
+1 → 0  (에니메니션 없이) → 4
+```
+
+`dragEnd`시 `currentIndex`를 변동하게 될 것이다.
+[**onTransitionEnd**](https://developer.mozilla.org/en-US/docs/Web/API/Element/transitionend_event)을 활용하여 `transition`이 종료될시 `animate`를 끄고 `currentIndex`를 변동해준다.
+
+```tsx
+const [animate, setAnimate] = useState(false);
+
+<div
+  style={{
+    transform: `translateX(${-currentIndex * SLIDER_WIDTH + transX}px)`,
+    transition: `transform ${animate ? 300 : 0}ms ease-in-out 0s`,
+  }}
+  {...({
+  	onDragEnd: (deltaX) => {
+      //...
+
+      setAnimate(true);
+      setTransX(0);
+    }
+  })}
+  onTransitionEnd={() => {
+	setAnimate(false);
+
+    if (currentIndex === 0) {
+      setCurrentIndex(slideList.length - 2);
+    } else if (currentIndex === slideList.length - 1) {
+      setCurrentIndex(1);
+    }
+  }}
+>
+  {...}
+</div>
+```
+
+![](https://velog.velcdn.com/images/bepyan/post/7c638d6a-838a-4f70-9c1d-4517e9e0770b/image.gif)
+
+---
+
+## 최종 코드
+
+```tsx
+const imageList = [
+  'https://blog.kakaocdn.net/dn/dpxiAT/btqUBv6Fvpn/E8xUMncq7AVuDeOim0LrMk/img.jpg',
+  'https://blog.kakaocdn.net/dn/BGT7X/btqUzvTqi5h/flp39GdJH0GU6mo7cTbbhk/img.jpg',
+  'https://blog.kakaocdn.net/dn/bWnmfv/btqUBwqZvwA/3CiXGt3SR0TXoOveRJxV91/img.jpg',
+  'https://blog.kakaocdn.net/dn/XsLCO/btqUL8PQLwp/NZWCU2jAYKkKSXwcohBKTK/img.jpg',
+  'https://blog.kakaocdn.net/dn/bG3iVL/btqUvCZPaRL/ofIjkNWJP1mj2bOG9fie51/img.jpg',
+];
+
+const SLIDER_WIDTH = 400;
+const SLIDER_HEIGHT = 400;
+
+export default function CarouselInfiniteExample() {
+  const slideList = [imageList.at(-1), ...imageList, imageList.at(0)];
+
+  const [currentIndex, setCurrentIndex] = useState(1);
+  const [transX, setTransX] = useState(0);
+  const [animate, setAnimate] = useState(false);
+
+  return (
+    <>
+      <div
+        className="overflow-hidden"
+        style={{
+          width: SLIDER_WIDTH,
+          height: SLIDER_HEIGHT,
+        }}
+      >
+        <div
+          className="flex"
+          style={{
+            transform: `translateX(${-currentIndex * SLIDER_WIDTH + transX}px)`,
+            transition: `transform ${animate ? 300 : 0}ms ease-in-out 0s`,
+          }}
+          {...registDragEvent({
+            onDragChange: (deltaX) => {
+              setTransX(inrange(deltaX, -SLIDER_WIDTH + 10, SLIDER_WIDTH - 10));
+            },
+            onDragEnd: (deltaX) => {
+              const maxIndex = slideList.length - 1;
+
+              if (deltaX < -100) setCurrentIndex(inrange(currentIndex + 1, 0, maxIndex));
+              if (deltaX > 100) setCurrentIndex(inrange(currentIndex - 1, 0, maxIndex));
+
+              setAnimate(true);
+              setTransX(0);
+            },
+          })}
+          onTransitionEnd={() => {
+            setAnimate(false);
+
+            if (currentIndex === 0) {
+              setCurrentIndex(slideList.length - 2);
+            } else if (currentIndex === slideList.length - 1) {
+              setCurrentIndex(1);
+            }
+          }}
+        >
+          {slideList.map((url, i) => (
+            <div key={i} className="flex-shrink-0">
+              <img src={url} alt="img" width={SLIDER_WIDTH} draggable={false} />
+            </div>
+          ))}
+        </div>
+      </div>
+    </>
+  );
+}
+```
+
+---
+
+실제 동작은 아래 링크에서 볼 수 있습니다.
+https://dnd-playground.vercel.app/carousel
+
+style 정보, 전체 코드는 아래 깃허브에서 살펴보면 됩니다.
+https://github.com/bepyan/dnd-playground/

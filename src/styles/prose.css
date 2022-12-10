@@ -24,6 +24,10 @@
   /* Don't apply styles to next/image */
   @apply m-0;
 }
+.prose img + span {
+  display: block;
+  margin-top: 0.5rem;
+}
 
 .prose > :first-child {
   /* Override removing top margin, causing layout shift */

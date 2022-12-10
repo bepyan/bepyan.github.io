@@ -16,16 +16,15 @@ const parseToc = (source: string) => {
     .filter((line) => line.toLowerCase().match(/^(?!.*(#*\stoc$|#*\stable of contents$)).*$/g))
     .reduce<TableOfContents>((ac, rawHeading) => {
       const nac = [...ac];
+      const removeMdx = rawHeading.replace(/^##*\s/, '').replace(/[\*,\~]{2,}/g, '');
+
       const section = {
-        slug: rawHeading
+        slug: removeMdx
           .trim()
           .toLowerCase()
           .replace(/[^a-z0-9ㄱ-ㅎ|ㅏ-ㅣ|가-힣 -]/g, '')
-          .replace(/\s+/g, '-')
-          .replace(/-+/g, '-')
-          .replace(/^-+/, '')
-          .replace(/-+$/, ''),
-        text: rawHeading.replace(/^##*\s/, '').replace(/[\*,\~]{2,}/g, ''),
+          .replace(/\s/g, '-'),
+        text: removeMdx,
       };
 
       const isSubTitle = rawHeading.split('#').length - 1 === 3;

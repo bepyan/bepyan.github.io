@@ -1,0 +1,597 @@
+---
+title: 'DND 이벤트 뽀개기'
+description: '라이브러리 없이 React에서 Drag and Drop 이벤트를 구현해보자!!!'
+icon: ''
+image: ''
+tags:
+  - Next.js
+  - React
+  - DOM
+draft: false
+date: 2022-10-10 15:03:21
+---
+
+드디어, 대망의 DND 이벤트를 구현해보도록 하자!
+
+칸반보드, 목차 편집 기능이 실용적이지만
+재미삼아서 먼저 퍼즐 맞추기 게임 느낌의 이벤트를 먼저 만들어 보자.
+https://www.happyclicks.net/drag-drop-games/games_numbers.php
+
+~~어쩌다보니 글이 좀 깁니다...~~
+
+## TL;DR
+
+> [**cloneNode**](https://developer.mozilla.org/ko/docs/Web/API/Node/cloneNode)를 통해 타겟을 복사하여 drag시킨다.
+> [**document.elementFromPoint(x, y)**](https://developer.mozilla.org/en-US/docs/Web/API/Document/elementFromPoint)을 활용하여 특정 영역의 element 정보를 얻는다.
+> 획득한 element의 정보 바탕으로 `onDrop` 이벤트를 구현한다.
+
+---
+
+## EVENT — 이벤트 등록
+
+DOM API를 직접적으로 다뤄야하다 보니
+이를 별도의 스크립트에서 vanilla로 코드를 작성하는 것이 편할 것 같다.
+
+먼저,
+NextJS에서는 CSR에서 스크립트가 실행되도록 훅을 만들어 준다.
+
+`DNDMatchExample.tsx`
+
+```tsx
+const [ready, setReady] = useState(false);
+
+useEffect(() => {
+  if(!ready) {
+    setReady(true);
+    return;
+  }
+
+  // 이벤트를 등록한다.
+  const cleanup = registDND(...);
+
+  // 이벤트를 해제해준다.
+  return () => cleanup();
+}, [ready]);
+
+if (!ready) return <></>;
+```
+
+<br />
+
+스크립트는 `DNDMatchExample.drag.ts` 파일로 작성했다.
+모바일에서도 동작이 가능하도록 설정했다.
+관련 로직은 [**이전 포스트**](https://velog.io/@bepyan/Drag-Touch-뽀개기)를 참고하면 될 것 같다.
+
+```tsx
+export const registDND = (...) => {
+
+  // 모바일 기기에서의 Touch 이벤트
+  const isTouchScreen =
+    typeof window !== 'undefined' &&
+    window.matchMedia('(hover: none) and (pointer: coarse)').matches;
+
+  const startEventName = isTouchScreen ? 'touchstart' : 'mousedown';
+  const moveEventName = isTouchScreen ? 'touchmove' : 'mousemove';
+  const endEventName = isTouchScreen ? 'touchend' : 'mouseup';
+
+  // 마우스 움직임 변화를 측정하는 유틸
+  const getDelta = (startEvent: MouseEvent | TouchEvent, moveEvent: MouseEvent | TouchEvent) => {
+    if (isTouchScreen) {
+      const se = startEvent as TouchEvent;
+      const me = moveEvent as TouchEvent;
+
+      return {
+        deltaX: me.touches[0].pageX - se.touches[0].pageX,
+        deltaY: me.touches[0].pageY - se.touches[0].pageY,
+      };
+    }
+
+    const se = startEvent as MouseEvent;
+    const me = moveEvent as MouseEvent;
+
+    return {
+      deltaX: me.pageX - se.pageX,
+      deltaY: me.pageY - se.pageY,
+    };
+  };
+
+  // DND 등록 이벤트
+  const startHandler = (startEvent: MouseEvent | TouchEvent) => {
+    const item = startEvent.target as HTMLElement;
+
+    // Drag 대상이 아니면 이벤트를 종료해준다.
+    if (!item.classList.contains('dnd-drag-item')) {
+      return;
+    }
+
+    // Drag 시작 이벤트 관련 동작
+    // {...}
+
+    // Drag 움직임 이벤트 관련 동작
+    const moveHandler = (moveEvent: MouseEvent | TouchEvent) => {
+      // {...}
+    };
+
+    // Drag 종료(Drop) 이벤트 관련 동작
+    const endHandler = () => {
+      // {...}
+
+      document.removeEventListener(moveEventName, moveHandler);
+    };
+
+    document.addEventListener(moveEventName, moveHandler);
+    document.addEventListener(endEventName, endHandler, { once: true });
+  }
+
+
+  // document에 DND 이벤트를 등록해준다.
+  document.addEventListener(startEventName, startHandler);
+  return () => document.removeEventListener(startEventName, startHandler);
+};
+```
+
+jsx에서처럼 이벤트를 등록할 수 없기에
+이전과는 다르게 [이벤트 위임](https://ko.javascript.info/event-delegation)를 활용하여 document에 등록해줬다.
+
+이제 로직을 하나 하나 구현을 해보자.
+
+---
+
+## DRAG — Ghost 만들기
+
+> 핵심은 기존 엘리먼트을 그대로 두고 `clone`한 `ghost`를 움직이게 한다.
+
+```tsx
+const startHandler = (startEvent: MouseEvent | TouchEvent) => {
+  const item = clickEvent.currentTarget as HTMLElement;
+  if (
+    !item.classList.contains('dnd-drag-item') ||
+    item.classList.contains('ghost') ||
+    item.classList.contains('placeholder')
+  ) {
+    return;
+  }
+
+  const itemRect = item.getBoundingClientRect();
+
+  // --- Ghost 만들기
+  const ghostItem = item.cloneNode(true) as HTMLElement;
+  ghostItem.classList.add('ghost');
+  ghostItem.style.position = 'fixed';
+  ghostItem.style.top = `${itemRect.top}px`;
+  ghostItem.style.left = `${itemRect.left}px`;
+  ghostItem.style.pointerEvents = 'none';
+  ghostItem.style.textShadow = '0 30px 60px rgba(0, 0, 0, .3)';
+  ghostItem.style.transform = 'scale(1.05)';
+  ghostItem.style.transition = 'transform 200ms ease';
+
+  item.style.opacity = '0.5';
+  item.style.cursor = 'grabbing';
+
+  document.body.style.cursor = 'grabbing';
+  document.body.appendChild(ghostItem);
+  // --- Ghost 만들기 END
+
+
+  const mouseMoveHandler = (moveEvent: MouseEvent) => {
+    // --- Ghost Drag
+    const deltaX = moveEvent.pageX - clickEvent.pageX;
+    const deltaY = moveEvent.pageY - clickEvent.pageY;
+
+    ghostItem.style.top = `${itemRect.top + deltaY}px`;
+    ghostItem.style.left = `${itemRect.left + deltaX}px`;
+    // --- Ghost Drag END
+  };
+
+
+  const mouseUpHandler = (moveEvent: MouseEvent) => {
+    // --- Ghost 제자리 복귀
+    ghostItem.style.transition = 'all 200ms ease';
+    ghostItem.style.left = `${itemRect.left}px`;
+    ghostItem.style.top = `${itemRect.top}px`;
+    ghostItem.style.transform = 'none';
+
+    ghostItem.addEventListener(
+      'transitionend',
+      () => {
+        item.removeAttribute('style');
+        document.body.removeAttribute('style');
+        ghostItem.remove();
+      },
+      { once: true },
+    );
+    // --- Ghost 제자리 복귀 END
+
+    // ...
+  };
+}}
+```
+
+#### 체크 포인트
+
+- `ghost`가 마우스(포인터) 이벤트에 관여되지 않도록 [pointer-event](https://developer.mozilla.org/en-US/docs/Web/CSS/pointer-events) `none`으로 설정해줬다.
+- 기존 엘리먼트에는 `placeholder` 클래스를 둬서 드레그되고 있음을 인지시킨다.
+- 별도의 css 없이 스타일을 모두 인라인으로 작성했다.
+
+![](https://velog.velcdn.com/images/bepyan/post/19de45cf-494e-4592-9575-c3cafd96604a/image.gif)
+
+---
+
+## DROP — 영역 확인
+
+> 핵심은 `docuemnt.elementFromPoint`을 활용해서 특정 위치에 어떤 엘리먼트가 있는지 확인 한다.
+> ghost가 항상 잡히기에 `pointer-event: none;`으로 설정하여 회피해준다.
+
+[**elementFromPoint**](https://developer.mozilla.org/en-US/docs/Web/API/Document/elementFromPoint) - returns the topmost Element at the specified coordinates (relative to the viewport).
+
+```tsx
+//...
+const dropAreaList = document.querySelectorAll<HTMLElement>('.dnd-drop-area');
+//...
+
+const moveHandler = (moveEvent: MouseEvent | TouchEvent) => {
+  // ...
+
+  //--- Drop 영역 확인
+  const ghostItemRect = ghostItem.getBoundingClientRect();
+  const ghostCenterX = ghostItemRect.left + ghostItemRect.width / 2;
+  const ghostCenterY = ghostItemRect.top + ghostItemRect.height / 2;
+
+  const dropItem = document
+    .elementFromPoint(ghostCenterX, ghostCenterY)
+    ?.closest<HTMLElement>('.dnd-drop-area');
+
+  dropAreaList.forEach((area) => {
+    area.classList.remove('active');
+    area.removeAttribute('style');
+  });
+
+  if (dropItem) {
+    dropItem.classList.add('active');
+    dropItem.style.filter = 'drop-shadow(16px 16px 16px gray)';
+  }
+  //--- Drop 영역 확인 END
+};
+```
+
+#### 체크 포인트
+
+- 커서의 위치가 아닌, **ghost의 중심 좌표**를 기준으로 `drop` 영역 위인지 여부를 파악했다.
+- drop 영역 위일 경우 `active` 클래스명을 추가했다. 이를 아래 onDrop 이벤트에서 활용한다.
+
+![](https://velog.velcdn.com/images/bepyan/post/ec48197a-2774-4b84-9473-1537853c3246/image.gif)
+
+---
+
+## DROP — onDrop
+
+> `active` 영역이 있을 경우 `onDrop` 로직을 수행한다.
+
+```tsx
+export const registDND = (
+  onDrop: (props: { source: string; destination: string; isCorrect: boolean }) => void,
+) => {
+  //...
+
+  const endHandler = () => {
+    const dropItem = document.querySelector<HTMLElement>('.dnd-drop-area.active');
+    const isCorrect = item.innerText === dropItem?.innerText;
+
+    if (isCorrect) {
+      // 해당 영역으로 이동
+      const dropItemRect = dropItem.getBoundingClientRect();
+      ghostItem.style.left = `${dropItemRect.left}px`;
+      ghostItem.style.top = `${dropItemRect.top}px`;
+    } else {
+      // 제자리 복귀
+      ghostItem.style.left = `${itemRect.left}px`;
+      ghostItem.style.top = `${itemRect.top}px`;
+    }
+
+    ghostItem.style.transition = 'all 200ms ease';
+    ghostItem.style.transform = 'none';
+    ghostItem.addEventListener(
+      'transitionend',
+      () => {
+        item.classList.remove('placeholder');
+        item.removeAttribute('style');
+        document.body.removeAttribute('style');
+
+        if (dropItem) {
+          // 영역 스타일 초기화
+          dropItem.classList.remove('active');
+          dropItem.removeAttribute('style');
+
+          //
+          if (isCorrect) {
+            item.classList.add('opacity-50');
+            dropItem.classList.remove('text-white');
+            dropItem.classList.add('text-stone-700');
+          }
+        }
+
+        ghostItem.remove();
+
+        // onDrop 콜벡을 수행
+        onDrop({
+          source: item.innerText,
+          destination: dropItem?.innerText ?? '',
+          isCorrect,
+        });
+      },
+      { once: true },
+    );
+
+    document.removeEventListener(moveEventName, moveHandler);
+  };
+
+  //...
+};
+```
+
+콜벡에서 위치가 맞는 겨우 상태를 수정해준다.
+
+```tsx
+useEffect(() => {
+  if (!ready) {
+    setReady(true);
+    return;
+  }
+
+  const cleanup = registDND(({ destination, isCorrect }) => {
+    if (isCorrect) {
+      setCorrectWords((list) => [...list, destination]);
+    }
+  });
+  return () => cleanup();
+}, [ready]);
+```
+
+#### 체크 포인트
+
+- 맞는 경우 DOM style을 수정하고 나서 react state를 변경해야 한다.
+  아니면 상태 변경 전에 화면이 깜빡 거린다.
+
+![](https://velog.velcdn.com/images/bepyan/post/5026ce1b-c9de-4a42-a862-69178a845a96/image.gif)
+
+이렇게 DND 기능 구현이 완료 👏🏻
+게임 컨셉의 DND이기 때문에 추가적인 에니메이션을 구현해보자.
+
+---
+
+## (번외) 틀린경우 — shake
+
+알맞지 않은 알파벳으로 이동할 경우 해당 알파벳이 흔들리도록 하자.
+![](https://velog.velcdn.com/images/bepyan/post/51711783-ca6a-48cb-932e-7875b185a1a8/image.gif)
+
+먼저 `global.css`에서 관련 에니메이션 css를 작성한다.
+`50%` 지점에서 가장 크게 흔들리는 것이 포인트이다.
+
+```css
+@keyframes shake {
+  10%,
+  90% {
+    transform: translate3d(-1px, 0, 0);
+  }
+
+  20%,
+  80% {
+    transform: translate3d(2px, 0, 0);
+  }
+
+  30%,
+  50%,
+  70% {
+    transform: translate3d(-4px, 0, 0);
+  }
+
+  40%,
+  60% {
+    transform: translate3d(4px, 0, 0);
+  }
+}
+
+.shake {
+  animation: shake 0.82s cubic-bezier(0.36, 0.07, 0.19, 0.97) both;
+}
+```
+
+엘리먼트에 `shake` 클래스를 추가하면 에니메이션이 실행되고,
+`animationend`에서 다시 `shake` 클래스를 제거해준다.
+
+```tsx
+ghostItem.addEventListener(
+  'transitionend',
+  () => {
+    //...
+
+    if (dropItem) {
+      //...
+
+      if (!isCorrect) {
+        // 틀린 경우 shake
+        item.classList.add('shake');
+        item.addEventListener(
+          'animationend',
+          () => {
+            item.classList.remove('shake');
+          },
+          { once: true },
+        );
+      } else {
+        item.classList.add('opacity-50');
+        dropItem.classList.remove('text-white');
+        dropItem.classList.add('text-stone-700');
+      }
+    }
+
+    //...
+  },
+  { once: true },
+);
+```
+
+---
+
+## (번외) 게임 클리어 — Confettiful
+
+게임 클리어할 경우 격하게 축하해주고 싶다.
+![](https://velog.velcdn.com/images/bepyan/post/d4c98124-7a66-4fbb-9cab-7da9859fa99b/image.gif)
+
+아래에서 관련 로직을 참고했다.
+https://codepen.io/l2zeo/pen/ZEBLepW
+
+너무 레거시한 코드 구현방식이여서 NextJS, Typescript에 맞게 리팩토링했다.
+~~생각보다 코드는 간단하다.~~
+
+`Confettiful.ts`
+
+```ts
+const confettiFrequency = 40;
+const confettiColors = ['#B1B2FF', '#AAC4FF', '#2D87B0', '#D2DAFF', '#EEF1FF'];
+const confettiAnimations = ['slow', 'medium', 'fast'];
+
+const getRandomListItem = (list: any[]) => list[Math.floor(Math.random() * list.length)];
+
+const Confettiful = function () {
+  const el = document.createElement('div');
+  el.style.position = 'fixed';
+  el.style.pointerEvents = 'none';
+  el.style.width = '100%';
+  el.style.height = '100%';
+
+  const containerEl = document.createElement('div');
+  containerEl.style.position = 'absolute';
+  containerEl.style.overflow = 'hidden';
+  containerEl.style.top = '0';
+  containerEl.style.right = '0';
+  containerEl.style.bottom = '0';
+  containerEl.style.left = '0';
+  el.appendChild(containerEl);
+
+  const confettiInterval = setInterval(() => {
+    const confettiEl = document.createElement('div');
+    confettiEl.style.position = 'absolute';
+    confettiEl.style.zIndex = '1';
+    confettiEl.style.top = '-10px';
+    confettiEl.style.borderRadius = '0%';
+
+    const confettiSize = Math.floor(Math.random() * 3) + 7 + 'px';
+    const confettiLeft = Math.floor(Math.random() * el.offsetWidth) + 'px';
+    const confettiBackground = getRandomListItem(confettiColors);
+    const confettiAnimation = getRandomListItem(confettiAnimations);
+
+    confettiEl.classList.add('confetti', `confetti--animation-${confettiAnimation}`);
+    confettiEl.style.left = confettiLeft;
+    confettiEl.style.width = confettiSize;
+    confettiEl.style.height = confettiSize;
+    confettiEl.style.backgroundColor = confettiBackground;
+
+    setTimeout(function () {
+      confettiEl.parentNode?.removeChild(confettiEl);
+    }, 3000);
+
+    containerEl.appendChild(confettiEl);
+  }, 1000 / confettiFrequency);
+
+  document.querySelector('#__next')?.prepend(el);
+
+  return () => {
+    clearInterval(confettiInterval);
+    setTimeout(function () {
+      el.remove();
+    }, 3000);
+  };
+};
+
+export default Confettiful;
+```
+
+<br />
+
+`global.css`에도 관련 스타일을 추가해줘야 한다.
+
+- 떨어지는 속도 종류를 `slow`, `medium`, `fast` 3가지를 정의하여 각각 `routate`되는 정도를 조정해준다.
+- `keyframe`이 `100%`되었을 때 가루가 화면 밖으로 떨어지도록 `105vh` 설정해준다.
+
+```css
+/* confetti */
+
+@keyframes confetti-slow {
+  0% {
+    transform: translate3d(0, 0, 0) rotateX(0) rotateY(0);
+  }
+
+  100% {
+    transform: translate3d(25px, 105vh, 0) rotateX(360deg) rotateY(180deg);
+  }
+}
+
+@keyframes confetti-medium {
+  0% {
+    transform: translate3d(0, 0, 0) rotateX(0) rotateY(0);
+  }
+
+  100% {
+    transform: translate3d(100px, 105vh, 0) rotateX(100deg) rotateY(360deg);
+  }
+}
+
+@keyframes confetti-fast {
+  0% {
+    transform: translate3d(0, 0, 0) rotateX(0) rotateY(0);
+  }
+
+  100% {
+    transform: translate3d(-50px, 105vh, 0) rotateX(10deg) rotateY(250deg);
+  }
+}
+
+.confetti--animation-slow {
+  animation: confetti-slow 2.25s linear 1 forwards;
+}
+
+.confetti--animation-medium {
+  animation: confetti-medium 1.75s linear 1 forwards;
+}
+
+.confetti--animation-fast {
+  animation: confetti-fast 1.25s linear 1 forwards;
+}
+
+/* confetti end */
+```
+
+<br />
+
+컴포넌트가 `unmounded`될 때 Confetii를 지워주면 된다.
+
+```tsx
+let cleanConfetti: () => void | undefined;
+//...
+
+const [words, setWords] = useState<string[]>(['D', 'R', 'A', 'G']);
+const [correctWords, setCorrectWords] = useState<string[]>([]);
+
+const isClear = useMemo(() => correctWords.length === words.length, [correctWords, words]);
+
+useEffect(() => {
+  if (isClear) {
+    cleanConfetti = Confettiful();
+  } else {
+    cleanConfetti?.();
+  }
+
+  return () => {
+    cleanConfetti?.();
+  };
+}, [isClear]);
+```
+
+---
+
+실제 동작은 아래 링크에서 볼 수 있습니다.
+https://dnd-playground.vercel.app/dnd
+
+style 정보, 전체 코드는 아래 깃허브에서 살펴보면 됩니다.
+https://github.com/bepyan/dnd-playground/blob/main/src/components/DragSizeExample.tsx
