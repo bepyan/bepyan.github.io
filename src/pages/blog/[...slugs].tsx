@@ -108,19 +108,18 @@ export default function PostPage({
         <Hr className="mt-4" />
       </div>
 
-      <div
-        className={$(
-          'fixed top-[120px] bottom-0 hidden overflow-y-auto px-4 pb-10 xl:block 2xl:px-8',
-          // 자연스럽게 사라지는 시점: 3xl(768) + 2 * width(256) = xl(1280)
-          'right-[max(0px,calc(50%-42rem))] w-64 2xl:right-[max(calc(50%-46rem),calc(50%-48rem))] 2xl:w-80',
-        )}
-      >
-        <TocBanner tableOfContents={tableOfContents} />
-      </div>
-
-      <div className="prose mt-4 w-full max-w-none dark:prose-dark">
-        <TocTop tableOfContents={tableOfContents} />
-        <MDXRemote compiledSource={compiledSource} />
+      <div className="relative flex gap-8">
+        <div className="prose mt-4 w-full max-w-3xl dark:prose-dark">
+          <div className="lg:hidden">
+            <TocTop tableOfContents={tableOfContents} />
+          </div>
+          <MDXRemote compiledSource={compiledSource} />
+        </div>
+        <div className="mt-16">
+          <div className={$('sticky top-[120px] hidden flex-1 self-start lg:block', '')}>
+            <TocBanner tableOfContents={tableOfContents} />
+          </div>
+        </div>
       </div>
 
       <div className="mt-12 space-y-8">

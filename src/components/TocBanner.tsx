@@ -106,7 +106,7 @@ export default function TocBanner({
   tableOfContents: TableOfContents;
   className?: string;
 }) {
-  const rootRef = useObserver();
+  // const rootRef = useObserver();
   const { currentSectionSlug } = useScroll(tableOfContents);
 
   const isSubSectionActive = (subSection: SubSection) => {
@@ -126,11 +126,8 @@ export default function TocBanner({
 
   return (
     <div
-      ref={rootRef}
-      className={$(
-        'hidden rounded-xl bg-gray-150 p-4 dark:border-gray-700 dark:bg-gray-800',
-        className,
-      )}
+      // ref={rootRef}
+      className={$('rounded-xl bg-gray-150 p-4 dark:border-gray-700 dark:bg-gray-800', className)}
     >
       <p
         id="toc-header"
