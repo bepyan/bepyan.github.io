@@ -2,9 +2,9 @@ import { ReactNode, useMemo } from 'react';
 import title from 'title';
 
 import { siteConfig } from '~/config';
-import ExternalLink from './common/ExternalLink';
-import Hr from './common/Hr';
-import HeaderNav from './HeaderNav';
+import ExternalLink from '../common/ExternalLink';
+import Hr from '../common/Hr';
+import HeaderNav from '../HeaderNav';
 
 export default function Layout({ children }: { children: ReactNode }) {
   const since = useMemo(() => {
@@ -16,7 +16,7 @@ export default function Layout({ children }: { children: ReactNode }) {
   }, []);
 
   return (
-    <div className="mx-auto max-w-3xl px-4 lg:max-w-5xl">
+    <div className="mx-auto max-w-3xl px-4 lg:max-w-6xl lg:px-8">
       <HeaderNav />
       {/* --- */}
       <main className="relative pb-16">{children}</main>

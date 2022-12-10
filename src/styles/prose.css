@@ -21,7 +21,6 @@
 
 /* common markdown */
 .prose img {
-  /* Don't apply styles to next/image */
   @apply m-0;
 }
 .prose img + span {
@@ -29,13 +28,16 @@
   margin-top: 0.5rem;
 }
 
+/* prose frist child, not <TocTop /> */
 .prose > :first-child {
-  /* Override removing top margin, causing layout shift */
-  margin-top: 1.25em !important;
+  margin-top: 3rem !important;
+}
+.prose > .lg\:hidden + * {
+  @apply lg:mt-12;
 }
 
 .prose a {
-  @apply border-b border-[#333333] font-normal no-underline transition-all break-words;
+  @apply break-words border-b border-[#333333] font-normal no-underline transition-all;
   @apply text-gray-700 dark:text-gray-400;
 }
 .prose a:not(:has(code, strong)) {

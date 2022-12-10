@@ -6,7 +6,7 @@ import PostListItem from '~/components/common/PostListItem';
 import CalanderIcon from '~/components/icons/CalanderIcon';
 import ClockIcon from '~/components/icons/ClockIcon';
 import ListIcon from '~/components/icons/ListIcon';
-import Layout from '~/components/Layout';
+import Layout from '~/components/layouts/Layout';
 import { getAllSerizes } from '~/libs/post';
 import { Serize } from '~/libs/types';
 

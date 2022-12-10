@@ -7,7 +7,7 @@ import Pill from '~/components/common/Pill';
 import PlainText from '~/components/common/PlainText';
 import SnippetListItem from '~/components/common/SnippetListItem';
 import Title from '~/components/common/Title';
-import Layout from '~/components/Layout';
+import Layout from '~/components/layouts/Layout';
 import { PageSEO } from '~/components/SEO';
 import { getAllSnippets } from '~/libs/post';
 import { Post } from '~/libs/types';

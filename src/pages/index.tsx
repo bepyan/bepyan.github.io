@@ -1,7 +1,7 @@
 import Image from 'next/image';
 import title from 'title';
 
-import Layout from '~/components/Layout';
+import Layout from '~/components/layouts/Layout';
 import { PageSEO } from '~/components/SEO';
 import { siteConfig } from '~/config';
 

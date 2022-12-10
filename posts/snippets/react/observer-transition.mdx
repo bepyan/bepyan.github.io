@@ -1,0 +1,69 @@
+---
+title: 'Observer Transition'
+description: ''
+icon: ''
+image: ''
+tags:
+  - React
+draft: true
+date: 2022-12-10 18:10:44
+---
+
+```tsx
+const useObserver = () => {
+  const rootRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const $toc = document.querySelector('#table-of-contents');
+    if (!$toc) return;
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (!rootRef.current) return;
+
+        const $root = rootRef.current;
+        $root.style.display = 'block';
+
+        const $header = $root.querySelector<HTMLElement>('#toc-header');
+        const $list = Array.from($root.querySelectorAll<HTMLElement>('#toc-content > li'));
+        const $footer = $root.querySelector<HTMLElement>('#toc-footer');
+        const elementList = [$root, $header, $footer, ...$list].filter(Boolean) as HTMLElement[];
+
+        if (entry.isIntersecting) {
+          elementList.reverse().forEach((element, i) => {
+            element.style.opacity = '0';
+            element.style.pointerEvents = 'none';
+            element.style.transition = '200ms ease-out';
+            element.style.transitionDelay = `${i * 15}ms`;
+          });
+        } else {
+          elementList.forEach((element, i) => {
+            element.style.opacity = '1';
+            element.style.pointerEvents = 'auto';
+            element.style.transition = '150ms ease-out';
+            element.style.transitionDelay = `${i * 10}ms`;
+          });
+        }
+      },
+      { threshold: 0.7 },
+    );
+
+    observer.observe($toc);
+  }, []);
+
+  return rootRef;
+};
+```
+
+<br />
+
+```tsx
+export default function TocBanner() {
+  const rootRef = useObserver();
+
+  return (
+    <div ref={rootRef}>
+        {...}
+    </div>
+  )
+```

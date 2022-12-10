@@ -8,7 +8,7 @@ import SubTitle from '~/components/common/SubTitle';
 import Tag from '~/components/common/Tag';
 import Title from '~/components/common/Title';
 import ListIcon from '~/components/icons/ListIcon';
-import Layout from '~/components/Layout';
+import Layout from '~/components/layouts/Layout';
 import { PageSEO } from '~/components/SEO';
 import { getAllPosts, getAllSerizes, getAllSnippets, getTagsByPosts } from '~/libs/post';
 import { Post, Serize } from '~/libs/types';

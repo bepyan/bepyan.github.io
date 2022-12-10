@@ -3,7 +3,7 @@ import { useEffect, useRef, useState } from 'react';
 
 import PostListItem from '~/components/common/PostListItem';
 import Title from '~/components/common/Title';
-import Layout from '~/components/Layout';
+import Layout from '~/components/layouts/Layout';
 import { getAllPosts, getAllSnippets, getTagsByPosts } from '~/libs/post';
 import { Post } from '~/libs/types';
 
