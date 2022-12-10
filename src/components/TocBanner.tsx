@@ -2,6 +2,7 @@ import { Fragment, useEffect, useState } from 'react';
 
 import { $ } from '~/libs/core';
 import { Section, SubSection, TableOfContents } from '~/libs/types';
+import CopyLinkButton from './common/CopyLinkButton';
 import IconButton from './common/IconButton';
 import ChatIcon from './icons/ChatIcon';
 import UpIcon from './icons/UpIcon';
@@ -78,19 +79,19 @@ export default function TocBanner({
   return (
     <div
       className={$(
-        'space-y-4 rounded-xl bg-gray-150 p-4 dark:border-gray-700 dark:bg-gray-800',
+        'overflow-hidden rounded-xl border border-gray-200 transition-all dark:border-gray-800',
         className,
       )}
     >
       {tableOfContents.length !== 0 && (
-        <>
+        <div className="bg-gray-100 p-4 pr-2 dark:border-gray-700 dark:bg-gray-800">
           <p
             id="toc-header"
             className="text-sm font-semibold leading-6 text-gray-900 dark:text-gray-100"
           >
             On this page
           </p>
-          <ul id="toc-content" className="flex flex-col items-start justify-start text-sm">
+          <ul id="toc-content" className="mt-2 flex flex-col items-start justify-start text-sm">
             {tableOfContents.map((section) => (
               <Fragment key={section.slug}>
                 <li>
@@ -100,8 +101,8 @@ export default function TocBanner({
                       'group block py-1 transition-colors',
                       section.subSections && 'font-medium',
                       isSectionActive(section)
-                        ? 'font-medium text-yellow-500 drop-shadow-base dark:text-yellow-400'
-                        : 'text-gray-700 hover:text-gray-900 hover:drop-shadow-base dark:text-gray-400 dark:hover:text-gray-300',
+                        ? 'font-medium text-gray-900 drop-shadow-base-bold dark:font-medium dark:text-yellow-400 dark:drop-shadow-base'
+                        : 'text-gray-700 hover:text-gray-900 hover:drop-shadow-base-bold dark:text-gray-400 dark:hover:text-gray-300 dark:hover:drop-shadow-base',
                     )}
                   >
                     {section.text}
@@ -114,8 +115,8 @@ export default function TocBanner({
                       className={$(
                         'group flex items-start py-1 transition-colors',
                         isSubSectionActive(subSection)
-                          ? 'text-yellow-500 drop-shadow-base dark:text-yellow-400'
-                          : 'text-gray-700 hover:text-gray-900 hover:drop-shadow-base dark:text-gray-400 dark:hover:text-gray-300',
+                          ? 'font-medium text-gray-900 drop-shadow-base-bold dark:text-yellow-400 dark:drop-shadow-base'
+                          : 'text-gray-700 hover:text-gray-900 hover:drop-shadow-base-bold dark:text-gray-400 dark:hover:text-gray-300 dark:hover:drop-shadow-base',
                       )}
                     >
                       <svg
@@ -142,9 +143,10 @@ export default function TocBanner({
               </Fragment>
             ))}
           </ul>
-        </>
+        </div>
       )}
-      <div id="toc-footer" className="flex items-center justify-end">
+      <div className="flex items-center justify-end bg-gray-150 p-2 dark:bg-gray-700">
+        <CopyLinkButton />
         <IconButton onClick={() => window.scrollTo({ top: 0 })}>
           <UpIcon width={20} />
         </IconButton>
