@@ -14,7 +14,7 @@ export default function SnippetListItem({
   noBorder?: boolean;
 }) {
   return (
-    <Link as={`/${post.slug}`} href={`/snippets/[...slug]`}>
+    <Link as={post.slug} href={`/snippets/[...slug]`}>
       <div
         className={$(
           'text-ye group w-full py-4 transition-all hover:bg-gray-200 dark:hover:bg-gray-800',

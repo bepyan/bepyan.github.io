@@ -41,14 +41,18 @@ const parsePost = (postPath: string): Post | undefined => {
 
     const [fristSlug, middleSlug] = post.slug.split('/');
 
+    const isSnippet = fristSlug === 'snippets';
     const isSerizePost = sync(`${POSTS_PATH}/${fristSlug}/index.mdx`).length > 0;
 
     if (isSerizePost) {
       post.serizeSlug = fristSlug;
     }
 
-    if (fristSlug === 'snippets') {
+    if (isSnippet) {
       post.snippetSlug = middleSlug;
+      post.slug = `/${post.slug}`;
+    } else {
+      post.slug = `/blog/${post.slug}`;
     }
 
     return post;
@@ -99,7 +103,7 @@ const parseSerize = (serizePath: string): Serize | undefined => {
       date: dayjs(grayMatter.date).format('YYYY-MM-DD'),
       posts,
       readingMinutes: posts.reduce((ac, post) => ac + post.readingMinutes, 0),
-      slug,
+      slug: `/blog/${slug}`,
     };
   } catch (e) {
     console.error(e);

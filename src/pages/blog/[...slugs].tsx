@@ -9,7 +9,7 @@ export const getStaticPaths: GetStaticPaths = () => {
   const posts = getAllPosts();
 
   return {
-    paths: posts.map((post) => `/blog/${post.slug}`),
+    paths: posts.map((post) => post.slug),
     fallback: 'blocking',
   };
 };
@@ -17,7 +17,7 @@ export const getStaticPaths: GetStaticPaths = () => {
 export const getStaticProps: GetStaticProps = async ({ params }) => {
   const { slugs } = params as { slugs: string[] };
 
-  const slug = [...slugs].join('/');
+  const slug = `/blog/${[...slugs].join('/')}`;
   const posts = getAllPosts();
   const postIndex = posts.findIndex((v) => v.slug === slug);
 

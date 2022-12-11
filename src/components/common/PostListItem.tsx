@@ -16,7 +16,6 @@ export default function PostListItem({
   noBorder?: boolean;
 }) {
   const href = !!post.snippetSlug ? `/snippets/[...slug]` : `/blog/[...slug]`;
-  const link = !!post.snippetSlug ? `/${post.slug}` : `/blog/${post.slug}`;
 
   return (
     <li
@@ -25,7 +24,7 @@ export default function PostListItem({
         !noBorder && 'rounded-lg px-4 ring-1 ring-gray-250 dark:ring-gray-700',
       )}
     >
-      <Link as={link} href={href} className="hover:drop-shadow-base">
+      <Link as={post.slug} href={href} className="hover:drop-shadow-base">
         <p className="text-xl font-bold">{post.title}</p>
         <p className="text-gray-600 dark:text-gray-400">{post.description}</p>
       </Link>

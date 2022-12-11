@@ -35,7 +35,7 @@ export default function PostPage({ serizes, posts }: { serizes: Serize[]; posts:
       <Suspense fallback={null}>
         <div className="flex items-center space-x-6">
           {serizes.map((serize) => (
-            <Link key={serize.slug} as={`/blog/${serize.slug}`} href={`/blog/[slug]`}>
+            <Link key={serize.slug} as={serize.slug} href={`/blog/[slug]`}>
               <div className="relative h-56 w-40 select-none rounded-lg bg-gray-200 px-8 pt-8 pb-12 dark:bg-gray-800">
                 <div className="absolute inset-y-0 left-2.5 w-[1px] bg-gray-100 dark:bg-gray-700" />
                 <div className="flex h-full break-keep bg-white px-2 py-3 text-sm font-medium dark:bg-gray-700 dark:text-white">

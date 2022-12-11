@@ -72,7 +72,7 @@ export default function Archives({
           {serizes.map((serize) => (
             <HoverLink
               key={serize.slug}
-              href={`/blog/${serize.slug}`}
+              href={serize.slug}
               className="px-4 py-2 ring-1 ring-gray-300 dark:ring-gray-700"
             >
               <div>
@@ -127,7 +127,7 @@ const PostSection = ({ classifiedPosts }: { classifiedPosts: ClassifiedPosts }) 
               {classifiedPosts[year].map((post) => (
                 <li key={post.slug}>
                   <Link
-                    href={`/blog/${post.slug}`}
+                    href={post.slug}
                     className="text-gray-500 transition hover:text-gray-900 dark:text-gray-400 dark:hover:text-gray-500"
                   >
                     {post.title}

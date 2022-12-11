@@ -14,7 +14,7 @@ export const getStaticPaths: GetStaticPaths = () => {
   const serizes = getAllSerizes();
 
   return {
-    paths: serizes.map((serize) => `/blog/${serize.slug}`),
+    paths: serizes.map((serize) => serize.slug),
     fallback: 'blocking',
   };
 };
@@ -22,7 +22,8 @@ export const getStaticPaths: GetStaticPaths = () => {
 export const getStaticProps: GetStaticProps = ({ params }) => {
   const { slug } = params as { slug: string };
 
-  const serize = getAllSerizes().find((v) => v.slug === slug);
+  const serizeSlug = `/blog/${slug}`;
+  const serize = getAllSerizes().find((v) => v.slug === serizeSlug);
 
   if (!serize) {
     return {
