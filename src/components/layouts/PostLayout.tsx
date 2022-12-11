@@ -4,6 +4,7 @@ import { MDXRemote } from 'next-mdx-remote';
 import { $ } from '~/libs/core';
 import { useRehypeCodeCoppy } from '~/libs/rehypeCodeWrap';
 import { Post, Serize, TableOfContents } from '~/libs/types';
+import useMediumZoom from '~/libs/useMediumZoom';
 import Hr from '../common/Hr';
 import IconText from '../common/IconText';
 import Title from '../common/Title';
@@ -36,6 +37,7 @@ export default function PostLayout({
 }: PostLayoutProps) {
   // eslint-disable-next-line @typescript-eslint/no-unsafe-call
   useRehypeCodeCoppy();
+  useMediumZoom();
 
   return (
     <Layout>
