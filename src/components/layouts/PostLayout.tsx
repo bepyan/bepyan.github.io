@@ -1,7 +1,7 @@
+import { Transition } from '@headlessui/react';
 import dayjs from 'dayjs';
 import { MDXRemote } from 'next-mdx-remote';
 
-import { $ } from '~/libs/core';
 import { useRehypeCodeCoppy } from '~/libs/rehypeCodeWrap';
 import { Post, Serize, TableOfContents } from '~/libs/types';
 import useMediumZoom from '~/libs/useMediumZoom';
@@ -56,21 +56,28 @@ export default function PostLayout({
         <Hr className="mt-4" />
       </div>
 
-      <div className="relative flex gap-8">
-        <div className="prose max-w-3xl flex-1 dark:prose-dark">
+      <Transition className="relative flex gap-8" show appear>
+        <Transition.Child
+          className="prose max-w-3xl flex-1 dark:prose-dark"
+          enter="transition-opacity duration-200"
+          enterFrom="opacity-70"
+          enterTo="opacity-100"
+        >
           <TocTop className="lg:hidden" tableOfContents={tableOfContents} />
           <MDXRemote compiledSource={compiledSource} />
-        </div>
-        <div className="mt-12 ml-auto">
-          <div
-            className={$(
-              'sticky top-[120px] hidden min-w-[240px] max-w-[260px] self-start lg:block',
-            )}
-          >
-            <TocBanner tableOfContents={tableOfContents} />
+        </Transition.Child>
+        <Transition.Child
+          enter="transition-opacity duration-200"
+          enterFrom="opacity-0"
+          enterTo="opacity-100"
+        >
+          <div className="mt-12 ml-auto">
+            <div className="sticky top-[120px] hidden min-w-[240px] max-w-[260px] self-start lg:block">
+              <TocBanner tableOfContents={tableOfContents} />
+            </div>
           </div>
-        </div>
-      </div>
+        </Transition.Child>
+      </Transition>
 
       <div className="mt-12 space-y-8">
         <PostFooter {...postFooterProps} />

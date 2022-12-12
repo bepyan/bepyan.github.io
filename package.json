@@ -11,6 +11,7 @@
     "lint": "eslint src/**/*.{ts,tsx} --fix"
   },
   "dependencies": {
+    "@headlessui/react": "^1.7.5",
     "@next/font": "^13.0.3",
     "dayjs": "^1.11.6",
     "medium-zoom": "^1.0.8",

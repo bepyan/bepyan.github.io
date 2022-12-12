@@ -1,5 +1,5 @@
+import { Transition } from '@headlessui/react';
 import Link from 'next/link';
-import { Suspense } from 'react';
 
 import PlainText from '~/components/common/PlainText';
 import PostListItem from '~/components/common/PostListItem';
@@ -32,10 +32,16 @@ export default function PostPage({ serizes, posts }: { serizes: Serize[]; posts:
         </PlainText>
       </div>
 
-      <Suspense fallback={null}>
-        <div className="flex items-center space-x-6">
-          {serizes.map((serize) => (
-            <Link key={serize.slug} as={serize.slug} href={`/blog/[slug]`}>
+      <Transition appear show className="flex items-center space-x-6">
+        {serizes.map((serize, i) => (
+          <Transition.Child
+            key={serize.slug}
+            enter="transition-all duration-300"
+            enterFrom="opacity-30 translate-x-16"
+            enterTo="opacity-100 translate-x-0"
+            style={{ transitionDelay: `${i * 30}ms` }}
+          >
+            <Link as={serize.slug} href={`/blog/[slug]`}>
               <div className="relative h-56 w-40 select-none rounded-lg bg-gray-200 px-8 pt-8 pb-12 dark:bg-gray-800">
                 <div className="absolute inset-y-0 left-2.5 w-[1px] bg-gray-100 dark:bg-gray-700" />
                 <div className="flex h-full break-keep bg-white px-2 py-3 text-sm font-medium dark:bg-gray-700 dark:text-white">
@@ -43,22 +49,36 @@ export default function PostPage({ serizes, posts }: { serizes: Serize[]; posts:
                 </div>
               </div>
             </Link>
-          ))}
-        </div>
-      </Suspense>
+          </Transition.Child>
+        ))}
+      </Transition>
 
-      <Suspense fallback={null}>
-        <div className="mt-16 mb-4 flex items-end gap-2">
+      <Transition appear show>
+        <Transition.Child
+          enter="transition-all duration-300"
+          enterFrom="opacity-60"
+          enterTo="opacity-100"
+          className="mt-16 mb-4 flex items-end gap-2"
+          style={{ transitionDelay: `${200}ms` }}
+        >
           <SubTitle>All Posts</SubTitle>
           <span className="font-bold">({posts.length})</span>
-        </div>
+        </Transition.Child>
 
         <ul className="w-full space-y-8 md:w-3/4">
-          {posts.map((post) => (
-            <PostListItem key={post.slug} post={post} />
+          {posts.map((post, i) => (
+            <Transition.Child
+              key={post.slug}
+              enter="transition-all duration-300"
+              enterFrom="opacity-0 -translate-y-2"
+              enterTo="opacity-100 translate-y-0"
+              style={{ transitionDelay: `${200 + i * 30}ms` }}
+            >
+              <PostListItem post={post} />
+            </Transition.Child>
           ))}
         </ul>
-      </Suspense>
+      </Transition>
     </Layout>
   );
 }

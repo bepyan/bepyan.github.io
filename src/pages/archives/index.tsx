@@ -1,3 +1,4 @@
+import { Transition } from '@headlessui/react';
 import Link from 'next/link';
 
 import HoverLink from '~/components/common/HoverLink';
@@ -64,50 +65,69 @@ export default function Archives({
       <PageSEO title="Archives" description="" url="/archives" />
       <Title>Archives</Title>
       <PlainText>모든 기록물들을 한곳에 저장하는 장소입니다.</PlainText>
-      <div className="mt-12">
-        <SubTitle>
-          Serizes<span className="ml-2 text-sm">({serizes.length})</span>
-        </SubTitle>
-        <div className="mt-4 flex flex-wrap gap-2">
-          {serizes.map((serize) => (
-            <HoverLink
-              key={serize.slug}
-              href={serize.slug}
-              className="px-4 py-2 ring-1 ring-gray-300 dark:ring-gray-700"
-            >
-              <div>
-                <span>{serize.title}</span>
-                <div className="flex gap-2 text-gray-600 dark:text-gray-400">
-                  <span className="text-xs">{serize.date}</span>
-                  <IconText Icon={ListIcon} text={serize.posts.length} />
+      <Transition appear show>
+        {/* Serizes */}
+        <div className="mt-12">
+          <SubTitle>
+            Serizes<span className="ml-2 text-sm">({serizes.length})</span>
+          </SubTitle>
+          <Transition.Child
+            className="mt-4 flex flex-wrap gap-2"
+            enter="transition-opacity duration-300"
+            enterFrom="opacity-30"
+            enterTo="opacity-100"
+          >
+            {serizes.map((serize) => (
+              <HoverLink
+                key={serize.slug}
+                href={serize.slug}
+                className="px-4 py-2 ring-1 ring-gray-300 dark:ring-gray-700"
+              >
+                <div>
+                  <span>{serize.title}</span>
+                  <div className="flex gap-2 text-gray-600 dark:text-gray-400">
+                    <span className="text-xs">{serize.date}</span>
+                    <IconText Icon={ListIcon} text={serize.posts.length} />
+                  </div>
                 </div>
-              </div>
-            </HoverLink>
-          ))}
+              </HoverLink>
+            ))}
+          </Transition.Child>
         </div>
-      </div>
-      <Hr className="my-8" />
-      <div>
-        <SubTitle>
-          Tags<span className="ml-2 text-sm">({tags.length})</span>
-        </SubTitle>
-        <div className="mt-4 flex flex-wrap gap-2">
-          {tags.map((tag, i) => (
-            <Tag key={i} tag={tag} />
-          ))}
-        </div>
-      </div>
-      <Hr className="my-8" />
-      <div className="mt-4 grid grid-cols-1 gap-8 sm:grid-cols-2">
-        <div>
-          <SubTitle>Posts</SubTitle>
-          <PostSection classifiedPosts={classifiedPosts} />
-        </div>
-        <div>
-          <SubTitle>Snippets</SubTitle>
-          <PostSection classifiedPosts={classifiedSnippets} />
-        </div>
-      </div>
+        <Hr className="my-8" />
+        {/* Tags */}
+        <Transition.Child
+          enter="transition-opacity duration-300 delay-75"
+          enterFrom="opacity-30"
+          enterTo="opacity-100"
+        >
+          <SubTitle>
+            Tags<span className="ml-2 text-sm">({tags.length})</span>
+          </SubTitle>
+          <div className="mt-4 flex flex-wrap gap-2">
+            {tags.map((tag, i) => (
+              <Tag key={i} tag={tag} />
+            ))}
+          </div>
+        </Transition.Child>
+        <Hr className="my-8" />
+        {/* Posts, Snippets */}
+        <Transition.Child
+          className="mt-4 grid grid-cols-1 gap-8 delay-100 sm:grid-cols-2"
+          enter="transition-opacity duration-300"
+          enterFrom="opacity-30"
+          enterTo="opacity-100"
+        >
+          <div>
+            <SubTitle>Posts</SubTitle>
+            <PostSection classifiedPosts={classifiedPosts} />
+          </div>
+          <div>
+            <SubTitle>Snippets</SubTitle>
+            <PostSection classifiedPosts={classifiedSnippets} />
+          </div>
+        </Transition.Child>
+      </Transition>
     </Layout>
   );
 }

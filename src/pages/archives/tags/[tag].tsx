@@ -1,3 +1,4 @@
+import { Transition } from '@headlessui/react';
 import { GetStaticPaths, GetStaticProps } from 'next';
 import { useEffect, useRef, useState } from 'react';
 
@@ -94,14 +95,22 @@ export default function TagPage({
         </div>
       )}
 
-      <div className="mt-8 space-y-12">
+      <Transition className="mt-8 space-y-12" appear show>
         <div ref={postsRef} className="scroll-m-16">
           <p className="text-xl font-bold">
             Posts <span className="text-base">({posts.length})</span>
           </p>
           <ul className="mt-2 space-y-4">
-            {posts.map((post) => (
-              <PostListItem key={post.slug} post={post} />
+            {posts.map((post, i) => (
+              <Transition.Child
+                key={post.slug}
+                enter="transition-opacity duration-300"
+                enterFrom="opacity-30"
+                enterTo="opacity-100"
+                style={{ transitionDelay: `${i * 30}ms` }}
+              >
+                <PostListItem post={post} />
+              </Transition.Child>
             ))}
           </ul>
         </div>
@@ -110,12 +119,20 @@ export default function TagPage({
             Snippets <span className="text-base">({snippets.length})</span>
           </p>
           <ul className="mt-2 space-y-4">
-            {snippets.map((post) => (
-              <PostListItem key={post.slug} post={post} />
+            {snippets.map((post, i) => (
+              <Transition.Child
+                key={post.slug}
+                enter="transition-opacity duration-300"
+                enterFrom="opacity-30"
+                enterTo="opacity-100"
+                style={{ transitionDelay: `${30 + i * 30}ms` }}
+              >
+                <PostListItem key={post.slug} post={post} />
+              </Transition.Child>
             ))}
           </ul>
         </div>
-      </div>
+      </Transition>
     </Layout>
   );
 }

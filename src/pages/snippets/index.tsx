@@ -1,3 +1,4 @@
+import { Transition } from '@headlessui/react';
 import { GetStaticProps } from 'next';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
@@ -88,9 +89,16 @@ export default function Snippets({ snippetList }: { snippetList: Snippet[] }) {
             return (
               <ul key={key} className="mt-4 grid grid-cols-2 gap-4">
                 {postList.map((post) => (
-                  <div key={post.slug} className="">
+                  <Transition
+                    key={post.slug}
+                    appear
+                    show
+                    enter="transition-opacity duration-300"
+                    enterFrom="opacity-30"
+                    enterTo="opacity-100"
+                  >
                     <SnippetListItem post={post} />
-                  </div>
+                  </Transition>
                 ))}
               </ul>
             );
@@ -98,9 +106,16 @@ export default function Snippets({ snippetList }: { snippetList: Snippet[] }) {
         ) : (
           <ul className="mt-4 grid grid-cols-2 gap-4">
             {postList.map((post) => (
-              <div key={post.slug} className="">
+              <Transition
+                key={post.slug}
+                appear
+                show
+                enter="transition-opacity duration-300"
+                enterFrom="opacity-30"
+                enterTo="opacity-100"
+              >
                 <SnippetListItem post={post} />
-              </div>
+              </Transition>
             ))}
           </ul>
         )}
