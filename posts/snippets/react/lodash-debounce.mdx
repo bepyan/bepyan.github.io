@@ -5,32 +5,46 @@ icon: ''
 image: ''
 tags:
   - React
+  - javascript
+  - typescript
   - debounce
 draft: false
 date: 2022-12-13 21:31:23
 ---
 
+`javascript`
+
 ```shell
 yarn add lodash.debounce
 ```
 
-```js
-const [searchValue, setSearchValue] = useState('');
+```jsx
+const App = () => {
+  const [searchValue, setSearchValue] = useState('');
 
-const searchHandler = useCallback(
-  sdebounce((e) => {
-    setSearchValue(e.target.value);
-  }, 300),
-  [],
-);
+  const searchHandler = useCallback(
+    sdebounce((e) => {
+      setSearchValue(e.target.value);
+    }, 300),
+    [],
+  );
+
+  return (
+    <div>
+      <div>{searchValue}</div>
+      <input type="text" onChange={searchHandler} />
+    </div>
+  );
+};
 ```
+
+---
 
 `typescript`
 
 ```shell
 yarn add -D @types/lodash.debounce
 ```
-
 
 ```ts:useSearch.ts
 import debounce from 'lodash.debounce';
