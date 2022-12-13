@@ -66,17 +66,12 @@ export default function PostLayout({
           <TocTop className="lg:hidden" tableOfContents={tableOfContents} />
           <MDXRemote compiledSource={compiledSource} />
         </Transition.Child>
-        <Transition.Child
-          enter="transition-opacity duration-200"
-          enterFrom="opacity-0"
-          enterTo="opacity-100"
-        >
-          <div className="mt-12 ml-auto">
-            <div className="sticky top-[120px] hidden min-w-[240px] max-w-[260px] self-start lg:block">
-              <TocBanner tableOfContents={tableOfContents} />
-            </div>
+
+        <div className="mt-12 ml-auto">
+          <div className="sticky top-[120px] hidden min-w-[240px] max-w-[260px] self-start lg:block">
+            <TocBanner tableOfContents={tableOfContents} />
           </div>
-        </Transition.Child>
+        </div>
       </Transition>
 
       <div className="mt-12 space-y-8">
