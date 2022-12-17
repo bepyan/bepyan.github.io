@@ -12,6 +12,7 @@ import Giscus from '../Giscus';
 import CalanderIcon from '../icons/CalanderIcon';
 import ClockIcon from '../icons/ClockIcon';
 import PostFooter, { PostFooterProps } from '../PostFooter';
+import ReadingProgressBar from '../ReadingProgressBar';
 import { BlogSEO } from '../SEO';
 import SerizeCard from '../SerizeCard';
 import TocBanner from '../TocBanner';
@@ -43,6 +44,8 @@ export default function PostLayout({
     <Layout>
       <BlogSEO {...post} url={`/blog/${slug}`} summary={post.description} images={[]} />
 
+      <ReadingProgressBar />
+
       <div>
         <Title className="mb-4 text-center">{post.title}</Title>
 
@@ -56,9 +59,9 @@ export default function PostLayout({
         <Hr className="mt-4" />
       </div>
 
-      <Transition className="relative flex gap-8" show appear>
+      <Transition className="relative gap-8 lg:flex" show appear>
         <Transition.Child
-          className="prose max-w-3xl flex-1 dark:prose-dark"
+          className="prose max-w-3xl dark:prose-dark"
           enter="transition-opacity duration-200"
           enterFrom="opacity-70"
           enterTo="opacity-100"
