@@ -21,17 +21,19 @@ type Snippet = {
 export const getStaticProps: GetStaticProps = () => {
   const snippets = getAllSnippets();
 
-  const tagSnippets = snippets.reduce<{ [key: string]: Post[] }>((ac, snippet) => {
-    const key = snippet.snippetSlug;
-    if (!key) return ac;
+  const tagSnippets = snippets
+    .sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime())
+    .reduce<{ [key: string]: Post[] }>((ac, snippet) => {
+      const key = snippet.snippetSlug;
+      if (!key) return ac;
 
-    if (!ac[key]) {
-      ac[key] = [];
-    }
+      if (!ac[key]) {
+        ac[key] = [];
+      }
 
-    ac[key].push(snippet);
-    return ac;
-  }, {});
+      ac[key].push(snippet);
+      return ac;
+    }, {});
 
   const snippetList = Object.keys(tagSnippets)
     .map<Snippet>((key) => ({
