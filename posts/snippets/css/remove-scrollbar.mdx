@@ -1,0 +1,34 @@
+---
+title: '(CSS) scroll bar 제거'
+description: ''
+icon: ''
+image: ''
+tags:
+  - css
+draft: false
+date: 2022-12-17 21:46:47
+---
+
+스크롤은 동작하지만 스크롤바를 숨기고 싶을 때가 있다.
+
+```css
+body {
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none; /* Firefox */
+}
+body::-webkit-scrollbar {
+  display: none; /* Chrome, Safari, Opera*/
+}
+```
+
+특정 엘리먼트의 스크롤바를 숨기고 싶다면 `body` 대신 클래스명을 입력하면 된다.
+
+```css
+.no-scrollbar {
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none; /* Firefox */
+}
+.no-scrollbar::-webkit-scrollbar {
+  display: none; /* Chrome, Safari, Opera*/
+}
+```

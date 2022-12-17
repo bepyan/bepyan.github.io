@@ -1,0 +1,26 @@
+---
+title: '(CSS) input focus시 border 제거'
+description: ''
+icon: ''
+image: ''
+tags:
+  - css
+draft: false
+date: 2022-12-17 18:29:43
+---
+
+`input`이 포커스 될 시 스타일은 [`outline`](https://developer.mozilla.org/ko/docs/Web/CSS/outline) 속성이 활용된다.
+
+```css
+input:focus {
+  outline: none;
+}
+```
+
+<br />
+
+`tailwind`
+
+```html
+<input className="focus:outline-none" />
+```
