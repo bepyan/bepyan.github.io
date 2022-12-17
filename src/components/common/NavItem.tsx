@@ -5,7 +5,7 @@ import HoverLink from './HoverLink';
 
 export default function NavItem({ href, children, className }: React.ComponentProps<'a'>) {
   const router = useRouter();
-  const isActive = router.asPath === href;
+  const isActive = router.asPath.startsWith(href ?? '/');
 
   return (
     <HoverLink
