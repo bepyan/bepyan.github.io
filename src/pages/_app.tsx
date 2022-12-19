@@ -1,7 +1,6 @@
 import '~/styles/globals.css';
 import 'dayjs/locale/ko';
 
-import { Inter } from '@next/font/google';
 import dayjs from 'dayjs';
 import type { AppProps } from 'next/app';
 import Head from 'next/head';
@@ -15,10 +14,6 @@ import { seoConfig } from '~/config';
 import * as gtag from '~/libs/gtag';
 
 dayjs.locale('ko');
-const inter = Inter({
-  subsets: ['latin'],
-  variable: '--font-inter',
-});
 
 export default function App({ Component, pageProps }: AppProps) {
   const router = useRouter();
@@ -42,7 +37,7 @@ export default function App({ Component, pageProps }: AppProps) {
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
       </Head>
       <DefaultSeo {...seoConfig} />
-      <div className={`${inter.variable} font-sans`}>
+      <div className="font-sans">
         <Component {...pageProps} />
       </div>
       <>

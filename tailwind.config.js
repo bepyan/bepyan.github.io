@@ -1,4 +1,4 @@
-const { spacing, fontFamily } = require('tailwindcss/defaultTheme');
+const { fontFamily } = require('tailwindcss/defaultTheme');
 
 /** @type {import('tailwindcss').Config} */
 module.exports = {
@@ -28,7 +28,7 @@ module.exports = {
         'base-bold': '0px 0px 7px rgba(234, 179, 8, 0.7)',
       },
       fontFamily: {
-        sans: ['var(--font-inter)', ...fontFamily.sans],
+        sans: ['inter', ...fontFamily.sans],
       },
       typography: (theme) => ({
         DEFAULT: {
