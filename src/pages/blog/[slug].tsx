@@ -44,7 +44,7 @@ export default function PostPage({ serize }: { serize: Serize }) {
     <Layout>
       <Transition appear={true} show={true}>
         <div className="grid gap-8 sm:grid-cols-3 sm:gap-32">
-          <div className="lg:sticky lg:top-8 lg:self-start">
+          <div className="sm:sticky sm:top-8 sm:self-start">
             <div className="col-span-3 sm:col-span-1">
               <Transition.Child
                 enter="transition-shadow duration-300"
