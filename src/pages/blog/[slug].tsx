@@ -4,6 +4,7 @@ import { GetStaticPaths, GetStaticProps } from 'next';
 
 import IconText from '~/components/common/IconText';
 import PostListItem from '~/components/common/PostListItem';
+import HoverCard from '~/components/HoverCard';
 import CalanderIcon from '~/components/icons/CalanderIcon';
 import ClockIcon from '~/components/icons/ClockIcon';
 import ListIcon from '~/components/icons/ListIcon';
@@ -46,17 +47,14 @@ export default function PostPage({ serize }: { serize: Serize }) {
         <div className="grid gap-8 sm:grid-cols-3 sm:gap-32">
           <div className="sm:sticky sm:top-8 sm:self-start">
             <div className="col-span-3 sm:col-span-1">
-              <Transition.Child
-                enter="transition-shadow duration-300"
-                enterFrom="shadow-md"
-                enterTo="shadow-lg"
-                className="relative mx-auto h-[336px] w-[240px] select-none rounded-lg bg-gray-200 px-11 pb-16 pt-12 dark:bg-gray-800"
-              >
-                <div className="absolute inset-y-0 left-4 w-[1px] bg-gray-100 dark:bg-gray-700" />
-                <div className="flex h-full break-keep bg-gray-50 px-3 py-4 text-xl font-semibold dark:bg-gray-700 dark:text-white">
-                  {serize.title}
+              <HoverCard>
+                <div className="relative mx-auto h-[336px] w-[240px] select-none rounded-lg bg-gray-200 px-11 pb-16 pt-12 dark:bg-gray-800">
+                  <div className="absolute inset-y-0 left-4 w-[1px] bg-gray-100 dark:bg-gray-700" />
+                  <div className="flex h-full break-keep bg-gray-50 px-3 py-4 text-xl font-semibold dark:bg-gray-700 dark:text-white">
+                    {serize.title}
+                  </div>
                 </div>
-              </Transition.Child>
+              </HoverCard>
             </div>
           </div>
           <div className="col-span-3 sm:col-span-2">

@@ -14,6 +14,7 @@
     "@headlessui/react": "^1.7.5",
     "@next/font": "^13.0.3",
     "dayjs": "^1.11.6",
+    "gsap": "^3.11.3",
     "lodash.debounce": "^4.0.8",
     "medium-zoom": "^1.0.8",
     "next": "^13.0.3",
