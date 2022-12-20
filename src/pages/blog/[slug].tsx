@@ -46,7 +46,7 @@ export default function PostPage({ serize }: { serize: Serize }) {
       <Transition appear={true} show={true}>
         <div className="grid gap-8 sm:grid-cols-3 sm:gap-32">
           <div className="sm:sticky sm:top-8 sm:self-start">
-            <div className="col-span-3 sm:col-span-1">
+            <div className="sm:col-span-1">
               <HoverCard>
                 <div className="relative mx-auto h-[336px] w-[240px] select-none rounded-lg bg-gray-200 px-11 pb-16 pt-12 dark:bg-gray-800">
                   <div className="absolute inset-y-0 left-4 w-[1px] bg-gray-100 dark:bg-gray-700" />
@@ -57,7 +57,7 @@ export default function PostPage({ serize }: { serize: Serize }) {
               </HoverCard>
             </div>
           </div>
-          <div className="col-span-3 sm:col-span-2">
+          <div className="sm:col-span-2">
             <div className="rounded-lg bg-gray-150 px-5 py-4 dark:bg-gray-800">
               <p>{serize.description}</p>
               <div className="mt-1 flex gap-2 text-gray-600 dark:text-gray-400">
