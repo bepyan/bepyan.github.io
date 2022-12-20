@@ -29,6 +29,12 @@ export default function HeaderNav() {
     }
   };
 
+  const isActiveNav = (navPath: string) => {
+    if (navPath === '/') return router.asPath === navPath;
+
+    return router.asPath.startsWith(navPath);
+  };
+
   useEffect(() => {
     return function cleanup() {
       document.body.style.overflow = '';
@@ -75,7 +81,7 @@ export default function HeaderNav() {
                 className={$(
                   'border-b border-gray-200 py-4 font-semibold transition-all dark:border-gray-700',
                   isMenuRendered ? 'translate-x-0 opacity-100' : '-translate-x-4 opacity-0',
-                  router.asPath.startsWith(link.path) ? 'text-yellow-400' : 'dark:text-gray-200',
+                  isActiveNav(link.path) ? 'text-yellow-400' : 'dark:text-gray-200',
                 )}
                 style={{ transitionDelay: `${150 + i * 25}ms` }}
               >
