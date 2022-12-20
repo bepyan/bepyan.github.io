@@ -52,7 +52,7 @@ export default function PostPage({ serizes, posts }: { serizes: Serize[]; posts:
       </div>
 
       <Transition appear show>
-        <div className="flex items-center space-x-6">
+        <div className="no-scrollbar -my-12 -ml-8 flex items-center space-x-6 overflow-scroll py-12 pl-8">
           {filteredSerizes.map((serize, i) => (
             <Transition.Child
               key={serize.slug}

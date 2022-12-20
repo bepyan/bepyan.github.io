@@ -70,15 +70,15 @@ export default function Snippets({ snippetList }: { snippetList: Snippet[] }) {
         간단한 Javavscript 유틸 함수, CSS 꼼수에서부터 Framework 사용 꿀팁까지 정리되어 있습니다 🍯
       </PlainText>
 
-      <div className="sticky top-0 -mx-2 flex items-center gap-2 bg-gray-100 bg-opacity-80 px-2 py-4 backdrop-blur transition-all dark:bg-gray-900 dark:bg-opacity-50">
+      <div className="no-scrollbar sticky top-0 -mx-2 flex items-center gap-2 overflow-scroll bg-gray-100 bg-opacity-80 px-2 py-4 backdrop-blur transition-all dark:bg-gray-900 dark:bg-opacity-50">
         <Link href="?key=all">
-          <Pill selected={isAll} className="cursor-pointer">
+          <Pill selected={isAll} className="cursor-pointer whitespace-nowrap">
             All <span className="text-xs">{allSnippetsCnt}</span>
           </Pill>
         </Link>
         {snippetList.map(({ key, postList }) => (
           <Link key={key} href={`?key=${key}`}>
-            <Pill className="cursor-pointer" selected={key === selectedKey}>
+            <Pill className="cursor-pointer whitespace-nowrap" selected={key === selectedKey}>
               {title(key)} <span className="text-xs">{postList.length}</span>
             </Pill>
           </Link>
