@@ -8,22 +8,11 @@ import ClockIcon from '../icons/ClockIcon';
 import IconText from './IconText';
 import Tag from './Tag';
 
-export default function PostListItem({
-  post,
-  noBorder,
-}: {
-  post: Omit<Post, 'content'>;
-  noBorder?: boolean;
-}) {
+export default function PostListItem({ post }: { post: Omit<Post, 'content'> }) {
   const href = !!post.snippetSlug ? `/snippets/[...slug]` : `/blog/[...slug]`;
 
   return (
-    <li
-      className={$(
-        'text-ye group w-full py-4 hover:drop-shadow-base',
-        !noBorder && 'rounded-lg px-4 ring-1 ring-gray-250 dark:ring-gray-700',
-      )}
-    >
+    <li className={$('text-ye group w-full py-4 hover:drop-shadow-base')}>
       <Link as={post.slug} href={href} className="hover:drop-shadow-base">
         <p className="text-xl font-bold">{post.title}</p>
         <p className="text-gray-600 dark:text-gray-400">{post.description}</p>

@@ -84,7 +84,7 @@ export default function PostPage({ serizes, posts }: { serizes: Serize[]; posts:
           <span className="font-bold">({filteredBlogPosts.length})</span>
         </Transition.Child>
 
-        <ul className="w-full space-y-8 md:w-3/4">
+        <ul className="mt-12 grid w-full gap-8 lg:grid-cols-2 lg:gap-12">
           {filteredBlogPosts.map((post, i) => (
             <Transition.Child
               key={post.slug}

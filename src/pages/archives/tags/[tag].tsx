@@ -2,7 +2,9 @@ import { Transition } from '@headlessui/react';
 import { GetStaticPaths, GetStaticProps } from 'next';
 import { useEffect, useRef, useState } from 'react';
 
+import Hr from '~/components/common/Hr';
 import PostListItem from '~/components/common/PostListItem';
+import SnippetListItem from '~/components/common/SnippetListItem';
 import Title from '~/components/common/Title';
 import Layout from '~/components/layouts/Layout';
 import { getAllPosts, getAllSnippets, getTagsByPosts } from '~/libs/post';
@@ -100,7 +102,8 @@ export default function TagPage({
           <p className="text-xl font-bold">
             Posts <span className="text-base">({posts.length})</span>
           </p>
-          <ul className="mt-2 space-y-4">
+          <Hr className="my-4" />
+          <ul className="grid gap-4 lg:grid-cols-2 lg:gap-12">
             {posts.map((post, i) => (
               <Transition.Child
                 key={post.slug}
@@ -118,7 +121,8 @@ export default function TagPage({
           <p className="text-xl font-bold">
             Snippets <span className="text-base">({snippets.length})</span>
           </p>
-          <ul className="mt-2 space-y-4">
+          <Hr className="my-4" />
+          <ul className="grid gap-4 lg:grid-cols-2">
             {snippets.map((post, i) => (
               <Transition.Child
                 key={post.slug}
@@ -127,7 +131,7 @@ export default function TagPage({
                 enterTo="opacity-100"
                 style={{ transitionDelay: `${30 + i * 30}ms` }}
               >
-                <PostListItem key={post.slug} post={post} />
+                <SnippetListItem key={post.slug} post={post} />
               </Transition.Child>
             ))}
           </ul>

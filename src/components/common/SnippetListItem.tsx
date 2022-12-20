@@ -6,19 +6,13 @@ import { Post } from '~/libs/types';
 import CalanderIcon from '../icons/CalanderIcon';
 import IconText from './IconText';
 
-export default function SnippetListItem({
-  post,
-  noBorder,
-}: {
-  post: Omit<Post, 'content'>;
-  noBorder?: boolean;
-}) {
+export default function SnippetListItem({ post }: { post: Omit<Post, 'content'> }) {
   return (
     <Link as={post.slug} href={`/snippets/[...slug]`}>
       <div
         className={$(
           'text-ye group w-full py-4 transition-all hover:bg-gray-200 dark:hover:bg-gray-800',
-          !noBorder && 'rounded-lg px-4 ring-1 ring-gray-250 dark:ring-gray-700',
+          'rounded-lg px-4 ring-1 ring-gray-250 dark:ring-gray-700',
         )}
       >
         <p className="text-xl font-bold">{post.title}</p>
