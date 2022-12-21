@@ -56,6 +56,6 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
   };
 };
 
-export default function PostPage({ ...props }: PostLayoutProps) {
+export default function PostPage(props: PostLayoutProps) {
   return <PostLayout {...props} />;
 }

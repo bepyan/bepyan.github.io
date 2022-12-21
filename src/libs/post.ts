@@ -124,8 +124,9 @@ export const getAllSerizes = () => {
 };
 
 export const getSerizeBySlug = (slug: string) => {
-  const commonSlug = slug.split('/').slice(0, -1).join('/');
+  const commonSlug = slug.split('/').slice(0, -1).slice(2).join('/');
   const serizePath = `.${BASE_PATH}/${commonSlug}/index.mdx`;
+
   if (!fs.existsSync(`${serizePath}`)) return undefined;
 
   return parseSerize(serizePath);
