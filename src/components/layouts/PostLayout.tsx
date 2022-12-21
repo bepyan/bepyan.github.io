@@ -89,7 +89,7 @@ export default function PostLayout({
         </div>
         <Hr />
         <div className="flex w-full items-center justify-center">
-          <div className="flex items-center gap-4 sm:gap-8">
+          <div className="flex items-center gap-4 sm:gap-8 sm:p-12">
             <div>
               <img
                 src={siteConfig.author.photo}
