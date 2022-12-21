@@ -1,6 +1,7 @@
 import Image from 'next/image';
 import title from 'title';
 
+import Title from '~/components/common/Title';
 import Layout from '~/components/layouts/Layout';
 import { PageSEO } from '~/components/SEO';
 import { siteConfig } from '~/config';
@@ -9,6 +10,9 @@ export default function Home() {
   return (
     <Layout>
       <PageSEO title="Home" />
+
+      <Title>bepyan</Title>
+
       <div className="inset-0 mb-2 h-full w-full tracking-wide">
         {title(siteConfig.author.name)}
       </div>

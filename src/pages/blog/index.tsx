@@ -35,7 +35,11 @@ export default function PostPage({ serizes, posts }: { serizes: Serize[]; posts:
 
   return (
     <Layout>
-      <PageSEO title="Blog" description="" url="/blog" />
+      <PageSEO
+        title="Blog"
+        description="개발하면서 탐구한 것을 소소하게 기록하는 공간입니다."
+        url="/blog"
+      />
 
       <div className="pb-4">
         <Title>Blog</Title>

@@ -7,6 +7,7 @@ import PostListItem from '~/components/common/PostListItem';
 import SnippetListItem from '~/components/common/SnippetListItem';
 import Title from '~/components/common/Title';
 import Layout from '~/components/layouts/Layout';
+import { PageSEO } from '~/components/SEO';
 import { getAllPosts, getAllSnippets, getTagsByPosts } from '~/libs/post';
 import { Post } from '~/libs/types';
 
@@ -53,6 +54,7 @@ export default function TagPage({
   const postsRef = useRef<HTMLDivElement>(null);
   const snippetsRef = useRef<HTMLDivElement>(null);
 
+  const postsLength = posts.length + snippets.length;
   const [isScrollable, setIsScrollable] = useState(false);
 
   useEffect(() => {
@@ -76,8 +78,10 @@ export default function TagPage({
 
   return (
     <Layout>
+      <PageSEO title="Tags" description={`${tag} (${postsLength})`} />
+
       <Title className="flex items-end gap-4">
-        Tags - {tag} <span className="text-2xl">({posts.length + snippets.length})</span>
+        Tags - {tag} <span className="text-2xl">({postsLength})</span>
       </Title>
 
       {isScrollable && (

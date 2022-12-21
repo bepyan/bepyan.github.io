@@ -9,6 +9,7 @@ import CalanderIcon from '~/components/icons/CalanderIcon';
 import ClockIcon from '~/components/icons/ClockIcon';
 import ListIcon from '~/components/icons/ListIcon';
 import Layout from '~/components/layouts/Layout';
+import { PageSEO } from '~/components/SEO';
 import { getAllSerizes } from '~/libs/post';
 import { Serize } from '~/libs/types';
 
@@ -43,6 +44,8 @@ export const getStaticProps: GetStaticProps = ({ params }) => {
 export default function PostPage({ serize }: { serize: Serize }) {
   return (
     <Layout>
+      <PageSEO title={serize.title} description={serize.description} url={serize.slug} />
+
       <Transition appear={true} show={true}>
         <div className="grid gap-8 sm:grid-cols-3 sm:gap-32">
           <div className="sm:sticky sm:top-8 sm:self-start">

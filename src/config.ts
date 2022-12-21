@@ -11,7 +11,7 @@ export const siteConfig = {
   googleAnalyticsId: '',
   author: {
     name: 'edward kim',
-    photo: '/profile.png',
+    photo: 'https://avatars.githubusercontent.com/u/65283190?v=4',
     bio: 'frontend engineer',
     contacts: {
       email: 'mailto:bepyan@naver.com',

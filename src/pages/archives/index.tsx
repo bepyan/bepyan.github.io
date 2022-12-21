@@ -62,7 +62,11 @@ export default function Archives({
 }) {
   return (
     <Layout>
-      <PageSEO title="Archives" description="" url="/archives" />
+      <PageSEO
+        title="Archives"
+        description="모든 기록물들을 한곳에 저장하는 장소입니다."
+        url="/archives"
+      />
       <Title>Archives</Title>
       <PlainText>모든 기록물들을 한곳에 저장하는 장소입니다.</PlainText>
       <Transition appear show>

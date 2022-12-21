@@ -10,7 +10,7 @@ export default function NotFound() {
       <div className="mb-16">
         <Title>404</Title>
         <p className="mb-8 text-gray-600 dark:text-gray-400">
-          Sorry we couldn&apos;t find this page 🥲
+          미안해요, 찾을 수 없는 페이지에요 🥲
         </p>
 
         <NavItem href="/blog" className="rounded-md px-4 py-2 ring-1 ring-gray-300">
