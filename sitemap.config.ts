@@ -1,7 +1,7 @@
 import fs from 'fs';
 
-import { siteConfig } from '../config';
-import { getAllPosts, getAllSerizes, getAllSnippets, getTagsByPosts } from './post';
+import { siteConfig } from './src/config';
+import { getAllPosts, getAllSerizes, getAllSnippets, getTagsByPosts } from './src/libs/post';
 
 async function createSiteMap() {
   const siteUrl = 'https://bepyan.github.io';

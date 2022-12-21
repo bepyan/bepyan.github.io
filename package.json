@@ -6,7 +6,7 @@
   "scripts": {
     "dev": "next dev",
     "build": "yarn sitemap && next build && next export",
-    "sitemap": "ts-node --project tsconfig.node.json ./src/libs/siteMap.ts",
+    "sitemap": "ts-node --project tsconfig.node.json siteMap.config.ts",
     "postbuild": "next-export-optimize-images",
     "serve": "npx http-server out",
     "lint": "eslint src/**/*.{ts,tsx} --fix"
