@@ -1,7 +1,7 @@
 import { ReactNode, useMemo } from 'react';
-import title from 'title';
 
 import { siteConfig } from '~/config';
+import AuthorContacts from '../common/AuthorContacts';
 import ExternalLink from '../common/ExternalLink';
 import Hr from '../common/Hr';
 import HeaderNav from '../HeaderNav';
@@ -25,18 +25,7 @@ export default function Layout({ children }: { children: ReactNode }) {
         <Hr className="mb-8" />
 
         <div className="flex flex-col items-end space-y-1">
-          <div className="flex space-x-2">
-            {Object.keys(siteConfig.author.contacts).map((sns) => {
-              const link =
-                siteConfig.author.contacts[sns as keyof typeof siteConfig.author.contacts];
-
-              return !link ? null : (
-                <ExternalLink key={sns} href={link}>
-                  {title(sns)}
-                </ExternalLink>
-              );
-            })}
-          </div>
+          <AuthorContacts />
           <p>
             <span>© {since} </span>
             <ExternalLink href={siteConfig.author.contacts.github}>{siteConfig.title}</ExternalLink>

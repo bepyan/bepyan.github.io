@@ -20,7 +20,7 @@ export default function MyDocument() {
           rel="stylesheet"
         />
       </Head>
-      <body className="bg-gray-100 text-gray-900 transition-[background] dark:bg-gray-850 dark:text-gray-200">
+      <body className="bg-gray-50 text-gray-900 transition-[background] dark:bg-gray-850 dark:text-gray-200">
         <Main />
         <NextScript />
 

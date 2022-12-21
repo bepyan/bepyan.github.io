@@ -2,11 +2,14 @@ import { Transition } from '@headlessui/react';
 import dayjs from 'dayjs';
 import { MDXRemote } from 'next-mdx-remote';
 
+import { siteConfig } from '~/config';
 import { useRehypeCodeCoppy } from '~/libs/rehypeCodeWrap';
 import { Post, Serize, TableOfContents } from '~/libs/types';
 import useMediumZoom from '~/libs/useMediumZoom';
+import AuthorContacts from '../common/AuthorContacts';
 import Hr from '../common/Hr';
 import IconText from '../common/IconText';
+import Tag from '../common/Tag';
 import Title from '../common/Title';
 import Giscus from '../Giscus';
 import CalanderIcon from '../icons/CalanderIcon';
@@ -68,6 +71,7 @@ export default function PostLayout({
         >
           <TocTop className="lg:hidden" tableOfContents={tableOfContents} />
           <MDXRemote compiledSource={compiledSource} />
+          <div></div>
         </Transition.Child>
 
         <div className="mt-12 ml-auto">
@@ -77,9 +81,30 @@ export default function PostLayout({
         </div>
       </Transition>
 
-      <div className="mt-12 space-y-8">
-        <PostFooter {...postFooterProps} />
+      <div className="mt-12 space-y-8 lg:mt-24">
+        <div className="flex gap-2">
+          {post.tags.map((tag) => (
+            <Tag key={tag} tag={tag} />
+          ))}
+        </div>
         <Hr />
+        <div className="flex w-full items-center justify-center">
+          <div className="flex items-center gap-4 sm:gap-8">
+            <div>
+              <img
+                src={siteConfig.author.photo}
+                className="h-24 w-24 overflow-hidden rounded-full"
+                alt="프로필 사진"
+              />
+            </div>
+            <div>
+              <div className="font-bold">{siteConfig.author.name}</div>
+              <div className="text-gray-600 dark:text-gray-400">{siteConfig.author.bio}</div>
+              <AuthorContacts className="mt-2 text-sm" />
+            </div>
+          </div>
+        </div>
+        <PostFooter {...postFooterProps} />
         {serize && <SerizeCard currentPost={post} serize={serize} />}
         <Giscus />
       </div>

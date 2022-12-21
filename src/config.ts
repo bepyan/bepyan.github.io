@@ -5,14 +5,14 @@ export const headerConfig = {};
 export const siteConfig = {
   url: 'https://bepyan.github.io',
   title: 'bepyan blog',
-  description: '인생은 고통이다, 그래서 달다.',
+  description: '개발하면서 탐구한 것을 소소하게 기록하는 공간입니다.',
   copyright: 'bepyan © All rights reserved.',
   since: 2022,
   googleAnalyticsId: '',
   author: {
-    name: 'edward kim',
+    name: 'Edward Kim',
     photo: 'https://avatars.githubusercontent.com/u/65283190?v=4',
-    bio: 'frontend engineer',
+    bio: 'junior frontend engineer',
     contacts: {
       email: 'mailto:bepyan@naver.com',
       twitter: 'https://twitter.com/__pyungan',
