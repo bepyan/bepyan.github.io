@@ -4,8 +4,8 @@ export const headerConfig = {};
 
 export const siteConfig = {
   url: 'https://bepyan.github.io',
-  title: 'bepyan',
-  description: 'bepyan blog',
+  title: 'bepyan blog',
+  description: '인생은 고통이다, 그래서 달다.',
   copyright: 'bepyan © All rights reserved.',
   since: 2022,
   googleAnalyticsId: '',

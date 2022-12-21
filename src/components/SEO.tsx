@@ -4,8 +4,9 @@ import { siteConfig } from '~/config';
 
 const getTitle = (title?: string) => {
   if (!title) return siteConfig.title;
+  if (title.length > 10) return title;
 
-  return `${title} – ${siteConfig.title}`;
+  return `${title} - bepyan`;
 };
 
 const getRelativeUrl = (url?: string) => {
@@ -65,6 +66,7 @@ export const BlogSEO = ({
   return (
     <>
       <NextSeo
+        title={title}
         description={summary}
         canonical={url}
         openGraph={{
@@ -72,7 +74,7 @@ export const BlogSEO = ({
           article: {
             publishedTime: dateTime,
             modifiedTime: dateTime,
-            authors: [`${siteConfig.url}`],
+            authors: [`https://github.com/bepyan`],
             tags,
           },
           url,
