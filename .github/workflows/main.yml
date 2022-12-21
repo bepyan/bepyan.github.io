@@ -16,6 +16,7 @@ jobs:
         run: |
           yarn install
           node -v
+          ls
           yarn build && touch ./out/.nojekyll
 
       - name: Deploy 🚀
