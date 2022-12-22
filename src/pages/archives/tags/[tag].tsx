@@ -80,7 +80,10 @@ export default function TagPage({
 
   return (
     <Layout>
-      <PageSEO title="Tags" description={`${tag} (${postsLength})`} />
+      <PageSEO
+        title={`${tag} - bepyan`}
+        description={`Posts and Snippets about ${tag} (${postsLength})`}
+      />
 
       <Title className="flex items-end gap-4">
         Tags - {tag} <span className="text-2xl">({postsLength})</span>
