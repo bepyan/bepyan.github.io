@@ -13,7 +13,6 @@ const parseToc = (source: string) => {
   return source
     .split('\n')
     .filter((line) => line.match(/(^#{1,3})\s/))
-    .filter((line) => line.toLowerCase().match(/^(?!.*(#*\stoc$|#*\stable of contents$)).*$/g))
     .reduce<TableOfContents>((ac, rawHeading) => {
       const nac = [...ac];
       const removeMdx = rawHeading.replace(/^##*\s/, '').replace(/[\*,\~]{2,}/g, '');
