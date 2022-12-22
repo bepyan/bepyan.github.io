@@ -18,7 +18,9 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
   const { slugs } = params as { slugs: string[] };
 
   const slug = `/blog/${[...slugs].join('/')}`;
-  const posts = getAllPosts();
+  const posts = getAllPosts().sort(
+    (a, b) => new Date(b.date).getTime() - new Date(a.date).getTime(),
+  );
   const postIndex = posts.findIndex((v) => v.slug === slug);
 
   if (postIndex === -1) {
