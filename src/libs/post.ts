@@ -145,3 +145,8 @@ export const getAllSnippets = () => {
     return [...ac, post];
   }, []);
 };
+
+/**
+ * Util
+ */
+export const excludePostContent = (post: Post): Post => ({ ...post, content: '' });

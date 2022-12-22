@@ -8,7 +8,7 @@ import SnippetListItem from '~/components/common/SnippetListItem';
 import Title from '~/components/common/Title';
 import Layout from '~/components/layouts/Layout';
 import { PageSEO } from '~/components/SEO';
-import { getAllPosts, getAllSnippets, getTagsByPosts } from '~/libs/post';
+import { excludePostContent, getAllPosts, getAllSnippets, getTagsByPosts } from '~/libs/post';
 import { Post } from '~/libs/types';
 
 export const getStaticPaths: GetStaticPaths = () => {
@@ -25,11 +25,13 @@ export const getStaticProps: GetStaticProps = ({ params }) => {
 
   const posts = getAllPosts()
     .filter((post) => post.tags.includes(tag))
-    .sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
+    .sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime())
+    .map(excludePostContent);
 
   const snippets = getAllSnippets()
     .filter((post) => post.tags.includes(tag))
-    .sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
+    .sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime())
+    .map(excludePostContent);
 
   if (posts.length + snippets.length === 0) {
     return {

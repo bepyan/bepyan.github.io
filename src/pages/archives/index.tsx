@@ -11,7 +11,13 @@ import Title from '~/components/common/Title';
 import ListIcon from '~/components/icons/ListIcon';
 import Layout from '~/components/layouts/Layout';
 import { PageSEO } from '~/components/SEO';
-import { getAllPosts, getAllSerizes, getAllSnippets, getTagsByPosts } from '~/libs/post';
+import {
+  excludePostContent,
+  getAllPosts,
+  getAllSerizes,
+  getAllSnippets,
+  getTagsByPosts,
+} from '~/libs/post';
 import { Post, Serize } from '~/libs/types';
 
 type ClassifiedPosts = {
@@ -35,8 +41,8 @@ const classifyPosts = (posts: Post[]) => {
 
 export const getStaticProps = () => {
   const serizes = getAllSerizes();
-  const posts = getAllPosts();
-  const snippets = getAllSnippets();
+  const posts = getAllPosts().map(excludePostContent);
+  const snippets = getAllSnippets().map(excludePostContent);
   const tags = getTagsByPosts([...posts, ...snippets]);
 
   return {

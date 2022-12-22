@@ -10,7 +10,7 @@ import SnippetListItem from '~/components/common/SnippetListItem';
 import Title from '~/components/common/Title';
 import Layout from '~/components/layouts/Layout';
 import { PageSEO } from '~/components/SEO';
-import { getAllSnippets } from '~/libs/post';
+import { excludePostContent, getAllSnippets } from '~/libs/post';
 import { Post } from '~/libs/types';
 
 type Snippet = {
@@ -19,7 +19,7 @@ type Snippet = {
 };
 
 export const getStaticProps: GetStaticProps = () => {
-  const snippets = getAllSnippets();
+  const snippets = getAllSnippets().map(excludePostContent);
 
   const tagSnippets = snippets
     .sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime())

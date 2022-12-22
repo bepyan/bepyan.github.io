@@ -9,7 +9,7 @@ import SubTitle from '~/components/common/SubTitle';
 import Title from '~/components/common/Title';
 import Layout from '~/components/layouts/Layout';
 import { PageSEO } from '~/components/SEO';
-import { getAllPosts, getAllSerizes } from '~/libs/post';
+import { excludePostContent, getAllPosts, getAllSerizes } from '~/libs/post';
 import { Post, Serize } from '~/libs/types';
 import useSearch from '~/libs/useSearch';
 
@@ -17,7 +17,9 @@ export function getStaticProps() {
   return {
     props: {
       serizes: getAllSerizes(),
-      posts: getAllPosts().sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime()),
+      posts: getAllPosts()
+        .sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime())
+        .map(excludePostContent),
     },
   };
 }
