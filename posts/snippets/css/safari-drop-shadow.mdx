@@ -1,0 +1,32 @@
+---
+title: 'safari에서 drop-shadow가 짤리는 현상'
+description: ''
+icon: ''
+image: ''
+tags:
+  - css
+draft: false
+date: 2022-10-10 16:20:26
+---
+
+## 현상
+
+style로 `drop-shadow`를 주입해줬지만 safari에서는 shadow가 짤린다.
+
+```css
+filter = 'drop-shadow(16px 16px 16px gray)';
+```
+
+## 해결 방법
+
+브라우저가 fileter가 변경될 수 있음을 css로 알려주면 해결 가능하다.
+
+```css
+will-change: filter;
+```
+
+---
+
+참고 자료
+
+- https://stackoverflow.com/questions/56478925/safari-drop-shadow-filter-remains-visible-even-with-hidden-element
