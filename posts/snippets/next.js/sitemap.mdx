@@ -1,0 +1,57 @@
+---
+title: '(Next.js) sitemap.xml'
+description: '직접 sitemap을 만들어서 배포시키자.'
+icon: ''
+image: ''
+tags:
+  - Next.js
+  - sitemap
+  - fs
+draft: false
+date: 2022-12-27 21:15:46
+---
+
+검색 엔진에 노출시킬 페이지를 잘 명시해주면 된다.
+`getStaticPaths`에서 경로를 만드는데 활용한 함수를 활용하면 간단하게 설정을 마칠 수 있다.
+
+```ts:sitemap.config.ts
+import fs from 'fs';
+import { getAllPosts } from './src/libs/post';
+
+async function createSiteMap() {
+  const siteUrl = 'https://bepyan.github.io';
+  const posts = getAllPosts();
+
+  const sitemap = `<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:news="http://www.google.com/schemas/sitemap-news/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml" xmlns:mobile="http://www.google.com/schemas/sitemap-mobile/1.0" xmlns:image="http://www.google.com/schemas/sitemap-image/1.1" xmlns:video="http://www.google.com/schemas/sitemap-video/1.1">
+<url><loc>${siteUrl}</loc><changefreq>daily</changefreq><priority>0.7</priority></url>
+${posts
+  .map(
+    (post) =>
+      `<url><loc>${siteUrl}${post.slug}</loc><changefreq>daily</changefreq><priority>0.7</priority></url>`,
+  )
+  .join('\n')}
+</urlset>`;
+
+  await fs.promises.writeFile('public/sitemap.xml', sitemap, {
+    encoding: 'utf-8',
+  });
+}
+
+void createSiteMap();
+```
+
+`public`에 sitemap을 `build` 이전에 생성하여 빌드 결과물에 포함되도록 한다.
+
+```json:package.json
+{
+- "build": "next build",
++ "build": "yarn sitemap && next build",
+}
+```
+
+빌드 단계에서 생성되기에 commit되지 않도록 해주자.
+
+```:.gitignore
+/public/sitemap*.xml
+```
