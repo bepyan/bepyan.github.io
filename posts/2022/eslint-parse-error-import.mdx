@@ -1,0 +1,72 @@
+---
+title: '(ESLint) Parsing error: The keyword 'import' is reserved'
+description: ''
+icon: ''
+image: ''
+tags:
+  - troubleshooting
+  - ESLint
+draft: false
+date: 2022-12-27 19:56:23
+---
+
+vscode에서 개발 중 `Parsing error: The keyword 'import' is reserved`를 마주칠 때가 있다.
+`typescript` 기반으로 개발을 하는데 `javascript`으로 된 설정 파일에서 에러를 뱉는다.
+
+---
+
+## 원인
+
+말그대로 eslint의 parser가 `import` 구문을 해석할 수 없기 때문에 에러가 발생한다.
+ESLint는 기본적으로 [Espree](https://github.com/eslint/espree)를 사용하고 이는 `commonjs` 기반으로 구문을 해석하기에 에러가 발생된다.
+
+---
+
+## 해결법
+
+1. `commonjs`가 아닌 `module` 기반으로 구문을 해석한다.
+
+```js:.eslintrc.cjs
+module.exports = {
+  //...
+  overrides: [
+    {
+      files: ['**/*.ts?(x)'],
+      parser: '@typescript-eslint/parser',
+      //...
+    },
+    {
+        files: ['**/*.js?(x)'],
+        parserOptions: {
+            sourceType: 'module',
+            ecmaVersion: 2015,
+        },
+    },
+  ],
+};
+```
+
+2. 다른 parser를 통해서 구문을 해석한다.
+
+가장 대표적인 [`@babel/parser`](https://www.npmjs.com/package/@babel/eslint-parser)를 사용하면 된다.
+참고로 [`babel-eslint`](https://www.npmjs.com/package/babel-eslint)는 deprecated 되었다.
+
+```shell
+yarn add -D @babel/parser @babel/preset-env
+```
+
+```js:.eslintrc.cjs
+module.exports = {
+  parser: '@babel/eslint-parser',
+  parserOptions: {
+    requireConfigFile: false,
+    babelOptions: {
+      babelrc: false,
+      configFile: false,
+      presets: ["@babel/preset-env"],
+    },
+  },
+};
+```
+
+사실 parser의 default sourceType `module`여서 에러가 사라지는 것이다...
