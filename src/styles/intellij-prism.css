@@ -165,24 +165,31 @@ code.language-css .token.selector > .token.pseudo-element {
 
 /* rehype-code-wrap */
 .rehype-code-wrap {
-  @apply relative my-2 overflow-hidden rounded-lg;
+  @apply relative my-2 overflow-hidden rounded-lg -mx-2 sm:m-0;
 }
 .rehype-code-wrap > pre {
-  margin: 0;
+  border-radius: 0;
+  @apply m-0 rounded-none p-5;
+}
+.rehype-code-wrap + .rehype-code-wrap {
+  @apply mt-4;
 }
 
 .rehype-code-wrap--title {
+  background-color: var(--prism-background);
   @apply flex;
 }
-.rehype-code-wrap--title-text {
-  color: #bbbbbb;
-  background-color: #3c3f41;
-  @apply flex-none px-4 py-3 border-b border-[#bbbbbb] text-sm font-bold rounded-t-lg;
-  @apply ring-1 ring-inset ring-white/10;
-}
+
 .rehype-code-wrap--title-blank {
   background-color: #3c3f41;
-  @apply flex-auto mt-3 rounded-tr-lg;
+  background-color: var(--prism-selection);
+  @apply mt-2 w-full rounded-tl;
+  @apply ring-1 ring-inset ring-white/5;
+}
+
+.rehype-code-wrap--title-text {
+  color: #bbbbbb;
+  @apply flex-none border-b-4 border-[#bbbbbb] px-5 pt-2 pb-1.5 text-sm font-bold;
 }
 
 .rehype-code-wrap--title + pre {
@@ -191,7 +198,7 @@ code.language-css .token.selector > .token.pseudo-element {
 
 .rehype-code-wrap--copy {
   @apply absolute right-2 bottom-2 flex h-8 w-8 items-center justify-center;
-  @apply rounded-lg bg-gray-600 text-xs opacity-0 transition-all text-gray-250 hover:text-gray-300;
+  @apply rounded-lg bg-gray-600 text-xs text-gray-250 opacity-0 transition-all hover:text-gray-300;
 }
 .rehype-code-wrap:hover .rehype-code-wrap--copy {
   @apply opacity-100;
@@ -204,7 +211,7 @@ code.language-css .token.selector > .token.pseudo-element {
 .code-line.inserted,
 .code-line.deleted,
 .code-line.highlight-line {
-  @apply -mx-4 block px-4;
+  @apply -mx-5 block px-5;
 }
 
 .code-line.highlight-line {
@@ -216,7 +223,7 @@ code.language-css .token.selector > .token.pseudo-element {
   margin-left: -6px;
 }
 .highlight-line.line-number::before {
-  margin-left: -14px;
+  margin-left: -18px;
 }
 
 .code-line.highlight-line::selection,
@@ -236,7 +243,7 @@ code.language-css .token.selector > .token.pseudo-element {
   width: 1rem;
   text-align: right;
   margin-right: 16px;
-  margin-left: -8px;
+  margin-left: -12px;
   color: var(--prism-comment);
   content: attr(line);
 }
