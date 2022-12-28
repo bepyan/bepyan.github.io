@@ -5,8 +5,11 @@ import Title from '~/components/common/Title';
 import Layout from '~/components/layouts/Layout';
 import { PageSEO } from '~/components/SEO';
 import { siteConfig } from '~/config';
+import useConfettiful from '~/libs/useConfettiful';
 
 export default function Home() {
+  useConfettiful(true);
+
   return (
     <Layout>
       <PageSEO title="Home" />
