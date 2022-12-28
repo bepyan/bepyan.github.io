@@ -8,7 +8,7 @@ export type PostFooterProps = {
 
 export default function PostFooter({ prevPost, nextPost }: PostFooterProps) {
   return (
-    <div className="flex items-center text-sm font-semibold text-slate-700 dark:text-slate-200 sm:text-base">
+    <div className="-mx-4 flex items-center text-sm font-semibold text-slate-700 dark:text-slate-200 sm:mx-0 sm:text-base">
       {prevPost && (
         <HoverLink href={prevPost.slug} className="group gap-3 px-4 py-2">
           <svg
