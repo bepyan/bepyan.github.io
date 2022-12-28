@@ -11,7 +11,14 @@ draft: false
 date: 2022-12-27 21:15:46
 ---
 
-검색 엔진에 노출시킬 페이지를 잘 명시해주면 된다.
+sitemap의 원리는 간단하기에 충분히 직접 만들 수 있다.
+검색 엔진에 노출시킬 페이지만 잘 명시해주면 된다.
+
+---
+
+## sitemap.xml 생성하는 script 구현
+
+핵심은 `fs.promises.writeFile`를 통해서 파일을 생성해주는 것이다.
 `getStaticPaths`에서 경로를 만드는데 활용한 함수를 활용하면 간단하게 설정을 마칠 수 있다.
 
 ```ts:sitemap.config.ts
@@ -41,17 +48,52 @@ ${posts
 void createSiteMap();
 ```
 
-`public`에 sitemap을 `build` 이전에 생성하여 빌드 결과물에 포함되도록 한다.
+---
 
-```json:package.json
+## script 실행하기
+
+`ts-node`로 `typescript`을 실행시켜야하기에 관련 패키지를 설치하자.
+
+```shell
+yarn add -D ts-node
+```
+
+`Node`로 js를 실행해야하기에 `typescript`를 `commonjs`로 컴파일한다.
+
+```json:tsconfig.node.json
 {
-- "build": "next build",
-+ "build": "yarn sitemap && next build",
+  "extends": "./tsconfig.json",
+  "compilerOptions": {
+    "module": "commonjs",
+  }
 }
 ```
 
-빌드 단계에서 생성되기에 commit되지 않도록 해주자.
+`build` 이전에 사이트맵을 생성해주면 된다. 그럼 `public`에 있는 사이트맵이 자연스럽게 빌드 결과물에 포함하게 된다.
+
+```diff-json:package.json
+{
+- "build": "next build",
++ "build": "yarn sitemap && next build",
++ "sitemap": "ts-node --project tsconfig.node.json ./sitemap.config.ts",
+}
+```
+
+마지막으로 컴파일된 사이트맵을 `commit`되지 않도록 해주자.
 
 ```:.gitignore
 /public/sitemap*.xml
 ```
+
+---
+
+## 결과물 확인하기
+
+```shell
+yarn build
+yarn start
+```
+
+http://localhost:3000/sitemap.xml
+
+[Google Search Console](https://search.google.com/search-console/sitemaps)에 사이트맵을 제출했을 때 `가져올 수 없음` 상태가 뜨게 되는데 몇일 후 확인하면 된다.
