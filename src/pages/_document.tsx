@@ -1,5 +1,7 @@
 import { Head, Html, Main, NextScript } from 'next/document';
 
+import { isDev } from '~/libs/core';
+
 export default function MyDocument() {
   return (
     <Html lang="ko" className="[--scroll-mt:2rem]">
@@ -25,15 +27,17 @@ export default function MyDocument() {
         <NextScript />
 
         {/* Global Site Tag (gtag.js) - Google Analytics */}
-        <script
-          dangerouslySetInnerHTML={{
-            __html: `
+        {!isDev && (
+          <script
+            dangerouslySetInnerHTML={{
+              __html: `
             window.dataLayer = window.dataLayer || [];
             function gtag(){dataLayer.push(arguments);}
             gtag('js', new Date());
           `,
-          }}
-        />
+            }}
+          />
+        )}
       </body>
     </Html>
   );
