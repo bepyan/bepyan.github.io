@@ -1,9 +1,15 @@
 import mediumZoom from 'medium-zoom';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 
 export default function useMediumZoom() {
+  const [mounted, setMounted] = useState(false);
+
   useEffect(() => {
-    const images = document.querySelectorAll('.prose img');
-    mediumZoom(images, {});
-  }, []);
+    setMounted(true);
+
+    if (mounted) {
+      const images = document.querySelectorAll('.prose img');
+      mediumZoom(images, {});
+    }
+  }, [mounted]);
 }
