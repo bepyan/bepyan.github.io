@@ -8,6 +8,7 @@ import Script from 'next/script';
 import { DefaultSeo } from 'next-seo';
 import { ThemeProvider } from 'next-themes';
 
+import FloatScrollUpButton from '~/components/FloatScrollUpButton';
 import { seoConfig } from '~/config';
 import { isDev } from '~/libs/core';
 import * as gtag from '~/libs/gtag';
@@ -25,6 +26,7 @@ export default function App({ Component, pageProps }: AppProps) {
       <DefaultSeo {...seoConfig} />
       <div className="font-sans">
         <Component {...pageProps} />
+        <FloatScrollUpButton />
       </div>
       {!isDev && (
         <>
