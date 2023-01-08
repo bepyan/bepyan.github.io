@@ -1,0 +1,104 @@
+---
+title: 'Next.js 블로그 Github Pages에 자동 배포하기'
+description: 'Github Action을 활용하여 자동으로 Github Pages에 배포되도록 하자.'
+icon: ''
+image: ''
+tags:
+  - Next.js
+  - Blog
+  - github action
+  - github pages
+draft: false
+date: 2022-11-12
+---
+
+## 레포 준비
+
+`github pages`에 배포할 것익기 때문에 공식 문서 가이드에 따라 진행하면 됩니다.
+https://pages.github.com/
+
+아래 사항들을 주의하면 됩니다.
+
+1. 기본적으로 github `username` 기반으로 도메인 하위에 생성된다. ex `bepyan.github.io`
+2. 레포지토리 이름을 `username.github.io` 형태로 설정해야 기본 도메인에 반영된다.
+3. 다른 형태의 레포지토리 이름은 하위 도메인에 반영이 된다. ex. `todo` => `bepyan.github.io/todo`
+4. 레포지토리는 `public`으로 설정되어야 한다.
+
+---
+
+## Next.js Static HTML Export
+
+경로 별로 html 파일을 생성하게 됩니다.
+
+https://nextjs.org/docs/advanced-features/static-html-export
+
+```json:packages.json
+{
+  "name": "bepyan.github.io",
+  "version": "0.1.0",
+  "private": true,
+  "homepage": "https://bepyan.github.io/",
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build && next export",
+    "serve": "npx http-server out",
+  },
+}
+```
+
+기본적으로 `yarn build`하면 결과물이 `out` 디랙토리에 생성됩니다.
+`npx http-server out`을 통해서 결과물을 확인할 수 있습니다.
+
+`static-html`에는 기본적으로 `next/image`를 지원하지 않습니다. 관련해서 오류가 뜰 수 있는데 [Next.js 블로그 Image Optimization](/6-image-optimization)를 참고 바랍니다.
+
+---
+
+## Github Action
+
+기본적으로 main 브랜치에 commit이 되었을 때 배포되도록 설정할 수 있습니다.
+아래 파일을 생성하면 끝입니다.
+
+```yml:.github/main.yml
+name: GitHub Pages Deploy
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout 🛎️
+        uses: actions/checkout@v3
+
+      - name: Install and Build 🔧
+        run: |
+          yarn install
+          yarn build && touch ./out/.nojekyll
+
+      - name: Deploy 🚀
+        uses: JamesIves/github-pages-deploy-action@v4
+        with:
+          branch: gh-pages
+          folder: out
+```
+
+동작원리는 단순합니다.
+
+1. main branch에 push 되었을 때 jobs를 실행한다.
+2. ubuntu(리눅스) 환경에서 레포지토리 코드를 pull 해온다.
+3. packages를 설치 해주고 웹앱을 빌드해준다.
+4. `touch ./out/.nojekyll` github pages jekyll 처리 과정에서 `_next` 관련 설정이 무시되지 않도록 설정해준다.
+5. 빌드 결과물 `out` 디랙토리를 gh-pages 브랜치에 푸시하고 github pages에 배포한다.
+
+지금은 배포 용도로만 사용하고 있지만 테스트 코드 시행, 맞춤법 검사, 썸네일 제작, 이미지 전처리 등 다양한 작업으로 확장할 수 있습니다.
+
+---
+
+저는 최종 배포까지 총 **2분 20초**가 소요되고 17MB의 파일들이 github pages에 배포 되었습니다.
+
+![230108-214628](/posts/4-deploy/230108-214628.png)
+
+![230108-214706](/posts/4-deploy/230108-214706.png)

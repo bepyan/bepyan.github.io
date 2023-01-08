@@ -1,0 +1,123 @@
+---
+title: Next.js 블로그 글 페이지 만들기
+description: glob를 활용하여 디랙토리 기반으로 페이지들을 생성해보자 🤔
+tags:
+  - Next.js
+  - Blog
+  - glob
+date: 2022-11-11
+---
+
+**glob patterns**를 활용하여 쉽게 파일을 탐색할 수 있습니다.
+터미널에서 `ls src/**/*.tsx`을 입력하면 어떤 결과가 나올지 쉽게 유추하실 수 있을 것입니다.
+다양한 언어에서 이를 지원하고 있으며 NodeJS 환경에서도 이를 활용할 수 있습니다.
+
+```shell
+yarn add -D glob @types/glob
+```
+
+---
+
+## 디랙토리 파싱
+
+`posts` 하위에 있는 모든 `mdx` 파일을 추출합니다.
+`/posts/2022/10/test.mdx` 파일이 `/posts/2022/11/test` 페이지를 생성되도록 적절히 파싱합니다.
+
+```ts:libs/post.ts {8}
+import { sync } from 'glob';
+import path from 'path';
+
+const BASE_PATH = '/posts';
+const POSTS_PATH = path.join(process.cwd(), BASE_PATH);
+
+export const getAllPosts = () => {
+  const postPaths: string[] = sync(`${POSTS_PATH}/**/*.mdx`);
+  return postPaths.map((path) => {
+    return {
+      slug: path.slice(path.indexOf(BASE_PATH)).replace('.mdx', ''),
+    };
+  });
+};
+```
+
+---
+
+## 페이지 생성
+
+[**NextJS Dynamic Routes**](https://nextjs.org/docs/routing/dynamic-routes#catch-all-routes)를 활용하여 쉽게 페이지를 생성할 수 있습니다.
+
+`/posts/2022/11/test` 경로에서 `/posts/` 이후에 부분이 동적으로 변동되기에 `catch-all-routes` 패턴을 활용하면 됩니다.
+`params`에 `string[]`타입의 변수가 전달받게 됩니다.
+
+```tsx:pages/blog/[...slugs].tsx {17}
+import { GetStaticPaths, GetStaticProps } from 'next';
+
+import { getAllPosts } from '../../libs/post';
+
+export const getStaticPaths: GetStaticPaths = () => {
+  const posts = getAllPosts();
+
+  return {
+    paths: posts.map((post) => post.slug),
+    fallback: 'blocking',
+  };
+};
+
+export const getStaticProps: GetStaticProps = ({ params }) => {
+  const { slugs } = params as { slugs: string[] };
+
+  const slug = `/posts/${[...slugs].join('/')}`;
+  const post = getAllPosts().find((post) => post.slug === slug);
+
+  if (!post) {
+    return {
+      notFound: true,
+    };
+  }
+
+  return {
+    props: {
+      slug,
+    },
+  };
+};
+
+export default function PostPage({ slug }: { slug: string }) {
+  return <div>{slug}</div>;
+}
+```
+
+잘못된 접근에는 `{ notFound: true }`를 리턴하여 404 페이지가 띄워지게 합니다.
+
+---
+
+## 글 목록 생성
+
+글 목록 또한 이를 활용하여 쉽게 생성할 수 있습니다.
+
+```tsx:pages/posts/index.tsx
+import { getAllPosts } from '../../libs/post';
+
+export const getStaticProps = () => {
+  return {
+    props: {
+      posts: getAllPosts(),
+    },
+  };
+};
+
+export default function PostsPage({ posts }: { posts: { slug: string }[] }) {
+  return (
+    <ul>
+      {posts.map((post, i) => (
+        <li key={i}>{post.slug}</li>
+      ))}
+    </ul>
+  );
+}
+```
+
+---
+
+현재는 글 경로 정보만 알 수 있는 상황입니다.
+글의 제목, 생성일 등 추가정보를 어떻게 파싱할 수 있을지는 다음 글에서 살펴보도록 합시다.

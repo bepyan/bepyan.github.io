@@ -1,0 +1,221 @@
+---
+title: Next.js 블로그 글의 추가 정보 파싱하기
+description: gray-matter, reading-time 등을 활용하여 글에 대한 추가 정보를 알아내자.
+tags:
+  - Next.js
+  - Blog
+date: 2022-11-11
+---
+
+다양한 플랫폼을 참고해보면 글 리스트에서 다양한 데이터가 첨부되어 있습니다.
+
+![230109-010815](/posts/2-blog-listInfo/230109-010815.png)
+
+- 글 제목
+- 글 설명
+- 글 작성 시간
+- 태그
+- ...
+
+---
+
+## 사용하게 될 라이브러리 소개
+
+```shell
+yarn add dayjs
+yarn add -D gray-matter reading-time
+```
+
+---
+
+### gray-matter
+
+https://github.com/jonschlinkert/gray-matter
+
+텍스트 중 [`front-matter`](https://jekyllrb.com/docs/front-matter/)를 파싱해주는 도구입니다.
+보통 여기에 글에 대한 추가정보를 작성해둡니다.
+
+```yaml
+---
+title: 포스트 제목
+---
+```
+
+사실 이후에 mdx 파일을 html 파일로 파싱할 `next-mdx-remote` 라이브러리에서 `front-matter`도 추출할 수 있습니다. 하지만 `front-matter`만 알고 싶은데 일일이 html 파일로 파싱하는 것은 너무 비효율적인 작업입니다.
+
+---
+
+### dayjs
+
+https://github.com/iamkun/dayjs/
+
+moment보다 가볍고 쉽게 날짜를 다룰 수 있습니다.
+`2023년 1월 1일 일요일`, `1년 전` 같이 한글 날짜에 대한 포멧팅도 쉽게 지원이 됩니다.
+
+```tsx:_app.tsx
+import 'dayjs/locale/ko';
+import dayjs from 'dayjs';
+
+dayjs.locale('ko');
+
+export default function App({...}) {
+  // ...
+}
+```
+
+---
+
+### reading-time
+
+https://github.com/ngryman/reading-time
+
+`markdown` 혹은 `html`의 **읽기 추정 시간**을 계산해 줍니다.
+한글은 조금 글게 측정되는 경향이 있는 것 같습니다.
+
+---
+
+## 글 파싱
+
+이제 지난 글에서 작성했던 코드 기반으로 이어서 작업해봅시다.
+
+```ts:libs/posts.ts
+import { sync } from 'glob';
+import path from 'path';
+
+const BASE_PATH = '/posts';
+const POSTS_PATH = path.join(process.cwd(), BASE_PATH);
+
+const parsePost = (postPath: string) => {
+  return {
+    // ...
+  }
+}
+
+export const getAllPosts = () => {
+  const postPaths: string[] = sync(`${POSTS_PATH}/**/*.mdx`);
+  return postPaths.map(parsePost);
+};
+```
+
+---
+
+### 파싱할 데이터 정의
+
+어떤 데이터를 표시할지 미리 구상을 해둬야 합니다.
+우선 아래 데이터가 파싱되도록 타입을 정의해봅니다.
+
+```ts
+type PostMatter = {
+  title: string;
+  description: string;
+  tags: string[];
+  draft?: boolean;
+  date: string;
+}
+
+type Post = PostMatter & {
+  slug: string;
+  content: string;
+  readingMinutes: number;
+  wordCount: number;
+}
+```
+
+---
+
+### 데이터 파싱
+
+`readFileSync`를 활용하여 파일을 조회하여 `gray-matter`에게 전달해주면 됩니다.
+
+```ts:libs/post.ts
+import dayjs from 'dayjs';
+import fs from 'fs';
+import matter from 'gray-matter';
+import readingTime from 'reading-time';
+
+//...
+
+const parsePost = (postPath: string): Post | undefined => {
+  try {
+    const file = fs.readFileSync(postPath, { encoding: 'utf8' });
+    const { content, data } = matter(file);
+    const grayMatter = data as PostMatter;
+
+    if (grayMatter.draft) {
+      return;
+    }
+
+    return {
+      ...grayMatter,
+      tags: grayMatter.tags.filter(Boolean),
+      date: dayjs(grayMatter.date).format('YYYY-MM-DD'),
+      content,
+      slug: postPath.slice(postPath.indexOf(BASE_PATH)).replace('.mdx', ''),
+      readingMinutes: Math.ceil(readingTime(content).minutes),
+      wordCount: content.split(/\s+/gu).length,
+    };
+  } catch (e) {
+    console.error(e);
+  }
+}
+```
+
+파싱에 실패할 수 있기 때문에 `getAllPosts`에도 예외처리 해줍니다.
+
+```ts
+export const getAllPosts = () => {
+  const postPaths: string[] = sync(`${POSTS_PATH}/**/*.mdx`);
+  return postPaths.reduce<Post[]>((ac, postPath) => {
+    const post = parsePost(postPath);
+    if (!post) return ac;
+
+    return [...ac, post];
+  }, []);
+};
+```
+
+---
+
+## (번외) 글 작성 꿀팁
+
+매번 `front-matter` 정보를 다른 글에서 복사해오긴 귀찮고 데이터 스키마가 변동될 수 있어 관리하기 어렵습니다.
+
+vscode에 `custom snippets`을 추가해두면 도움이 될 것입니다.
+아래처럼 설정하면 해당 레포에서만 단축키를 사용할 수 있게 됩니다.
+
+```json:.vscode/mdx.code-snippets
+{
+  "Post Matter": {
+    "prefix": ["matter", "---"],
+    "description": "Output a file header with the file name and date",
+    "body": [
+      "---",
+      "title: '$1'",
+      "description: '$2'",
+      "icon: ''",
+      "image: ''",
+      "tags:",
+      "  - $3",
+      "draft: false",
+      "date: $CURRENT_YEAR-$CURRENT_MONTH-$CURRENT_DATE $CURRENT_HOUR:$CURRENT_MINUTE:$CURRENT_SECOND",
+      "---",
+      "",
+      "$0"
+    ],
+    "scope": "md,mdx"
+  },
+  "Current DateTime": {
+    "prefix": ["current_date_time", "cdt"],
+    "description": "Output current DateTime YYYY-MM-DD HH:mm:ss",
+    "body": "$CURRENT_YEAR-$CURRENT_MONTH-$CURRENT_DATE $CURRENT_HOUR:$CURRENT_MINUTE:$CURRENT_SECOND"
+  },
+  "Current Date": {
+    "prefix": ["current_date", "cd"],
+    "description": "Output current Date YYYY-MM-DD",
+    "body": "$CURRENT_YEAR-$CURRENT_MONTH-$CURRENT_DATE"
+  }
+}
+```
+
+
+![예시](https://user-images.githubusercontent.com/65283190/211207259-793fe7a0-c9b1-4bfd-b444-93eca7e9dc1e.gif)
