@@ -10,7 +10,7 @@ import ClockIcon from './icons/ClockIcon';
 import ListIcon from './icons/ListIcon';
 
 export default function SerizeCard({ currentPost, serize }: { currentPost: Post; serize: Serize }) {
-  const [open, setOpen] = useState(false);
+  const [open, setOpen] = useState(true);
 
   const currentPostIndex = serize.posts.findIndex((post) => post.slug === currentPost.slug);
 
