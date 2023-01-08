@@ -22,13 +22,15 @@
 <url><loc>https://bepyan.github.io/blog/dnd-master/6-react-beautiful-dnd</loc><changefreq>daily</changefreq><priority>0.7</priority></url>
 <url><loc>https://bepyan.github.io/blog/dnd-master/7-drag-and-drop-todo</loc><changefreq>daily</changefreq><priority>0.7</priority></url>
 <url><loc>https://bepyan.github.io/blog/nextjs-blog/1-boilerplate</loc><changefreq>daily</changefreq><priority>0.7</priority></url>
-<url><loc>https://bepyan.github.io/blog/nextjs-blog/2-image-optimization</loc><changefreq>daily</changefreq><priority>0.7</priority></url>
-<url><loc>https://bepyan.github.io/blog/nextjs-blog/3-blog-list</loc><changefreq>daily</changefreq><priority>0.7</priority></url>
-<url><loc>https://bepyan.github.io/blog/nextjs-blog/4-mdx-plugin</loc><changefreq>daily</changefreq><priority>0.7</priority></url>
-<url><loc>https://bepyan.github.io/blog/nextjs-blog/5-comments</loc><changefreq>daily</changefreq><priority>0.7</priority></url>
-<url><loc>https://bepyan.github.io/blog/nextjs-blog/6-mdx-images</loc><changefreq>daily</changefreq><priority>0.7</priority></url>
-<url><loc>https://bepyan.github.io/blog/nextjs-blog/google-analytics</loc><changefreq>daily</changefreq><priority>0.7</priority></url>
-<url><loc>https://bepyan.github.io/blog/nextjs-blog/sitemap</loc><changefreq>daily</changefreq><priority>0.7</priority></url>
+<url><loc>https://bepyan.github.io/blog/nextjs-blog/2-blog-list</loc><changefreq>daily</changefreq><priority>0.7</priority></url>
+<url><loc>https://bepyan.github.io/blog/nextjs-blog/2-blog-listInfo</loc><changefreq>daily</changefreq><priority>0.7</priority></url>
+<url><loc>https://bepyan.github.io/blog/nextjs-blog/3-mdx-plugin</loc><changefreq>daily</changefreq><priority>0.7</priority></url>
+<url><loc>https://bepyan.github.io/blog/nextjs-blog/4-deploy</loc><changefreq>daily</changefreq><priority>0.7</priority></url>
+<url><loc>https://bepyan.github.io/blog/nextjs-blog/5-create-sitemap</loc><changefreq>daily</changefreq><priority>0.7</priority></url>
+<url><loc>https://bepyan.github.io/blog/nextjs-blog/5-google-analytics</loc><changefreq>daily</changefreq><priority>0.7</priority></url>
+<url><loc>https://bepyan.github.io/blog/nextjs-blog/6-comments</loc><changefreq>daily</changefreq><priority>0.7</priority></url>
+<url><loc>https://bepyan.github.io/blog/nextjs-blog/6-image-optimization</loc><changefreq>daily</changefreq><priority>0.7</priority></url>
+<url><loc>https://bepyan.github.io/blog/nextjs-blog/6-images-use-in-vscode</loc><changefreq>daily</changefreq><priority>0.7</priority></url>
 <url><loc>https://bepyan.github.io/blog/retrospect/2021-in-startup</loc><changefreq>daily</changefreq><priority>0.7</priority></url>
 <url><loc>https://bepyan.github.io/blog/retrospect/2021-pass-kakao</loc><changefreq>daily</changefreq><priority>0.7</priority></url>
 <url><loc>https://bepyan.github.io/blog/retrospect/2022-in-kakao</loc><changefreq>daily</changefreq><priority>0.7</priority></url>
@@ -67,13 +69,16 @@
 <url><loc>https://bepyan.github.io/archives/tags/DOM</loc><changefreq>daily</changefreq><priority>0.3</priority></url>
 <url><loc>https://bepyan.github.io/archives/tags/react-beautiful-dnd</loc><changefreq>daily</changefreq><priority>0.3</priority></url>
 <url><loc>https://bepyan.github.io/archives/tags/Blog</loc><changefreq>daily</changefreq><priority>0.3</priority></url>
-<url><loc>https://bepyan.github.io/archives/tags/image</loc><changefreq>daily</changefreq><priority>0.3</priority></url>
-<url><loc>https://bepyan.github.io/archives/tags/optimization</loc><changefreq>daily</changefreq><priority>0.3</priority></url>
-<url><loc>https://bepyan.github.io/archives/tags/giscus</loc><changefreq>daily</changefreq><priority>0.3</priority></url>
-<url><loc>https://bepyan.github.io/archives/tags/Paste Image</loc><changefreq>daily</changefreq><priority>0.3</priority></url>
+<url><loc>https://bepyan.github.io/archives/tags/glob</loc><changefreq>daily</changefreq><priority>0.3</priority></url>
+<url><loc>https://bepyan.github.io/archives/tags/github action</loc><changefreq>daily</changefreq><priority>0.3</priority></url>
+<url><loc>https://bepyan.github.io/archives/tags/github pages</loc><changefreq>daily</changefreq><priority>0.3</priority></url>
+<url><loc>https://bepyan.github.io/archives/tags/SEO</loc><changefreq>daily</changefreq><priority>0.3</priority></url>
 <url><loc>https://bepyan.github.io/archives/tags/Typescript</loc><changefreq>daily</changefreq><priority>0.3</priority></url>
 <url><loc>https://bepyan.github.io/archives/tags/GA</loc><changefreq>daily</changefreq><priority>0.3</priority></url>
-<url><loc>https://bepyan.github.io/archives/tags/SEO</loc><changefreq>daily</changefreq><priority>0.3</priority></url>
+<url><loc>https://bepyan.github.io/archives/tags/giscus</loc><changefreq>daily</changefreq><priority>0.3</priority></url>
+<url><loc>https://bepyan.github.io/archives/tags/image</loc><changefreq>daily</changefreq><priority>0.3</priority></url>
+<url><loc>https://bepyan.github.io/archives/tags/optimization</loc><changefreq>daily</changefreq><priority>0.3</priority></url>
+<url><loc>https://bepyan.github.io/archives/tags/Paste Image</loc><changefreq>daily</changefreq><priority>0.3</priority></url>
 <url><loc>https://bepyan.github.io/archives/tags/회고</loc><changefreq>daily</changefreq><priority>0.3</priority></url>
 <url><loc>https://bepyan.github.io/archives/tags/커리어</loc><changefreq>daily</changefreq><priority>0.3</priority></url>
 <url><loc>https://bepyan.github.io/archives/tags/css</loc><changefreq>daily</changefreq><priority>0.3</priority></url>
