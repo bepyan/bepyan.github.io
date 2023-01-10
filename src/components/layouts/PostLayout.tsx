@@ -71,7 +71,6 @@ export default function PostLayout({
         >
           <TocTop className="lg:hidden" tableOfContents={tableOfContents} />
           <MDXRemote compiledSource={compiledSource} />
-          <div></div>
         </Transition.Child>
 
         <div className="mt-12 ml-auto">
