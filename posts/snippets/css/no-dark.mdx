@@ -1,0 +1,54 @@
+---
+title: '(CSS) 특정 영역만 상위 클래스 영향 안 받기'
+description: ''
+icon: ''
+image: ''
+tags:
+  - css
+draft: false
+date: 2023-01-10 19:30:18
+---
+
+다크모드에서 특정 영역만 다크모드 스타일이 적용되지 않길 바랄 때가 있다.
+
+---
+
+## 해결 방법
+
+[`:not`](https://developer.mozilla.org/ko/docs/Web/CSS/:not) [`:where`](https://developer.mozilla.org/en-US/docs/Web/CSS/:where) [`attribute selector`](https://developer.mozilla.org/en-US/docs/Web/CSS/Attribute_selectors) 3가지 문법을 조합하면 쉽게 적용할 수 있다.
+
+```css
+:not(:where([class~="className"] *))
+```
+
+부모 중 클래스 속성이 `className`이 아닌 경우에만 css 적용한다.
+
+---
+
+## 예시
+
+```css {5}
+.txt {
+    color: red;
+}
+
+.dark .txt:not(:where([class~="no-dark"] *)) {
+    color: blue;
+}
+```
+
+```html
+<body class="dark">
+    <div>
+        <span class="txt">dynamic text</span>
+    </div>
+    <div class="no-dark">
+        <span class="txt">red text</span>
+    </div>
+</body>
+```
+
+---
+
+**tailwindcss** [`.not-prose`](https://tailwindcss.com/docs/typography-plugin#undoing-typography-styles)에서 사용하는 방법이다.
+https://github.com/tailwindlabs/tailwindcss-typography/pull/205/files
