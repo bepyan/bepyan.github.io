@@ -46,6 +46,7 @@
 <url><loc>https://bepyan.github.io/snippets/javascript/form-data</loc><changefreq>daily</changefreq><priority>0.7</priority></url>
 <url><loc>https://bepyan.github.io/snippets/javascript/txt-file</loc><changefreq>daily</changefreq><priority>0.7</priority></url>
 <url><loc>https://bepyan.github.io/snippets/javascript/version-regex</loc><changefreq>daily</changefreq><priority>0.7</priority></url>
+<url><loc>https://bepyan.github.io/snippets/lint/eslint-sort-import</loc><changefreq>daily</changefreq><priority>0.7</priority></url>
 <url><loc>https://bepyan.github.io/snippets/next.js/document-fonts</loc><changefreq>daily</changefreq><priority>0.7</priority></url>
 <url><loc>https://bepyan.github.io/snippets/next.js/nprogress</loc><changefreq>daily</changefreq><priority>0.7</priority></url>
 <url><loc>https://bepyan.github.io/snippets/next.js/sitemap</loc><changefreq>daily</changefreq><priority>0.7</priority></url>
@@ -87,6 +88,7 @@
 <url><loc>https://bepyan.github.io/archives/tags/Javascript</loc><changefreq>daily</changefreq><priority>0.3</priority></url>
 <url><loc>https://bepyan.github.io/archives/tags/clipboard</loc><changefreq>daily</changefreq><priority>0.3</priority></url>
 <url><loc>https://bepyan.github.io/archives/tags/regex</loc><changefreq>daily</changefreq><priority>0.3</priority></url>
+<url><loc>https://bepyan.github.io/archives/tags/import</loc><changefreq>daily</changefreq><priority>0.3</priority></url>
 <url><loc>https://bepyan.github.io/archives/tags/tailwindcss</loc><changefreq>daily</changefreq><priority>0.3</priority></url>
 <url><loc>https://bepyan.github.io/archives/tags/sitemap</loc><changefreq>daily</changefreq><priority>0.3</priority></url>
 <url><loc>https://bepyan.github.io/archives/tags/fs</loc><changefreq>daily</changefreq><priority>0.3</priority></url>
