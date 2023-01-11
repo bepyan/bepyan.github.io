@@ -1,0 +1,97 @@
+---
+title: '(ESLint) sort import'
+description: ''
+icon: ''
+image: ''
+tags:
+  - ESLint
+  - import
+draft: false
+date: 2023-01-11 18:57:07
+---
+
+[**eslint sort-imports**](https://eslint.org/docs/latest/rules/sort-imports) 설정은 `autofix`를 제공해주지 않는다.
+
+크게 2가지 방법으로 해결할 수 있다.
+
+---
+
+## simple-import-sort
+
+plugin을 통해서 설정이 간편하다.
+https://github.com/lydell/eslint-plugin-simple-import-sort
+
+```shell
+yarn add -D eslint-plugin-simple-import-sort
+```
+
+```js:.eslintrc.js
+module.exports = {
+    //...
+    "plugins": ["simple-import-sort"],
+    "rules": {
+        "simple-import-sort/imports": "error",
+        "simple-import-sort/exports": "error"
+    }
+}
+```
+
+`import` 순서 커스텀화
+
+```js
+{
+    'simple-import-sort/imports': [
+        'error',
+        {
+        groups: [['^\\u0000'], ['^@?\\w'], ['^~/', '^\\.']],
+        },
+    ],
+}
+```
+
+---
+
+## eslint-plugin-import
+
+타 plugin과 충돌될 경우 이를 사용하면 좋다. (예를 들어 [eslint-plugin-svelte](https://github.com/ota-meshi/eslint-plugin-svelte))
+https://github.com/import-js/eslint-plugin-import
+
+```shell
+yarn add -D eslint-plugin-import
+```
+
+```js:.eslintrc.js
+module.exports = {
+    //...
+    settings: {
+        'import/resolver': {
+            alias: {
+                map: [
+                    ['~', './src'],
+                ],
+                extensions: ['.js', '.jsx', '.ts', '.tsx', '.svelte'],
+            },
+        },
+    },
+    rules: {
+        // https://github.com/import-js/eslint-plugin-import/blob/main/docs/rules/order.md
+        'import/order': [
+            'error',
+            {
+                groups: ['builtin', 'external', 'internal', ['parent', 'sibling', 'index']],
+                alphabetize: {
+                    order: 'asc',
+                    caseInsensitive: true,
+                },
+                'newlines-between': 'always',
+            },
+        ],
+        'import/first': 'error',
+        'import/newline-after-import': 'error',
+        'import/prefer-default-export': 'off',
+        'import/no-useless-path-segments': ['error', { noUselessIndex: true }],
+    }
+}
+```
+
+`import/order`가 절대경로를 `internal script`로 인식하기 위해선 `settings."import/resolver"` 설정을 해줘야 한다.
