@@ -1,0 +1,54 @@
+---
+title: '(React) useMediaQuery'
+description: ''
+icon: ''
+image: ''
+tags:
+  - React
+  - Typescript
+  - hook
+  - css
+draft: false
+date: 2023-01-14 01:15:43
+---
+
+React / Next.js 런타임에서 MediaQuery를 충족시켰는지 여부를 알고 싶다.
+
+```ts:useMediaQuery.ts
+import { useCallback, useEffect, useState } from 'react';
+
+export const useMediaQuery = (width: number) => {
+  const [targetReached, setTargetReached] = useState(false);
+
+  const updateTarget = useCallback((e: MediaQueryListEvent) => {
+    if (e.matches) setTargetReached(true);
+    else setTargetReached(false);
+  }, []);
+
+  useEffect(() => {
+    const media = window.matchMedia(`(max-width: ${width}px)`);
+    media.addEventListener('change', updateTarget);
+
+    if (media.matches) setTargetReached(true);
+
+    return () => media.removeEventListener('change', updateTarget);
+  }, []);
+
+  return targetReached;
+};
+```
+
+---
+
+## Usage
+
+```ts
+// 600px
+const matches = useMediaQuery(600);
+```
+
+---
+
+**참고 자료**
+
+- https://stackoverflow.com/questions/72238021/how-to-apply-media-query-in-nextjs
