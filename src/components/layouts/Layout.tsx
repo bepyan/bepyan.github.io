@@ -2,8 +2,8 @@ import { ReactNode, useMemo } from 'react';
 
 import { siteConfig } from '~/config';
 import AuthorContacts from '../common/AuthorContacts';
-import ExternalLink from '../common/ExternalLink';
 import Hr from '../common/Hr';
+import LinkExternal from '../common/LinkExternal';
 import HeaderNav from '../HeaderNav';
 
 export default function Layout({ children }: { children: ReactNode }) {
@@ -28,11 +28,11 @@ export default function Layout({ children }: { children: ReactNode }) {
           <AuthorContacts />
           <p>
             <span>© {since} </span>
-            <ExternalLink href={siteConfig.author.contacts.github}>{siteConfig.title}</ExternalLink>
+            <LinkExternal href={siteConfig.author.contacts.github}>{siteConfig.title}</LinkExternal>
             <span> Powered by </span>
-            <ExternalLink href="https://nextjs.org/">Next.js</ExternalLink>
+            <LinkExternal href="https://nextjs.org/">Next.js</LinkExternal>
             <span>, </span>
-            <ExternalLink href="https://pages.github.com/">Github Pages</ExternalLink>
+            <LinkExternal href="https://pages.github.com/">Github Pages</LinkExternal>
           </p>
         </div>
       </footer>

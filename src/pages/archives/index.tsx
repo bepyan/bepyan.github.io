@@ -1,9 +1,9 @@
 import { Transition } from '@headlessui/react';
 import Link from 'next/link';
 
-import HoverLink from '~/components/common/HoverLink';
 import Hr from '~/components/common/Hr';
 import IconText from '~/components/common/IconText';
+import LinkHover from '~/components/common/LinkHover';
 import PlainText from '~/components/common/PlainText';
 import SubTitle from '~/components/common/SubTitle';
 import Tag from '~/components/common/Tag';
@@ -88,7 +88,7 @@ export default function Archives({
             enterTo="opacity-100"
           >
             {serizes.map((serize) => (
-              <HoverLink
+              <LinkHover
                 key={serize.slug}
                 href={serize.slug}
                 className="px-4 py-2 ring-1 ring-gray-300 dark:ring-gray-700"
@@ -100,7 +100,7 @@ export default function Archives({
                     <IconText Icon={ListIcon} text={serize.posts.length} />
                   </div>
                 </div>
-              </HoverLink>
+              </LinkHover>
             ))}
           </Transition.Child>
         </div>

@@ -3,7 +3,7 @@ import title from 'title';
 
 import { siteConfig } from '~/config';
 import { $ } from '~/libs/core';
-import ExternalLink from './ExternalLink';
+import LinkExternal from './LinkExternal';
 
 export default function AuthorContacts({ className, ...props }: React.ComponentProps<'div'>) {
   return (
@@ -12,9 +12,9 @@ export default function AuthorContacts({ className, ...props }: React.ComponentP
         const link = siteConfig.author.contacts[sns as keyof typeof siteConfig.author.contacts];
 
         return !link ? null : (
-          <ExternalLink key={sns} href={link}>
+          <LinkExternal key={sns} href={link}>
             {title(sns)}
-          </ExternalLink>
+          </LinkExternal>
         );
       })}
     </div>
