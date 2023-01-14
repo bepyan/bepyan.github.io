@@ -7,7 +7,6 @@
     "dev": "next dev",
     "build": "yarn sitemap && next build && next export",
     "sitemap": "ts-node --project tsconfig.node.json ./sitemap.config.ts",
-    "postbuild": "next-export-optimize-images",
     "serve": "npx http-server out",
     "lint": "eslint src/**/*.{ts,tsx} --fix"
   },
@@ -50,7 +49,6 @@
     "glob": "^8.0.3",
     "gray-matter": "^4.0.3",
     "hastscript": "^7.1.0",
-    "next-export-optimize-images": "^1.9.0",
     "postcss": "^8.4.18",
     "prettier": "^2.7.1",
     "prettier-plugin-tailwindcss": "^0.1.13",

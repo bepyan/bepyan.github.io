@@ -1,4 +1,3 @@
-import Image from 'next/image';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
@@ -57,15 +56,7 @@ export default function HeaderNav() {
       {/* MW */}
       <div className="flex sm:hidden">
         <button onClick={toggleMenu}>
-          <Image
-            src="/favicon.png"
-            blurDataURL="/favicon.png"
-            alt="logo"
-            width={40}
-            height={40}
-            placeholder="blur"
-            className="block h-auto"
-          />
+          <LogoIcon width={40} />
         </button>
         {isMenuMounted && (
           <ul

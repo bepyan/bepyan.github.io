@@ -121,7 +121,6 @@ const PostItem = (props: { href: string; imgUrl: string; title: string; date: st
           alt={props.title}
           width={300}
           height={300}
-          placeholder="blur"
           className="h-64 w-full object-cover"
           draggable={false}
         />

@@ -1,9 +1,11 @@
-const withExportImages = require('next-export-optimize-images');
-
 /** @type {import('next').NextConfig} */
-const nextConfig = withExportImages({
+module.exports = {
   reactStrictMode: true,
   swcMinify: true,
-});
-
-module.exports = nextConfig;
+  experimental: {
+    fontLoaders: [{ loader: '@next/font/google', options: { subsets: ['latin'] } }],
+  },
+  images: {
+    unoptimized: true,
+  },
+};
