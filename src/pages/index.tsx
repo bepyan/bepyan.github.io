@@ -32,7 +32,6 @@ export default function Home() {
         variants={staggerHalf}
         initial="initial"
         whileInView="animate"
-        exit="exit"
         viewport={{ amount: 0.6, once: true }}
       >
         <Title>bepyan</Title>
@@ -63,7 +62,6 @@ export default function Home() {
         variants={staggerHalf}
         initial="initial"
         whileInView="animate"
-        exit="exit"
         viewport={{ amount: isMobile ? 0.2 : 0.6, once: true }}
         className="mt-16"
       >

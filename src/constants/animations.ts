@@ -10,6 +10,24 @@ export const staggerHalf: Variants = {
   animate: { transition: { staggerChildren: 0.05 } },
 };
 
+export const fadeInHalf: Variants = {
+  initial: {
+    opacity: 0.3,
+    transition: { duration: 0.6, ease: defaultEasing },
+    willChange: 'opacity',
+  },
+  animate: {
+    opacity: 1,
+    transition: { duration: 0.6, ease: defaultEasing },
+    willChange: 'opacity',
+  },
+  exit: {
+    opacity: 0.3,
+    transition: { duration: 0.6, ease: defaultEasing },
+    willChange: 'opacity',
+  },
+};
+
 export const defaultFadeInVariants: Variants = {
   initial: {
     opacity: 0,

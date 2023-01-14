@@ -1,4 +1,4 @@
-import { Transition } from '@headlessui/react';
+import { AnimatePresence, motion } from 'framer-motion';
 import Link from 'next/link';
 import React from 'react';
 
@@ -9,6 +9,12 @@ import SubTitle from '~/components/common/SubTitle';
 import Title from '~/components/common/Title';
 import Layout from '~/components/layouts/Layout';
 import { PageSEO } from '~/components/SEO';
+import {
+  defaultFadeInSlideToLeftVariants,
+  defaultFadeInUpVariants,
+  defaultFadeInVariants,
+  fadeInHalf,
+} from '~/constants/animations';
 import { excludePostContent, getAllPosts, getAllSerizes } from '~/libs/post';
 import { Post, Serize } from '~/libs/types';
 import useSearch from '~/libs/useSearch';
@@ -43,29 +49,35 @@ export default function PostPage({ serizes, posts }: { serizes: Serize[]; posts:
         url="/blog"
       />
 
-      <div className="pb-4">
-        <Title>Blog</Title>
-        <PlainText>
-          개발하면서 탐구한 것을 소소하게 기록하는 공간입니다. <br />
-          {`시리즈로 연재된 포스트는 아래 시리즈북으로 편리하게 열람할 수 있습니다 🧐`}
-        </PlainText>
+      <Title>Blog</Title>
 
+      <PlainText>
+        개발하면서 탐구한 것을 소소하게 기록하는 공간입니다. <br />
+        {`시리즈로 연재된 포스트는 아래 시리즈북으로 편리하게 열람할 수 있습니다 🧐`}
+      </PlainText>
+
+      <motion.div
+        variants={fadeInHalf}
+        initial="initial"
+        whileInView="animate"
+        viewport={{ amount: 0.6, once: true }}
+      >
         <SearchInput
           className="relative mb-4 w-full"
           placeholder="시리즈북, 포스트 제목 검색"
           onChange={searchHandler}
         />
-      </div>
+      </motion.div>
 
-      <Transition appear show>
-        <div className="no-scrollbar -my-12 -ml-8 flex items-center space-x-6 overflow-scroll py-12 pl-8">
-          {filteredSerizes.map((serize, i) => (
-            <Transition.Child
+      <div className="no-scrollbar -my-12 -ml-8 flex items-center space-x-6 overflow-scroll py-12 pl-8">
+        <AnimatePresence mode="wait">
+          {filteredSerizes.map((serize) => (
+            <motion.div
               key={serize.slug}
-              enter="transition-all duration-300"
-              enterFrom="opacity-30 translate-x-16"
-              enterTo="opacity-100 translate-x-0"
-              style={{ transitionDelay: `${i * 30}ms` }}
+              variants={defaultFadeInSlideToLeftVariants}
+              initial="initial"
+              animate="animate"
+              exit="exit"
             >
               <Link as={serize.slug} href={`/blog/[slug]`}>
                 <div className="relative h-56 w-40 select-none rounded-lg bg-gray-200 px-8 pt-8 pb-12 shadow-lg transition-all hover:scale-[1.01] hover:shadow-xl dark:bg-gray-800">
@@ -75,35 +87,35 @@ export default function PostPage({ serizes, posts }: { serizes: Serize[]; posts:
                   </div>
                 </div>
               </Link>
-            </Transition.Child>
+            </motion.div>
           ))}
-        </div>
+        </AnimatePresence>
+      </div>
 
-        <Transition.Child
-          enter="transition-all duration-300"
-          enterFrom="opacity-60"
-          enterTo="opacity-100"
-          className="mt-16 mb-4 flex items-end gap-2"
-          style={{ transitionDelay: `${200}ms` }}
-        >
-          <SubTitle>{!searchValue ? 'All Posts' : 'Filtered Posts'}</SubTitle>
-          <span className="font-bold">({filteredBlogPosts.length})</span>
-        </Transition.Child>
+      <motion.div
+        className="mt-16 mb-4 flex items-end gap-2"
+        variants={defaultFadeInVariants}
+        initial="initial"
+        whileInView="animate"
+        viewport={{ amount: 0.6, once: true }}
+      >
+        <SubTitle>{!searchValue ? 'All Posts' : 'Filtered Posts'}</SubTitle>
+        <span className="font-bold">({filteredBlogPosts.length})</span>
+      </motion.div>
 
-        <ul className="mt-12 grid w-full gap-8 lg:grid-cols-2 lg:gap-12">
-          {filteredBlogPosts.map((post, i) => (
-            <Transition.Child
-              key={post.slug}
-              enter="transition-all duration-300"
-              enterFrom="opacity-0 -translate-y-2"
-              enterTo="opacity-100 translate-y-0"
-              style={{ transitionDelay: `${200 + i * 30}ms` }}
-            >
-              <PostListItem post={post} />
-            </Transition.Child>
-          ))}
-        </ul>
-      </Transition>
+      <ul className="mt-12 grid w-full gap-8 lg:grid-cols-2 lg:gap-12">
+        {filteredBlogPosts.map((post) => (
+          <motion.div
+            key={post.slug}
+            variants={defaultFadeInUpVariants}
+            initial="initial"
+            whileInView="animate"
+            viewport={{ amount: 0.6, once: true }}
+          >
+            <PostListItem post={post} />
+          </motion.div>
+        ))}
+      </ul>
     </Layout>
   );
 }
