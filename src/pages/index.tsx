@@ -71,7 +71,7 @@ export default function Home() {
 
         <motion.div variants={staggerHalf} className="grid gap-6 md:grid-cols-4">
           <PostItem
-            href="/blog/retrospect/2021-pass-kakao"
+            href="/blog/dnd-master/1-drag-event"
             imgUrl={featureImages[0]}
             title="Drag 이벤트 뽀개기"
             date="2022.10.01"
