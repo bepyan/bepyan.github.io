@@ -1,5 +1,4 @@
 import { ArticleJsonLd, NextSeo } from 'next-seo';
-import { OpenGraphMedia } from 'next-seo/lib/types';
 
 import { siteConfig } from '~/config';
 
@@ -16,30 +15,39 @@ const getRelativeUrl = (url?: string) => {
   return `${siteConfig.url}/${url.replace(/^\/s*/g, '')}`;
 };
 
-const DEFAULT_IMAGE: OpenGraphMedia = {
-  url: `${siteConfig.url}/images/base.jpg`,
-  alt: 'bepyan blog',
+const DEFAULT_IMAGE = `${siteConfig.url}/images/base.jpg`;
+
+const getImageUrl = (img?: string) => {
+  if (!img) return DEFAULT_IMAGE;
+  if (img.startsWith('https://')) return img;
+
+  return `${siteConfig.url}/${img}`;
 };
 
 /**
  * use in Normal Page SEO
  */
-export const PageSEO = ({
-  title,
-  description,
-  url,
-}: {
+export const PageSEO = (props: {
   title?: string;
   description?: string;
   url?: string;
+  image?: string;
 }) => {
+  const title = getTitle(props.title);
+  const description = props.description ?? siteConfig.description;
+  const url = getRelativeUrl(props.url);
+  const image = getImageUrl(props.image);
+
   return (
     <NextSeo
-      title={getTitle(title)}
-      description={description ?? siteConfig.description}
-      canonical={getRelativeUrl(url)}
+      title={title}
+      description={description}
+      canonical={url}
       openGraph={{
-        images: [DEFAULT_IMAGE],
+        url,
+        title,
+        description,
+        images: [{ url: image }],
       }}
     />
   );
@@ -64,13 +72,7 @@ export const BlogSEO = ({
   const title = getTitle(props.title);
   const url = getRelativeUrl(props.url);
   const dateTime = new Date(props.date).toISOString();
-
-  const featuredImages = images.length
-    ? images.map((img) => ({
-        url: img.startsWith('https://') ? img : `${siteConfig.url}/${img}`,
-        alt: title,
-      }))
-    : [DEFAULT_IMAGE];
+  const imageList = images.length ? images.map(getImageUrl) : [DEFAULT_IMAGE];
 
   return (
     <>
@@ -89,19 +91,13 @@ export const BlogSEO = ({
           url,
           title,
           description: summary,
-          images: featuredImages,
+          images: imageList.map((img) => ({ url: img })),
         }}
-        additionalMetaTags={[
-          {
-            name: 'twitter:image',
-            content: images[0],
-          },
-        ]}
       />
       <ArticleJsonLd
         datePublished={dateTime}
         dateModified={dateTime}
-        images={images}
+        images={imageList}
         url={url}
         title={title}
         description={summary}
