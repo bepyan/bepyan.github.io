@@ -27,5 +27,17 @@
     "prefix": ["current_date", "cd"],
     "description": "Output current Date YYYY-MM-DD",
     "body": "$CURRENT_YEAR-$CURRENT_MONTH-$CURRENT_DATE"
+  },
+  "참고자료": {
+    "prefix": ["참고자료"],
+    "description": "참고자료 footer",
+    "body": [
+      "---",
+      "",
+      "**참고 자료**",
+      "",
+      "- $0",
+      ""
+    ]
   }
 }
