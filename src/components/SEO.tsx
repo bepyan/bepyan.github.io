@@ -1,4 +1,5 @@
 import { ArticleJsonLd, NextSeo } from 'next-seo';
+import { OpenGraphMedia } from 'next-seo/lib/types';
 
 import { siteConfig } from '~/config';
 
@@ -13,6 +14,11 @@ const getRelativeUrl = (url?: string) => {
   if (!url) return siteConfig.url;
 
   return `${siteConfig.url}/${url.replace(/^\/s*/g, '')}`;
+};
+
+const DEFAULT_IMAGE: OpenGraphMedia = {
+  url: '/images/base.jpg',
+  alt: 'bepyan blog',
 };
 
 /**
@@ -32,6 +38,9 @@ export const PageSEO = ({
       title={getTitle(title)}
       description={description ?? siteConfig.description}
       canonical={getRelativeUrl(url)}
+      openGraph={{
+        images: [DEFAULT_IMAGE],
+      }}
     />
   );
 };
@@ -56,12 +65,9 @@ export const BlogSEO = ({
   const url = getRelativeUrl(props.url);
   const dateTime = new Date(props.date).toISOString();
 
-  const featuredImages = images.map((img) => {
-    return {
-      url: img,
-      alt: title,
-    };
-  });
+  const featuredImages = images.length
+    ? images.map((img) => ({ url: img, alt: title }))
+    : [DEFAULT_IMAGE];
 
   return (
     <>

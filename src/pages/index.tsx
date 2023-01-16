@@ -26,7 +26,7 @@ export default function Home() {
 
   return (
     <Layout>
-      <PageSEO title="Home" />
+      <PageSEO />
 
       <motion.section
         variants={staggerHalf}
