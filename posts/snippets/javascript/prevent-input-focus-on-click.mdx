@@ -1,0 +1,31 @@
+---
+title: '(JS) input 클릭시 focus 안되도록'
+description: ''
+icon: ''
+image: ''
+tags:
+  - Javascript
+  - dom
+  - preventDefault
+draft: false
+date: 2023-01-16 13:27:17
+---
+
+input element를 클릭시 input에 focus가 안되고 동작을 커스터마이징하고 싶을 때가 있다.
+
+`event.preventDefault()`로 input 클릭시 디폴트로 이어지는 동작을 제어할 수 있다.
+주의할 것은 `click`이 아닌 `mousedown` 이벤트에 걸어야 한다.
+
+> The focus will be set on a HTML element when the mouse down is successful.
+
+```js
+$('#div').on('mousedown', function (e) {
+  e.preventDefault();
+});
+```
+
+---
+
+**참고 자료**
+
+- https://stackoverflow.com/questions/8735764/prevent-firing-focus-event-when-clicking-on-div
