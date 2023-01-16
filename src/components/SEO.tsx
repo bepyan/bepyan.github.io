@@ -17,7 +17,7 @@ const getRelativeUrl = (url?: string) => {
 };
 
 const DEFAULT_IMAGE: OpenGraphMedia = {
-  url: '/images/base.jpg',
+  url: `${siteConfig.url}/images/base.jpg`,
   alt: 'bepyan blog',
 };
 
@@ -66,7 +66,10 @@ export const BlogSEO = ({
   const dateTime = new Date(props.date).toISOString();
 
   const featuredImages = images.length
-    ? images.map((img) => ({ url: img, alt: title }))
+    ? images.map((img) => ({
+        url: img.startsWith('https://') ? img : `${siteConfig.url}/${img}`,
+        alt: title,
+      }))
     : [DEFAULT_IMAGE];
 
   return (
