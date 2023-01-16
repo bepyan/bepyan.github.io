@@ -11,13 +11,14 @@ date: 2022-11-13 22:21:24
 
 ## giscus
 
-[utterances](https://utteranc.es/)의 영감을 받아 만들어진 오픈소스입니다.   
+[utterances](https://utteranc.es/)의 영감을 받아 만들어진 오픈소스입니다.  
 기존 Github Issue가 아닌 Github Discussion을 활용하여 댓글을 작성하는 것이 특징입니다.
 
 utterances의 장점(광고없음, 가벼움, github 연동, 깔끔한 UI...)들이 너무나 완벽했지만,  
 개인적으로 하나 아쉬웠던 것이 `대댓글이 직관적이지 않다`는 것입니다.
 
 giscus는 기존 장점을 그대로 가져가면서 아래 추가적인 기능을 제공합니다!
+
 - 대댓글 작성
 - 댓글 시간순 정렬
 - 댓글 인기순 정렬
@@ -27,7 +28,7 @@ giscus는 기존 장점을 그대로 가져가면서 아래 추가적인 기능�
 - (덤으로) github에서 전체 댓글들을 더 직관적으로 쉽게 관리
 - (덤으로) 잘 번역된 한글 공식문서 ✨
 
-💎 https://giscus.app/ko 
+💎 https://giscus.app/ko
 
 ---
 
@@ -36,27 +37,27 @@ giscus는 기존 장점을 그대로 가져가면서 아래 추가적인 기능�
 Github Discussion을 연동하기 위해 사전 세팅을 해야합니다.
 
 1. 레포는 `Public`이여야 합니다.
-    - 만약 `private`을 유지하고 싶다면 별도의 `public` 레포(ex. `myusername/comment`)를 생성하면 됩니다.
+   - 만약 `private`을 유지하고 싶다면 별도의 `public` 레포(ex. `myusername/comment`)를 생성하면 됩니다.
 2. Github 계정에 [giscus](https://github.com/apps/giscus) 앱을 설치합니다.
-3. Settings에서 [discussions]((https://docs.github.com/en/repositories/managing-your-repositorys-settings-and-features/enabling-features-for-your-repository/enabling-or-disabling-github-discussions-for-a-repository). ) 기능을 활성화 합니다.
+3. Settings에서 [discussions](<(https://docs.github.com/en/repositories/managing-your-repositorys-settings-and-features/enabling-features-for-your-repository/enabling-or-disabling-github-discussions-for-a-repository).>) 기능을 활성화 합니다.
 
-<br/>
+<br />
 
 [공식문서 가이드](https://giscus.app/ko) 따라 `script config`를 생성합니다.
 
 1. 레포 이름 `myusername/myrepo` 입력
 2. Discussion 카테고리 선택
-    - 일반적으로 General 선택하면 됩니다.
+   - 일반적으로 General 선택하면 됩니다.
 3. 원하는 입맛대로 기능 설정
-    - 가이드 문서의 친절한 설명을 참고해보세요!
+   - 가이드 문서의 친절한 설명을 참고해보세요!
 4. 생성된 script config 확인
-    - 위 과정에서 `repo-id` `category-id`를 자동으로 탐지해줍니다!
+   - 위 과정에서 `repo-id` `category-id`를 자동으로 탐지해줍니다!
 
 ---
 
 ## 코드 작성
 
-생성된 script config 바탕으로 Next.js에서 활용할 수 있는 컴포넌트를 구현합니다.   
+생성된 script config 바탕으로 Next.js에서 활용할 수 있는 컴포넌트를 구현합니다.  
 Next.js 테마에 따라 자동으로 반응하도록 구현했습니다.
 
 ```tsx
@@ -108,8 +109,27 @@ export default function Giscus() {
 - `data-lang`가 `ko`도 지원해주지만 ~~영어가 더 간지나기 때문에~~ 저는 `en`을 선택했습니다.
 - 만약 utterances를 사용하고 싶다면 [여기 코드](https://github.com/bepyan/bepyan.github.io/blob/main/src/components/Utterances.tsx)를 참고하시면 됩니다.
 - 참고
-    - https://github.com/utterance/utterances/issues/161#issuecomment-820722906
-    - https://github.com/utterance/utterances/issues/549#issuecomment-913070158
+  - https://github.com/utterance/utterances/issues/161#issuecomment-820722906
+  - https://github.com/utterance/utterances/issues/549#issuecomment-913070158
+
+---
+
+### 페이지 이동시 자동 변경
+
+SPA에서 페이지가 이동했지만 댓글창이 갱신이 안되는 현상이 있다.
+
+`iframe`에 동적으로 `term` 설정을 갱신해주면 된다고 한다.
+https://github.com/giscus/giscus/issues/357#issuecomment-1015964573
+
+```ts
+useEffect(() => {
+  const iframe = document.querySelector<HTMLIFrameElement>('iframe.giscus-frame');
+  iframe?.contentWindow?.postMessage(
+    { giscus: { setConfig: { term: router.asPath } } },
+    'https://giscus.app',
+  );
+}, [router.asPath]);
+```
 
 ---
 
@@ -117,7 +137,7 @@ export default function Giscus() {
 
 ### 💥 github 로그인시 home으로 리다이랙팅되는 문제
 
-giscus는 utterances 처럼 canonical link를 활용하여 로그인 리다이랙팅을 진행합니다.   
+giscus는 utterances 처럼 canonical link를 활용하여 로그인 리다이랙팅을 진행합니다.
 
 따라서 SEO에서 canonical link를 **현재 글 주소**로 잘 설정해주면 됩니다.
 
