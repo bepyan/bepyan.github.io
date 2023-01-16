@@ -93,6 +93,10 @@ export const BlogSEO = ({
           description: summary,
           images: imageList.map((img) => ({ url: img })),
         }}
+        twitter={{
+          site: '@__bepyan',
+          cardType: 'summary_large_image',
+        }}
       />
       <ArticleJsonLd
         datePublished={dateTime}
