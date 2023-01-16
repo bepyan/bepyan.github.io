@@ -49,6 +49,10 @@ export const PageSEO = (props: {
         description,
         images: [{ url: image }],
       }}
+      twitter={{
+        site: '@__bepyan',
+        cardType: 'summary_large_image',
+      }}
     />
   );
 };
