@@ -17,14 +17,16 @@ const pathToSlug = (filePath: string) =>
     .replace('/index', '');
 
 const getDescription = (description: string, content: string) => {
-  if (description) return description;
+  if (description.length) return description;
 
   const parsedContent = content
-    .replace(/[`#*\[\]]/g, '')
+    .replace(/(?<=\])\((.*?)\)/g, '')
+    .replace(/[`#*\-\[\]]/g, '')
     .trim()
     .slice(0, 130);
   return `${parsedContent}...`;
 };
+
 /**
  * 글
  */
