@@ -3,10 +3,12 @@ import 'dayjs/locale/ko';
 
 import dayjs from 'dayjs';
 import type { AppProps } from 'next/app';
+import dynamic from 'next/dynamic';
 import Head from 'next/head';
 import Script from 'next/script';
 import { DefaultSeo } from 'next-seo';
 import { ThemeProvider } from 'next-themes';
+import { Toaster } from 'react-hot-toast';
 
 import FloatScrollUpButton from '~/components/FloatScrollUpButton';
 import { seoConfig } from '~/config';
@@ -14,6 +16,8 @@ import { isDev } from '~/libs/core';
 import * as gtag from '~/libs/gtag';
 
 dayjs.locale('ko');
+
+const KbarComponent = dynamic(() => import('~/components/KBar'), { ssr: false });
 
 export default function App({ Component, pageProps }: AppProps) {
   gtag.useGtag();
@@ -27,6 +31,8 @@ export default function App({ Component, pageProps }: AppProps) {
       <div className="font-sans">
         <Component {...pageProps} />
         <FloatScrollUpButton />
+        <KbarComponent />
+        <Toaster toastOptions={{ position: 'bottom-right' }} />
       </div>
       {!isDev && (
         <>

@@ -1,19 +1,16 @@
-import { useTheme } from 'next-themes';
 import { useEffect, useState } from 'react';
 
+import useDarkMode from '~/libs/useDarkMode';
 import IconButton from './common/IconButton';
 
 export default function ThemeSwitch() {
   const [mounted, setMounted] = useState(false);
-  const { resolvedTheme, setTheme } = useTheme();
+  const { isThemeDark, toggleTheme } = useDarkMode();
 
   useEffect(() => setMounted(true), []);
 
   return (
-    <IconButton
-      aria-label="Toggle Dark Mode"
-      onClick={() => setTheme(resolvedTheme === 'dark' ? 'light' : 'dark')}
-    >
+    <IconButton aria-label="Toggle Dark Mode" onClick={toggleTheme}>
       <svg
         xmlns="http://www.w3.org/2000/svg"
         viewBox="0 0 24 24"
@@ -22,7 +19,7 @@ export default function ThemeSwitch() {
       >
         {!mounted ? (
           <></>
-        ) : resolvedTheme === 'dark' ? (
+        ) : isThemeDark ? (
           <path
             fillRule="evenodd"
             clipRule="evenodd"
