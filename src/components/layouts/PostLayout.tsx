@@ -45,7 +45,7 @@ export default function PostLayout({
 
   return (
     <Layout>
-      <BlogSEO {...post} url={`/blog/${slug}`} summary={post.description} images={[]} />
+      <BlogSEO {...post} url={slug} summary={post.description} images={[]} />
 
       <ReadingProgressBar />
 
