@@ -1,0 +1,89 @@
+---
+title: '(Lint) 레포 단위로 VSCode 설정 적용하기'
+description: ''
+icon: ''
+image: ''
+tags:
+  - vscode
+  - eslint
+  - prettier
+draft: false
+date: 2023-01-26 17:23:10
+---
+
+repository 단위로 IDE 설정을 강제하고 싶을 때가 있다.
+사람마다 제각각 선호하는 설정이 있고 프로젝트 환경에 따라 설정이 달라져 프로젝트마다 이를 다르게 설정해야 한다.
+
+`.vscode` 디랙토리에 설정을 명시하여 이를 해결할 수 있다!
+
+---
+
+### 옵션 설정
+
+```json:.vscode/settings.json
+{
+  "editor.rulers": [120], // IDE에 줄이 보이게 함
+  "editor.formatOnSave": true, // 파일 저장시 포멧팅 실행
+  "editor.defaultFormatter": "esbenp.prettier-vscode", // 포멧팅 도구를 prettier로 사용
+  "editor.codeActionsOnSave": { "source.fixAll.eslint": true }, // 파일 저장시 eslint auto fix 실행
+  "eslint.validate": ["javascript", "javascriptreact", "typescript", "typescriptreact", "svelte"] // 사용 언어에 따라 설정
+}
+```
+
+속성을 잘 모르겠다면 설정에서 톱니바퀴의 `Copy Setting as JSON`을 클릭하면 된다.
+
+![230126-175049](/posts/vscode-eslint-prettier/230126-175049.png)
+
+---
+
+### 플러그인 설정
+
+```json:.vscode/extensions.json
+{
+  "recommendations": ["svelte.svelte-vscode", "dbaeumer.vscode-eslint", "esbenp.prettier-vscode"]
+}
+```
+
+플러그인이 설치가 안되어 있다면 IDE에서 이를 경고해준다.
+
+![230126-173852](/posts/vscode-eslint-prettier/230126-173852.png)
+
+---
+
+### code snippets 설정
+
+```json:.vscode/.code-snippets
+{
+
+  "Current DateTime": {
+    "prefix": ["current_date_time", "cdt"],
+    "description": "Output current DateTime YYYY-MM-DD HH:mm:ss",
+    "body": "$CURRENT_YEAR-$CURRENT_MONTH-$CURRENT_DATE $CURRENT_HOUR:$CURRENT_MINUTE:$CURRENT_SECOND"
+  },
+}
+```
+
+[**VSCode Variables**](https://code.visualstudio.com/docs/editor/userdefinedsnippets#_variables)을 활용하여 프로젝트에 맞는 다양한 `code snippets`을 작성할 수 있다.
+
+`.code-snippets` 앞에 적용될 파일 타입을 명시할 수 있다. `ts.code-snippets`
+
+---
+
+### 단축키 설정
+
+```json:.vscode/keybindings.json
+[
+    {
+        "key": "shift+cmd+v",
+        "command": "-markdown.extension.closePreview",
+        "when": "markdownPreviewFocus"
+    },
+    {
+        "key": "shift+cmd+v",
+        "command": "extension.pasteImage",
+        "when": "editorTextFocus"
+    }
+]
+```
+
+VSCode 동작부터 Extension 실행까지 [**다양한 동작**](https://code.visualstudio.com/docs/getstarted/keybindings)을 지원하니 필요에 따라 적용하면 좋을 것 같다.
