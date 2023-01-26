@@ -8,12 +8,21 @@ export default function KBarButton() {
   return (
     <button
       className={$(
-        'cursor-pointer rounded-lg border px-2 py-1 text-xs dark:border-gray-700 dark:bg-gray-800',
-        'transition-colors active:bg-gray-200 dark:active:bg-gray-700',
+        'flex cursor-pointer items-center rounded-lg  p-1 text-xs',
+        'bg-gray-200 dark:bg-gray-700',
+        'transition-colors hover:bg-gray-150 hover:dark:bg-gray-800',
       )}
       onClick={query.toggle}
     >
-      ⌘ K
+      <span className="px-3">Search...</span>
+      <div
+        className={$(
+          'ml-auto rounded-lg px-2 py-1',
+          'border bg-gray-100 dark:border-gray-700 dark:bg-gray-800',
+        )}
+      >
+        ⌘ K
+      </div>
     </button>
   );
 }

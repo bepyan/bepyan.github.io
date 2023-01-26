@@ -41,8 +41,5 @@ body,
   height: 10px;
 }
 .kbar-scrollbar > div::-webkit-scrollbar-thumb {
-  @apply bg-gray-250;
-}
-.dark .kbar-scrollbar > div::-webkit-scrollbar-thumb {
-  @apply bg-gray-600;
+  @apply bg-gray-250 dark:bg-gray-600 hover:bg-opacity-70 dark:hover:bg-opacity-70;
 }

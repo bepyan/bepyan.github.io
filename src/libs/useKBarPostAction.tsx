@@ -1,4 +1,4 @@
-import { useRegisterActions } from 'kbar';
+import { Priority, useRegisterActions } from 'kbar';
 import { useRouter } from 'next/router';
 
 import ArchiveBoxIcon from '~/components/icons/ArchiveBoxIcon';
@@ -19,6 +19,7 @@ export default function useKBarPostAction() {
       keywords: serize.tags.join(' '),
       icon: <BookIcon width={18} />,
       perform: () => router.push(serize.slug),
+      priority: Priority.NORMAL,
     })),
     ...posts.map((post) => ({
       id: post.slug,
