@@ -6,6 +6,7 @@ import toast from 'react-hot-toast';
 import ComputerIcon from '~/components/icons/ComputerIcon';
 import MoonIcon from '~/components/icons/MoonIcon';
 import SunIcon from '~/components/icons/SunIcon';
+
 import useDarkMode from './useDarkMode';
 
 export default function useKBarThemeAction() {

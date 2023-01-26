@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 
 import useDarkMode from '~/libs/useDarkMode';
+
 import IconButton from './common/IconButton';
 
 export default function ThemeSwitch() {

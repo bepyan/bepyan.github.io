@@ -8,12 +8,10 @@ import SnippetListItem from '~/components/common/SnippetListItem';
 import Title from '~/components/common/Title';
 import Layout from '~/components/layouts/Layout';
 import { PageSEO } from '~/components/SEO';
-import { excludePostContent, getAllPosts, getAllSnippets, getTagsByPosts } from '~/libs/post';
-import { Post } from '~/libs/types';
+import { posts as reducedPosts, snippets as reducedSnippets, tags } from '~/constants/dataset';
+import { ReducedPost } from '~/libs/types';
 
 export const getStaticPaths: GetStaticPaths = () => {
-  const tags = getTagsByPosts([...getAllPosts(), ...getAllSnippets()]);
-
   return {
     paths: tags.map((tag) => `/archives/tags/${tag}`),
     fallback: 'blocking',
@@ -22,16 +20,8 @@ export const getStaticPaths: GetStaticPaths = () => {
 
 export const getStaticProps: GetStaticProps = ({ params }) => {
   const tag = (params?.tag ?? '') as string;
-
-  const posts = getAllPosts()
-    .filter((post) => post.tags.includes(tag))
-    .sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime())
-    .map(excludePostContent);
-
-  const snippets = getAllSnippets()
-    .filter((post) => post.tags.includes(tag))
-    .sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime())
-    .map(excludePostContent);
+  const posts = reducedPosts.filter((post) => post.tags.includes(tag));
+  const snippets = reducedSnippets.filter((post) => post.tags.includes(tag));
 
   if (posts.length + snippets.length === 0) {
     return {
@@ -50,8 +40,8 @@ export default function TagPage({
   snippets,
 }: {
   tag: string;
-  posts: Post[];
-  snippets: Post[];
+  posts: ReducedPost[];
+  snippets: ReducedPost[];
 }) {
   const postsRef = useRef<HTMLDivElement>(null);
   const snippetsRef = useRef<HTMLDivElement>(null);

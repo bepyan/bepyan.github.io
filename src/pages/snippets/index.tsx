@@ -10,30 +10,26 @@ import SnippetListItem from '~/components/common/SnippetListItem';
 import Title from '~/components/common/Title';
 import Layout from '~/components/layouts/Layout';
 import { PageSEO } from '~/components/SEO';
-import { excludePostContent, getAllSnippets } from '~/libs/post';
-import { Post } from '~/libs/types';
+import { snippets } from '~/constants/dataset';
+import { ReducedPost } from '~/libs/types';
 
 type Snippet = {
   key: string;
-  postList: Post[];
+  postList: ReducedPost[];
 };
 
 export const getStaticProps: GetStaticProps = () => {
-  const snippets = getAllSnippets().map(excludePostContent);
+  const tagSnippets = snippets.reduce<{ [key: string]: ReducedPost[] }>((ac, snippet) => {
+    const key = snippet.snippetSlug;
+    if (!key) return ac;
 
-  const tagSnippets = snippets
-    .sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime())
-    .reduce<{ [key: string]: Post[] }>((ac, snippet) => {
-      const key = snippet.snippetSlug;
-      if (!key) return ac;
+    if (!ac[key]) {
+      ac[key] = [];
+    }
 
-      if (!ac[key]) {
-        ac[key] = [];
-      }
-
-      ac[key].push(snippet);
-      return ac;
-    }, {});
+    ac[key].push(snippet);
+    return ac;
+  }, {});
 
   const snippetList = Object.keys(tagSnippets)
     .map<Snippet>((key) => ({
@@ -53,7 +49,7 @@ export default function Snippets({ snippetList }: { snippetList: Snippet[] }) {
 
   const isAll = !selectedKey || selectedKey === 'all';
   const allSnippetsCnt = snippetList.reduce((ac, snippet) => ac + snippet.postList.length, 0);
-  const postList = snippetList.reduce<Post[]>((ac, v) => {
+  const postList = snippetList.reduce<ReducedPost[]>((ac, v) => {
     if (selectedKey && selectedKey !== 'all' && selectedKey !== v.key) {
       return [...ac];
     }

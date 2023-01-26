@@ -11,20 +11,14 @@ import Title from '~/components/common/Title';
 import ListIcon from '~/components/icons/ListIcon';
 import Layout from '~/components/layouts/Layout';
 import { PageSEO } from '~/components/SEO';
-import {
-  excludePostContent,
-  getAllPosts,
-  getAllSerizes,
-  getAllSnippets,
-  getTagsByPosts,
-} from '~/libs/post';
-import { Post, Serize } from '~/libs/types';
+import { posts, serizes, snippets, tags } from '~/constants/dataset';
+import { ReducedPost } from '~/libs/types';
 
 type ClassifiedPosts = {
-  [key: string]: Post[];
+  [key: string]: ReducedPost[];
 };
 
-const classifyPosts = (posts: Post[]) => {
+const classifyPosts = (posts: ReducedPost[]) => {
   return [...posts]
     .sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime())
     .reduce<ClassifiedPosts>((ac, v) => {
@@ -40,15 +34,8 @@ const classifyPosts = (posts: Post[]) => {
 };
 
 export const getStaticProps = () => {
-  const serizes = getAllSerizes();
-  const posts = getAllPosts().map(excludePostContent);
-  const snippets = getAllSnippets().map(excludePostContent);
-  const tags = getTagsByPosts([...posts, ...snippets]);
-
   return {
     props: {
-      serizes,
-      tags,
       classifiedPosts: classifyPosts(posts),
       classifiedSnippets: classifyPosts(snippets),
     },
@@ -56,13 +43,9 @@ export const getStaticProps = () => {
 };
 
 export default function Archives({
-  serizes,
-  tags,
   classifiedPosts,
   classifiedSnippets,
 }: {
-  serizes: Serize[];
-  tags: string[];
   classifiedPosts: ClassifiedPosts;
   classifiedSnippets: ClassifiedPosts;
 }) {

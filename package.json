@@ -4,9 +4,12 @@
   "private": true,
   "homepage": "https://bepyan.github.io/",
   "scripts": {
+    "predev": "yarn dataset",
     "dev": "next dev",
-    "build": "yarn sitemap && next build && next export",
-    "sitemap": "ts-node --project tsconfig.node.json ./sitemap.config.ts",
+    "prebuild": "yarn dataset && yarn sitemap",
+    "build": "next build && next export",
+    "dataset": "ts-node --project tsconfig.node.json ./scripts/generate-dataset.ts",
+    "sitemap": "ts-node --project tsconfig.node.json ./scripts/generate-sitemap.ts",
     "serve": "npx http-server out",
     "lint": "eslint src/**/*.{ts,tsx} --fix"
   },

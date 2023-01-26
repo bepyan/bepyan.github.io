@@ -1,4 +1,5 @@
 import { TableOfContents } from '~/libs/types';
+
 import Hr from './common/Hr';
 
 export default function TocTop({

@@ -5,7 +5,7 @@ import matter from 'gray-matter';
 import path from 'path';
 import readingTime from 'reading-time';
 
-import { GrayMatter, Post, Serize } from './types';
+import { GrayMatter, Post, ReducedPost, Serize } from './types';
 
 const BASE_PATH = '/posts';
 const POSTS_PATH = path.join(process.cwd(), BASE_PATH);
@@ -23,6 +23,7 @@ const getDescription = (description: string, content: string) => {
     .replace(/(?<=\])\((.*?)\)/g, '')
     .replace(/(?<!\S)((http)(s?):\/\/|www\.).+?(?=\s)/g, '')
     .replace(/[#*\|\[\]]|(\-{3,})|(`{3})(\S*)(?=\s)/g, '')
+    .replace(/\s+/g, ' ')
     .trim()
     .slice(0, 130);
   return `${parsedContent}...`;
@@ -86,7 +87,11 @@ export const getAllPosts = (subPath = '') => {
   }, []);
 };
 
-export const getTagsByPosts = (posts: Post[]) => {
+export const getPost = (slug: string) => {
+  return parsePost(`${POSTS_PATH}${slug.replace(/\/blog/g, '')}.mdx`);
+};
+
+export const getTagsByPosts = (posts: ReducedPost[]) => {
   return Array.from(
     posts.reduce((ac, v) => {
       v.tags.forEach((tag) => ac.add(tag));
@@ -106,8 +111,7 @@ const parseSerize = (serizePath: string): Serize | undefined => {
 
     const slug = pathToSlug(serizePath);
     const posts = getAllPosts(slug)
-      // eslint-disable-next-line @typescript-eslint/no-unused-vars
-      .map(({ content, ...v }) => v)
+      .map(reducePost)
       .sort((a, b) => (a.slug > b.slug ? 1 : -1));
 
     return {
@@ -162,4 +166,8 @@ export const getAllSnippets = () => {
 /**
  * Util
  */
-export const excludePostContent = (post: Post): Post => ({ ...post, content: '' });
+export const reducePost = ({ content: _, ...post }: Post): ReducedPost => post;
+
+export const sortPostByTimeDesc = (a: ReducedPost, b: ReducedPost) => {
+  return new Date(b.date).getTime() - new Date(a.date).getTime();
+};

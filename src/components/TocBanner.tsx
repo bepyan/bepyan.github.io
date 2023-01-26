@@ -2,6 +2,7 @@ import { Fragment, useEffect, useState } from 'react';
 
 import { $ } from '~/libs/core';
 import { Section, SubSection, TableOfContents } from '~/libs/types';
+
 import CopyLinkButton from './common/CopyLinkButton';
 import IconButton from './common/IconButton';
 import ChatIcon from './icons/ChatIcon';

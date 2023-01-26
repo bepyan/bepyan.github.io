@@ -8,7 +8,7 @@ interface Options {
 }
 
 export default function useDelayedRender(active = false, options: Options = {}) {
-  const [, force] = useState<any>();
+  const [, force] = useState<unknown>();
   const mounted = useRef(active);
   const rendered = useRef(false);
   const renderTimer = useRef<NodeJS.Timeout | null>(null);

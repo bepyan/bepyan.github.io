@@ -23,11 +23,13 @@ export type Post = Omit<GrayMatter, 'date'> & {
   snippetSlug?: string;
 };
 
+export type ReducedPost = Omit<Post, 'content'>;
+
 export type Serize = Omit<GrayMatter, 'date'> & {
   date: string;
   slug: string;
   readingMinutes: number;
-  posts: Omit<Post, 'content'>[];
+  posts: ReducedPost[];
 };
 
 /**

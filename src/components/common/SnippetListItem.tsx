@@ -2,11 +2,11 @@ import dayjs from 'dayjs';
 import Link from 'next/link';
 
 import { $ } from '~/libs/core';
-import { Post } from '~/libs/types';
+import { ReducedPost } from '~/libs/types';
 import CalanderIcon from '../icons/CalanderIcon';
 import IconText from './IconText';
 
-export default function SnippetListItem({ post }: { post: Omit<Post, 'content'> }) {
+export default function SnippetListItem({ post }: { post: ReducedPost }) {
   return (
     <Link as={post.slug} href={`/snippets/[...slug]`}>
       <div

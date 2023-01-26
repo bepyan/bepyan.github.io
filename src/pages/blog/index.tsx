@@ -15,22 +15,10 @@ import {
   defaultFadeInVariants,
   fadeInHalf,
 } from '~/constants/animations';
-import { excludePostContent, getAllPosts, getAllSerizes } from '~/libs/post';
-import { Post, Serize } from '~/libs/types';
+import { posts, serizes } from '~/constants/dataset';
 import useSearch from '~/libs/useSearch';
 
-export function getStaticProps() {
-  return {
-    props: {
-      serizes: getAllSerizes(),
-      posts: getAllPosts()
-        .sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime())
-        .map(excludePostContent),
-    },
-  };
-}
-
-export default function PostPage({ serizes, posts }: { serizes: Serize[]; posts: Post[] }) {
+export default function PostPage() {
   const { searchValue, searchHandler } = useSearch();
 
   const filteredSerizes = serizes.filter((serize) =>

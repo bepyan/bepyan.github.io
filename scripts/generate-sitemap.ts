@@ -1,10 +1,10 @@
-import fs from 'fs';
+import { writeFileSync } from 'fs';
 
-import { siteConfig } from './src/config';
-import { getAllPosts, getAllSerizes, getAllSnippets, getTagsByPosts } from './src/libs/post';
+import { siteConfig } from '../src/config';
+import { getAllPosts, getAllSerizes, getAllSnippets, getTagsByPosts } from '../src/libs/post';
 
-async function createSiteMap() {
-  const siteUrl = 'https://bepyan.github.io';
+const createSiteMap = () => {
+  const siteUrl = siteConfig.url;
   const posts = [...getAllPosts(), ...getAllSnippets()];
   const serizes = getAllSerizes();
   const tags = getTagsByPosts(posts);
@@ -38,9 +38,23 @@ ${tags
   .join('\n')}
 </urlset>`;
 
-  await fs.promises.writeFile('public/sitemap.xml', sitemap, {
-    encoding: 'utf-8',
-  });
-}
+  writeFileSync('public/sitemap.xml', sitemap, 'utf-8');
+};
 
-void createSiteMap();
+const createRobotsTxt = () => {
+  const siteUrl = siteConfig.url;
+
+  const text = `
+User-agent: *
+Allow: /
+Sitemap: ${siteUrl}/sitemap.xml
+Host: ${siteUrl}
+`;
+
+  writeFileSync('public/robots.txt', text.trim(), 'utf-8');
+};
+
+(() => {
+  createSiteMap();
+  createRobotsTxt();
+})();

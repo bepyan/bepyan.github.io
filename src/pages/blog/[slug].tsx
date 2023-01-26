@@ -10,12 +10,10 @@ import ClockIcon from '~/components/icons/ClockIcon';
 import ListIcon from '~/components/icons/ListIcon';
 import Layout from '~/components/layouts/Layout';
 import { PageSEO } from '~/components/SEO';
-import { getAllSerizes } from '~/libs/post';
+import { serizes } from '~/constants/dataset';
 import { Serize } from '~/libs/types';
 
 export const getStaticPaths: GetStaticPaths = () => {
-  const serizes = getAllSerizes();
-
   return {
     paths: serizes.map((serize) => serize.slug),
     fallback: 'blocking',
@@ -26,7 +24,7 @@ export const getStaticProps: GetStaticProps = ({ params }) => {
   const { slug } = params as { slug: string };
 
   const serizeSlug = `/blog/${slug}`;
-  const serize = getAllSerizes().find((v) => v.slug === serizeSlug);
+  const serize = serizes.find((v) => v.slug === serizeSlug);
 
   if (!serize) {
     return {

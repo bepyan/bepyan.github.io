@@ -2,13 +2,13 @@ import dayjs from 'dayjs';
 import Link from 'next/link';
 
 import { $ } from '~/libs/core';
-import { Post } from '~/libs/types';
+import { ReducedPost } from '~/libs/types';
 import CalanderIcon from '../icons/CalanderIcon';
 import ClockIcon from '../icons/ClockIcon';
 import IconText from './IconText';
 import Tag from './Tag';
 
-export default function PostListItem({ post }: { post: Omit<Post, 'content'> }) {
+export default function PostListItem({ post }: { post: ReducedPost }) {
   const href = !!post.snippetSlug ? `/snippets/[...slug]` : `/blog/[...slug]`;
 
   return (

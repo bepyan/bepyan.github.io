@@ -5,6 +5,7 @@ import { useEffect, useState } from 'react';
 import { siteConfig } from '~/config';
 import { $ } from '~/libs/core';
 import useDelayedRender from '~/libs/useDelayedRender';
+
 import NavItem from './common/NavItem';
 import LogoIcon from './icons/LogoIcon';
 import KBarButton from './KBarButton';
