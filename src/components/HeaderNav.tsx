@@ -86,9 +86,7 @@ export default function HeaderNav() {
       </div>
       <div className="ml-auto flex items-center gap-2">
         <KBarButton />
-        <div className="mb-1">
-          <ThemeSwitch />
-        </div>
+        <ThemeSwitch />
       </div>
     </nav>
   );
