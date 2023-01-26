@@ -6,59 +6,14 @@ import {
   KBarSearch,
   useMatches,
 } from 'kbar';
-import { useRouter } from 'next/router';
 
 import { $ } from '~/libs/core';
-import useKbarThemeAction from '~/libs/useKbarThemeAction';
-import ArchiveBoxIcon from './icons/ArchiveBoxIcon';
-import HomeIcon from './icons/HomeIcon';
-import InBox from './icons/InBox';
-import InBoxStack from './icons/InBoxStack';
-
-export const useKBarAction = () => {
-  const router = useRouter();
-
-  return [
-    {
-      id: 'home',
-      name: 'Home',
-      shortcut: ['H'],
-      keywords: 'profile',
-      section: 'Pages',
-      icon: <HomeIcon width={18} />,
-      perform: () => router.push('/'),
-    },
-    {
-      id: 'blog',
-      name: 'Blog',
-      shortcut: ['B'],
-      keywords: 'writing words',
-      section: 'Pages',
-      icon: <ArchiveBoxIcon width={18} />,
-      perform: () => router.push('/blog'),
-    },
-    {
-      id: 'snippets',
-      name: 'Code Snippets',
-      shortcut: ['S'],
-      keywords: 'code',
-      section: 'Pages',
-      icon: <InBox width={18} />,
-      perform: () => router.push('/snippets'),
-    },
-    {
-      id: 'archives',
-      name: 'Archives',
-      shortcut: ['A'],
-      section: 'Pages',
-      icon: <InBoxStack width={18} />,
-      perform: () => router.push('/archives'),
-    },
-  ];
-};
+import useKBarPostAction from '~/libs/useKBarPostAction';
+import useKBarThemeAction from '~/libs/useKBarThemeAction';
 
 export default function KBar() {
-  useKbarThemeAction();
+  useKBarThemeAction();
+  useKBarPostAction();
 
   return (
     <KBarPortal>

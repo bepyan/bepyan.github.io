@@ -8,7 +8,7 @@ import MoonIcon from '~/components/icons/MoonIcon';
 import SunIcon from '~/components/icons/SunIcon';
 import useDarkMode from './useDarkMode';
 
-export default function useKbarThemeAction() {
+export default function useKBarThemeAction() {
   const { setThemeDark, setThemeLight } = useDarkMode();
 
   useRegisterActions([

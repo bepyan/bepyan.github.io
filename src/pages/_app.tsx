@@ -12,10 +12,10 @@ import { ThemeProvider } from 'next-themes';
 import { Toaster } from 'react-hot-toast';
 
 import FloatScrollUpButton from '~/components/FloatScrollUpButton';
-import { useKBarAction } from '~/components/KBar';
 import { seoConfig } from '~/config';
 import { isDev } from '~/libs/core';
 import * as gtag from '~/libs/gtag';
+import useKBarAction from '~/libs/useKBarAction';
 
 dayjs.locale('ko');
 
