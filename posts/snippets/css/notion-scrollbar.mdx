@@ -1,0 +1,51 @@
+---
+title: '(CSS) Notion Style Scrollbar'
+description: ''
+icon: ''
+image: ''
+tags:
+  - css
+draft: false
+date: 2023-01-27 02:29:04
+---
+
+Notion의 scrollbar 스타일 코드를 빼돌려보자!
+
+---
+
+## 라이트 모드
+
+```css
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+::-webkit-scrollbar {
+  background: transparent;
+}
+::-webkit-scrollbar-track {
+  background: #edece9;
+}
+::-webkit-scrollbar-thumb {
+  background: #d3d1cb;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #aeaca6;
+}
+```
+
+---
+
+## 다크모드
+
+```css
+.dark ::-webkit-scrollbar-track {
+  background: rgba(202, 204, 206, 0.04);
+}
+.dark ::-webkit-scrollbar-thumb {
+  background: #474c50;
+}
+.dark ::-webkit-scrollbar-thumb:hover {
+  background: rgba(202, 204, 206, 0.3);
+}
+```
