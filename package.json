@@ -11,7 +11,7 @@
     "dataset": "ts-node --project tsconfig.node.json ./scripts/generate-dataset.ts",
     "sitemap": "ts-node --project tsconfig.node.json ./scripts/generate-sitemap.ts",
     "serve": "npx http-server out",
-    "lint": "eslint src/**/*.{ts,tsx} --fix"
+    "lint": "eslint \"**/*.{js,cjs,ejs,ts,tsx}\" --fix"
   },
   "dependencies": {
     "@headlessui/react": "^1.7.5",

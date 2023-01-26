@@ -3,6 +3,7 @@ import title from 'title';
 
 import { siteConfig } from '~/config';
 import { $ } from '~/libs/core';
+
 import LinkExternal from './LinkExternal';
 
 export default function AuthorContacts({ className, ...props }: React.ComponentProps<'div'>) {

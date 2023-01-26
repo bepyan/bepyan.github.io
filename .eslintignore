@@ -3,5 +3,6 @@
 .cache
 node_modules
 dist
+out
 public
 *.d.ts

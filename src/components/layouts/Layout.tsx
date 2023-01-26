@@ -1,6 +1,7 @@
 import { ReactNode, useMemo } from 'react';
 
 import { siteConfig } from '~/config';
+
 import AuthorContacts from '../common/AuthorContacts';
 import Hr from '../common/Hr';
 import LinkExternal from '../common/LinkExternal';

@@ -1,6 +1,7 @@
 import { useRouter } from 'next/router';
 
 import { $ } from '~/libs/core';
+
 import LinkHover from './LinkHover';
 
 export default function NavItem({ href, children, className }: React.ComponentProps<'a'>) {
