@@ -14,6 +14,7 @@
 <url><loc>https://bepyan.github.io/blog/2022/google-adsense</loc><changefreq>daily</changefreq><priority>0.7</priority></url>
 <url><loc>https://bepyan.github.io/blog/2022/m1-muti-terminal-architecture</loc><changefreq>daily</changefreq><priority>0.7</priority></url>
 <url><loc>https://bepyan.github.io/blog/2022/styled-components-vs-emotion</loc><changefreq>daily</changefreq><priority>0.7</priority></url>
+<url><loc>https://bepyan.github.io/blog/2023/debug-in-android-web</loc><changefreq>daily</changefreq><priority>0.7</priority></url>
 <url><loc>https://bepyan.github.io/blog/dnd-master/1-drag-event</loc><changefreq>daily</changefreq><priority>0.7</priority></url>
 <url><loc>https://bepyan.github.io/blog/dnd-master/2-drag-touch-event</loc><changefreq>daily</changefreq><priority>0.7</priority></url>
 <url><loc>https://bepyan.github.io/blog/dnd-master/3-drag-resize</loc><changefreq>daily</changefreq><priority>0.7</priority></url>
@@ -69,6 +70,8 @@
 <url><loc>https://bepyan.github.io/archives/tags/Next.js</loc><changefreq>daily</changefreq><priority>0.3</priority></url>
 <url><loc>https://bepyan.github.io/archives/tags/google adsense</loc><changefreq>daily</changefreq><priority>0.3</priority></url>
 <url><loc>https://bepyan.github.io/archives/tags/infra</loc><changefreq>daily</changefreq><priority>0.3</priority></url>
+<url><loc>https://bepyan.github.io/archives/tags/android</loc><changefreq>daily</changefreq><priority>0.3</priority></url>
+<url><loc>https://bepyan.github.io/archives/tags/debug</loc><changefreq>daily</changefreq><priority>0.3</priority></url>
 <url><loc>https://bepyan.github.io/archives/tags/React</loc><changefreq>daily</changefreq><priority>0.3</priority></url>
 <url><loc>https://bepyan.github.io/archives/tags/DOM</loc><changefreq>daily</changefreq><priority>0.3</priority></url>
 <url><loc>https://bepyan.github.io/archives/tags/react-beautiful-dnd</loc><changefreq>daily</changefreq><priority>0.3</priority></url>
