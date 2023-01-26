@@ -7,6 +7,7 @@ import { $ } from '~/libs/core';
 import useDelayedRender from '~/libs/useDelayedRender';
 import NavItem from './common/NavItem';
 import LogoIcon from './icons/LogoIcon';
+import KBarButton from './KBarButton';
 import ThemeSwitch from './ThemeSwitch';
 
 export default function HeaderNav() {
@@ -82,8 +83,11 @@ export default function HeaderNav() {
           </ul>
         )}
       </div>
-      <div className="ml-auto mb-1">
-        <ThemeSwitch />
+      <div className="ml-auto flex items-center gap-2">
+        <KBarButton />
+        <div className="mb-1">
+          <ThemeSwitch />
+        </div>
       </div>
     </nav>
   );

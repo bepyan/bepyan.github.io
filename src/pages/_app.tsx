@@ -2,6 +2,7 @@ import '~/styles/globals.css';
 import 'dayjs/locale/ko';
 
 import dayjs from 'dayjs';
+import { KBarProvider } from 'kbar';
 import type { AppProps } from 'next/app';
 import dynamic from 'next/dynamic';
 import Head from 'next/head';
@@ -11,16 +12,19 @@ import { ThemeProvider } from 'next-themes';
 import { Toaster } from 'react-hot-toast';
 
 import FloatScrollUpButton from '~/components/FloatScrollUpButton';
+import { useKBarAction } from '~/components/KBar';
 import { seoConfig } from '~/config';
 import { isDev } from '~/libs/core';
 import * as gtag from '~/libs/gtag';
 
 dayjs.locale('ko');
 
-const KbarComponent = dynamic(() => import('~/components/KBar'), { ssr: false });
+const KBar = dynamic(() => import('~/components/KBar'), { ssr: false });
 
 export default function App({ Component, pageProps }: AppProps) {
   gtag.useGtag();
+
+  const actions = useKBarAction();
 
   return (
     <ThemeProvider attribute="class">
@@ -28,12 +32,14 @@ export default function App({ Component, pageProps }: AppProps) {
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
       </Head>
       <DefaultSeo {...seoConfig} />
-      <div className="font-sans">
-        <Component {...pageProps} />
-        <FloatScrollUpButton />
-        <KbarComponent />
-        <Toaster toastOptions={{ position: 'bottom-right' }} />
-      </div>
+      <KBarProvider actions={actions} options={{ enableHistory: true }}>
+        <div className="font-sans">
+          <Component {...pageProps} />
+          <FloatScrollUpButton />
+          <KBar />
+          <Toaster toastOptions={{ position: 'bottom-right' }} />
+        </div>
+      </KBarProvider>
       {!isDev && (
         <>
           {/* Global Site Tag (gtag.js) - Google Analytics */}

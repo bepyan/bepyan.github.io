@@ -2,7 +2,6 @@ import {
   KBarAnimator,
   KBarPortal,
   KBarPositioner,
-  KBarProvider,
   KBarResults,
   KBarSearch,
   useMatches,
@@ -16,10 +15,10 @@ import HomeIcon from './icons/HomeIcon';
 import InBox from './icons/InBox';
 import InBoxStack from './icons/InBoxStack';
 
-export default function KBar() {
+export const useKBarAction = () => {
   const router = useRouter();
 
-  const actions = [
+  return [
     {
       id: 'home',
       name: 'Home',
@@ -56,15 +55,9 @@ export default function KBar() {
       perform: () => router.push('/archives'),
     },
   ];
+};
 
-  return (
-    <KBarProvider actions={actions} options={{ enableHistory: true }}>
-      <CommandBar />
-    </KBarProvider>
-  );
-}
-
-function CommandBar() {
+export default function KBar() {
   useKbarThemeAction();
 
   return (
