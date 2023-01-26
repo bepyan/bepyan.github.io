@@ -12,7 +12,7 @@ const getTitle = (title?: string) => {
 const getRelativeUrl = (url?: string) => {
   if (!url) return siteConfig.url;
 
-  return `${siteConfig.url}/${url.replace(/^\/s*/g, '')}`;
+  return `${siteConfig.url}/${url.replace(/^\/+/g, '')}`;
 };
 
 const DEFAULT_IMAGE = `${siteConfig.url}/images/base.jpg`;
