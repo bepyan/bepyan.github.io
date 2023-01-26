@@ -34,3 +34,15 @@ body,
 .no-scrollbar::-webkit-scrollbar {
   display: none; /* Chrome, Safari, Opera*/
 }
+
+.kbar-scrollbar > div::-webkit-scrollbar {
+  background: transparent;
+  width: 10px;
+  height: 10px;
+}
+.kbar-scrollbar > div::-webkit-scrollbar-thumb {
+  @apply bg-gray-250;
+}
+.dark .kbar-scrollbar > div::-webkit-scrollbar-thumb {
+  @apply bg-gray-600;
+}

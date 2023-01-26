@@ -1,5 +1,6 @@
 import { useRouter } from 'next/router';
 
+import ArchiveBoxIcon from '~/components/icons/ArchiveBoxIcon';
 import HomeIcon from '~/components/icons/HomeIcon';
 import InBox from '~/components/icons/InBox';
 import InBoxStack from '~/components/icons/InBoxStack';
@@ -17,15 +18,15 @@ export default function useKBarAction() {
       icon: <HomeIcon width={18} />,
       perform: () => router.push('/'),
     },
-    // {
-    //   id: 'blog',
-    //   name: 'Blog',
-    //   shortcut: ['B'],
-    //   keywords: 'writing words',
-    //   section: 'Pages',
-    //   icon: <ArchiveBoxIcon width={18} />,
-    //   perform: () => router.push('/blog'),
-    // },
+    {
+      id: 'blog',
+      name: 'Blog',
+      shortcut: ['B'],
+      keywords: 'writing words',
+      section: 'Pages',
+      icon: <ArchiveBoxIcon width={18} />,
+      perform: () => router.push('/blog'),
+    },
     {
       id: 'snippets',
       name: 'Code Snippets',

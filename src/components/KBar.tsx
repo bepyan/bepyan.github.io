@@ -30,7 +30,7 @@ export default function KBar() {
           }}
         >
           <KBarSearch className="box-border w-full border-none bg-gray-100 px-6 py-4 outline-none dark:bg-gray-700" />
-          <div className="p-4 pt-0">
+          <div className="kbar-scrollbar pb-4">
             <RenderResults />
           </div>
         </KBarAnimator>
@@ -47,18 +47,22 @@ function RenderResults() {
       items={results}
       onRender={({ item, active }) =>
         typeof item === 'string' ? (
-          <div className="py-2 text-xs text-gray-700 dark:text-gray-400">{item}</div>
+          <div className="mx-3 py-2 text-xs text-gray-700 dark:text-gray-400">{item}</div>
         ) : (
           <div
             className={$(
-              'flex cursor-pointer items-center gap-3 rounded-lg p-3 text-sm transition-colors',
+              'mx-3 flex cursor-pointer items-center gap-3 rounded-lg p-3 text-sm transition-colors',
               active && 'bg-gray-200 dark:bg-gray-600',
             )}
           >
             {item.icon && item.icon}
             <div className="flex flex-col font-medium">
               <div>{item.name}</div>
-              {item.subtitle && <span style={{ fontSize: 12 }}>{item.subtitle}</span>}
+              {item.subtitle && (
+                <span className="text-xs font-normal text-gray-600 dark:text-gray-400">
+                  {item.subtitle}
+                </span>
+              )}
             </div>
 
             {item.shortcut?.length && (
