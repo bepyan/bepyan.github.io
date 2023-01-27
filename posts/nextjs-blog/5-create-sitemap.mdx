@@ -68,11 +68,11 @@ module.exports = {
 
 `yarn build`를 실행하면 `out` 디랙토리에도 sitemap 관련 파일들이 추가된 것을 확인할 수 있습니다.
 
-![221116-000505](/posts/5-create-sitemap/221116-000505.png)
+![221116-000505](/images/posts/5-create-sitemap/221116-000505.png)
 
 github action에서도 잘 실행된 것을 확인할 수 있습니다.
 
-![221115-231937](/posts/5-create-sitemap/221115-231937.png)
+![221115-231937](/images/posts/5-create-sitemap/221115-231937.png)
 
 [**sitemap.xml**](/sitemap.xml)
 
@@ -101,7 +101,7 @@ Google은 [**Google Search Console**](https://search.google.com/search-console/w
 URL 접두어에 블로그 도메인 주소를 입력해줍니다.  
 `https://bepyan.github.io/`
 
-![221116-011827](/posts/5-create-sitemap/221116-011827.png)
+![221116-011827](/images/posts/5-create-sitemap/221116-011827.png)
 
 편의상 HTML 태그 방법을 활용하도록 합니다.  
 `_document.tsx` 파일에 `meta` 태그를 추가해주면 됩니다.
@@ -125,17 +125,17 @@ export default function MyDocument() {
 배포이후 `확인`을 클릭해 본인 사이트 인증을 합니다.  
 인증이 성공된다면 사이트의 통계를 볼 수 있게 됩니다.
 
-![221116-012421](/posts/5-create-sitemap/221116-012421.png)
+![221116-012421](/images/posts/5-create-sitemap/221116-012421.png)
 
 정상으로 인식되기까지 정말 오래 걸린 것 같습니다.
 ~~영향력 없는 사이트를 대놓고 무시하는 느낌이 들기도 합니다..~~
 
-![230107-173326](/posts/5-create-sitemap/230107-173326.png)
+![230107-173326](/images/posts/5-create-sitemap/230107-173326.png)
 
 사이트맵이 정상 등록 되면 봇이 꾸준히 사이트 상태를 확인하게 되는데요.
 페이지 색인이 생성되기까지도 오래 걸리는 것 같습니다. ~~일하자 구글..~~
 
-![230107-173819](/posts/5-create-sitemap/230107-173819.png)
+![230107-173819](/images/posts/5-create-sitemap/230107-173819.png)
 
 ---
 
@@ -149,7 +149,7 @@ Naver는 [**네이버 웹마스터**](https://searchadvisor.naver.com/console/bo
 4. 검증 -> robots.txt -> 잘 수집이 되었는지 확인합니다.
 5. 설정 -> 수집 주기 설정 -> `빠르게`로 설정해줍니다.
 
-![221116-010832](/posts/5-create-sitemap/221116-010832.png)
+![221116-010832](/images/posts/5-create-sitemap/221116-010832.png)
 
 네이버도 구글과 비슷한 지표들을 정리해줍니다.
 

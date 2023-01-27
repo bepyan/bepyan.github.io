@@ -12,13 +12,10 @@ import CalanderIcon from '~/components/icons/CalanderIcon';
 import Layout from '~/components/layouts/Layout';
 import { PageSEO } from '~/components/SEO';
 import { fadeIn, fadeInHalf, fadeInUp, staggerHalf } from '~/constants/animations';
-import { getRandomUnsplashImageList } from '~/constants/images';
-import { useMediaQuery } from '~/libs/useMediaQuery';
+import { getRandomUnsplashImageList, unsplashImageList } from '~/constants/images';
 
 export default function Home() {
   const featureImages = getRandomUnsplashImageList(4);
-
-  const isMobile = useMediaQuery(640);
 
   return (
     <Layout>
@@ -57,25 +54,25 @@ export default function Home() {
         <motion.div variants={staggerHalf} className="grid gap-6 md:grid-cols-4">
           <PostItem
             href="/blog/dnd-master/1-drag-event"
-            imgUrl={featureImages[0]}
+            imgUrl={unsplashImageList[13]}
             title="Drag 이벤트 뽀개기"
             date="2022.10.01"
           />
           <PostItem
             href="/blog/2022/css-in-js"
-            imgUrl={featureImages[1]}
+            imgUrl={unsplashImageList[10]}
             title="CSS-in-JS 라이브러리들에 대한 고찰"
             date="2022.02.11"
           />
           <PostItem
             href="/blog/retrospect/2021-pass-kakao"
-            imgUrl={featureImages[2]}
+            imgUrl={unsplashImageList[8]}
             title="2022 카카오 블라인드 공채 합격 후기"
             date="2021.12.20"
           />
           <PostItem
             href="/blog/retrospect/2021-in-startup"
-            imgUrl={featureImages[3]}
+            imgUrl={unsplashImageList[9]}
             title="5개월간 스타트업에서 굴렀다. 그리고 얻었다."
             date="2021.12.14"
           />
