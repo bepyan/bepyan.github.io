@@ -68,7 +68,7 @@ export default function TagPage({
       </Title>
 
       <motion.div variants={staggerOne} initial="initial" animate="animate">
-        <div className="sticky top-0 z-40 my-4 -mx-2 flex items-center gap-2 bg-gray-100 bg-opacity-80 px-2 py-4 backdrop-blur transition-all dark:bg-gray-900 dark:bg-opacity-50">
+        <div className="sticky top-0 z-10 my-4 -mx-2 flex items-center gap-2 bg-gray-100 bg-opacity-80 px-2 py-4 backdrop-blur transition-all dark:bg-gray-900 dark:bg-opacity-50">
           <motion.div
             className="cursor-pointer rounded-lg border border-gray-700 py-1 px-2 font-bold hover:bg-gray-200 dark:border-gray-200 dark:font-normal dark:hover:bg-gray-800"
             onClick={scrollToPosts}

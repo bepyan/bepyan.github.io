@@ -13,11 +13,11 @@ export default function KBar() {
 
   return (
     <KBarPortal>
-      <KBarPositioner>
-        <div className="pointer-events-none fixed inset-0 z-40 h-full w-full bg-white bg-opacity-50 backdrop-blur dark:bg-black dark:bg-opacity-50" />
+      <KBarPositioner className="z-50">
+        <div className="pointer-events-none fixed inset-0 h-full w-full bg-white bg-opacity-50 backdrop-blur dark:bg-black dark:bg-opacity-50" />
         <KBarAnimator
           className={$(
-            'z-50 w-full overflow-hidden rounded-lg bg-gray-100 shadow-xl dark:bg-gray-700',
+            'w-full overflow-hidden rounded-lg bg-gray-100 shadow-xl dark:bg-gray-700',
             'dark:border dark:border-gray-600',
           )}
           style={{

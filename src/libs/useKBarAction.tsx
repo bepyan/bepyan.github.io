@@ -1,3 +1,4 @@
+import { Action } from 'kbar';
 import { useRouter } from 'next/router';
 
 import ContactsIcon from '~/components/common/ContactsIcon';
@@ -7,7 +8,7 @@ import InBoxIcon from '~/components/icons/InBoxIcon';
 import InBoxStackIcon from '~/components/icons/InBoxStackIcon';
 import { siteConfig } from '~/config';
 
-export default function useKBarAction() {
+export default function useKBarAction(): Action[] {
   const router = useRouter();
 
   return [
@@ -47,7 +48,7 @@ export default function useKBarAction() {
       perform: () => router.push('/archives'),
     },
 
-    ...Object.keys(siteConfig.author.contacts)
+    ...(Object.keys(siteConfig.author.contacts)
       .map((sns) => {
         const link = siteConfig.author.contacts[sns as keyof typeof siteConfig.author.contacts];
         if (!link) return;
@@ -63,6 +64,6 @@ export default function useKBarAction() {
           },
         };
       })
-      .filter(Boolean),
+      .filter(Boolean) as Action[]),
   ];
 }
