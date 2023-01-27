@@ -11,11 +11,7 @@ import Title from '~/components/common/Title';
 import CalanderIcon from '~/components/icons/CalanderIcon';
 import Layout from '~/components/layouts/Layout';
 import { PageSEO } from '~/components/SEO';
-import {
-  defaultFadeInUpVariants,
-  defaultFadeInVariants,
-  staggerHalf,
-} from '~/constants/animations';
+import { fadeIn, fadeInHalf, fadeInUp, staggerHalf } from '~/constants/animations';
 import { getRandomUnsplashImageList } from '~/constants/images';
 import { useMediaQuery } from '~/libs/useMediaQuery';
 
@@ -28,27 +24,22 @@ export default function Home() {
     <Layout>
       <PageSEO />
 
-      <motion.section
-        variants={staggerHalf}
-        initial="initial"
-        whileInView="animate"
-        viewport={{ amount: 0.6, once: true }}
-      >
+      <motion.section variants={staggerHalf} initial="initial" animate="animate">
         <Title>bepyan</Title>
 
-        <motion.div variants={defaultFadeInVariants} className="mb-4">
+        <motion.div variants={fadeInHalf} className="mb-4">
           Frontend Developer at{' '}
           <LinkExternalBold href="https://www.kakaocorp.com/">Kakao</LinkExternalBold>, developing{' '}
           <LinkExternalBold href="https://brunch.co.kr/">Brunch</LinkExternalBold>.
         </motion.div>
 
-        <motion.div variants={defaultFadeInVariants}>
+        <motion.div variants={fadeInHalf}>
           <PlainText>
             Motivated to help people around me using React / Next.js, Typescript, Tailwind CSS.
           </PlainText>
         </motion.div>
 
-        <motion.div variants={defaultFadeInVariants}>
+        <motion.div variants={fadeInHalf}>
           <LinkArrow
             href="https://bepyan.notion.site/Frontend-Developer-69fd245161734c1793e8df78dffe705c"
             target="_blank"
@@ -58,14 +49,8 @@ export default function Home() {
         </motion.div>
       </motion.section>
 
-      <motion.section
-        variants={staggerHalf}
-        initial="initial"
-        whileInView="animate"
-        viewport={{ amount: isMobile ? 0.2 : 0.6, once: true }}
-        className="mt-16"
-      >
-        <motion.div variants={defaultFadeInVariants}>
+      <motion.section className="mt-16" variants={staggerHalf} initial="initial" animate="animate">
+        <motion.div variants={fadeIn}>
           <SubTitle className="mb-6">Featured Posts</SubTitle>
         </motion.div>
 
@@ -96,7 +81,7 @@ export default function Home() {
           />
         </motion.div>
 
-        <motion.div variants={defaultFadeInVariants}>
+        <motion.div variants={fadeIn}>
           <LinkArrow href="/blog" className="mt-8">
             Read all posts
           </LinkArrow>
@@ -111,7 +96,7 @@ const PostItem = (props: { href: string; imgUrl: string; title: string; date: st
     <motion.a
       href={props.href}
       className="overflow-hidden rounded-xl bg-gray-200 dark:bg-gray-800"
-      variants={defaultFadeInUpVariants}
+      variants={fadeInUp}
       whileHover={{ scale: 1.02, transformOrigin: 'center' }}
       whileTap={{ scale: 0.98 }}
     >

@@ -2,6 +2,10 @@ import { Variants } from 'framer-motion';
 
 export const defaultEasing = [0.6, -0.05, 0.01, 0.99];
 
+export const staggerTwo: Variants = {
+  animate: { transition: { staggerChildren: 0.2 } },
+};
+
 export const staggerOne: Variants = {
   animate: { transition: { staggerChildren: 0.1 } },
 };
@@ -10,25 +14,29 @@ export const staggerHalf: Variants = {
   animate: { transition: { staggerChildren: 0.05 } },
 };
 
+export const staggerImmediate: Variants = {
+  animate: { transition: { staggerChildren: 0.01 } },
+};
+
 export const fadeInHalf: Variants = {
   initial: {
     opacity: 0.3,
-    transition: { duration: 0.6, ease: defaultEasing },
+    transition: { duration: 0.3, ease: defaultEasing },
     willChange: 'opacity',
   },
   animate: {
     opacity: 1,
-    transition: { duration: 0.6, ease: defaultEasing },
+    transition: { duration: 0.3, ease: defaultEasing },
     willChange: 'opacity',
   },
   exit: {
     opacity: 0.3,
-    transition: { duration: 0.6, ease: defaultEasing },
+    transition: { duration: 0.3, ease: defaultEasing },
     willChange: 'opacity',
   },
 };
 
-export const defaultFadeInVariants: Variants = {
+export const fadeIn: Variants = {
   initial: {
     opacity: 0,
     transition: { duration: 0.6, ease: defaultEasing },
@@ -46,7 +54,7 @@ export const defaultFadeInVariants: Variants = {
   },
 };
 
-export const defaultFadeInUpVariants: Variants = {
+export const fadeInUp: Variants = {
   initial: {
     opacity: 0,
     y: 30,
@@ -67,7 +75,7 @@ export const defaultFadeInUpVariants: Variants = {
   },
 };
 
-export const defaultFadeInScaleVariants: Variants = {
+export const fadeInScale: Variants = {
   initial: {
     opacity: 0,
     scale: 0.85,
@@ -88,7 +96,7 @@ export const defaultFadeInScaleVariants: Variants = {
   },
 };
 
-export const defaultFadeInSlideToRightVariants: Variants = {
+export const fadeInSlideToRight: Variants = {
   initial: {
     opacity: 0,
     x: -30,
@@ -109,7 +117,7 @@ export const defaultFadeInSlideToRightVariants: Variants = {
   },
 };
 
-export const defaultFadeInSlideToLeftVariants: Variants = {
+export const fadeInSlideToLeft: Variants = {
   initial: {
     opacity: 0,
     x: 30,
@@ -130,7 +138,7 @@ export const defaultFadeInSlideToLeftVariants: Variants = {
   },
 };
 
-export const cardSwitchVariants: Variants = {
+export const cardSwitch: Variants = {
   initial: {
     opacity: 0,
     y: 30,

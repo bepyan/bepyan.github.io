@@ -1,6 +1,6 @@
-import { Transition } from '@headlessui/react';
+import { motion } from 'framer-motion';
 import { GetStaticPaths, GetStaticProps } from 'next';
-import { useEffect, useRef, useState } from 'react';
+import { useRef } from 'react';
 
 import Hr from '~/components/common/Hr';
 import PostListItem from '~/components/common/PostListItem';
@@ -8,6 +8,7 @@ import SnippetListItem from '~/components/common/SnippetListItem';
 import Title from '~/components/common/Title';
 import Layout from '~/components/layouts/Layout';
 import { PageSEO } from '~/components/SEO';
+import { fadeIn, fadeInUp, staggerOne } from '~/constants/animations';
 import { posts as reducedPosts, snippets as reducedSnippets, tags } from '~/constants/dataset';
 import { ReducedPost } from '~/libs/types';
 
@@ -47,19 +48,6 @@ export default function TagPage({
   const snippetsRef = useRef<HTMLDivElement>(null);
 
   const postsLength = posts.length + snippets.length;
-  const [isScrollable, setIsScrollable] = useState(false);
-
-  useEffect(() => {
-    const onResize = () => {
-      setIsScrollable(window.innerHeight < document.body.clientHeight);
-    };
-    onResize();
-
-    window.addEventListener('resize', onResize);
-    return () => {
-      window.removeEventListener('reize', onResize);
-    };
-  }, []);
 
   const scrollToPosts = () => {
     postsRef.current?.scrollIntoView({ behavior: 'smooth' });
@@ -79,63 +67,58 @@ export default function TagPage({
         Tags - {tag} <span className="text-2xl">({postsLength})</span>
       </Title>
 
-      {isScrollable && (
-        <div className="sticky top-0 my-4 -mx-2 flex items-center gap-2 bg-gray-100 bg-opacity-80 px-2 py-4 backdrop-blur transition-all dark:bg-gray-900 dark:bg-opacity-50">
-          <div
+      <motion.div variants={staggerOne} initial="initial" animate="animate">
+        <div className="sticky top-0 z-40 my-4 -mx-2 flex items-center gap-2 bg-gray-100 bg-opacity-80 px-2 py-4 backdrop-blur transition-all dark:bg-gray-900 dark:bg-opacity-50">
+          <motion.div
             className="cursor-pointer rounded-lg border border-gray-700 py-1 px-2 font-bold hover:bg-gray-200 dark:border-gray-200 dark:font-normal dark:hover:bg-gray-800"
             onClick={scrollToPosts}
+            variants={fadeIn}
           >
             Posts
-          </div>
-          <div
+          </motion.div>
+          <motion.div
             className="cursor-pointer rounded-lg border border-gray-700 py-1 px-2 font-bold hover:bg-gray-200 dark:border-gray-200 dark:font-normal dark:hover:bg-gray-800"
             onClick={scrollToSnippets}
+            variants={fadeIn}
           >
             Snippets
+          </motion.div>
+        </div>
+
+        <div className="mt-8 space-y-12">
+          <div ref={postsRef} className="scroll-m-16">
+            <p className="text-xl font-bold">
+              Posts <span className="text-base">({posts.length})</span>
+            </p>
+            <Hr className="my-4" />
+            <ul className="grid gap-4 lg:grid-cols-2 lg:gap-12">
+              {posts.map((post) => (
+                <motion.div key={post.slug} variants={fadeInUp}>
+                  <motion.div variants={fadeIn} initial="initial" whileInView="animate">
+                    <PostListItem post={post} />
+                  </motion.div>
+                </motion.div>
+              ))}
+            </ul>
+          </div>
+
+          <div ref={snippetsRef}>
+            <p className="text-xl font-bold">
+              Snippets <span className="text-base">({snippets.length})</span>
+            </p>
+            <Hr className="my-4" />
+            <ul className="grid gap-4 lg:grid-cols-2">
+              {snippets.map((post) => (
+                <motion.div key={post.slug} variants={fadeInUp}>
+                  <motion.div variants={fadeIn} initial="initial" whileInView="animate">
+                    <SnippetListItem key={post.slug} post={post} />
+                  </motion.div>
+                </motion.div>
+              ))}
+            </ul>
           </div>
         </div>
-      )}
-
-      <Transition className="mt-8 space-y-12" appear show>
-        <div ref={postsRef} className="scroll-m-16">
-          <p className="text-xl font-bold">
-            Posts <span className="text-base">({posts.length})</span>
-          </p>
-          <Hr className="my-4" />
-          <ul className="grid gap-4 lg:grid-cols-2 lg:gap-12">
-            {posts.map((post, i) => (
-              <Transition.Child
-                key={post.slug}
-                enter="transition-opacity duration-300"
-                enterFrom="opacity-30"
-                enterTo="opacity-100"
-                style={{ transitionDelay: `${i * 30}ms` }}
-              >
-                <PostListItem post={post} />
-              </Transition.Child>
-            ))}
-          </ul>
-        </div>
-        <div ref={snippetsRef}>
-          <p className="text-xl font-bold">
-            Snippets <span className="text-base">({snippets.length})</span>
-          </p>
-          <Hr className="my-4" />
-          <ul className="grid gap-4 lg:grid-cols-2">
-            {snippets.map((post, i) => (
-              <Transition.Child
-                key={post.slug}
-                enter="transition-opacity duration-300"
-                enterFrom="opacity-30"
-                enterTo="opacity-100"
-                style={{ transitionDelay: `${30 + i * 30}ms` }}
-              >
-                <SnippetListItem key={post.slug} post={post} />
-              </Transition.Child>
-            ))}
-          </ul>
-        </div>
-      </Transition>
+      </motion.div>
     </Layout>
   );
 }

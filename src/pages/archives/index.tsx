@@ -1,4 +1,4 @@
-import { Transition } from '@headlessui/react';
+import { motion } from 'framer-motion';
 import Link from 'next/link';
 
 import Hr from '~/components/common/Hr';
@@ -11,6 +11,7 @@ import Title from '~/components/common/Title';
 import ListIcon from '~/components/icons/ListIcon';
 import Layout from '~/components/layouts/Layout';
 import { PageSEO } from '~/components/SEO';
+import { fadeInHalf, staggerHalf } from '~/constants/animations';
 import { posts, serizes, snippets, tags } from '~/constants/dataset';
 import { ReducedPost } from '~/libs/types';
 
@@ -56,20 +57,20 @@ export default function Archives({
         description="모든 기록물들을 한곳에 저장하는 장소입니다."
         url="/archives"
       />
+
       <Title>Archives</Title>
-      <PlainText>모든 기록물들을 한곳에 저장하는 장소입니다.</PlainText>
-      <Transition appear show>
+
+      <motion.div variants={staggerHalf} initial="initial" animate="animate" exit="exit">
+        <motion.div variants={fadeInHalf}>
+          <PlainText>모든 기록물들을 한곳에 저장하는 장소입니다.</PlainText>
+        </motion.div>
+
         {/* Serizes */}
-        <div className="mt-12">
+        <motion.div className="mt-12" variants={fadeInHalf}>
           <SubTitle>
             Serizes<span className="ml-2 text-sm">({serizes.length})</span>
           </SubTitle>
-          <Transition.Child
-            className="mt-4 flex flex-wrap gap-2"
-            enter="transition-opacity duration-300"
-            enterFrom="opacity-30"
-            enterTo="opacity-100"
-          >
+          <div className="mt-4 flex flex-wrap gap-2">
             {serizes.map((serize) => (
               <LinkHover
                 key={serize.slug}
@@ -85,15 +86,13 @@ export default function Archives({
                 </div>
               </LinkHover>
             ))}
-          </Transition.Child>
-        </div>
+          </div>
+        </motion.div>
+
         <Hr className="my-8" />
+
         {/* Tags */}
-        <Transition.Child
-          enter="transition-opacity duration-300 delay-75"
-          enterFrom="opacity-30"
-          enterTo="opacity-100"
-        >
+        <motion.div className="mt-12" variants={fadeInHalf}>
           <SubTitle>
             Tags<span className="ml-2 text-sm">({tags.length})</span>
           </SubTitle>
@@ -102,14 +101,14 @@ export default function Archives({
               <Tag key={i} tag={tag} />
             ))}
           </div>
-        </Transition.Child>
+        </motion.div>
+
         <Hr className="my-8" />
+
         {/* Posts, Snippets */}
-        <Transition.Child
+        <motion.div
+          variants={fadeInHalf}
           className="mt-4 grid grid-cols-1 gap-8 delay-100 sm:grid-cols-2"
-          enter="transition-opacity duration-300"
-          enterFrom="opacity-30"
-          enterTo="opacity-100"
         >
           <div>
             <SubTitle>Posts</SubTitle>
@@ -119,8 +118,8 @@ export default function Archives({
             <SubTitle>Snippets</SubTitle>
             <PostSection classifiedPosts={classifiedSnippets} />
           </div>
-        </Transition.Child>
-      </Transition>
+        </motion.div>
+      </motion.div>
     </Layout>
   );
 }

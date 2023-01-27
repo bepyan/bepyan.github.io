@@ -1,5 +1,5 @@
-import { Transition } from '@headlessui/react';
 import dayjs from 'dayjs';
+import { motion } from 'framer-motion';
 import { GetStaticPaths, GetStaticProps } from 'next';
 
 import IconText from '~/components/common/IconText';
@@ -10,6 +10,7 @@ import ClockIcon from '~/components/icons/ClockIcon';
 import ListIcon from '~/components/icons/ListIcon';
 import Layout from '~/components/layouts/Layout';
 import { PageSEO } from '~/components/SEO';
+import { fadeIn, fadeInSlideToLeft, fadeInUp, staggerTwo } from '~/constants/animations';
 import { serizes } from '~/constants/dataset';
 import { Serize } from '~/libs/types';
 
@@ -44,10 +45,10 @@ export default function PostPage({ serize }: { serize: Serize }) {
     <Layout>
       <PageSEO title={serize.title} description={serize.description} url={serize.slug} />
 
-      <Transition appear={true} show={true}>
+      <motion.section variants={staggerTwo} initial="initial" animate="animate">
         <div className="grid gap-8 sm:grid-cols-3 sm:gap-32">
           <div className="sm:sticky sm:top-8 sm:self-start">
-            <div className="sm:col-span-1">
+            <motion.div variants={fadeInSlideToLeft} className="sm:col-span-1">
               <HoverCard>
                 <div className="relative mx-auto h-[336px] w-[240px] select-none rounded-lg bg-gray-200 px-11 pb-16 pt-12 dark:bg-gray-800">
                   <div className="absolute inset-y-0 left-4 w-[1px] bg-gray-100 dark:bg-gray-700" />
@@ -56,36 +57,35 @@ export default function PostPage({ serize }: { serize: Serize }) {
                   </div>
                 </div>
               </HoverCard>
-            </div>
+            </motion.div>
           </div>
+
           <div className="sm:col-span-2">
-            <div className="rounded-lg bg-gray-150 px-5 py-4 dark:bg-gray-800">
+            <motion.div
+              className="rounded-lg bg-gray-150 px-5 py-4 dark:bg-gray-800"
+              variants={fadeIn}
+            >
               <p>{serize.description}</p>
               <div className="mt-1 flex gap-2 text-gray-600 dark:text-gray-400">
                 <IconText Icon={CalanderIcon} text={dayjs(serize.date).format('YY.MM.DD')} />
                 <IconText Icon={ListIcon} text={`${serize.posts.length}편`} />
                 <IconText Icon={ClockIcon} text={`${serize.readingMinutes}분`} />
               </div>
-            </div>
+            </motion.div>
+
             <ul className="mt-16 space-y-4">
               {serize.posts.map((post, i) => (
-                <Transition.Child
-                  key={post.slug}
-                  enter="transition-opacity duration-300"
-                  enterFrom="opacity-0"
-                  enterTo="opacity-100"
-                  style={{ transitionDelay: `${i * 30}ms` }}
-                >
+                <motion.div key={post.slug} variants={fadeInUp}>
                   <div className="flex space-x-6">
                     <div className="pt-4 font-bold">{i + 1}.</div>
                     <PostListItem post={post} />
                   </div>
-                </Transition.Child>
+                </motion.div>
               ))}
             </ul>
           </div>
         </div>
-      </Transition>
+      </motion.section>
     </Layout>
   );
 }
