@@ -1,4 +1,4 @@
-export default function InBoxStack({
+export default function InBoxStackIcon({
   className,
   width = 16,
   height = 16,

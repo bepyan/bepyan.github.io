@@ -1,4 +1,4 @@
-export default function InBox({
+export default function InBoxIcon({
   className,
   width = 16,
   height = 16,

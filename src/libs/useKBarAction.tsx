@@ -2,8 +2,8 @@ import { useRouter } from 'next/router';
 
 import ArchiveBoxIcon from '~/components/icons/ArchiveBoxIcon';
 import HomeIcon from '~/components/icons/HomeIcon';
-import InBox from '~/components/icons/InBox';
-import InBoxStack from '~/components/icons/InBoxStack';
+import InBoxIcon from '~/components/icons/InBoxIcon';
+import InBoxStackIcon from '~/components/icons/InBoxStackIcon';
 
 export default function useKBarAction() {
   const router = useRouter();
@@ -33,7 +33,7 @@ export default function useKBarAction() {
       shortcut: ['S'],
       keywords: 'code',
       section: 'Pages',
-      icon: <InBox width={18} />,
+      icon: <InBoxIcon width={18} />,
       perform: () => router.push('/snippets'),
     },
     {
@@ -41,7 +41,7 @@ export default function useKBarAction() {
       name: 'Archives',
       shortcut: ['A'],
       section: 'Pages',
-      icon: <InBoxStack width={18} />,
+      icon: <InBoxStackIcon width={18} />,
       perform: () => router.push('/archives'),
     },
   ];

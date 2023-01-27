@@ -3,7 +3,7 @@ import { useRouter } from 'next/router';
 
 import ArchiveBoxIcon from '~/components/icons/ArchiveBoxIcon';
 import BookIcon from '~/components/icons/BookIcon';
-import InBox from '~/components/icons/InBox';
+import InBoxIcon from '~/components/icons/InBoxIcon';
 import TagIcon from '~/components/icons/TagIcon';
 import { posts, serizes, snippets, tags } from '~/constants/dataset';
 
@@ -38,7 +38,7 @@ export default function useKBarPostAction() {
       parent: 'snippets',
       section: 'Code Snippets',
       keywords: post.tags.join(' '),
-      icon: <InBox width={18} />,
+      icon: <InBoxIcon width={18} />,
       perform: () => router.push(post.slug),
     })),
     ...tags.map((tag) => ({
