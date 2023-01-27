@@ -1,5 +1,6 @@
 import { h, s } from 'hastscript';
 import { useEffect } from 'react';
+import { toast } from 'react-hot-toast';
 import { visit } from 'unist-util-visit';
 
 export default function rehypeCodeWrap() {
@@ -99,8 +100,12 @@ export const useRehypeCodeCoppy = () => {
               clipboardIcon.style.display = 'block';
             }, 1500);
           }
+
+          toast.success('successfully copied.');
         })
-        .catch((e) => alert(e.message));
+        .catch((e) => {
+          toast.error(e.message);
+        });
     };
 
     document.addEventListener('click', copyEvent);

@@ -39,7 +39,7 @@ export default function App({ Component, pageProps }: AppProps) {
           <KBar />
           <Toaster
             toastOptions={{
-              className: 'bg-gray-50 text-gray-900 dark:bg-gray-800 dark:text-gray-200',
+              className: 'bg-gray-50 text-gray-700 dark:bg-gray-800 dark:text-gray-300',
               position: 'bottom-right',
             }}
           />
