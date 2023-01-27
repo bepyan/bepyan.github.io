@@ -65,7 +65,7 @@ export default function PostLayout({
 
       <Transition className="relative gap-8 lg:flex" show appear>
         <Transition.Child
-          className="prose max-w-3xl dark:prose-dark"
+          className="prose w-full max-w-3xl dark:prose-dark"
           enter="transition-opacity duration-200"
           enterFrom="opacity-70"
           enterTo="opacity-100"
