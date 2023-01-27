@@ -54,7 +54,7 @@ export default function PostLayout({
       <motion.section variants={staggerHalf} initial="initial" animate="animate" exit="exit">
         {/* Post Header */}
         <motion.div variants={fadeInHalf}>
-          <Title className="mb-4 text-center">{post.title}</Title>
+          <Title className="mx-auto mb-4 max-w-3xl text-center">{post.title}</Title>
 
           <div className="mt-2 flex w-full flex-col justify-between md:flex-row md:items-center">
             <div className="mx-auto flex gap-2 text-gray-600 dark:text-gray-400">
