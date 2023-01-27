@@ -56,6 +56,7 @@
 <url><loc>https://bepyan.github.io/snippets/next.js/sitemap</loc><changefreq>daily</changefreq><priority>0.7</priority></url>
 <url><loc>https://bepyan.github.io/snippets/react/confettiful</loc><changefreq>daily</changefreq><priority>0.7</priority></url>
 <url><loc>https://bepyan.github.io/snippets/react/lodash-debounce</loc><changefreq>daily</changefreq><priority>0.7</priority></url>
+<url><loc>https://bepyan.github.io/snippets/react/react-hot-toast</loc><changefreq>daily</changefreq><priority>0.7</priority></url>
 <url><loc>https://bepyan.github.io/snippets/react/reading-progress-bar</loc><changefreq>daily</changefreq><priority>0.7</priority></url>
 <url><loc>https://bepyan.github.io/snippets/react/use-media-query</loc><changefreq>daily</changefreq><priority>0.7</priority></url>
 <url><loc>https://bepyan.github.io/snippets/typescript/remove-promise</loc><changefreq>daily</changefreq><priority>0.7</priority></url>
