@@ -1,0 +1,109 @@
+---
+title: 'react-hot-toast'
+description: ''
+icon: ''
+image: ''
+tags:
+  - Next.js
+  -
+draft: false
+date: 2023-01-27 21:43:35
+---
+
+✨ [**react-hot-toast**](https://github.com/timolins/react-hot-toast)
+
+🔥 Hot by default
+🔩 Easily Customizable
+⏳ Promise API - Automatic loader from a promise
+🕊 Lightweight - less than 5kb including styles
+✅ Accessible
+🤯 Headless Hooks
+
+---
+
+## 기본 활용법
+
+```shell
+yarn add react-hot-toast
+```
+
+```tsx:_app.tsx
+import { AppProps } from 'next/app';
+import { Toaster } from 'react-hot-toast';
+
+export default function App({ Component, pageProps }: AppProps) {
+  return (
+    <div>
+      <Component {...pageProps} />
+      <Toaster
+        toastOptions={{
+          className: 'bg-gray-50 text-gray-700 dark:bg-gray-800 dark:text-gray-300',
+          position: 'bottom-right',
+        }}
+      />
+    </div>
+  );
+}
+```
+
+```tsx
+toast.success('successful');
+toast.error('failed');
+```
+
+무척 간편하다!
+
+---
+
+## 커스텀 컴포넌트로 undo 기능 추가
+
+```tsx
+toast((action) => (
+  <Toast
+    title="Dark theme enabled"
+    buttonText="Undo"
+    action={() => {
+      actionImpl.command?.history?.undo();
+      toast.dismiss(action.id);
+
+      toast((undoAction) => (
+        <Toast
+          title="Dark theme undone"
+          buttonText="Redo"
+          action={() => {
+            actionImpl.command?.history?.redo();
+            toast.dismiss(undoAction.id);
+          }}
+        />
+      ));
+    }}
+  />
+));
+```
+
+```tsx
+function Toast({
+  title,
+  buttonText,
+  action,
+}: {
+  title: string;
+  buttonText: string;
+  action: () => void;
+}) {
+  return (
+    <div className="flex items-center gap-4 text-sm">
+      <span>{title}</span>
+      <button
+        onClick={action}
+        className={$(
+          'cursor-pointer rounded py-1 px-2',
+          'bg-gray-150 active:bg-gray-200 dark:bg-gray-700 dark:active:bg-gray-600',
+        )}
+      >
+        {buttonText}
+      </button>
+    </div>
+  );
+}
+```
