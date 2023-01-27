@@ -1,15 +1,11 @@
-import {
-  KBarAnimator,
-  KBarPortal,
-  KBarPositioner,
-  KBarResults,
-  KBarSearch,
-  useMatches,
-} from 'kbar';
+import { KBarAnimator, KBarPortal, KBarPositioner, KBarResults, useMatches } from 'kbar';
+import React from 'react';
 
 import { $ } from '~/libs/core';
 import useKBarPostAction from '~/libs/useKBarPostAction';
 import useKBarThemeAction from '~/libs/useKBarThemeAction';
+
+import { KBarSearch } from './KBarSearch';
 
 export default function KBar() {
   useKBarThemeAction();
