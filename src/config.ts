@@ -15,11 +15,11 @@ export const siteConfig = {
     bio: 'junior frontend engineer',
     contacts: {
       email: 'mailto:bepyan@naver.com',
+      github: 'https://github.com/bepyan',
       twitter: 'https://twitter.com/__pyungan',
       velog: 'https://velog.io/@bepyan',
       linkedin: '',
       youtube: '',
-      github: 'https://github.com/bepyan',
     },
   },
   menus: [
