@@ -1,6 +1,6 @@
 import { Post } from '~/libs/types';
 
-import LinkHover from './common/LinkHover';
+import LinkHover from '../common/LinkHover';
 
 export type PostFooterProps = {
   prevPost: Pick<Post, 'title' | 'slug'> | null;

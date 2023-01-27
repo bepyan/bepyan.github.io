@@ -16,13 +16,13 @@ import Title from '../common/Title';
 import Giscus from '../Giscus';
 import CalanderIcon from '../icons/CalanderIcon';
 import ClockIcon from '../icons/ClockIcon';
-import PostFooter, { PostFooterProps } from '../PostFooter';
 import ReadingProgressBar from '../ReadingProgressBar';
 import { BlogSEO } from '../SEO';
 import SerizeCard from '../SerizeCard';
 import TocBanner from '../TocBanner';
 import TocTop from '../TocTop';
 import Layout from './Layout';
+import PostFooter, { PostFooterProps } from './PostFooter';
 
 export type PostLayoutProps = {
   post: Post;

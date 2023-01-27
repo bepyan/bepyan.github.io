@@ -5,7 +5,7 @@ import { siteConfig } from '~/config';
 import AuthorContacts from '../common/AuthorContacts';
 import Hr from '../common/Hr';
 import LinkExternal from '../common/LinkExternal';
-import HeaderNav from '../HeaderNav';
+import HeaderNav from './HeaderNav';
 
 export default function Layout({ children }: { children: ReactNode }) {
   const since = useMemo(() => {

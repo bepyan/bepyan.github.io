@@ -1,7 +1,7 @@
 import { GetStaticPaths, GetStaticProps } from 'next';
 
+import { PostFooterProps } from '~/components/layouts/PostFooter';
 import PostLayout, { PostLayoutProps } from '~/components/layouts/PostLayout';
-import { PostFooterProps } from '~/components/PostFooter';
 import { snippets } from '~/constants/dataset';
 import { parseMdx } from '~/libs/mdx';
 import { getPost } from '~/libs/post';

@@ -12,11 +12,9 @@ import CalanderIcon from '~/components/icons/CalanderIcon';
 import Layout from '~/components/layouts/Layout';
 import { PageSEO } from '~/components/SEO';
 import { fadeIn, fadeInHalf, fadeInUp, staggerHalf } from '~/constants/animations';
-import { getRandomUnsplashImageList, unsplashImageList } from '~/constants/images';
+import { unsplashImageList } from '~/constants/images';
 
 export default function Home() {
-  const featureImages = getRandomUnsplashImageList(4);
-
   return (
     <Layout>
       <PageSEO />
