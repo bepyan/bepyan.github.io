@@ -20,6 +20,7 @@ export const siteConfig = {
       velog: 'https://velog.io/@bepyan',
       linkedin: '',
       youtube: '',
+      instagram: '',
     },
   },
   menus: [

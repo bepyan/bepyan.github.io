@@ -7,8 +7,8 @@ import GithubIcon from '../icons/GithubIcon';
 import InstagramIcon from '../icons/InstagramIcon';
 import LinkedinIcon from '../icons/LinkedinIcon';
 import MailIcon from '../icons/MailIcon';
-import PencilSquareIcon from '../icons/PencilSquareIcon';
 import TwitterIcon from '../icons/TwitterIcon';
+import VelogIcon from '../icons/VelogIcon';
 import YoutubeIcon from '../icons/YoutubeIcon';
 import LinkExternal from './LinkExternal';
 
@@ -17,7 +17,7 @@ const icons = {
   github: <GithubIcon />,
   twitter: <TwitterIcon />,
   instagram: <InstagramIcon />,
-  velog: <PencilSquareIcon />,
+  velog: <VelogIcon />,
   linkedin: <LinkedinIcon />,
   youtube: <YoutubeIcon />,
 };
