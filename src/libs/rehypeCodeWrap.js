@@ -101,10 +101,11 @@ export const useRehypeCodeCoppy = () => {
             }, 1500);
           }
 
-          toast.success('successfully copied.');
+          toast.success('code copy successful');
         })
         .catch((e) => {
-          toast.error(e.message);
+          console.error(e);
+          toast.error('code copy failed');
         });
     };
 

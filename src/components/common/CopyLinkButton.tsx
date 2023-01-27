@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import { toast } from 'react-hot-toast';
 
 import CheckIcon from '../icons/CheckIcon';
 import LinkIcon from '../icons/LinkIcon';
@@ -13,9 +14,10 @@ export default function CopyLinkButton() {
     try {
       await navigator.clipboard.writeText(url);
       setCopied(true);
+      toast.success('link copy successful');
     } catch (e) {
       console.error(e);
-      alert('클립보드 복사에 실패했습니다.');
+      toast.error('link copy failed');
     }
   };
 
