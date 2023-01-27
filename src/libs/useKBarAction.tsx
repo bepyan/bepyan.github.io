@@ -1,9 +1,11 @@
 import { useRouter } from 'next/router';
 
+import ContactsIcon from '~/components/common/ContactsIcon';
 import ArchiveBoxIcon from '~/components/icons/ArchiveBoxIcon';
 import HomeIcon from '~/components/icons/HomeIcon';
 import InBoxIcon from '~/components/icons/InBoxIcon';
 import InBoxStackIcon from '~/components/icons/InBoxStackIcon';
+import { siteConfig } from '~/config';
 
 export default function useKBarAction() {
   const router = useRouter();
@@ -44,5 +46,23 @@ export default function useKBarAction() {
       icon: <InBoxStackIcon width={18} />,
       perform: () => router.push('/archives'),
     },
+
+    ...Object.keys(siteConfig.author.contacts)
+      .map((sns) => {
+        const link = siteConfig.author.contacts[sns as keyof typeof siteConfig.author.contacts];
+        if (!link) return;
+
+        return {
+          id: sns,
+          name: sns,
+          subtitle: link,
+          section: 'Social',
+          icon: <ContactsIcon width={18} contact={sns} />,
+          perform: () => {
+            window.open(link);
+          },
+        };
+      })
+      .filter(Boolean),
   ];
 }

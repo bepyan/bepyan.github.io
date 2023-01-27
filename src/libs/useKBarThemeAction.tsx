@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-unsafe-member-access */
 /* eslint-disable @typescript-eslint/no-unsafe-call */
-import { useRegisterActions } from 'kbar';
+import { Priority, useRegisterActions } from 'kbar';
 import toast from 'react-hot-toast';
 
 import ComputerIcon from '~/components/icons/ComputerIcon';
@@ -21,6 +21,7 @@ export default function useKBarThemeAction() {
       keywords: 'interface color theme',
       section: 'Preferences',
       icon: <ComputerIcon width={18} />,
+      priority: Priority.HIGH,
     },
     {
       id: 'darkTheme',
