@@ -37,7 +37,12 @@ export default function App({ Component, pageProps }: AppProps) {
           <Component {...pageProps} />
           <FloatScrollUpButton />
           <KBar />
-          <Toaster toastOptions={{ position: 'bottom-right' }} />
+          <Toaster
+            toastOptions={{
+              className: 'bg-gray-50 text-gray-900 dark:bg-gray-800 dark:text-gray-200',
+              position: 'bottom-right',
+            }}
+          />
         </div>
       </KBarProvider>
       {!isDev && (

@@ -7,6 +7,7 @@ import ComputerIcon from '~/components/icons/ComputerIcon';
 import MoonIcon from '~/components/icons/MoonIcon';
 import SunIcon from '~/components/icons/SunIcon';
 
+import { $ } from './core';
 import useDarkMode from './useDarkMode';
 
 export default function useKBarThemeAction() {
@@ -106,19 +107,14 @@ function Toast({
   action: () => void;
 }) {
   return (
-    <div style={{ display: 'flex', alignItems: 'center', gap: 16 }}>
-      <span style={{ fontSize: 14 }}>{title}</span>
+    <div className={$('flex items-center gap-4 text-sm')}>
+      <span>{title}</span>
       <button
         onClick={action}
-        style={{
-          background: '#fff',
-          border: 'none',
-          boxShadow: '0 0 0 1px #000',
-          padding: '4px 8px',
-          cursor: 'pointer',
-          borderRadius: 4,
-          fontSize: 14,
-        }}
+        className={$(
+          'cursor-pointer rounded py-1 px-2',
+          'bg-gray-150 active:bg-gray-200 dark:bg-gray-700 dark:active:bg-gray-600',
+        )}
       >
         {buttonText}
       </button>
