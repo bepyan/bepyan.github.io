@@ -1,17 +1,17 @@
 import { writeFileSync } from 'fs';
 
 import {
-  getAllPosts,
+  getAllBlogPosts,
   getAllSerizes,
-  getAllSnippets,
+  getAllSnippetPosts,
   getTagsByPosts,
   reducePost,
   sortPostByTimeDesc,
 } from '../src/libs/post';
 
 const generateContentDataset = () => {
-  const posts = getAllPosts().map(reducePost).sort(sortPostByTimeDesc);
-  const snippets = getAllSnippets().map(reducePost).sort(sortPostByTimeDesc);
+  const posts = getAllBlogPosts().map(reducePost).sort(sortPostByTimeDesc);
+  const snippets = getAllSnippetPosts().map(reducePost).sort(sortPostByTimeDesc);
   const serizes = getAllSerizes();
   const tags = getTagsByPosts([...posts, ...snippets]);
 

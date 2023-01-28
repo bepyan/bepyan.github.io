@@ -1,11 +1,16 @@
 import { writeFileSync } from 'fs';
 
 import { siteConfig } from '../src/config';
-import { getAllPosts, getAllSerizes, getAllSnippets, getTagsByPosts } from '../src/libs/post';
+import {
+  getAllBlogPosts,
+  getAllSerizes,
+  getAllSnippetPosts,
+  getTagsByPosts,
+} from '../src/libs/post';
 
 const createSiteMap = () => {
   const siteUrl = siteConfig.url;
-  const posts = [...getAllPosts(), ...getAllSnippets()];
+  const posts = [...getAllBlogPosts(), ...getAllSnippetPosts()];
   const serizes = getAllSerizes();
   const tags = getTagsByPosts(posts);
 

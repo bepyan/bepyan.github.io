@@ -5,7 +5,10 @@ module.exports = {
     // https://github.com/sweepline/eslint-plugin-unused-imports
     'no-unused-vars': 'off',
     'unused-imports/no-unused-imports': 'error',
-    'unused-imports/no-unused-vars': ['warn', { argsIgnorePattern: '^_' }],
+    'unused-imports/no-unused-vars': [
+      'warn',
+      { vars: 'all', varsIgnorePattern: '^_', args: 'after-used', argsIgnorePattern: '^_' },
+    ],
     // https://github.com/lydell/eslint-plugin-simple-import-sort
     'simple-import-sort/imports': 'error',
     'simple-import-sort/exports': 'error',

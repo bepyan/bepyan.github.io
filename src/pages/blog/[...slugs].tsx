@@ -31,7 +31,7 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
     nextPost: posts.at(postIndex + 1) ?? null,
   };
 
-  const serize = getSerizeBySlug(post.slug) ?? null;
+  const serize = getSerizeBySlug(post?.serizeSlug);
   if (serize) {
     const postI = serize.posts.findIndex((v) => v.slug === slug);
     postFooterProps.prevPost = postI - 1 >= 0 ? serize.posts.at(postI - 1) ?? null : null;

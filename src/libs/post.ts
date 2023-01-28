@@ -48,25 +48,21 @@ const parsePost = (postPath: string): Post | undefined => {
       tags: grayMatter.tags.filter(Boolean),
       date: dayjs(grayMatter.date).format('YYYY-MM-DD'),
       content,
-      slug: pathToSlug(postPath),
+      slug: `/${pathToSlug(postPath)}`,
       readingMinutes: Math.ceil(readingTime(content).minutes),
       wordCount: content.split(/\s+/gu).length,
     };
 
-    const [fristSlug, middleSlug] = post.slug.split('/');
+    const [_, fristSlug, middleSlug] = post.slug.split('/');
 
-    const isSnippet = fristSlug === 'snippets';
-    const isSerizePost = sync(`${POSTS_PATH}/${fristSlug}/index.mdx`).length > 0;
-
-    if (isSerizePost) {
-      post.serizeSlug = fristSlug;
-    }
-
-    if (isSnippet) {
+    if (fristSlug === 'snippets') {
       post.snippetSlug = middleSlug;
-      post.slug = `/${post.slug}`;
-    } else {
-      post.slug = `/blog/${post.slug}`;
+    } else if (fristSlug === 'blog') {
+      const isSerizePost = sync(`${POSTS_PATH}/${fristSlug}/${middleSlug}/index.mdx`).length > 0;
+
+      if (isSerizePost) {
+        post.serizeSlug = middleSlug;
+      }
     }
 
     return post;
@@ -76,8 +72,9 @@ const parsePost = (postPath: string): Post | undefined => {
   }
 };
 
-export const getAllPosts = (subPath = '') => {
-  const postPaths = sync(`${POSTS_PATH}/!(snippets)${subPath}/!(index).mdx`);
+export const getAllBlogPosts = (subPath = '**/*') => {
+  const path = subPath.replace('blog/', '');
+  const postPaths = sync(`${POSTS_PATH}/blog/${path}/!(index).mdx`);
 
   return postPaths.reduce<Post[]>((ac, filePath) => {
     const post = parsePost(filePath);
@@ -88,7 +85,7 @@ export const getAllPosts = (subPath = '') => {
 };
 
 export const getPost = (slug: string) => {
-  return parsePost(`${POSTS_PATH}${slug.replace(/\/blog/g, '')}.mdx`);
+  return parsePost(`${POSTS_PATH}${slug}.mdx`);
 };
 
 export const getTagsByPosts = (posts: ReducedPost[]) => {
@@ -110,7 +107,7 @@ const parseSerize = (serizePath: string): Serize | undefined => {
     const grayMatter = data as GrayMatter;
 
     const slug = pathToSlug(serizePath);
-    const posts = getAllPosts(slug)
+    const posts = getAllBlogPosts(slug)
       .map(reducePost)
       .sort((a, b) => (a.slug > b.slug ? 1 : -1));
 
@@ -120,7 +117,7 @@ const parseSerize = (serizePath: string): Serize | undefined => {
       date: dayjs(grayMatter.date).format('YYYY-MM-DD'),
       posts,
       readingMinutes: posts.reduce((ac, post) => ac + post.readingMinutes, 0),
-      slug: `/blog/${slug}`,
+      slug: `/${slug}`,
     };
   } catch (e) {
     console.error(e);
@@ -140,20 +137,21 @@ export const getAllSerizes = () => {
     .sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
 };
 
-export const getSerizeBySlug = (slug: string) => {
-  const commonSlug = slug.split('/').slice(0, -1).slice(2).join('/');
-  const serizePath = `.${BASE_PATH}/${commonSlug}/index.mdx`;
+export const getSerizeBySlug = (serizeSlug = '') => {
+  if (!serizeSlug) return null;
 
-  if (!fs.existsSync(`${serizePath}`)) return undefined;
+  const serizePath = `.${BASE_PATH}/blog/${serizeSlug}/index.mdx`;
 
-  return parseSerize(serizePath);
+  if (!fs.existsSync(`${serizePath}`)) return null;
+
+  return parseSerize(serizePath) ?? null;
 };
 
 /**
  * Snippets
  */
-export const getAllSnippets = () => {
-  const snippetsPaths = sync(`${POSTS_PATH}/**/snippets/**/*.mdx`);
+export const getAllSnippetPosts = () => {
+  const snippetsPaths = sync(`${POSTS_PATH}/snippets/**/*.mdx`);
 
   return snippetsPaths.reduce<Post[]>((ac, filePath) => {
     const post = parsePost(filePath);
