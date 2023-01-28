@@ -1,5 +1,6 @@
 import dayjs from 'dayjs';
 import { motion } from 'framer-motion';
+import Link from 'next/link';
 import { MDXRemote } from 'next-mdx-remote';
 
 import { siteConfig } from '~/config';
@@ -11,6 +12,7 @@ import useMediumZoom from '~/libs/useMediumZoom';
 import AuthorContacts from '../common/AuthorContacts';
 import Hr from '../common/Hr';
 import IconText from '../common/IconText';
+import Pill from '../common/Pill';
 import Tag from '../common/Tag';
 import Title from '../common/Title';
 import Giscus from '../Giscus';
@@ -45,6 +47,9 @@ export default function PostLayout({
   useRehypeCodeCoppy();
   useMediumZoom();
 
+  const headerTagTitle = serize?.title ?? post.snippetSlug;
+  const headerTagSlug = serize?.slug ?? `/snippets?key=${post.snippetSlug ?? 'all'}`;
+
   return (
     <Layout>
       <BlogSEO {...post} url={slug} summary={post.description} images={[]} />
@@ -54,6 +59,14 @@ export default function PostLayout({
       <motion.section variants={staggerHalf} initial="initial" animate="animate" exit="exit">
         {/* Post Header */}
         <motion.div variants={fadeInHalf}>
+          {headerTagTitle && (
+            <div className="mb-4 flex justify-center">
+              <Link href={headerTagSlug}>
+                <Pill className="text-sm sm:text-base">{headerTagTitle}</Pill>
+              </Link>
+            </div>
+          )}
+
           <Title className="mx-auto mb-4 max-w-3xl text-center">{post.title}</Title>
 
           <div className="mt-2 flex w-full flex-col justify-between md:flex-row md:items-center">

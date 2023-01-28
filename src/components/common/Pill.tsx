@@ -11,7 +11,7 @@ export default function Pill({ className, selected, ...props }: PillProps) {
     <div
       {...props}
       className={$(
-        'rounded-lg px-1.5 py-0.5',
+        'rounded-lg px-2 py-0.5',
         'transition-colors hover:bg-[#dadada] hover:text-gray-900 dark:hover:text-gray-200',
         selected
           ? 'bg-gray-200 font-semibold ring-1 ring-gray-300 dark:bg-gray-700 dark:text-gray-200'
