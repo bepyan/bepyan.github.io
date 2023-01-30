@@ -63,7 +63,7 @@ export default function Snippets({ snippetList }: { snippetList: Snippet[] }) {
     <Layout>
       <PageSEO
         title="Snippets"
-        description="개발하면서 실제 사용되었던 코드 조각들 입니다. 간단한 Javavscript 유틸 함수, CSS 꼼수에서부터 Framework 사용 꿀팁까지 정리되어 있습니다 🍯"
+        description="개발하면서 실제 사용되었던 코드 조각들 입니다. 간단한 JavaScript 유틸 함수, CSS 꼼수에서부터 Framework 사용 꿀팁까지 정리되어 있습니다 🍯"
         url="/snippets"
       />
 
@@ -74,7 +74,7 @@ export default function Snippets({ snippetList }: { snippetList: Snippet[] }) {
           <PlainText>
             개발하면서 실제 사용되었던 코드 조각들 입니다.
             <br />
-            간단한 Javavscript 유틸 함수, CSS 꼼수에서부터 Framework 사용 꿀팁까지 정리되어 있습니다
+            간단한 JavaScript 유틸 함수, CSS 꼼수에서부터 Framework 사용 꿀팁까지 정리되어 있습니다
             🍯
           </PlainText>
         </motion.div>
