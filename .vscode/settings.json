@@ -3,6 +3,7 @@
   "editor.codeActionsOnSave": {
     "source.fixAll.eslint": true
   },
+  "css.lint.unknownAtRules": "ignore",
   "pasteImage.defaultName": "YYMMDD-HHmmss",
   "pasteImage.basePath": "${projectRoot}/public",
   "pasteImage.path": "${projectRoot}/public/images/posts/${currentFileNameWithoutExt}",
