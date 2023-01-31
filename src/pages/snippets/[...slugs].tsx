@@ -4,7 +4,7 @@ import { PostFooterProps } from '~/components/layouts/PostFooter';
 import PostLayout, { PostLayoutProps } from '~/components/layouts/PostLayout';
 import { snippets } from '~/constants/dataset';
 import { parseMdx } from '~/libs/mdx';
-import { getPost } from '~/libs/post';
+import { contentToDescription, getPost } from '~/libs/post';
 
 export const getStaticPaths: GetStaticPaths = () => {
   return {
@@ -25,6 +25,10 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
     return {
       notFound: true,
     };
+  }
+
+  if (!post.description) {
+    post.description = contentToDescription(post.content);
   }
 
   const postFooterProps: PostFooterProps = {

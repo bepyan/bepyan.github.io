@@ -16,9 +16,7 @@ const pathToSlug = (filePath: string) =>
     .replace('.mdx', '')
     .replace('/index', '');
 
-const getDescription = (description: string, content: string) => {
-  if (description.length) return description;
-
+export const contentToDescription = (content: string) => {
   const parsedContent = content
     .replace(/(?<=\])\((.*?)\)/g, '')
     .replace(/(?<!\S)((http)(s?):\/\/|www\.).+?(?=\s)/g, '')
@@ -26,6 +24,7 @@ const getDescription = (description: string, content: string) => {
     .replace(/\s+/g, ' ')
     .trim()
     .slice(0, 130);
+
   return `${parsedContent}...`;
 };
 
@@ -37,7 +36,6 @@ const parsePost = (postPath: string): Post | undefined => {
     const file = fs.readFileSync(postPath, { encoding: 'utf8' });
     const { content, data } = matter(file);
     const grayMatter = data as GrayMatter;
-    grayMatter.description = getDescription(grayMatter.description, content);
 
     if (grayMatter.draft) {
       return;
