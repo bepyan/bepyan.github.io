@@ -25,7 +25,7 @@ export default function KBar() {
             boxShadow: '0 16px 70px rgb(0 0 0 / 20%)',
           }}
         >
-          <KBarSearch className="bg-primary box-border w-full border-none px-6 py-4 outline-none" />
+          <KBarSearch className="bg-primary box-border w-full border-none px-6 py-4 outline-none placeholder:text-tertiary" />
           <div className="kbar-scrollbar pb-4">
             <RenderResults />
           </div>
