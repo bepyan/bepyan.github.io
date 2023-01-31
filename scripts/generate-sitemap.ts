@@ -1,18 +1,12 @@
 import { writeFileSync } from 'fs';
 
 import { siteConfig } from '../src/config';
-import {
-  getAllBlogPosts,
-  getAllSerizes,
-  getAllSnippetPosts,
-  getTagsByPosts,
-} from '../src/libs/post';
+import { getAllBlogPosts, getAllSerizes, getAllSnippetPosts } from '../src/libs/post';
 
 const createSiteMap = () => {
   const siteUrl = siteConfig.url;
   const posts = [...getAllBlogPosts(), ...getAllSnippetPosts()];
   const serizes = getAllSerizes();
-  const tags = getTagsByPosts(posts);
 
   const sitemap = `<?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:news="http://www.google.com/schemas/sitemap-news/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml" xmlns:mobile="http://www.google.com/schemas/sitemap-mobile/1.0" xmlns:image="http://www.google.com/schemas/sitemap-image/1.1" xmlns:video="http://www.google.com/schemas/sitemap-video/1.1">
@@ -33,12 +27,6 @@ ${posts
   .map(
     (post) =>
       `<url><loc>${siteUrl}${post.slug}</loc><changefreq>daily</changefreq><priority>0.7</priority></url>`,
-  )
-  .join('\n')}
-${tags
-  .map(
-    (tag) =>
-      `<url><loc>${siteUrl}/archives/tags/${tag}</loc><changefreq>daily</changefreq><priority>0.3</priority></url>`,
   )
   .join('\n')}
 </urlset>`;
