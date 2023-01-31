@@ -9,5 +9,5 @@ export default function PlainText({
   children?: React.ReactNode;
   className?: string;
 }) {
-  return <p className={$('mb-4 text-gray-600 dark:text-gray-400', className)}>{children}</p>;
+  return <p className={$('text-secondary mb-4', className)}>{children}</p>;
 }

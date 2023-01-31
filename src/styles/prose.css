@@ -1,8 +1,61 @@
+/* common markdown */
+.prose {
+  @apply text-secondary;
+}
+.prose strong,
+.prose h2,
+.prose h3,
+.prose h4,
+.prose thead th {
+  @apply text-primary;
+}
+
+.prose del {
+  @apply text-mute;
+}
+
+.prose img {
+  @apply my-0 mx-auto;
+}
+.prose img + span {
+  display: block;
+  margin-top: 0.5rem;
+}
+
+.prose a {
+  @apply text-primary break-words transition-all;
+  @apply decoration-neutral-400/70 underline-offset-2;
+}
+.prose a:has(strong) {
+  @apply decoration-yellow-300 decoration-wavy underline-offset-1 dark:decoration-yellow-300/70;
+}
+
+.prose code:not(:where(pre *)) {
+  @apply text-primary rounded-lg px-2 py-0.5 content-none;
+  @apply bg-neutral-200 dark:bg-[var(--prism-background)];
+}
+
+.prose pre::-webkit-scrollbar {
+  display: none;
+}
+.prose pre {
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none; /* Firefox */
+}
+
+/* prose first child, not <TocTop /> */
+.prose > :first-child {
+  margin-top: 3rem !important;
+}
+.prose > .lg\:hidden + * {
+  @apply lg:mt-12;
+}
+
 /* rehype-autolink-headings */
 .prose .anchor {
   @apply absolute -ml-10 mt-1 flex h-6 w-6 items-center justify-center opacity-0 transition-all;
-  @apply rounded-md border-none no-underline ring-1 ring-gray-700/10;
-  @apply hover:shadow hover:ring-gray-700/30 dark:bg-gray-700 dark:text-gray-400;
+  @apply rounded-md border-none no-underline ring-1 ring-neutral-700/10;
+  @apply hover:shadow hover:ring-neutral-700/30 dark:bg-neutral-700 dark:text-neutral-400;
 }
 
 .prose .anchor:after {
@@ -11,55 +64,10 @@
   mask-repeat: no-repeat;
   mask-position: center;
 
-  @apply h-4 w-4 bg-gray-700 dark:bg-gray-300;
+  @apply h-4 w-4 bg-neutral-700 dark:bg-neutral-400;
 }
 
 .prose .anchor:hover,
 .prose *:hover > .anchor {
   @apply md:opacity-100;
-}
-
-/* common markdown */
-.prose img {
-  @apply m-0;
-}
-.prose img + span {
-  display: block;
-  margin-top: 0.5rem;
-}
-
-/* prose frist child, not <TocTop /> */
-.prose > :first-child {
-  margin-top: 3rem !important;
-}
-.prose > .lg\:hidden + * {
-  @apply lg:mt-12;
-}
-
-.prose a {
-  @apply break-words border-b border-[#333333] font-normal no-underline transition-all;
-  @apply text-gray-700 dark:text-gray-400;
-}
-.prose a:not(:has(code, strong)) {
-  @apply hover:text-gray-400 dark:hover:text-gray-500;
-}
-
-.prose a:has(code, strong) {
-  @apply border-opacity-90 hover:border-b-2 dark:border-yellow-300;
-}
-.prose a:has(code) {
-  @apply pb-1;
-}
-
-.prose del {
-  @apply text-gray-300 dark:text-gray-600;
-}
-
-.prose pre::-webkit-scrollbar {
-  display: none;
-}
-
-.prose pre {
-  -ms-overflow-style: none; /* IE and Edge */
-  scrollbar-width: none; /* Firefox */
 }

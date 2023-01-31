@@ -14,7 +14,7 @@ export default function PostFooter({ prevPost, nextPost }: PostFooterProps) {
         <LinkHover href={prevPost.slug} className="group gap-3 px-4 py-2">
           <svg
             viewBox="0 0 3 6"
-            className="h-1.5 w-auto overflow-visible text-gray-400 group-hover:text-gray-600 dark:group-hover:text-gray-300"
+            className="h-1.5 w-auto overflow-visible text-neutral-400 group-hover:text-neutral-600 dark:group-hover:text-neutral-300"
           >
             <path
               d="M3 0L0 3L3 6"
@@ -33,7 +33,7 @@ export default function PostFooter({ prevPost, nextPost }: PostFooterProps) {
           <span>{nextPost.title}</span>
           <svg
             viewBox="0 0 3 6"
-            className="h-1.5 w-auto overflow-visible text-gray-400 group-hover:text-gray-600 dark:group-hover:text-gray-300"
+            className="h-1.5 w-auto overflow-visible text-neutral-400 group-hover:text-neutral-600 dark:group-hover:text-neutral-300"
           >
             <path
               d="M0 0L3 3L0 6"

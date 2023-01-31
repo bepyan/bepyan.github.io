@@ -7,13 +7,13 @@ export default function SearchInput({ className, ...props }: React.ComponentProp
         type="text"
         className={$(
           'block w-full rounded-md border px-4 py-2',
-          'border-gray-200 bg-white text-gray-900 dark:border-gray-900 dark:bg-gray-800 dark:text-gray-100',
-          'focus:outline-none focus:ring-4 focus:ring-gray-200 dark:focus:ring-gray-700',
+          'border-neutral-200 bg-white placeholder:text-tertiary dark:border-neutral-900 dark:bg-neutral-800',
+          'focus:outline-none focus:ring-4 focus:ring-neutral-200 dark:focus:ring-neutral-800',
         )}
         {...props}
       />
       <svg
-        className="absolute right-3 top-3 h-5 w-5 text-gray-400 dark:text-gray-300"
+        className="text-secondary absolute right-3 top-3 h-5 w-5"
         xmlns="http://www.w3.org/2000/svg"
         fill="none"
         viewBox="0 0 24 24"

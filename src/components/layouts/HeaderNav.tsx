@@ -23,10 +23,10 @@ export default function HeaderNav() {
   const toggleMenu = () => {
     if (isMenuOpen) {
       setIsMenuOpen(false);
-      document.body.style.overflow = '';
+      document.body.classList.remove('overflow-hidden');
     } else {
       setIsMenuOpen(true);
-      document.body.style.overflow = 'hidden';
+      document.body.classList.add('overflow-hidden');
     }
   };
 
@@ -38,12 +38,12 @@ export default function HeaderNav() {
 
   useEffect(() => {
     return function cleanup() {
-      document.body.style.overflow = '';
+      document.body.classList.remove('overflow-hidden');
     };
   }, []);
 
   return (
-    <nav className="flex w-full select-none items-end pt-8 pb-12 text-gray-800 dark:text-gray-400">
+    <nav className="text-secondary flex w-full select-none items-end pt-8 pb-12">
       {/* PC */}
       <div className="hidden items-end sm:flex">
         <NavItem href="/" className="mr-2">
@@ -63,7 +63,7 @@ export default function HeaderNav() {
         {isMenuMounted && (
           <ul
             className={$(
-              'absolute inset-x-0 top-[108px] -bottom-4 z-50 flex flex-col bg-gray-100 px-6 transition-all dark:bg-gray-850',
+              'bg-primary absolute inset-x-0 top-[108px] -bottom-4 z-50 flex flex-col px-6 transition-all',
               isMenuRendered ? 'opacity-100' : 'opacity-0',
             )}
           >
@@ -72,9 +72,9 @@ export default function HeaderNav() {
                 key={link.label}
                 href={link.path}
                 className={$(
-                  'border-b border-gray-200 py-4 font-semibold transition-all dark:border-gray-700',
+                  'border-b border-neutral-200 py-4 font-semibold transition-all dark:border-neutral-700',
                   isMenuRendered ? 'translate-x-0 opacity-100' : '-translate-x-4 opacity-0',
-                  isActiveNav(link.path) ? 'text-yellow-400' : 'dark:text-gray-200',
+                  isActiveNav(link.path) ? 'text-yellow-400' : 'text-primary',
                 )}
                 style={{ transitionDelay: `${150 + i * 25}ms` }}
               >

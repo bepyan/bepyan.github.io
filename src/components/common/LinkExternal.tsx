@@ -4,7 +4,7 @@ export default function LinkExternal({ children, className, ...props }: React.Co
   return (
     <a
       {...props}
-      className={$('text-gray-500 transition hover:text-gray-600', className)}
+      className={$('text-tertiary transition hover:text-secondary', className)}
       target="_blank"
       rel="noopener noreferrer"
     >

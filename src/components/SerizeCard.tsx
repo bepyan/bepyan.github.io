@@ -6,7 +6,7 @@ import { $ } from '~/libs/core';
 import { Post, Serize } from '~/libs/types';
 
 import IconText from './common/IconText';
-import CalanderIcon from './icons/CalanderIcon';
+import CalenderIcon from './icons/CalenderIcon';
 import ClockIcon from './icons/ClockIcon';
 import ListIcon from './icons/ListIcon';
 
@@ -22,26 +22,19 @@ export default function SerizeCard({ currentPost, serize }: { currentPost: Post;
   return (
     <div
       className={$(
-        'rounded-lg bg-gray-150 p-4 dark:bg-gray-800',
-        !open && 'cursor-pointer transition-all hover:bg-gray-200 dark:hover:bg-gray-700',
+        'rounded-lg bg-neutral-200/70 p-4 dark:bg-neutral-800/70',
+        !open && 'cursor-pointer transition-all hover:bg-neutral-200 dark:hover:bg-neutral-800',
       )}
       onClick={onClickCard}
     >
       <p className="text-base font-medium sm:text-lg">{serize.title}</p>
       <div className="mt-1 flex gap-3">
         <IconText Icon={ListIcon} text={`${currentPostIndex + 1} / ${serize.posts.length}`} />
-        <IconText Icon={CalanderIcon} text={dayjs(serize.date).format('YY.MM.DD')} />
+        <IconText Icon={CalenderIcon} text={dayjs(serize.date).format('YY.MM.DD')} />
         <IconText Icon={ClockIcon} text={`${serize.readingMinutes}분`} />
       </div>
       <div className="mt-3 whitespace-pre-wrap text-sm">
-        <div className="">
-          {serize.description}
-          {!open && (
-            <span className="ml-3 text-gray-700 dark:text-gray-300" onClick={() => setOpen(true)}>
-              더보기
-            </span>
-          )}
-        </div>
+        <div className="text-secondary">{serize.description}</div>
       </div>
       {open && (
         <div className="mt-4 flex flex-col gap-2">
@@ -50,15 +43,17 @@ export default function SerizeCard({ currentPost, serize }: { currentPost: Post;
               key={i}
               href={post.slug}
               className={$(
-                'text-gray-400 transition-all hover:text-gray-700 dark:hover:text-gray-250',
-                post.slug === currentPost.slug && 'font-semibold text-gray-700 dark:text-gray-200',
+                'transition-all',
+                post.slug === currentPost.slug
+                  ? 'text-primary font-semibold'
+                  : 'text-secondary hover:text-primary',
               )}
             >
               {i + 1}. {post.title}
             </Link>
           ))}
           <span
-            className="mt-2 mr-auto cursor-pointer text-sm text-gray-400 hover:text-gray-700 dark:text-gray-300 dark:hover:text-gray-250"
+            className="text-tertiary mt-2 mr-auto cursor-pointer text-sm hover:text-secondary"
             onClick={() => setOpen(false)}
           >
             간략히

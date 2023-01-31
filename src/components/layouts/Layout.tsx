@@ -22,7 +22,7 @@ export default function Layout({ children }: { children: ReactNode }) {
       {/* --- */}
       <main className="relative pb-16">{children}</main>
       {/* --- */}
-      <footer className="pb-8 text-sm text-gray-800 dark:text-gray-400">
+      <footer className="pb-8 text-sm text-neutral-800 dark:text-neutral-400">
         <Hr className="mb-8" />
 
         <div className="flex flex-col items-end space-y-1">

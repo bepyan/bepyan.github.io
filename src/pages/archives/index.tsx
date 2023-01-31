@@ -1,3 +1,4 @@
+import dayjs from 'dayjs';
 import { motion } from 'framer-motion';
 import Link from 'next/link';
 
@@ -75,11 +76,11 @@ export default function Archives({
               <LinkHover
                 key={serize.slug}
                 href={serize.slug}
-                className="px-4 py-2 ring-1 ring-gray-300 dark:ring-gray-700"
+                className="px-4 py-2 ring-1 ring-neutral-300 dark:ring-neutral-700"
               >
                 <div>
                   <span>{serize.title}</span>
-                  <div className="flex gap-2 text-gray-600 dark:text-gray-400">
+                  <div className="text-tertiary flex gap-2">
                     <span className="text-xs">{serize.date}</span>
                     <IconText Icon={ListIcon} text={serize.posts.length} />
                   </div>
@@ -138,11 +139,11 @@ const PostSection = ({ classifiedPosts }: { classifiedPosts: ClassifiedPosts }) 
             <ul>
               {classifiedPosts[year].map((post) => (
                 <li key={post.slug}>
-                  <Link
-                    href={post.slug}
-                    className="text-gray-500 transition hover:text-gray-900 dark:text-gray-400 dark:hover:text-gray-500"
-                  >
-                    {post.title}
+                  <Link href={post.slug} className="text-tertiary transition hover:text-primary">
+                    <div className="flex items-end gap-1">
+                      <span className="mb-0.5 w-8 text-xs">{dayjs(post.date).format('MM.DD')}</span>
+                      <span>{post.title}</span>
+                    </div>
                   </Link>
                 </li>
               ))}

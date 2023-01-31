@@ -15,7 +15,8 @@ export default function LinkArrow({
       {...props}
       href={href ?? '/'}
       className={$(
-        'inline-flex h-6 items-center rounded-lg leading-7 text-gray-600 transition-all hover:text-gray-800 dark:text-gray-500 dark:hover:text-gray-200',
+        'inline-flex h-6 items-center rounded-lg leading-7 transition-all',
+        'text-mute hover:text-primary',
         className,
       )}
     >

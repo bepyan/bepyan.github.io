@@ -6,10 +6,7 @@ export default function LinkHover({ className, href, children }: React.Component
   return (
     <Link
       href={href ?? '/'}
-      className={$(
-        'flex items-center rounded-lg transition-all hover:bg-gray-250 hover:bg-opacity-20 dark:hover:bg-gray-800',
-        className,
-      )}
+      className={$('flex items-center rounded-lg transition-all hover:bg-secondary', className)}
     >
       {children}
     </Link>

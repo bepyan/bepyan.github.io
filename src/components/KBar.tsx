@@ -14,18 +14,18 @@ export default function KBar() {
   return (
     <KBarPortal>
       <KBarPositioner className="z-50">
-        <div className="pointer-events-none fixed inset-0 h-full w-full bg-white bg-opacity-50 backdrop-blur dark:bg-black dark:bg-opacity-50" />
+        <div className="pointer-events-none fixed inset-0 h-full w-full bg-white/50 backdrop-blur dark:bg-black/50" />
         <KBarAnimator
           className={$(
-            'w-full overflow-hidden rounded-lg bg-gray-100 shadow-xl dark:bg-gray-700',
-            'dark:border dark:border-gray-600',
+            'bg-primary w-full overflow-hidden rounded-lg shadow-xl',
+            'dark:border dark:border-neutral-800',
           )}
           style={{
             maxWidth: '600px',
             boxShadow: '0 16px 70px rgb(0 0 0 / 20%)',
           }}
         >
-          <KBarSearch className="box-border w-full border-none bg-gray-100 px-6 py-4 outline-none dark:bg-gray-700" />
+          <KBarSearch className="bg-primary box-border w-full border-none px-6 py-4 outline-none" />
           <div className="kbar-scrollbar pb-4">
             <RenderResults />
           </div>
@@ -43,21 +43,19 @@ function RenderResults() {
       items={results}
       onRender={({ item, active }) =>
         typeof item === 'string' ? (
-          <div className="mx-3 py-2 text-xs text-gray-700 dark:text-gray-400">{item}</div>
+          <div className="text-secondary mx-3 py-2 text-xs">{item}</div>
         ) : (
           <div
             className={$(
               'mx-3 flex cursor-pointer items-center gap-3 rounded-lg p-3 text-sm transition-colors',
-              active && 'bg-gray-200 dark:bg-gray-600',
+              active && 'bg-secondary',
             )}
           >
             {item.icon && item.icon}
             <div className="flex flex-col font-medium">
               <div>{item.name}</div>
               {item.subtitle && (
-                <span className="text-xs font-normal text-gray-600 dark:text-gray-400">
-                  {item.subtitle}
-                </span>
+                <span className="text-secondary text-xs font-normal">{item.subtitle}</span>
               )}
             </div>
 

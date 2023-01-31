@@ -80,16 +80,13 @@ export default function TocBanner({
   return (
     <div
       className={$(
-        'overflow-hidden rounded-xl border border-gray-200 transition-all dark:border-gray-800',
+        'overflow-hidden rounded-xl border border-neutral-200 transition-all dark:border-neutral-800',
         className,
       )}
     >
       {tableOfContents.length !== 0 && (
-        <div className="bg-gray-100 p-4 pr-2 dark:border-gray-700 dark:bg-gray-800">
-          <p
-            id="toc-header"
-            className="text-sm font-semibold leading-6 text-gray-900 dark:text-gray-100"
-          >
+        <div className="p-4 pr-2 dark:border-neutral-700 dark:bg-neutral-800">
+          <p id="toc-header" className="text-primary text-sm font-semibold leading-6">
             On this page
           </p>
           <ul id="toc-content" className="mt-2 flex flex-col items-start justify-start text-sm">
@@ -99,11 +96,11 @@ export default function TocBanner({
                   <a
                     href={`#${section.slug}`}
                     className={$(
-                      'group block py-1 transition-colors',
-                      section.subSections && 'font-medium',
+                      'group block py-1',
+                      section.subSections && '',
                       isSectionActive(section)
-                        ? 'font-medium text-gray-900 drop-shadow-base-bold dark:font-medium dark:text-yellow-400 dark:drop-shadow-base'
-                        : 'text-gray-700 hover:text-gray-900 hover:drop-shadow-base-bold dark:text-gray-400 dark:hover:text-gray-300 dark:hover:drop-shadow-base',
+                        ? 'bg-gradient-to-r from-neutral-700 to-yellow-900 bg-clip-text font-extrabold text-transparent dark:from-yellow-400 dark:to-yellow-600'
+                        : 'text-secondary hover:text-primary hover:drop-shadow-base-bold dark:hover:drop-shadow-base',
                     )}
                   >
                     {section.text}
@@ -114,10 +111,10 @@ export default function TocBanner({
                     <a
                       href={`#${subSection.slug}`}
                       className={$(
-                        'group flex items-start py-1 transition-colors',
+                        'group flex items-start py-1',
                         isSubSectionActive(subSection)
-                          ? 'font-medium text-gray-900 drop-shadow-base-bold dark:text-yellow-400 dark:drop-shadow-base'
-                          : 'text-gray-700 hover:text-gray-900 hover:drop-shadow-base-bold dark:text-gray-400 dark:hover:text-gray-300 dark:hover:drop-shadow-base',
+                          ? 'bg-gradient-to-r from-neutral-700 to-yellow-900 bg-clip-text font-extrabold text-transparent dark:from-yellow-400 dark:to-yellow-600'
+                          : 'text-secondary hover:text-primary hover:drop-shadow-base-bold dark:hover:drop-shadow-base',
                       )}
                     >
                       <svg
@@ -126,7 +123,7 @@ export default function TocBanner({
                         viewBox="0 -9 3 24"
                         className={$(
                           'mr-2 overflow-visible',
-                          'text-gray-400 group-hover:text-gray-600 dark:text-gray-600 dark:group-hover:text-gray-500',
+                          'text-tertiary group-hover:text-secondary',
                         )}
                       >
                         <path
@@ -146,7 +143,9 @@ export default function TocBanner({
           </ul>
         </div>
       )}
-      <div className="flex items-center justify-end bg-gray-150 p-2 dark:bg-gray-700">
+      <div
+        className={$('flex items-center justify-end p-2', 'bg-neutral-200/50 dark:bg-neutral-700')}
+      >
         <CopyLinkButton />
         <IconButton onClick={() => window.scrollTo({ top: 0 })}>
           <UpIcon width={20} />

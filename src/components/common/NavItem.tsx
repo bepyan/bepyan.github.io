@@ -12,9 +12,7 @@ export default function NavItem({ href, children, className }: React.ComponentPr
     <LinkHover
       href={href}
       className={$(
-        isActive
-          ? 'font-semibold text-gray-800 dark:text-gray-200'
-          : 'font-normal text-gray-600 dark:text-gray-400',
+        isActive ? 'text-primary font-semibold' : 'text-secondary font-normal',
         className,
       )}
     >

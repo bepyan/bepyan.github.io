@@ -8,7 +8,7 @@ import LinkExternalBold from '~/components/common/LinkExternalBold';
 import PlainText from '~/components/common/PlainText';
 import SubTitle from '~/components/common/SubTitle';
 import Title from '~/components/common/Title';
-import CalanderIcon from '~/components/icons/CalanderIcon';
+import CalenderIcon from '~/components/icons/CalenderIcon';
 import Layout from '~/components/layouts/Layout';
 import { PageSEO } from '~/components/SEO';
 import { fadeIn, fadeInHalf, fadeInUp, staggerHalf } from '~/constants/animations';
@@ -90,7 +90,7 @@ const PostItem = (props: { href: string; imgUrl: string; title: string; date: st
   return (
     <motion.a
       href={props.href}
-      className="overflow-hidden rounded-xl bg-gray-200 dark:bg-gray-800"
+      className="overflow-hidden rounded-xl bg-neutral-200 dark:bg-neutral-800"
       variants={fadeInUp}
       whileHover={{ scale: 1.02, transformOrigin: 'center' }}
       whileTap={{ scale: 0.98 }}
@@ -107,7 +107,7 @@ const PostItem = (props: { href: string; imgUrl: string; title: string; date: st
       </div>
       <div className="p-6">
         <div className="mb-2 flex w-full items-end">
-          <IconText Icon={CalanderIcon} text={props.date} />
+          <IconText Icon={CalenderIcon} text={props.date} />
         </div>
         <h4 className="text-xl font-bold tracking-tight md:text-lg">{props.title}</h4>
       </div>

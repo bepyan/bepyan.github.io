@@ -12,10 +12,10 @@ export default function Pill({ className, selected, ...props }: PillProps) {
       {...props}
       className={$(
         'rounded-lg px-2 py-0.5',
-        'transition-colors hover:bg-[#dadada] hover:text-gray-900 dark:hover:text-gray-200',
+        'bg-neutral-200 transition-colors hover:bg-neutral-300 hover:text-primary dark:bg-neutral-700',
         selected
-          ? 'bg-gray-200 font-semibold ring-1 ring-gray-300 dark:bg-gray-700 dark:text-gray-200'
-          : 'bg-gray-200 font-medium text-gray-600 dark:bg-gray-700 dark:text-gray-300',
+          ? 'text-primary font-semibold ring-2 ring-neutral-400/70'
+          : 'text-secondary font-medium',
         className,
       )}
     />

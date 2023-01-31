@@ -165,7 +165,7 @@ code.language-css .token.selector > .token.pseudo-element {
 
 /* rehype-code-wrap */
 .rehype-code-wrap {
-  @apply relative my-2 overflow-hidden rounded-lg -mx-2 sm:m-0;
+  @apply relative my-2 -mx-2 overflow-hidden rounded-lg sm:m-0;
 }
 .rehype-code-wrap > pre {
   border-radius: 0;
@@ -198,7 +198,7 @@ code.language-css .token.selector > .token.pseudo-element {
 
 .rehype-code-wrap--copy {
   @apply absolute right-2 bottom-2 flex h-8 w-8 items-center justify-center;
-  @apply rounded-lg bg-gray-600 text-xs text-gray-250 opacity-0 transition-all hover:text-gray-300;
+  @apply rounded-lg bg-neutral-700 text-xs text-neutral-400 opacity-0 transition-all hover:text-neutral-300;
 }
 .rehype-code-wrap:hover .rehype-code-wrap--copy {
   @apply opacity-100;
@@ -248,11 +248,7 @@ code.language-css .token.selector > .token.pseudo-element {
   content: attr(line);
 }
 
-/* Inline code */
-.prose :not(pre) code {
-  @apply text-gray-800 dark:text-gray-200;
-}
-
 .prose pre {
-  @apply bg-[var(--prism-background)] text-[var(--prism-foreground)];
+  color: var(--prism-foreground);
+  background-color: var(--prism-background);
 }

@@ -26,7 +26,7 @@ export default function FloatScrollUpButton() {
 
   return (
     <div
-      className="fixed right-6 bottom-6 h-8 w-8 rounded bg-gray-150 p-2 active:opacity-80 dark:bg-gray-700 sm:hidden"
+      className="bg-secondary fixed right-6 bottom-6 h-8 w-8 rounded p-2 active:opacity-80 sm:hidden"
       onClick={() => window.scrollTo({ top: 0 })}
       style={{ display: show ? '' : 'none' }}
     >

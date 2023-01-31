@@ -112,10 +112,7 @@ function Toast({
       <span>{title}</span>
       <button
         onClick={action}
-        className={$(
-          'cursor-pointer rounded py-1 px-2',
-          'bg-gray-150 active:bg-gray-200 dark:bg-gray-700 dark:active:bg-gray-600',
-        )}
+        className={$('cursor-pointer rounded py-1 px-2', 'bg-secondary active:bg-tertiary')}
       >
         {buttonText}
       </button>

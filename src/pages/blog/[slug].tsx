@@ -5,7 +5,7 @@ import { GetStaticPaths, GetStaticProps } from 'next';
 import IconText from '~/components/common/IconText';
 import PostListItem from '~/components/common/PostListItem';
 import HoverCard from '~/components/HoverCard';
-import CalanderIcon from '~/components/icons/CalanderIcon';
+import CalenderIcon from '~/components/icons/CalenderIcon';
 import ClockIcon from '~/components/icons/ClockIcon';
 import ListIcon from '~/components/icons/ListIcon';
 import Layout from '~/components/layouts/Layout';
@@ -50,9 +50,9 @@ export default function PostPage({ serize }: { serize: Serize }) {
           <div className="sm:sticky sm:top-8 sm:self-start">
             <motion.div variants={fadeInSlideToLeft} className="sm:col-span-1">
               <HoverCard>
-                <div className="relative mx-auto h-[336px] w-[240px] select-none rounded-lg bg-gray-200 px-11 pb-16 pt-12 dark:bg-gray-800">
-                  <div className="absolute inset-y-0 left-4 w-[1px] bg-gray-100 dark:bg-gray-700" />
-                  <div className="flex h-full break-keep bg-gray-50 px-3 py-4 text-xl font-semibold dark:bg-gray-700 dark:text-white">
+                <div className="relative mx-auto h-[336px] w-[240px] select-none rounded-lg bg-neutral-200 px-11 pb-16 pt-12 dark:bg-neutral-800">
+                  <div className="absolute inset-y-0 left-4 w-[1px] bg-neutral-50 dark:bg-neutral-700" />
+                  <div className="text-primary flex h-full break-keep bg-neutral-50 px-3 py-4 text-xl font-semibold dark:bg-neutral-700">
                     {serize.title}
                   </div>
                 </div>
@@ -61,13 +61,10 @@ export default function PostPage({ serize }: { serize: Serize }) {
           </div>
 
           <div className="sm:col-span-2">
-            <motion.div
-              className="rounded-lg bg-gray-150 px-5 py-4 dark:bg-gray-800"
-              variants={fadeIn}
-            >
-              <p>{serize.description}</p>
-              <div className="mt-1 flex gap-2 text-gray-600 dark:text-gray-400">
-                <IconText Icon={CalanderIcon} text={dayjs(serize.date).format('YY.MM.DD')} />
+            <motion.div className="bg-secondary rounded-lg px-5 py-4" variants={fadeIn}>
+              <p className="text-primary font-medium">{serize.description}</p>
+              <div className="text-secondary mt-1 flex gap-2">
+                <IconText Icon={CalenderIcon} text={dayjs(serize.date).format('YY.MM.DD')} />
                 <IconText Icon={ListIcon} text={`${serize.posts.length}편`} />
                 <IconText Icon={ClockIcon} text={`${serize.readingMinutes}분`} />
               </div>

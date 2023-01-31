@@ -8,9 +8,8 @@ export default function KBarButton() {
   return (
     <button
       className={$(
-        'flex cursor-pointer items-center rounded-lg  p-1 text-xs',
-        'bg-gray-200 dark:bg-gray-700',
-        'transition-colors hover:bg-gray-150 hover:dark:bg-gray-800',
+        'flex cursor-pointer items-center rounded-lg p-1 text-xs',
+        'bg-secondary transition-colors hover:bg-tertiary',
       )}
       onClick={query.toggle}
     >
@@ -18,7 +17,7 @@ export default function KBarButton() {
       <div
         className={$(
           'ml-auto rounded-lg px-2 py-1',
-          'border bg-gray-100 dark:border-gray-700 dark:bg-gray-800',
+          'bg-primary border transition-colors dark:border-neutral-700',
         )}
       >
         ⌘ K

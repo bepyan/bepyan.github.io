@@ -16,7 +16,7 @@ import Pill from '../common/Pill';
 import Tag from '../common/Tag';
 import Title from '../common/Title';
 import Giscus from '../Giscus';
-import CalanderIcon from '../icons/CalanderIcon';
+import CalenderIcon from '../icons/CalenderIcon';
 import ClockIcon from '../icons/ClockIcon';
 import ReadingProgressBar from '../ReadingProgressBar';
 import { BlogSEO } from '../SEO';
@@ -70,8 +70,8 @@ export default function PostLayout({
           <Title className="mx-auto mb-4 max-w-3xl text-center">{post.title}</Title>
 
           <div className="mt-2 flex w-full flex-col justify-between md:flex-row md:items-center">
-            <div className="mx-auto flex gap-2 text-gray-600 dark:text-gray-400">
-              <IconText Icon={CalanderIcon} text={dayjs(post.date).format('YYYY.MM.DD')} />
+            <div className="mx-auto flex gap-2 text-neutral-600 dark:text-neutral-400">
+              <IconText Icon={CalenderIcon} text={dayjs(post.date).format('YYYY.MM.DD')} />
               <IconText Icon={ClockIcon} text={`${post.readingMinutes}분`} />
             </div>
           </div>
@@ -81,7 +81,7 @@ export default function PostLayout({
 
         {/* Post Content */}
         <motion.div variants={fadeInHalf} className="relative gap-8 lg:flex">
-          <div className="prose w-full max-w-3xl dark:prose-dark">
+          <div className="prose prose-neutral w-full max-w-3xl dark:prose-dark">
             <TocTop className="lg:hidden" tableOfContents={tableOfContents} />
             <MDXRemote compiledSource={compiledSource} />
           </div>
@@ -112,7 +112,9 @@ export default function PostLayout({
               </div>
               <div>
                 <div className="font-bold">{siteConfig.author.name}</div>
-                <div className="text-gray-600 dark:text-gray-400">{siteConfig.author.bio}</div>
+                <div className="text-neutral-600 dark:text-neutral-400">
+                  {siteConfig.author.bio}
+                </div>
                 <AuthorContacts className="mt-2 text-sm" />
               </div>
             </div>
