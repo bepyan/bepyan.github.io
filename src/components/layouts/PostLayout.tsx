@@ -12,7 +12,6 @@ import useMediumZoom from '~/libs/useMediumZoom';
 import AuthorContacts from '../common/AuthorContacts';
 import Hr from '../common/Hr';
 import IconText from '../common/IconText';
-import Pill from '../common/Pill';
 import Tag from '../common/Tag';
 import Title from '../common/Title';
 import Giscus from '../Giscus';
@@ -59,15 +58,18 @@ export default function PostLayout({
       <motion.section variants={staggerHalf} initial="initial" animate="animate" exit="exit">
         {/* Post Header */}
         <motion.div variants={fadeInHalf}>
+          <Title className="mx-auto mb-4 max-w-3xl text-center">{post.title}</Title>
+
           {headerTagTitle && (
-            <div className="mb-4 flex justify-center">
+            <div className="mt-2 flex justify-center gap-1">
+              {post.snippetSlug && <span>snippet: </span>}
               <Link href={headerTagSlug}>
-                <Pill className="text-sm sm:text-base">{headerTagTitle}</Pill>
+                <span className="text-sm font-medium underline underline-offset-4 sm:text-base">
+                  {headerTagTitle}
+                </span>
               </Link>
             </div>
           )}
-
-          <Title className="mx-auto mb-4 max-w-3xl text-center">{post.title}</Title>
 
           <div className="mt-2 flex w-full flex-col justify-between md:flex-row md:items-center">
             <div className="mx-auto flex gap-2 text-neutral-600 dark:text-neutral-400">
