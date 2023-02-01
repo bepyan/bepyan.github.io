@@ -14,6 +14,10 @@
   @apply text-mute;
 }
 
+.prose p {
+  @apply leading-7 sm:leading-8;
+}
+
 .prose img {
   @apply my-0 mx-auto;
 }
