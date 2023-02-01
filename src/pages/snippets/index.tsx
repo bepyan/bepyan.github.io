@@ -80,7 +80,7 @@ export default function Snippets({ snippetList }: { snippetList: Snippet[] }) {
         </motion.div>
 
         <motion.div
-          className="no-scrollbar bg-primary sticky top-0 z-10 -mx-2 flex items-center gap-2 overflow-scroll bg-opacity-70 px-2 py-4 backdrop-blur transition-all dark:bg-opacity-70"
+          className="bg-primary sticky top-0 z-10 -mx-2 flex items-center gap-2 overflow-scroll bg-opacity-70 px-2 py-4 backdrop-blur transition-all no-scrollbar dark:bg-opacity-70"
           variants={staggerImmediate}
         >
           <motion.div variants={fadeInHalf}>
