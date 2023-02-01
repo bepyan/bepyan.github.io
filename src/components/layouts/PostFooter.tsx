@@ -9,12 +9,12 @@ export type PostFooterProps = {
 
 export default function PostFooter({ prevPost, nextPost }: PostFooterProps) {
   return (
-    <div className="-mx-4 flex items-center text-sm font-semibold text-slate-700 dark:text-slate-200 sm:mx-0 sm:text-base">
+    <div className="text-secondary -mx-4 flex items-center text-xs font-semibold sm:mx-0 sm:text-base">
       {prevPost && (
         <LinkHover href={prevPost.slug} className="group gap-3 px-4 py-2">
           <svg
             viewBox="0 0 3 6"
-            className="h-1.5 w-auto overflow-visible text-neutral-400 group-hover:text-neutral-600 dark:group-hover:text-neutral-300"
+            className="text-mute h-1.5 w-auto overflow-visible group-hover:text-secondary"
           >
             <path
               d="M3 0L0 3L3 6"

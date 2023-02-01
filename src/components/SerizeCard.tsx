@@ -33,11 +33,11 @@ export default function SerizeCard({ currentPost, serize }: { currentPost: Post;
         <IconText Icon={CalenderIcon} text={dayjs(serize.date).format('YY.MM.DD')} />
         <IconText Icon={ClockIcon} text={`${serize.readingMinutes}분`} />
       </div>
-      <div className="mt-3 whitespace-pre-wrap text-sm">
+      <div className="mt-3 whitespace-pre-wrap text-xs sm:text-sm">
         <div className="text-secondary">{serize.description}</div>
       </div>
       {open && (
-        <div className="mt-4 flex flex-col gap-2">
+        <div className="mt-4 flex flex-col gap-2 text-sm sm:text-base">
           {serize.posts.map((post, i) => (
             <Link
               key={i}
