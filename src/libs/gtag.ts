@@ -1,7 +1,5 @@
-import { useRouter } from 'next/router';
-import { useEffect } from 'react';
-
 import { isDev } from './core';
+import useRouteChange from './useRouteChange';
 
 export const GA_TRACKING_ID = 'G-DBJG1MY1M0';
 
@@ -25,20 +23,9 @@ export const event = (
 };
 
 export const useGtag = () => {
-  const router = useRouter();
-
-  useEffect(() => {
+  useRouteChange((url) => {
     if (isDev) return;
 
-    const handleRouteChange = (url: URL) => {
-      pageview(url);
-    };
-
-    router.events.on('routeChangeComplete', handleRouteChange);
-    router.events.on('hashChangeComplete', handleRouteChange);
-    return () => {
-      router.events.off('routeChangeComplete', handleRouteChange);
-      router.events.off('hashChangeComplete', handleRouteChange);
-    };
-  }, [router.events]);
+    pageview(url);
+  });
 };
