@@ -67,7 +67,7 @@ module.exports = {
   },
   plugins: [
     require('@tailwindcss/typography'),
-    ({ addComponents }) => {
+    ({ addComponents, addUtilities }) => {
       addComponents({
         '.text-primary': {
           '@apply text-neutral-900 dark:text-neutral-200': '',
@@ -94,6 +94,21 @@ module.exports = {
           '@apply bg-neutral-250 dark:bg-neutral-800': '',
         },
       });
+      addUtilities(
+        {
+          '.no-scrollbar': {
+            /* IE and Edge */
+            '-ms-overflow-style': 'none',
+            /* Firefox */
+            'scrollbar-width': 'none',
+            /* Safari and Chrome */
+            '&::-webkit-scrollbar': {
+              display: 'none',
+            },
+          },
+        },
+        ['responsive'],
+      );
     },
   ],
 };
