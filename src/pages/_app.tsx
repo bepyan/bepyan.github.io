@@ -12,9 +12,9 @@ import { ThemeProvider } from 'next-themes';
 import { Toaster } from 'react-hot-toast';
 
 import FloatScrollUpButton from '~/components/FloatScrollUpButton';
+import Fonts from '~/components/Fonts';
 import { seoConfig } from '~/config';
 import { $, isDev } from '~/libs/core';
-import { fontMono, fontSans, fontSpoqa } from '~/libs/fonts';
 import * as gtag from '~/libs/gtag';
 import useKBarAction from '~/libs/useKBarAction';
 
@@ -34,7 +34,8 @@ export default function App({ Component, pageProps }: AppProps) {
       </Head>
       <DefaultSeo {...seoConfig} />
       <KBarProvider actions={actions} options={{ enableHistory: true }}>
-        <div className={$(fontSans.variable, fontSpoqa.variable, fontMono.variable, 'font-sans')}>
+        <Fonts />
+        <div className={$('font-sans')}>
           <Component {...pageProps} />
           <FloatScrollUpButton />
           <KBar />
