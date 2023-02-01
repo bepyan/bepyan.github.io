@@ -13,7 +13,8 @@ import { Toaster } from 'react-hot-toast';
 
 import FloatScrollUpButton from '~/components/FloatScrollUpButton';
 import { seoConfig } from '~/config';
-import { isDev } from '~/libs/core';
+import { $, isDev } from '~/libs/core';
+import { fontMono, fontSans, fontSpoqa } from '~/libs/fonts';
 import * as gtag from '~/libs/gtag';
 import useKBarAction from '~/libs/useKBarAction';
 
@@ -33,7 +34,7 @@ export default function App({ Component, pageProps }: AppProps) {
       </Head>
       <DefaultSeo {...seoConfig} />
       <KBarProvider actions={actions} options={{ enableHistory: true }}>
-        <div className="font-sans">
+        <div className={$(fontSans.variable, fontSpoqa.variable, fontMono.variable, 'font-sans')}>
           <Component {...pageProps} />
           <FloatScrollUpButton />
           <KBar />

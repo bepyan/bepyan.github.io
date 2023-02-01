@@ -31,6 +31,10 @@
   @apply dark:decoration-yellow-300/70 dark:hover:decoration-yellow-300/90;
 }
 
+.prose code {
+  font-family: var(--font-mono), Consolas, Monaco, 'Andale Mono', monospace;
+}
+
 .prose code:not(:where(pre *)) {
   @apply text-primary rounded-lg px-2 py-0.5 content-none;
   @apply bg-neutral-200 dark:bg-[var(--prism-background)];
