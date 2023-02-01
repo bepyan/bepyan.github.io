@@ -114,9 +114,7 @@ export default function PostLayout({
               </div>
               <div>
                 <div className="font-bold">{siteConfig.author.name}</div>
-                <div className="text-neutral-600 dark:text-neutral-400">
-                  {siteConfig.author.bio}
-                </div>
+                <div className="text-tertiary text-sm">{siteConfig.author.bio}</div>
                 <AuthorContacts className="mt-2 text-sm" />
               </div>
             </div>

@@ -12,7 +12,7 @@ export const siteConfig = {
   author: {
     name: 'Edward Kim',
     photo: 'https://avatars.githubusercontent.com/u/65283190?v=4',
-    bio: 'junior frontend engineer',
+    bio: 'Junior Frontend Engineer',
     contacts: {
       email: 'mailto:bepyan@naver.com',
       github: 'https://github.com/bepyan',
