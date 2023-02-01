@@ -24,10 +24,11 @@
 
 .prose a {
   @apply text-primary break-words transition-all;
-  @apply decoration-neutral-400/70 underline-offset-2;
+  @apply decoration-neutral-450 underline-offset-2 hover:decoration-neutral-350;
 }
 .prose a:has(strong) {
-  @apply decoration-yellow-300 decoration-wavy underline-offset-1 dark:decoration-yellow-300/70;
+  @apply decoration-yellow-300 decoration-wavy underline-offset-1 hover:decoration-yellow-400;
+  @apply dark:decoration-yellow-300/70 dark:hover:decoration-yellow-300/90;
 }
 
 .prose code:not(:where(pre *)) {

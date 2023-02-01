@@ -143,17 +143,23 @@ export default function TocBanner({
           </ul>
         </div>
       )}
-      <div
-        className={$('flex items-center justify-end p-2', 'bg-neutral-200/50 dark:bg-neutral-700')}
-      >
-        <CopyLinkButton />
-        <IconButton onClick={() => window.scrollTo({ top: 0 })}>
+      <div className={$('flex items-center justify-end p-2', 'bg-neutral-150 dark:bg-neutral-750')}>
+        <CopyLinkButton className="mr-auto hover:bg-mute" />
+        <IconButton
+          className="hover:bg-mute"
+          aria-label="scroll-up"
+          onClick={() => window.scrollTo({ top: 0 })}
+        >
           <UpIcon width={20} />
         </IconButton>
-        <IconButton onClick={() => document.querySelector('.giscus')?.scrollIntoView()}>
+        <IconButton
+          className="hover:bg-mute"
+          aria-label="scroll-down"
+          onClick={() => document.querySelector('.giscus')?.scrollIntoView()}
+        >
           <ChatIcon width={20} />
         </IconButton>
-        <ThemeSwitch />
+        <ThemeSwitch className="hover:bg-mute" />
       </div>
     </div>
   );

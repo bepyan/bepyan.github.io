@@ -70,7 +70,7 @@ export default function PostPage({ serize }: { serize: Serize }) {
               </div>
             </motion.div>
 
-            <ul className="mt-16 space-y-4">
+            <div className="mt-16 space-y-4">
               {serize.posts.map((post, i) => (
                 <motion.div key={post.slug} variants={fadeInUp}>
                   <div className="flex space-x-6">
@@ -79,7 +79,7 @@ export default function PostPage({ serize }: { serize: Serize }) {
                   </div>
                 </motion.div>
               ))}
-            </ul>
+            </div>
           </div>
         </div>
       </motion.section>

@@ -46,7 +46,7 @@ export default function HeaderNav() {
     <nav className="text-secondary flex w-full select-none items-end pt-8 pb-12">
       {/* PC */}
       <div className="hidden items-end sm:flex">
-        <NavItem href="/" className="mr-2">
+        <NavItem href="/" className="mr-2" aria-label="logo">
           <LogoIcon width={40} />
         </NavItem>
         {siteConfig.menus.map((link) => (

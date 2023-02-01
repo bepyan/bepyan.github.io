@@ -7,6 +7,7 @@ export default function IconButton({
 }: React.ComponentProps<'button'>) {
   return (
     <button
+      aria-label="icon-button"
       {...props}
       type={type}
       className={$(

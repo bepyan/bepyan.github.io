@@ -39,7 +39,7 @@ export default function App({ Component, pageProps }: AppProps) {
           <KBar />
           <Toaster
             toastOptions={{
-              className: 'text-primary bg-primary',
+              className: 'text-primary bg-secondary',
               position: 'bottom-right',
             }}
           />

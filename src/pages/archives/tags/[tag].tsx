@@ -88,7 +88,7 @@ export default function TagPage({
               Posts <span className="text-base">({posts.length})</span>
             </p>
             <Hr className="my-4" />
-            <ul className="grid gap-4 lg:grid-cols-2 lg:gap-12">
+            <div className="grid gap-4 lg:grid-cols-2 lg:gap-12">
               {posts.map((post) => (
                 <motion.div key={post.slug} variants={fadeInUp}>
                   <motion.div variants={fadeIn} initial="initial" whileInView="animate">
@@ -96,7 +96,7 @@ export default function TagPage({
                   </motion.div>
                 </motion.div>
               ))}
-            </ul>
+            </div>
           </div>
 
           <div ref={snippetsRef}>
@@ -104,7 +104,7 @@ export default function TagPage({
               Snippets <span className="text-base">({snippets.length})</span>
             </p>
             <Hr className="my-4" />
-            <ul className="grid gap-4 lg:grid-cols-2">
+            <div className="grid gap-4 lg:grid-cols-2">
               {snippets.map((post) => (
                 <motion.div key={post.slug} variants={fadeInUp}>
                   <motion.div variants={fadeIn} initial="initial" whileInView="animate">
@@ -112,7 +112,7 @@ export default function TagPage({
                   </motion.div>
                 </motion.div>
               ))}
-            </ul>
+            </div>
           </div>
         </div>
       </motion.div>

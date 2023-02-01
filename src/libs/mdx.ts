@@ -52,6 +52,7 @@ const serializeMdx = (source: string) => {
           {
             properties: {
               className: ['anchor'],
+              ariaLabel: 'anchor',
             },
           },
         ],

@@ -22,8 +22,8 @@ export default function SerizeCard({ currentPost, serize }: { currentPost: Post;
   return (
     <div
       className={$(
-        'rounded-lg bg-neutral-200/70 p-4 dark:bg-neutral-800/70',
-        !open && 'cursor-pointer transition-all hover:bg-neutral-200 dark:hover:bg-neutral-800',
+        'bg-secondary rounded-lg p-4',
+        !open && 'cursor-pointer transition-all hover:bg-tertiary',
       )}
       onClick={onClickCard}
     >

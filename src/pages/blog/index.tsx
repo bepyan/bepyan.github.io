@@ -82,7 +82,7 @@ export default function PostPage() {
           <span className="font-bold">({filteredBlogPosts.length})</span>
         </motion.div>
 
-        <motion.ul
+        <motion.div
           className="mt-12 grid w-full gap-8 lg:grid-cols-2 lg:gap-12"
           variants={staggerHalf}
         >
@@ -99,7 +99,7 @@ export default function PostPage() {
               </motion.div>
             </motion.div>
           ))}
-        </motion.ul>
+        </motion.div>
       </motion.div>
     </Layout>
   );

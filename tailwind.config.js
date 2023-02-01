@@ -6,7 +6,26 @@ module.exports = {
   darkMode: 'class',
   theme: {
     extend: {
-      colors: {},
+      colors: {
+        neutral: {
+          50: '#fafafa',
+          100: '#f5f5f5',
+          150: '#ededed',
+          200: '#e5e5e5',
+          250: '#dedede',
+          300: '#d4d4d4',
+          350: '#b5b5b5',
+          400: '#a3a3a3',
+          450: '#8a8a8a',
+          470: '#808080',
+          500: '#737373',
+          600: '#525252',
+          700: '#404040',
+          750: '#363636',
+          800: '#262626',
+          900: '#171717',
+        },
+      },
       dropShadow: {
         base: '0px 0px 10px rgba(234, 179, 8, 0.3)',
         'base-bold': '0px 0px 7px rgba(234, 179, 8, 0.7)',
@@ -53,22 +72,25 @@ module.exports = {
           '@apply text-neutral-900 dark:text-neutral-200': '',
         },
         '.text-secondary': {
-          '@apply text-neutral-700 dark:text-neutral-400': '',
+          '@apply text-neutral-700 dark:text-neutral-350': '',
         },
         '.text-tertiary': {
-          '@apply text-neutral-500 dark:text-neutral-500': '',
+          '@apply text-neutral-600 dark:text-neutral-400': '',
         },
         '.text-mute': {
-          '@apply text-neutral-400 dark:text-neutral-600': '',
+          '@apply text-neutral-500 dark:text-neutral-470': '',
         },
         '.bg-primary': {
           '@apply bg-neutral-50 dark:bg-neutral-900': '',
         },
         '.bg-secondary': {
-          '@apply bg-neutral-200/70 dark:bg-neutral-800': '',
+          '@apply bg-neutral-150 dark:bg-neutral-800': '',
         },
         '.bg-tertiary': {
-          '@apply bg-neutral-200 dark:bg-neutral-700/70': '',
+          '@apply bg-neutral-200 dark:bg-neutral-750': '',
+        },
+        '.bg-mute': {
+          '@apply bg-neutral-250 dark:bg-neutral-800': '',
         },
       });
     },

@@ -13,7 +13,7 @@ export default function PostListItem({ post }: { post: ReducedPost }) {
   const href = !!post.snippetSlug ? `/snippets/[...slug]` : `/blog/[...slug]`;
 
   return (
-    <li className={$('text-ye group w-full py-4 hover:drop-shadow-base')}>
+    <div className={$('text-ye group w-full py-4 hover:drop-shadow-base')}>
       <Link as={post.slug} href={href} className="hover:drop-shadow-base">
         <p className="text-xl font-bold">{post.title}</p>
         <p className="text-tertiary mt-1">{post.description}</p>
@@ -30,6 +30,6 @@ export default function PostListItem({ post }: { post: ReducedPost }) {
           <IconText Icon={ClockIcon} text={`${post.readingMinutes}분`} />
         </div>
       </div>
-    </li>
+    </div>
   );
 }

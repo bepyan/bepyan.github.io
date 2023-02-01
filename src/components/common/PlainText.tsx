@@ -9,5 +9,5 @@ export default function PlainText({
   children?: React.ReactNode;
   className?: string;
 }) {
-  return <p className={$('text-secondary mb-4', className)}>{children}</p>;
+  return <p className={$('text-tertiary mb-4', className)}>{children}</p>;
 }

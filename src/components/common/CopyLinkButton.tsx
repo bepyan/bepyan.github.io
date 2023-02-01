@@ -5,7 +5,7 @@ import CheckIcon from '../icons/CheckIcon';
 import LinkIcon from '../icons/LinkIcon';
 import IconButton from './IconButton';
 
-export default function CopyLinkButton() {
+export default function CopyLinkButton(props: React.ComponentProps<'button'>) {
   const [copied, setCopied] = useState(false);
 
   const onClickCopy = async () => {
@@ -36,7 +36,7 @@ export default function CopyLinkButton() {
   }, [copied]);
 
   return (
-    <IconButton className="mr-auto" onClick={() => void onClickCopy()}>
+    <IconButton {...props} aria-label="copy-link" onClick={() => void onClickCopy()}>
       {copied ? <CheckIcon width={20} /> : <LinkIcon width={20} />}
     </IconButton>
   );

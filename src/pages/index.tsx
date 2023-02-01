@@ -109,7 +109,7 @@ const PostItem = (props: { href: string; imgUrl: string; title: string; date: st
         <div className="mb-2 flex w-full items-end">
           <IconText Icon={CalenderIcon} text={props.date} />
         </div>
-        <h4 className="text-xl font-bold tracking-tight md:text-lg">{props.title}</h4>
+        <p className="text-xl font-bold tracking-tight md:text-lg">{props.title}</p>
       </div>
     </motion.a>
   );

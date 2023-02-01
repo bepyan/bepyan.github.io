@@ -4,14 +4,14 @@ import useDarkMode from '~/libs/useDarkMode';
 
 import IconButton from './common/IconButton';
 
-export default function ThemeSwitch() {
+export default function ThemeSwitch(props: React.ComponentProps<'button'>) {
   const [mounted, setMounted] = useState(false);
   const { isThemeDark, toggleTheme } = useDarkMode();
 
   useEffect(() => setMounted(true), []);
 
   return (
-    <IconButton aria-label="Toggle Dark Mode" onClick={toggleTheme}>
+    <IconButton {...props} aria-label="Toggle Dark Mode" onClick={toggleTheme}>
       <svg
         xmlns="http://www.w3.org/2000/svg"
         viewBox="0 0 24 24"
