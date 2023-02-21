@@ -83,7 +83,7 @@ export default function PostLayout({
 
         {/* Post Content */}
         <motion.div variants={fadeInHalf} className="relative gap-8 lg:flex">
-          <div className="prose prose-neutral w-full max-w-3xl dark:prose-dark">
+          <div className="prose prose-neutral w-full max-w-3xl font-spoqa dark:prose-dark">
             <TocTop className="lg:hidden" tableOfContents={tableOfContents} />
             <MDXRemote compiledSource={compiledSource} />
           </div>

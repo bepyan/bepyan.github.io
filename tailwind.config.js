@@ -31,7 +31,8 @@ module.exports = {
         'base-bold': '0px 0px 7px rgba(234, 179, 8, 0.7)',
       },
       fontFamily: {
-        sans: ['var(--font-spoqa)', ...fontFamily.sans],
+        sans: ['var(--font-sans)', ...fontFamily.sans],
+        spoqa: ['var(--font-spoqa)', ...fontFamily.sans],
         mono: ['var(--font-mono)', ...fontFamily.mono],
       },
       typography: (theme) => ({
