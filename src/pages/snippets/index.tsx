@@ -1,3 +1,4 @@
+import { Post } from 'contentlayer/generated';
 import { AnimatePresence, motion } from 'framer-motion';
 import { GetStaticProps } from 'next';
 import Link from 'next/link';
@@ -11,26 +12,24 @@ import Title from '~/components/common/Title';
 import Layout from '~/components/layouts/Layout';
 import { PageSEO } from '~/components/SEO';
 import { fadeInHalf, staggerHalf, staggerImmediate } from '~/constants/animations';
-import { snippets } from '~/constants/dataset';
-import { ReducedPost } from '~/libs/types';
+import { allSnippets } from '~/libs/post';
 
 type Snippet = {
   key: string;
-  postList: ReducedPost[];
+  postList: Post[];
 };
 
 export const getStaticProps: GetStaticProps = () => {
-  const tagSnippets = snippets.reduce<{ [key: string]: ReducedPost[] }>((ac, snippet) => {
-    const key = snippet.snippetSlug;
-    if (!key) {
+  const tagSnippets = allSnippets.reduce<{ [key: string]: Post[] }>((ac, snippet) => {
+    if (!snippet.snippetName) {
       return ac;
     }
 
-    if (!ac[key]) {
-      ac[key] = [];
+    if (!ac[snippet.snippetName]) {
+      ac[snippet.snippetName] = [];
     }
 
-    ac[key].push(snippet);
+    ac[snippet.snippetName].push(snippet);
     return ac;
   }, {});
 

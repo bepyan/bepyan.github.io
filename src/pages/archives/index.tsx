@@ -72,17 +72,17 @@ export default function Archives({
             Serizes<span className="ml-2 text-sm">({serizes.length})</span>
           </SubTitle>
           <div className="mt-4 flex flex-wrap gap-2">
-            {serizes.map((serize) => (
+            {serizes.map((series) => (
               <LinkHover
-                key={serize.slug}
-                href={serize.slug}
+                key={series.slug}
+                href={series.slug}
                 className="px-4 py-2 ring-1 ring-neutral-300 dark:ring-neutral-700"
               >
                 <div>
-                  <span>{serize.title}</span>
+                  <span>{series.title}</span>
                   <div className="text-tertiary flex gap-2">
-                    <span className="text-xs">{serize.date}</span>
-                    <IconText Icon={ListIcon} text={serize.posts.length} />
+                    <span className="text-xs">{series.date}</span>
+                    <IconText Icon={ListIcon} text={series.posts.length} />
                   </div>
                 </div>
               </LinkHover>

@@ -9,7 +9,7 @@ import remarkGfm from 'remark-gfm';
 import rehypeCodeWrap from './rehypeCodeWrap';
 import { TableOfContents } from './types';
 
-const parseToc = (source: string) => {
+export const parseToc = (source: string) => {
   return source
     .split('\n')
     .filter((line) => line.match(/(^#{1,3})\s/))

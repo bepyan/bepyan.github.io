@@ -23,8 +23,8 @@ import useSearch from '~/libs/useSearch';
 export default function PostPage() {
   const { searchValue, searchHandler } = useSearch();
 
-  const filteredSerizes = serizes.filter((serize) =>
-    serize.title.toLowerCase().includes(searchValue.toLowerCase()),
+  const filteredSerizes = serizes.filter((series) =>
+    series.title.toLowerCase().includes(searchValue.toLowerCase()),
   );
 
   const filteredBlogPosts = posts.filter((post) =>
@@ -58,17 +58,17 @@ export default function PostPage() {
         </motion.div>
 
         <motion.div
-          className="no-scrollbar -my-12 -ml-8 flex items-center space-x-6 overflow-scroll py-12 pl-8"
+          className="-my-12 -ml-8 flex items-center space-x-6 overflow-scroll py-12 pl-8 no-scrollbar"
           variants={staggerOne}
         >
           <AnimatePresence mode="wait">
-            {filteredSerizes.map((serize) => (
-              <motion.div key={serize.slug} variants={fadeInSlideToLeft}>
-                <Link as={serize.slug} href={`/blog/[slug]`}>
+            {filteredSerizes.map((series) => (
+              <motion.div key={series.slug} variants={fadeInSlideToLeft}>
+                <Link as={series.slug} href={`/blog/[slug]`}>
                   <div className="relative h-56 w-40 select-none rounded-lg bg-neutral-200 px-8 pt-8 pb-12 shadow-lg transition-all hover:scale-[1.01] hover:shadow-xl dark:bg-neutral-800">
                     <div className="absolute inset-y-0 left-2.5 w-[1px] bg-neutral-100 dark:bg-neutral-700" />
                     <div className="flex h-full break-keep bg-white px-2 py-3 text-sm font-medium dark:bg-neutral-700 dark:text-white">
-                      {serize.title}
+                      {series.title}
                     </div>
                   </div>
                 </Link>

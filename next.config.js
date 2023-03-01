@@ -1,5 +1,7 @@
+const { withContentlayer } = require('next-contentlayer');
+
 /** @type {import('next').NextConfig} */
-module.exports = {
+module.exports = withContentlayer({
   reactStrictMode: true,
   swcMinify: true,
   experimental: {
@@ -8,4 +10,4 @@ module.exports = {
   images: {
     unoptimized: true,
   },
-};
+});

@@ -11,14 +11,14 @@ export default function useKBarPostAction() {
   const router = useRouter();
 
   useRegisterActions([
-    ...serizes.map((serize) => ({
-      id: serize.slug,
-      name: serize.title,
-      subtitle: serize.date,
-      section: 'Serize Book',
-      keywords: serize.tags.join(' '),
+    ...serizes.map((series) => ({
+      id: series.slug,
+      name: series.title,
+      subtitle: series.date,
+      section: 'Series Book',
+      keywords: series.tags.join(' '),
       icon: <BookIcon width={18} />,
-      perform: () => router.push(serize.slug),
+      perform: () => router.push(series.slug),
       priority: Priority.NORMAL,
     })),
     ...posts.map((post) => ({

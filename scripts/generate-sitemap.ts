@@ -15,7 +15,7 @@ ${siteConfig.menus
   .map(({ path }) => `<url><loc>${siteUrl}${path}</loc><changefreq>daily</changefreq></url>`)
   .join('\n')}
 ${serizes
-  .map((serize) => `<url><loc>${siteUrl}${serize.slug}</loc><changefreq>daily</changefreq></url>`)
+  .map((series) => `<url><loc>${siteUrl}${series.slug}</loc><changefreq>daily</changefreq></url>`)
   .join('\n')}
 ${posts
   .map((post) => `<url><loc>${siteUrl}${post.slug}</loc><changefreq>daily</changefreq></url>`)

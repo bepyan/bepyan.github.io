@@ -1,35 +1,21 @@
+import { Post as TPost } from 'contentlayer/generated';
+
 export type Optional<Type, Key extends keyof Type> = Omit<Type, Key> & Partial<Pick<Type, Key>>;
 
 /**
- * 글 관련 타입
+ * 글 (posts + snippets)
  */
-export type GrayMatter = {
-  title: string;
-  description: string;
-  tags: string[];
-  draft?: boolean;
-  date: Date;
-  image?: string;
-  icon?: string;
+export type Post = TPost & {
+  seriesName?: string | null;
+  snippetName?: string | null;
 };
+export type ReducedPost = Omit<Omit<Post, 'body'>, '_raw'>;
 
-export type Post = Omit<GrayMatter, 'date'> & {
-  date: string;
-  slug: string;
-  content: string;
-  readingMinutes: number;
-  wordCount: number;
-  serizeSlug?: string;
-  snippetSlug?: string;
-};
-
-export type ReducedPost = Omit<Post, 'content'>;
-
-export type Serize = Omit<GrayMatter, 'date'> & {
-  date: string;
-  slug: string;
-  readingMinutes: number;
-  posts: ReducedPost[];
+/**
+ * 시리즈북
+ */
+export type Series = Post & {
+  posts: Post[];
 };
 
 /**

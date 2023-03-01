@@ -2,24 +2,22 @@ import { GetStaticPaths, GetStaticProps } from 'next';
 
 import { PostFooterProps } from '~/components/layouts/PostFooter';
 import PostLayout, { PostLayoutProps } from '~/components/layouts/PostLayout';
-import { snippets } from '~/constants/dataset';
-import { parseMdx } from '~/libs/mdx';
-import { contentToDescription, getPost } from '~/libs/post';
+import { parseToc } from '~/libs/mdx';
+import { allSnippets, contentToDescription } from '~/libs/post';
 
 export const getStaticPaths: GetStaticPaths = () => {
   return {
-    paths: snippets.map((post) => post.slug),
+    paths: allSnippets.filter((post) => post.snippetName).map((post) => post.slug),
     fallback: 'blocking',
   };
 };
 
 export const getStaticProps: GetStaticProps = async ({ params }) => {
   const { slugs } = params as { slugs: string[] };
-
   const slug = `/snippets/${[...slugs].join('/')}`;
 
-  const post = getPost(slug);
-  const postIndex = snippets.findIndex((v) => v.slug === slug);
+  const post = allSnippets.find((v) => v.slug === slug);
+  const postIndex = allSnippets.findIndex((v) => v.slug === slug);
 
   if (!post || postIndex === -1) {
     return {
@@ -28,28 +26,23 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
   }
 
   if (!post.description) {
-    post.description = contentToDescription(post.content);
+    post.description = contentToDescription(post.body.raw);
   }
 
   const postFooterProps: PostFooterProps = {
-    prevPost: postIndex > 0 ? snippets.at(postIndex - 1) ?? null : null,
-    nextPost: snippets.at(postIndex + 1) ?? null,
+    prevPost: postIndex > 0 ? allSnippets.at(postIndex - 1) ?? null : null,
+    nextPost: allSnippets.at(postIndex + 1) ?? null,
   };
 
-  const { compiledSource, tableOfContents } = await parseMdx(post.content);
+  const tableOfContents = parseToc(post.body.raw);
 
   const props: PostLayoutProps = {
     post,
-    serize: null,
     postFooterProps,
-    slug,
-    compiledSource,
     tableOfContents,
   };
 
-  return {
-    props,
-  };
+  return { props };
 };
 
 export default function PostPage({ ...postLayoutProps }: PostLayoutProps) {

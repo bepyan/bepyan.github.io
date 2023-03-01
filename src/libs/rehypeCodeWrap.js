@@ -83,7 +83,7 @@ export default function rehypeCodeWrap() {
   };
 }
 
-export const useRehypeCodeCoppy = () => {
+export const useRehypeCodeCopy = () => {
   useEffect(() => {
     let timeOut;
 

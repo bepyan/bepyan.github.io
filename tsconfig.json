@@ -18,9 +18,17 @@
 
     "baseUrl": "./",
     "paths": {
-      "~/*": ["src/*"]
+      "~/*": ["src/*"],
+      "contentlayer/generated": ["./.contentlayer/generated"]
     }
   },
-  "include": ["next-env.d.ts", "**/*.d.ts", "**/*.ts", "**/*.tsx", "src/libs/rehypeCopyButton.js"],
+  "include": [
+    "next-env.d.ts",
+    "**/*.d.ts",
+    "**/*.ts",
+    "**/*.tsx",
+    "src/libs/rehypeCopyButton.js",
+    ".contentlayer/generated"
+  ],
   "exclude": ["node_modules"]
 }

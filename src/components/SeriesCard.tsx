@@ -1,19 +1,20 @@
+import { Post } from 'contentlayer/generated';
 import dayjs from 'dayjs';
 import Link from 'next/link';
 import { useState } from 'react';
 
 import { $ } from '~/libs/core';
-import { Post, Serize } from '~/libs/types';
+import { Series } from '~/libs/types';
 
 import IconText from './common/IconText';
 import CalenderIcon from './icons/CalenderIcon';
 import ClockIcon from './icons/ClockIcon';
 import ListIcon from './icons/ListIcon';
 
-export default function SerizeCard({ currentPost, serize }: { currentPost: Post; serize: Serize }) {
+export default function SeriesCard({ currentPost, series }: { currentPost: Post; series: Series }) {
   const [open, setOpen] = useState(true);
 
-  const currentPostIndex = serize.posts.findIndex((post) => post.slug === currentPost.slug);
+  const currentPostIndex = series.posts.findIndex((post) => post.slug === currentPost.slug);
 
   const onClickCard = () => {
     !open && setOpen(!open);
@@ -27,18 +28,18 @@ export default function SerizeCard({ currentPost, serize }: { currentPost: Post;
       )}
       onClick={onClickCard}
     >
-      <p className="text-base font-medium sm:text-lg">{serize.title}</p>
+      <p className="text-base font-medium sm:text-lg">{series.title}</p>
       <div className="mt-1 flex gap-3">
-        <IconText Icon={ListIcon} text={`${currentPostIndex + 1} / ${serize.posts.length}`} />
-        <IconText Icon={CalenderIcon} text={dayjs(serize.date).format('YY.MM.DD')} />
-        <IconText Icon={ClockIcon} text={`${serize.readingMinutes}분`} />
+        <IconText Icon={ListIcon} text={`${currentPostIndex + 1} / ${series.posts.length}`} />
+        <IconText Icon={CalenderIcon} text={dayjs(series.date).format('YY.MM.DD')} />
+        <IconText Icon={ClockIcon} text={`${series.readingMinutes}분`} />
       </div>
       <div className="mt-3 whitespace-pre-wrap text-xs sm:text-sm">
-        <div className="text-secondary">{serize.description}</div>
+        <div className="text-secondary">{series.description}</div>
       </div>
       {open && (
         <div className="mt-4 flex flex-col gap-2 text-sm sm:text-base">
-          {serize.posts.map((post, i) => (
+          {series.posts.map((post, i) => (
             <Link
               key={i}
               href={post.slug}

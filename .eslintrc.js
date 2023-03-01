@@ -21,11 +21,6 @@ module.exports = {
     {
       files: ['**/*.{ts,tsx}'],
       parser: '@typescript-eslint/parser',
-      extends: [
-        'plugin:@typescript-eslint/recommended',
-        'plugin:@typescript-eslint/recommended-requiring-type-checking',
-      ],
-      plugins: ['@typescript-eslint'],
       rules: {
         '@typescript-eslint/no-unused-vars': 'off',
         'simple-import-sort/imports': [

@@ -1,12 +1,13 @@
+import { Post } from 'contentlayer/generated';
 import dayjs from 'dayjs';
 import { motion } from 'framer-motion';
 import Link from 'next/link';
-import { MDXRemote } from 'next-mdx-remote';
+import { useMDXComponent } from 'next-contentlayer/hooks';
 
 import { siteConfig } from '~/config';
 import { fadeInHalf, staggerHalf } from '~/constants/animations';
-import { useRehypeCodeCoppy } from '~/libs/rehypeCodeWrap';
-import { Post, Serize, TableOfContents } from '~/libs/types';
+import { useRehypeCodeCopy } from '~/libs/rehypeCodeWrap';
+import { Series, TableOfContents } from '~/libs/types';
 import useMediumZoom from '~/libs/useMediumZoom';
 
 import AuthorContacts from '../common/AuthorContacts';
@@ -19,7 +20,7 @@ import CalenderIcon from '../icons/CalenderIcon';
 import ClockIcon from '../icons/ClockIcon';
 import ReadingProgressBar from '../ReadingProgressBar';
 import { BlogSEO } from '../SEO';
-import SerizeCard from '../SerizeCard';
+import SeriesCard from '../SeriesCard';
 import TocBanner from '../TocBanner';
 import TocTop from '../TocTop';
 import Layout from './Layout';
@@ -27,31 +28,28 @@ import PostFooter, { PostFooterProps } from './PostFooter';
 
 export type PostLayoutProps = {
   post: Post;
-  serize: Serize | null;
+  series?: Series | null;
   postFooterProps: PostFooterProps;
-  slug: string;
-  compiledSource: string;
   tableOfContents: TableOfContents;
 };
 
 export default function PostLayout({
   post,
-  serize,
+  series,
   postFooterProps,
-  slug,
-  compiledSource,
   tableOfContents,
 }: PostLayoutProps) {
-  // eslint-disable-next-line @typescript-eslint/no-unsafe-call
-  useRehypeCodeCoppy();
+  useRehypeCodeCopy();
   useMediumZoom();
 
-  const headerTagTitle = serize?.title ?? post.snippetSlug;
-  const headerTagSlug = serize?.slug ?? `/snippets?key=${post.snippetSlug ?? 'all'}`;
+  const headerTagTitle = series?.title ?? post.snippetName;
+  const headerTagSlug = series?.slug ?? `/snippets?key=${post.snippetName ?? 'all'}`;
+
+  const Component = useMDXComponent(post.body.code);
 
   return (
     <Layout>
-      <BlogSEO {...post} url={slug} summary={post.description} images={[]} />
+      <BlogSEO {...post} url={post.slug} summary={post.description} images={[]} />
 
       <ReadingProgressBar />
 
@@ -62,7 +60,7 @@ export default function PostLayout({
 
           {headerTagTitle && (
             <div className="mt-2 flex justify-center gap-1">
-              {post.snippetSlug && <span>snippet: </span>}
+              {post.snippetName && <span>snippet: </span>}
               <Link href={headerTagSlug}>
                 <span className="text-sm font-medium underline underline-offset-4 sm:text-base">
                   {headerTagTitle}
@@ -85,7 +83,7 @@ export default function PostLayout({
         <motion.div variants={fadeInHalf} className="relative gap-8 lg:flex">
           <div className="prose prose-neutral w-full max-w-3xl font-spoqa dark:prose-dark">
             <TocTop className="lg:hidden" tableOfContents={tableOfContents} />
-            <MDXRemote compiledSource={compiledSource} />
+            <Component components={{}} />
           </div>
 
           <div className="mt-12 ml-auto">
@@ -120,7 +118,7 @@ export default function PostLayout({
             </div>
           </div>
           <PostFooter {...postFooterProps} />
-          {serize && <SerizeCard currentPost={post} serize={serize} />}
+          {series && <SeriesCard currentPost={post} series={series} />}
           <Giscus />
         </motion.div>
       </motion.section>

@@ -10,7 +10,7 @@ import IconText from './IconText';
 import Tag from './Tag';
 
 export default function PostListItem({ post }: { post: ReducedPost }) {
-  const href = !!post.snippetSlug ? `/snippets/[...slug]` : `/blog/[...slug]`;
+  const href = !!post.snippetName ? `/snippets/[...slug]` : `/blog/[...slug]`;
 
   return (
     <div className={$('text-ye group w-full py-4 hover:drop-shadow-base')}>
