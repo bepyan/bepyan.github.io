@@ -12,11 +12,11 @@ date: 2022-12-17 21:46:47
 스크롤은 동작하지만 스크롤바를 숨기고 싶을 때가 있다.
 
 ```css
-body {
-  -ms-overflow-style: none; /* IE and Edge */
+* {
+  -ms-overflow-style: none; /* IE, Edge */
   scrollbar-width: none; /* Firefox */
 }
-body::-webkit-scrollbar {
+::-webkit-scrollbar {
   display: none; /* Chrome, Safari, Opera*/
 }
 ```
@@ -25,10 +25,31 @@ body::-webkit-scrollbar {
 
 ```css
 .no-scrollbar {
-  -ms-overflow-style: none; /* IE and Edge */
+  -ms-overflow-style: none; /* IE, Edge */
   scrollbar-width: none; /* Firefox */
 }
 .no-scrollbar::-webkit-scrollbar {
   display: none; /* Chrome, Safari, Opera*/
 }
+```
+
+추가로 tailwind의 클래스로 적용하고 싶다면?
+
+```js:tailwind.config.js
+plugins: [
+  ({ addUtilities }) => {
+    addUtilities({
+      '.no-scrollbar': {
+        /* IE, Edge */
+        '-ms-overflow-style': 'none',
+        /* Firefox */
+        'scrollbar-width': 'none',
+        /* Chrome, Safari, Opera*/
+        '&::-webkit-scrollbar': {
+          display: 'none',
+        },
+      },
+    }, ['responsive'])
+  },
+],
 ```

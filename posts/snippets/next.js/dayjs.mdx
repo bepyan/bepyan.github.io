@@ -1,0 +1,93 @@
+---
+title: 'dayjs'
+description: ''
+icon: ''
+image: ''
+tags:
+  - Next.js
+  - date
+draft: false
+date: 2023-02-03 12:25:11
+---
+
+https://github.com/iamkun/dayjs/
+
+`moment`보다 **가볍고** 쉽게 날짜를 다룰 수 있습니다.
+MINIFIED + GZIPPED 기준으로 [2.9KB(dayjs)](https://bundlephobia.com/package/dayjs@1.11.7) vs [72KB(moment)](https://bundlephobia.com/package/moment@2.29.4) 이면 차이가 어마무시합니다.
+
+- `chaining` 방식으로 날짜 다루기 편함
+- 쉬운 커스터마이징, 확장
+- 한글 및 KST 지원
+- `immutable` 모든 것이 순수함수
+- `typescript` 완벽 호환
+
+단순하게 날짜를 다루거나 표기할 경우는 [`date-fns`](https://github.com/date-fns/date-fns)를 고려해보세요!
+
+---
+
+## 기본 사용법
+
+```shell
+yarn add dayjs
+```
+
+`typescript`을 위해서 별도의 설정이 필요 없습니다!
+
+```js
+import dayjs from 'dayjs';
+
+dayjs().format('yyyy-dd-mm'); // 2023-02-03
+dayjs().add(1, 'day').format('yyyy-dd-mm'); // 2023-02-04
+```
+
+기존 `Date` 클래스를 `dayjs.Dayjs` 클래스로 래핑하여서 사용하게 됩니다.
+따라서 `dayjs.Dayjs` 클래스에서 제공하는 다양한 기능을 체이닝해서 사용할 수 있고 모든 과정이 순수합니다!
+
+---
+
+### 한글 세팅
+
+`2023년 1월 1일 일요일`, `1년 전` 같이 한글 날짜에 대한 포멧팅도 쉽게 지원이 됩니다.
+`Next.js`에서 아래와 같이 쉽게 세팅할 수 있습니다.
+
+```tsx:_app.tsx
+import 'dayjs/locale/ko';
+import dayjs from 'dayjs';
+
+dayjs.locale('ko');
+
+export default function App({...}) {
+  // ...
+}
+```
+
+혹은 `re-export`해서 사용해도 좋습니다.
+
+```ts:libs/dayjs.ts
+import 'dayjs/locale/ko'
+
+import dayjs from 'dayjs'
+import duration from 'dayjs/plugin/duration'
+import localeData from 'dayjs/plugin/localeData'
+
+dayjs.locale('ko')
+dayjs.extend(localeData)
+dayjs.extend(duration)
+
+export default dayjs
+```
+
+---
+
+## 여러 활용 꿀팁
+
+제가 실제로 사용하게된 것들을 계속 기록해보겠습니다 🙂
+
+```ts
+dayjs().localeData().monthsShort(dayjs()); // 2월
+dayjs().localeData().monthsShort(dayjs().month(2)); // 3월
+```
+
+```ts
+dayjs.localeData().weekdaysShort(); // ['월', '화', '수', '목', '금', '토', '일']
+```
