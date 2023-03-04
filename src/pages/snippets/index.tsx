@@ -12,7 +12,7 @@ import Title from '~/components/common/Title';
 import Layout from '~/components/layouts/Layout';
 import { PageSEO } from '~/components/SEO';
 import { fadeInHalf, staggerHalf, staggerImmediate } from '~/constants/animations';
-import { allSnippets } from '~/libs/post';
+import { allSnippets } from '~/constants/dataset';
 
 type Snippet = {
   key: string;

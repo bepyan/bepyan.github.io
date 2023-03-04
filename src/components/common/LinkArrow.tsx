@@ -3,7 +3,6 @@ import Link from 'next/link';
 import { $ } from '~/libs/core';
 
 export default function LinkArrow({
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   ref: _,
   className,
   href,

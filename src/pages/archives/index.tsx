@@ -13,8 +13,9 @@ import ListIcon from '~/components/icons/ListIcon';
 import Layout from '~/components/layouts/Layout';
 import { PageSEO } from '~/components/SEO';
 import { fadeInHalf, staggerHalf } from '~/constants/animations';
-import { posts, serizes, snippets, tags } from '~/constants/dataset';
-import { ReducedPost } from '~/libs/types';
+import { allBlogPosts, allSeries, allSnippets, allTags } from '~/constants/dataset';
+import { reducePost } from '~/libs/post';
+import { ReducedPost, Series } from '~/libs/types';
 
 type ClassifiedPosts = {
   [key: string]: ReducedPost[];
@@ -38,8 +39,10 @@ const classifyPosts = (posts: ReducedPost[]) => {
 export const getStaticProps = () => {
   return {
     props: {
-      classifiedPosts: classifyPosts(posts),
-      classifiedSnippets: classifyPosts(snippets),
+      classifiedPosts: classifyPosts(allBlogPosts.map(reducePost)),
+      classifiedSnippets: classifyPosts(allSnippets.map(reducePost)),
+      allSeries,
+      allTags,
     },
   };
 };
@@ -47,9 +50,13 @@ export const getStaticProps = () => {
 export default function Archives({
   classifiedPosts,
   classifiedSnippets,
+  allSeries,
+  allTags,
 }: {
   classifiedPosts: ClassifiedPosts;
   classifiedSnippets: ClassifiedPosts;
+  allSeries: Series[];
+  allTags: string[];
 }) {
   return (
     <Layout>
@@ -66,13 +73,13 @@ export default function Archives({
           <PlainText>모든 기록물들을 한곳에 저장하는 장소입니다.</PlainText>
         </motion.div>
 
-        {/* Serizes */}
+        {/* Series */}
         <motion.div className="mt-12" variants={fadeInHalf}>
           <SubTitle>
-            Serizes<span className="ml-2 text-sm">({serizes.length})</span>
+            Series<span className="ml-2 text-sm">({allSeries.length})</span>
           </SubTitle>
           <div className="mt-4 flex flex-wrap gap-2">
-            {serizes.map((series) => (
+            {allSeries.map((series) => (
               <LinkHover
                 key={series.slug}
                 href={series.slug}
@@ -81,7 +88,7 @@ export default function Archives({
                 <div>
                   <span>{series.title}</span>
                   <div className="text-tertiary flex gap-2">
-                    <span className="text-xs">{series.date}</span>
+                    <span className="text-xs">{dayjs(series.date).format('YYYY-MM-DD')}</span>
                     <IconText Icon={ListIcon} text={series.posts.length} />
                   </div>
                 </div>
@@ -95,10 +102,10 @@ export default function Archives({
         {/* Tags */}
         <motion.div className="mt-12" variants={fadeInHalf}>
           <SubTitle>
-            Tags<span className="ml-2 text-sm">({tags.length})</span>
+            Tags<span className="ml-2 text-sm">({allTags.length})</span>
           </SubTitle>
           <div className="mt-4 flex flex-wrap gap-2">
-            {tags.map((tag, i) => (
+            {allTags.map((tag, i) => (
               <Tag key={i} tag={tag} />
             ))}
           </div>

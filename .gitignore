@@ -18,6 +18,7 @@
 /public/robots.txt
 /public/dataset.json
 /public/manifest.json
+/.bin
 
 # misc
 .DS_Store

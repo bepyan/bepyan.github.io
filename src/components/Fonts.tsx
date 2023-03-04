@@ -1,5 +1,3 @@
-'use client';
-
 import { fontMono, fontSans, fontSpoqa } from '~/libs/fonts';
 
 export default function Fonts() {

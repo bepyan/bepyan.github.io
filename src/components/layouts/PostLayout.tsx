@@ -1,4 +1,3 @@
-import { Post } from 'contentlayer/generated';
 import dayjs from 'dayjs';
 import { motion } from 'framer-motion';
 import Link from 'next/link';
@@ -7,7 +6,7 @@ import { useMDXComponent } from 'next-contentlayer/hooks';
 import { siteConfig } from '~/config';
 import { fadeInHalf, staggerHalf } from '~/constants/animations';
 import { useRehypeCodeCopy } from '~/libs/rehypeCodeWrap';
-import { Series, TableOfContents } from '~/libs/types';
+import { Post, Series, TableOfContents } from '~/libs/types';
 import useMediumZoom from '~/libs/useMediumZoom';
 
 import AuthorContacts from '../common/AuthorContacts';

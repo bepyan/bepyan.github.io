@@ -21,7 +21,6 @@ export default function ContactsIcon({
   contact,
   ...props
 }: React.ComponentProps<'svg'> & { contact: string }) {
-  // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
   const Component = icons[contact] ?? TagIcon;
 
   return <Component {...props} />;

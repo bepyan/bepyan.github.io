@@ -1,13 +1,13 @@
-import { Post } from 'contentlayer/generated';
 import dayjs from 'dayjs';
 import Link from 'next/link';
 
 import { $ } from '~/libs/core';
+import { ReducedPost } from '~/libs/types';
 
 import CalenderIcon from '../icons/CalenderIcon';
 import IconText from './IconText';
 
-export default function SnippetListItem({ post }: { post: Post }) {
+export default function SnippetListItem({ post }: { post: ReducedPost }) {
   return (
     <Link as={post.slug} href={`/snippets/[...slug]`}>
       <div

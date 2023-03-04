@@ -1,5 +1,3 @@
-/* eslint-disable @typescript-eslint/no-unsafe-member-access */
-/* eslint-disable @typescript-eslint/no-unsafe-call */
 import { Priority, useRegisterActions } from 'kbar';
 import toast from 'react-hot-toast';
 

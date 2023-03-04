@@ -17,17 +17,17 @@ import {
   staggerHalf,
   staggerOne,
 } from '~/constants/animations';
-import { posts, serizes } from '~/constants/dataset';
+import { allBlogPosts, allSeries } from '~/constants/dataset';
 import useSearch from '~/libs/useSearch';
 
 export default function PostPage() {
   const { searchValue, searchHandler } = useSearch();
 
-  const filteredSerizes = serizes.filter((series) =>
+  const filteredSeries = allSeries.filter((series) =>
     series.title.toLowerCase().includes(searchValue.toLowerCase()),
   );
 
-  const filteredBlogPosts = posts.filter((post) =>
+  const filteredBlogPosts = allBlogPosts.filter((post) =>
     post.title.toLowerCase().includes(searchValue.toLowerCase()),
   );
 
@@ -62,7 +62,7 @@ export default function PostPage() {
           variants={staggerOne}
         >
           <AnimatePresence mode="wait">
-            {filteredSerizes.map((series) => (
+            {filteredSeries.map((series) => (
               <motion.div key={series.slug} variants={fadeInSlideToLeft}>
                 <Link as={series.slug} href={`/blog/[slug]`}>
                   <div className="relative h-56 w-40 select-none rounded-lg bg-neutral-200 px-8 pt-8 pb-12 shadow-lg transition-all hover:scale-[1.01] hover:shadow-xl dark:bg-neutral-800">

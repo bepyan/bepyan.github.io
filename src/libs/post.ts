@@ -1,6 +1,4 @@
-import { allPosts } from 'contentlayer/generated';
-
-import { Post, ReducedPost, Series } from './types';
+import { Post, ReducedPost } from './types';
 
 export const contentToDescription = (content: string) => {
   const parsedContent = content
@@ -14,34 +12,6 @@ export const contentToDescription = (content: string) => {
   return `${parsedContent}...`;
 };
 
-/**
- * 글 & 시리즈북
- */
-export const allSeriesName = allPosts
-  .filter((post) => post._raw.sourceFilePath.includes('/index.mdx'))
-  .map((post) => post.slug.split('/')[2]);
-
-export const allBlogPosts: Post[] = allPosts
-  .filter(
-    (post) =>
-      post._raw.sourceFilePath.includes('blog') && !post._raw.sourceFilePath.includes('/index.mdx'),
-  )
-  .map((post) => ({
-    ...post,
-    seriesName: allSeriesName.find((seriesName) => post.slug.includes(seriesName)) ?? null,
-  }));
-
-export const allSnippets: Post[] = allPosts
-  .filter((post) => post._raw.sourceFilePath.includes('snippets'))
-  .map((snippet) => ({ ...snippet, snippetName: snippet.slug.split('/').at(2) ?? null }));
-
-export const allSeries: Series[] = allBlogPosts
-  .filter((post) => Boolean(post.seriesName))
-  .map((series) => ({
-    ...series,
-    posts: allBlogPosts.filter((post) => series.slug.includes(post.seriesName ?? 'none')),
-  }));
-
 export const getTagsByPosts = (posts: ReducedPost[]) => {
   return Array.from(
     posts.reduce((ac, v) => {
@@ -51,9 +21,6 @@ export const getTagsByPosts = (posts: ReducedPost[]) => {
   );
 };
 
-/**
- * Util
- */
 export const reducePost = ({ body: _, ...post }: Post): ReducedPost => post;
 
 export const sortPostByTimeDesc = (a: Post, b: Post) => {

@@ -2,8 +2,9 @@ import { GetStaticPaths, GetStaticProps } from 'next';
 
 import { PostFooterProps } from '~/components/layouts/PostFooter';
 import PostLayout, { PostLayoutProps } from '~/components/layouts/PostLayout';
+import { allBlogPosts, allSeries } from '~/constants/dataset';
 import { parseToc } from '~/libs/mdx';
-import { allBlogPosts, allSeries, contentToDescription } from '~/libs/post';
+import { contentToDescription } from '~/libs/post';
 
 export const getStaticPaths: GetStaticPaths = () => {
   return {

@@ -5,10 +5,9 @@
   "homepage": "https://bepyan.github.io/",
   "scripts": {
     "dev": "next dev",
-    "prebuild": "yarn sitemap",
+    "prebuild": "yarn contentlayer build && yarn sitemap",
     "build": "next build && next export",
-    "dataset": "ts-node --project tsconfig.node.json ./scripts/generate-dataset.ts",
-    "sitemap": "ts-node --project tsconfig.node.json ./scripts/generate-sitemap.ts",
+    "sitemap": "ts-node --project tsconfig.node.json ./scripts/generate-static.ts",
     "serve": "npx http-server out",
     "lint": "eslint \"**/*.{js,cjs,ejs,ts,tsx}\" --fix"
   },

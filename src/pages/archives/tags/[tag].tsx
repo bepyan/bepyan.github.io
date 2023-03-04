@@ -10,20 +10,21 @@ import Title from '~/components/common/Title';
 import Layout from '~/components/layouts/Layout';
 import { PageSEO } from '~/components/SEO';
 import { fadeIn, fadeInUp, staggerOne } from '~/constants/animations';
-import { posts as reducedPosts, snippets as reducedSnippets, tags } from '~/constants/dataset';
+import { allBlogPosts, allSnippets, allTags } from '~/constants/dataset';
+import { reducePost } from '~/libs/post';
 import { ReducedPost } from '~/libs/types';
 
 export const getStaticPaths: GetStaticPaths = () => {
   return {
-    paths: tags.map((tag) => `/archives/tags/${tag}`),
+    paths: allTags.map((tag) => `/archives/tags/${tag}`),
     fallback: 'blocking',
   };
 };
 
 export const getStaticProps: GetStaticProps = ({ params }) => {
   const tag = (params?.tag ?? '') as string;
-  const posts = reducedPosts.filter((post) => post.tags.includes(tag));
-  const snippets = reducedSnippets.filter((post) => post.tags.includes(tag));
+  const posts = allBlogPosts.filter((post) => post.tags.includes(tag)).map(reducePost);
+  const snippets = allSnippets.filter((post) => post.tags.includes(tag)).map(reducePost);
 
   if (posts.length + snippets.length === 0) {
     return {

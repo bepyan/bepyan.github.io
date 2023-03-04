@@ -10,7 +10,7 @@ import ListIcon from '~/components/icons/ListIcon';
 import Layout from '~/components/layouts/Layout';
 import { PageSEO } from '~/components/SEO';
 import { fadeIn, fadeInSlideToLeft, fadeInUp, staggerTwo } from '~/constants/animations';
-import { allSeries, allSeriesName } from '~/libs/post';
+import { allSeries, allSeriesName } from '~/constants/dataset';
 import { Series } from '~/libs/types';
 
 export const getStaticPaths: GetStaticPaths = () => {
