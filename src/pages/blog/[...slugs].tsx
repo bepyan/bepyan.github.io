@@ -35,7 +35,8 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
     nextPost: allBlogPosts.at(postIndex + 1) ?? null,
   };
 
-  const series = allSeries.find((series) => series.slug === post?.seriesName) ?? null;
+  const postSeriesName = '/blog/' + (post?.seriesName ?? '');
+  const series = allSeries.find((series) => series.slug.startsWith(postSeriesName)) ?? null;
   if (series) {
     const postI = series.posts.findIndex((v) => v.slug === slug);
     postFooterProps.prevPost = postI - 1 >= 0 ? series.posts.at(postI - 1) ?? null : null;

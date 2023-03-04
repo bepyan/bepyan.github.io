@@ -24,6 +24,7 @@ export const allSeries: Series[] = allPosts
   .filter((post) => post._raw.sourceFilePath.includes('/index.mdx'))
   .map((series) => ({
     ...series,
+    seriesName: series.slug.split('/')[2],
     posts: allBlogPosts.filter((post) => series.slug.includes(post.seriesName ?? 'none')),
   }));
 
