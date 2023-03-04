@@ -86,7 +86,7 @@ export default function TocBanner({
     >
       {tableOfContents.length !== 0 && (
         <div className="p-4 pr-2 dark:border-neutral-700 dark:bg-neutral-800">
-          <p id="toc-header" className="text-primary text-sm font-semibold leading-6">
+          <p id="toc-header" className="text-primary text-sm font-extrabold leading-6">
             On this page
           </p>
           <ul id="toc-content" className="mt-2 flex flex-col items-start justify-start text-sm">
