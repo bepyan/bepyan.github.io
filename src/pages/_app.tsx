@@ -42,7 +42,7 @@ export default function App({ Component, pageProps }: AppProps) {
           <Toaster
             toastOptions={{
               className: 'text-primary bg-secondary',
-              position: 'top-center',
+              position: 'bottom-right',
             }}
           />
         </div>

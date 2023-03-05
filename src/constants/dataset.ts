@@ -1,5 +1,6 @@
 import { allPosts } from 'contentlayer/generated';
 
+import { reducePost } from '~/libs/post';
 import { Post, Series } from '~/libs/types';
 
 export const allSeriesName = allPosts
@@ -16,16 +17,22 @@ export const allBlogPosts: Post[] = allPosts
     seriesName: allSeriesName.find((seriesName) => post.slug.includes(seriesName)) ?? null,
   }));
 
+export const reducedAllBlogPosts = allBlogPosts.map(reducePost);
+
 export const allSnippets: Post[] = allPosts
   .filter((post) => post._raw.sourceFilePath.includes('snippets'))
   .map((snippet) => ({ ...snippet, snippetName: snippet.slug.split('/').at(2) ?? null }));
+
+export const reducedAllSnippets = allSnippets.map(reducePost);
 
 export const allSeries: Series[] = allPosts
   .filter((post) => post._raw.sourceFilePath.includes('/index.mdx'))
   .map((series) => ({
     ...series,
     seriesName: series.slug.split('/')[2],
-    posts: allBlogPosts.filter((post) => series.slug.includes(post.seriesName ?? 'none')),
+    posts: allBlogPosts
+      .filter((post) => series.slug.includes(post.seriesName ?? 'none'))
+      .map(reducePost),
   }));
 
 export const allTags = Array.from(

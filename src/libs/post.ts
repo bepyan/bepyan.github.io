@@ -21,7 +21,7 @@ export const getTagsByPosts = (posts: ReducedPost[]) => {
   );
 };
 
-export const reducePost = ({ body: _, ...post }: Post): ReducedPost => post;
+export const reducePost = ({ body: _, _raw, _id, ...post }: Post): ReducedPost => post;
 
 export const sortPostByTimeDesc = (a: Post, b: Post) => {
   return new Date(b.date).getTime() - new Date(a.date).getTime();

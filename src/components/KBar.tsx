@@ -2,14 +2,14 @@ import { KBarAnimator, KBarPortal, KBarPositioner, KBarResults, useMatches } fro
 import React from 'react';
 
 import { $ } from '~/libs/core';
-import useKBarPostAction from '~/libs/useKBarPostAction';
 import useKBarThemeAction from '~/libs/useKBarThemeAction';
 
 import { KBarSearch } from './KBarSearch';
 
 export default function KBar() {
   useKBarThemeAction();
-  useKBarPostAction();
+  // JSON.parse 이슈가 있음...
+  // useKBarPostAction();
 
   return (
     <KBarPortal>

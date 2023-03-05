@@ -13,8 +13,7 @@ import ListIcon from '~/components/icons/ListIcon';
 import Layout from '~/components/layouts/Layout';
 import { PageSEO } from '~/components/SEO';
 import { fadeInHalf, staggerHalf } from '~/constants/animations';
-import { allBlogPosts, allSeries, allSnippets, allTags } from '~/constants/dataset';
-import { reducePost } from '~/libs/post';
+import { allSeries, allTags, reducedAllBlogPosts, reducedAllSnippets } from '~/constants/dataset';
 import { ReducedPost, Series } from '~/libs/types';
 
 type ClassifiedPosts = {
@@ -39,8 +38,8 @@ const classifyPosts = (posts: ReducedPost[]) => {
 export const getStaticProps = () => {
   return {
     props: {
-      classifiedPosts: classifyPosts(allBlogPosts.map(reducePost)),
-      classifiedSnippets: classifyPosts(allSnippets.map(reducePost)),
+      classifiedPosts: classifyPosts(reducedAllBlogPosts),
+      classifiedSnippets: classifyPosts(reducedAllSnippets),
       allSeries,
       allTags,
     },

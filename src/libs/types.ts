@@ -9,13 +9,13 @@ export type Post = TPost & {
   seriesName?: string | null;
   snippetName?: string | null;
 };
-export type ReducedPost = Omit<Omit<Post, 'body'>, '_raw'>;
+export type ReducedPost = Omit<Omit<Omit<Post, 'body'>, '_raw'>, '_id'>;
 
 /**
  * 시리즈북
  */
 export type Series = Post & {
-  posts: Post[];
+  posts: ReducedPost[];
 };
 
 /**

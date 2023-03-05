@@ -17,17 +17,33 @@ import {
   staggerHalf,
   staggerOne,
 } from '~/constants/animations';
-import { allBlogPosts, allSeries } from '~/constants/dataset';
+import { allSeries, reducedAllBlogPosts } from '~/constants/dataset';
+import { ReducedPost, Series } from '~/libs/types';
 import useSearch from '~/libs/useSearch';
 
-export default function PostPage() {
+export const getStaticProps = () => {
+  return {
+    props: {
+      postList: reducedAllBlogPosts,
+      seriesList: allSeries,
+    },
+  };
+};
+
+export default function PostPage({
+  postList,
+  seriesList,
+}: {
+  postList: ReducedPost[];
+  seriesList: Series[];
+}) {
   const { searchValue, searchHandler } = useSearch();
 
-  const filteredSeries = allSeries.filter((series) =>
+  const filteredSeries = seriesList.filter((series) =>
     series.title.toLowerCase().includes(searchValue.toLowerCase()),
   );
 
-  const filteredBlogPosts = allBlogPosts.filter((post) =>
+  const filteredBlogPosts = postList.filter((post) =>
     post.title.toLowerCase().includes(searchValue.toLowerCase()),
   );
 

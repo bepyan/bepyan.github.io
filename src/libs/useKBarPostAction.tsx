@@ -5,7 +5,7 @@ import ArchiveBoxIcon from '~/components/icons/ArchiveBoxIcon';
 import BookIcon from '~/components/icons/BookIcon';
 import InBoxIcon from '~/components/icons/InBoxIcon';
 import TagIcon from '~/components/icons/TagIcon';
-import { allBlogPosts, allSeries, allSnippets, allTags } from '~/constants/dataset';
+import { allSeries, allTags, reducedAllBlogPosts, reducedAllSnippets } from '~/constants/dataset';
 
 export default function useKBarPostAction() {
   const router = useRouter();
@@ -21,7 +21,7 @@ export default function useKBarPostAction() {
       perform: () => router.push(series.slug),
       priority: Priority.NORMAL,
     })),
-    ...allBlogPosts.map((post) => ({
+    ...reducedAllBlogPosts.map((post) => ({
       id: post.slug,
       name: post.title,
       subtitle: post.date,
@@ -31,7 +31,7 @@ export default function useKBarPostAction() {
       icon: <ArchiveBoxIcon width={18} />,
       perform: () => router.push(post.slug),
     })),
-    ...allSnippets.map((post) => ({
+    ...reducedAllSnippets.map((post) => ({
       id: post.slug,
       name: post.title,
       subtitle: post.date,
