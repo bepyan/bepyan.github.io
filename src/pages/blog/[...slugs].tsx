@@ -5,6 +5,7 @@ import PostLayout, { PostLayoutProps } from '~/components/layouts/PostLayout';
 import { allBlogPosts, allSeries } from '~/constants/dataset';
 import { parseToc } from '~/libs/mdx';
 import { contentToDescription } from '~/libs/post';
+import { Series } from '~/libs/types';
 
 export const getStaticPaths: GetStaticPaths = () => {
   return {
@@ -35,12 +36,16 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
     nextPost: allBlogPosts.at(postIndex + 1) ?? null,
   };
 
-  const postSeriesName = '/blog/' + (post?.seriesName ?? '');
-  const series = allSeries.find((series) => series.slug.startsWith(postSeriesName)) ?? null;
-  if (series) {
-    const postI = series.posts.findIndex((v) => v.slug === slug);
-    postFooterProps.prevPost = postI - 1 >= 0 ? series.posts.at(postI - 1) ?? null : null;
-    postFooterProps.nextPost = series.posts.at(postI + 1) ?? null;
+  let series: Series | null = null;
+
+  if (post.seriesName) {
+    series = allSeries.find((series) => series.slug.startsWith(`/blog/${post.seriesName}`)) ?? null;
+
+    if (series) {
+      const postI = series.posts.findIndex((v) => v.slug === slug);
+      postFooterProps.prevPost = postI - 1 >= 0 ? series.posts.at(postI - 1) ?? null : null;
+      postFooterProps.nextPost = series.posts.at(postI + 1) ?? null;
+    }
   }
 
   const props: PostLayoutProps = {
