@@ -29,22 +29,22 @@ date: 2023-01-10 19:30:18
 
 ```css {5}
 .txt {
-    color: red;
+  color: red;
 }
 
-.dark .txt:not(:where([class~="no-dark"] *)) {
-    color: blue;
+.dark .txt:not(:where([class~='no-dark'] *)) {
+  color: blue;
 }
 ```
 
 ```html
 <body class="dark">
-    <div>
-        <span class="txt">dynamic text</span>
-    </div>
-    <div class="no-dark">
-        <span class="txt">red text</span>
-    </div>
+  <div>
+    <span class="txt">dynamic text</span>
+  </div>
+  <div class="no-dark">
+    <span class="txt">red text</span>
+  </div>
 </body>
 ```
 

@@ -1,0 +1,220 @@
+---
+title: '프론트엔드 개발자 도구함'
+description: '직접 개발말고, 좋은 라이브러리를 씁시다!'
+icon: ''
+image: ''
+tags:
+  - 라이브러리
+draft: false
+date: 2023-01-30 14:08:18
+---
+
+세상에는 좋은 라이브러리가 정말 많다!
+100% 무료인 라이브러리들을 정리해봤다.
+전부 써본 것은 아니고 필요할 때 써보면 좋겠다 싶은 것들만 정리했습니다.
+
+---
+
+## UI Design System
+
+[**`material-ui`**](https://github.com/mui/material-ui) `react` &nbsp; [**`vuetify`**](https://github.com/vuetifyjs/vuetify) `vue`
+Google의 디자인 시스템.
+[Material Design 3](https://m3.material.io/develop/web)가 절찬 개발되고 있음.
+
+[**`ant-design`**](https://github.com/ant-design/ant-design) `react`
+Alibaba의 디자인 시스템.
+큰 기업에서 그저 믿고 쓸 수 있는 안정적인 라이브러리.
+
+[**`baseweb`**](https://github.com/uber/baseweb) `react`
+Uber의 디자인 시스템.
+깔끔한 흑백 테마 UI, 여기에 확장성이 곁들인.
+
+[**`carbon`**](https://github.com/carbon-design-system/carbon) `react` `angular` `vue` `svelte` `vanillajs`
+IBM의 디자인 시스템.
+날카로운 UI가 무척 매력적임. ( [storyboook](https://react.carbondesignsystem.com/?path=/story/getting-started-welcome--welcome) )
+
+[**`chakra-ui`**](https://github.com/chakra-ui/chakra-ui) `react`
+`Box` 컴포넌트 기반으로 레이아웃을 쉽게 구축할 수 있는 것이 특징.
+테마 커스터마이징, 접근성, 다크모드도 잘 지원해주기에 래핑해서 쓰기 좋은 라이브러리.
+
+[**`mantine-ui`**](https://github.com/mantinedev/ui.mantine.dev) `react`
+인지도는 조금 떨어지지만 개인적으로 깔끔하다고 생각이 듦.
+
+[**`daisyui`**](https://github.com/saadeghi/daisyui) `tailwindcss`
+tailwind를 래핑해주는 라이브라리라 모든 프레임워크에 사용할 수 있음.
+클래스명이 간결하고 [theme](https://daisyui.com/docs/themes/)을 쉽게 구축할 수 있는 것이 특징.
+
+[**`framework7`**](https://github.com/framework7io/framework7) `vanillajs` `react` `vue` `svelte`
+aOS, iOS와 똑같이 생긴 UI kit을 제공.
+
+[**`vant`**](https://github.com/youzan/vant) `vue`
+모바일 웹을 타겟으로 하는 라이브러리.
+
+---
+
+### 참고용 (코드 복붙)
+
+[**`hyperui`**](https://github.com/markmead/hyperui) `tailwindcss`
+무척 무척 깔끔하고 완성도가 높음.
+컴포넌트를 넘어서서 marketing 등 큰 단위의 레이아웃 예시도 있음.
+
+[**`shadcn/ui`**](https://github.com/shadcn/ui) `next.js` `radix-ui` `tailwindcss` ✨
+최근 뜨겁게 개발 중... 🔥
+예시를 넘어서서 `Next.js` 시스템을 어떻게 구축해갈지 인사이트를 받을 수 있음.
+
+[**`tw-elements`**](https://github.com/mdbootstrap/Tailwind-Elements/) `tailwindcss`
+방대한 마크업 예제가 있음. ~~개인적으로 조금 아쉽..~~
+마크업을 어떻게 작성할지 모를 때 참고하면 좋음.
+
+[**`tabler`**](https://github.com/tabler/tabler) `bootstrap`
+~~요즘 누가 bootstrap 씀?~~
+
+---
+
+### 읽어볼 만한 디자인 원칙
+
+- [LINE Global Family Service](https://designsystem.line.me/LDSG/foundation/)
+
+---
+
+## UI component library
+
+[**`headlessui`**](https://github.com/tailwindlabs/headlessui) `react` `vue` `tailwindcss` ✨
+메뉴, 팝업, 모달 등 직접 구현하기 귀찮은 컴포넌트를 `headless`한 형태로 제공.
+예시 UI 완성도가 무척 높아 그대로 따라하게 됨.
+
+[**`radix-ui-primitives`**](https://github.com/radix-ui/primitives) `react`
+복잡한 팝업, 모달을 완성도 높은 구조 `headless`한 형태로 제공.
+슬랙 같은 관리툴 만들 때 무척 유용 함.
+
+---
+
+### Carousel
+
+[**`swiper`**](https://github.com/nolimits4web/swiper) `vanillajs` `react` `vue` `svelte`
+모바일 전용.
+
+[**`glide`**](https://github.com/glidejs/glide) `vanillajs`
+가벼움.
+
+---
+
+### Image Viewer
+
+[**`lightgallery`**](https://github.com/sachinchoolur/lightGallery) `vanillajs` `react` `vue` `angluar` (상업적 용도는 유료)
+내가 원하는 모든 기능이 있는 완성형 이미지 뷰어.
+
+[**`medium-zoom`**](https://github.com/francoischalifour/medium-zoom) `vanillajs`
+단순하게 이미지 확대해주는데 부드럽고 깔끔함.
+
+---
+
+### Drag and Drop
+
+[**`react-beautiful-dnd`**](https://github.com/atlassian/react-beautiful-dnd) `react` (추가 개발 중단 됨)
+
+---
+
+### Toast
+
+[**`react-hot-toast`**](https://github.com/timolins/react-hot-toast) `react` 무척 가볍고 깔끔함. 커스터마이징하기 쉬움. ✨
+
+---
+
+### Chart
+
+[**`Chart.js`**](https://github.com/chartjs/Chart.js) `html canvas`
+
+---
+
+### Canvas
+
+[**`fabric.js`**](https://github.com/fabricjs/fabric.js) `vanillajs`
+[**`konva`**](https://github.com/konvajs/konva) `vanillajs`
+
+---
+
+### 기타
+
+[**`tiptap`**](https://github.com/ueberdosis/tiptap) 텍스트 에디터 `v2.0 beta`
+[**`kbar`**](https://github.com/timc1/kbar) `react` command palette (cmd+k) (아직 마이너버전)
+[**`cobe`**](https://github.com/shuding/cobe) `vanillajs` 아주 이쁜 지구의
+
+---
+
+## Icons
+
+[**`heroicons`**](https://github.com/tailwindlabs/heroicons) `tailwindcss`기반의 환경에서 쓰기 좋음. `outline` `solid` 둘다 있음.
+[**`lucide`**](https://github.com/lucide-icons/lucide) 아주 다양한 환경에서 쓰기 좋음. `outline`만 있음. [`Feather Icons`](https://github.com/feathericons/feather) 기반.
+[**`simple-icons`**](https://github.com/simple-icons/simple-icons) 브랜드 아이콘 창고. 없는 브랜드가 없음.
+
+추가적으로 아이콘 검색하기 좋은 사이트.
+**https://icones.netlify.app/**
+**https://icons8.com/icons/color**
+
+---
+
+## Transition
+
+[**`framer-motion`**](https://github.com/framer/motion) `react` ✨
+
+[**`react-srping`**](https://github.com/pmndrs/react-spring) `react`
+
+[**`gsap`**](https://github.com/greensock/GSAP) `vanillajs`
+
+[**`easings.net`**](https://easings.net/) 다양한 `transition` 속성 예시.
+
+---
+
+## 프레임워크
+
+[**`nextra`**](https://github.com/shuding/nextra) (`next.js` 공식문서 제작용)
+
+---
+
+## 유틸 도구
+
+---
+
+### 이미지 처리
+
+[**`sharp`**](https://github.com/lovell/sharp) `node`환경에서 이미지를 효율적으로 가공.
+[**`plaiceholder`**](https://github.com/joe-bell/plaiceholder) `node`환경에서 `blur`한 이미지 `placeholder`를 생성.
+
+---
+
+### 날짜
+
+~~[`moment`](https://github.com/moment/moment/)~~ [**`dayjs`**](https://github.com/iamkun/dayjs/)
+💪 Immutable, 🔥 Chainable, 🌐 I18n
+
+[**`date-fns`**](https://github.com/date-fns/date-fns)
+`Date`를 객체로 래핑하지 않고 `lodash` 처럼 유틸을 제공해주는 라이브러리.
+
+---
+
+### Code Syntax Highlighter
+
+[**`shiki`**](https://github.com/shikijs/shiki)
+[**`prism`**](https://github.com/PrismJS/prism)
+
+---
+
+### 기타
+
+[**`contentlayer`**](https://github.com/contentlayerdev/contentlayer) 파일 데이터 관리 (아직 마이너버전)
+
+---
+
+## 개발외 도구
+
+[**`gifox`**](https://gifox.app/) GIF 캡쳐 도구 ✨
+무료버전 쓰다가 너무 좋아서 19,000원 결제함
+
+[**`shottr`**](https://shottr.cc/) 캡쳐 도구 ✨
+픽셀 체크, 색상 코드 확인, 화살표 표시 등 협업할 때 무척 도움이 됨!
+
+[**`cleanshot`**](https://cleanshot.com/pricing) GIF + 캡쳐 도구
+36,000원 유료
+
+[**`Timer RH`**](https://apps.apple.com/us/app/timer-rh/id929960914?mt=12) 타이머. 건강을 위해서 쉬면서 코딩하자 🙏🏻

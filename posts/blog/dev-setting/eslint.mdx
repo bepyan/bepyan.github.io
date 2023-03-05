@@ -1,0 +1,68 @@
+---
+title: '내가 기본적으로 사용하는 ESLint 설정'
+description: ''
+icon: ''
+image: ''
+tags:
+  - eslint
+draft: false
+date: 2023-02-18 14:07:14
+---
+
+> 사심 ❤️을 넘치게 담아서 기록한 eslint 설정입니다.
+
+사용 환경
+
+- Next.js
+- typescript
+- tailwindcss
+
+---
+
+```shell
+yarn add -D eslint @typescript-eslint/parser
+yarn add -D eslint-plugin-unused-imports eslint-plugin-simple-import-sort
+yarn add -D eslint-plugin-tailwindcss
+```
+
+```js:eslintrc.cjs
+module.exports = {
+  root: true,
+  extends: ['next/core-web-vitals', 'plugin:tailwindcss/recommended'],
+  plugins: ['unused-imports', 'simple-import-sort'],
+  parser: '@typescript-eslint/parser',
+  settings: {
+    tailwindcss: {
+      callees: ['cn'],
+    },
+  },
+  rules: {
+    // https://github.com/sweepline/eslint-plugin-unused-imports
+    'no-unused-vars': 'off',
+    '@typescript-eslint/no-unused-vars': 'off',
+    'unused-imports/no-unused-imports': 'error',
+    'unused-imports/no-unused-vars': [
+      'warn',
+      {
+        vars: 'all',
+        varsIgnorePattern: '^_',
+        args: 'after-used',
+        argsIgnorePattern: '^_',
+      },
+    ],
+    // https://github.com/lydell/eslint-plugin-simple-import-sort
+    'simple-import-sort/exports': 'error',
+    'simple-import-sort/imports': [
+      'error',
+      {
+        groups: [['^\\u0000'], ['^@?\\w'], ['^~/'], ['^\\.']],
+      },
+    ],
+    'import/first': 'error',
+    'import/newline-after-import': 'error',
+    'import/no-duplicates': 'error',
+    // https://nextjs.org/docs/basic-features/eslint
+    'react-hooks/exhaustive-deps': 'off',
+  },
+};
+```

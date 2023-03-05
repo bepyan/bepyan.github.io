@@ -1,0 +1,160 @@
+---
+title: 'tailwindcss 완벽 세팅 (feat Next.js)'
+description: ''
+icon: ''
+image: ''
+tags:
+  - tailwindcss
+draft: false
+date: 2023-01-31 20:15:20
+---
+
+## 기본 설정
+
+https://tailwindcss.com/docs/guides/nextjs
+
+```shell
+yarn add -D tailwindcss postcss autoprefixer
+npx tailwindcss init -p
+```
+
+```js:tailwind.config.js {4}
+/** @type {import('tailwindcss').Config} */
+module.exports = {
+  content: [
+    './src/**/*.{ts,tsx}',
+  ],
+  theme: {
+    extend: {},
+  },
+  plugins: [],
+}
+```
+
+```css:global.css
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+```
+
+```json:.vscode/settings.json
+{
+    "css.lint.unknownAtRules": "ignore",
+}
+```
+
+---
+
+## utils
+
+클래스명을 정렬하기 위해 3가지 방법이 있다.
+
+[`prettier-plugin-tailwindcss`](https://github.com/tailwindlabs/prettier-plugin-tailwindcss)
+tailwindlabs에서 공식으로 지원하는 플러그인.
+
+[`eslint-plugin-tailwindcss`](https://github.com/francoismassart/eslint-plugin-tailwindcss)
+prettier 의존성을 벗어남은 물론 몇몇 추가 기능을 제공.
+
+[`headwind`](https://marketplace.visualstudio.com/items?itemName=heybourn.headwind)
+vscode 플러그인.
+
+---
+
+```shell
+yarn add -D clsx tailwind-merge
+```
+
+```ts:libs/utils
+import type { ClassValue } from 'clsx'
+import { clsx } from 'clsx'
+import { twMerge } from 'tailwind-merge'
+
+export function cn(...inputs: ClassValue[]) {
+  return twMerge(clsx(inputs))
+}
+```
+
+---
+
+## fonts
+
+```shell
+yarn add -D @next/font
+```
+
+```tsx:layout.tsx
+import localFont from '@next/font/local';
+
+const fontSans = localFont({
+  variable: '--font-spoqa',
+  src: [
+    {
+      path: '../assets/fonts/SpoqaHanSansNeo-Thin.woff2',
+      weight: '100',
+      style: 'normal',
+    },
+    {
+      path: '../assets/fonts/SpoqaHanSansNeo-Light.woff2',
+      weight: '300',
+      style: 'normal',
+    },
+    {
+      path: '../assets/fonts/SpoqaHanSansNeo-Regular.woff2',
+      weight: '400',
+      style: 'normal',
+    },
+    {
+      path: '../assets/fonts/SpoqaHanSansNeo-Medium.woff2',
+      weight: '500',
+      style: 'normal',
+    },
+    {
+      path: '../assets/fonts/SpoqaHanSansNeo-Bold.woff2',
+      weight: '700',
+      style: 'normal',
+    },
+  ],
+});
+
+<body
+  className={cn(
+    fontSans.variable,
+    'font-sans ...',
+  )}
+>
+```
+
+```diff-js:tailwind.config.js
++ const { fontFamily } = require('tailwindcss/defaultTheme')
+
+/** @type {import('tailwindcss').Config} */
+module.exports = {
+  content: ['./src/**/*.{ts,tsx}'],
+  theme: {
+    extend: {
++      fontFamily: {
++        sans: ['var(--font-spoqa)', ...fontFamily.sans],
++      },
+    },
+  },
+  plugins: [],
+}
+```
+
+---
+
+## 추가 설정
+
+**모바일에선 hover 스타일이 동작하지 않도록**
+
+```js:tailwind.config.js {4}
+/** @type {import('tailwindcss').Config} */
+module.exports = {
+  future: {
+    hoverOnlyWhenSupported: true,
+  },
+  // ...
+}
+```
+
+https://github.com/tailwindlabs/tailwindcss/pull/8394
