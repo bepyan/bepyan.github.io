@@ -163,50 +163,6 @@ code.language-css .token.selector > .token.pseudo-element {
   color: var(--prism-foreground);
 }
 
-/* rehype-code-wrap */
-.rehype-code-wrap {
-  @apply relative my-2 -mx-2 overflow-hidden rounded-lg sm:m-0;
-}
-.rehype-code-wrap > pre {
-  border-radius: 0;
-  @apply m-0 rounded-none p-5;
-}
-.rehype-code-wrap + .rehype-code-wrap {
-  @apply mt-4;
-}
-
-.rehype-code-wrap--title {
-  background-color: var(--prism-background);
-  @apply flex;
-}
-
-.rehype-code-wrap--title-blank {
-  background-color: #3c3f41;
-  background-color: var(--prism-selection);
-  @apply mt-2 w-full rounded-tl;
-  @apply ring-1 ring-inset ring-white/5;
-}
-
-.rehype-code-wrap--title-text {
-  color: #bbbbbb;
-  @apply flex-none border-b-4 border-[#bbbbbb] px-5 pt-2 pb-1.5 text-sm font-bold;
-}
-
-.rehype-code-wrap--title + pre {
-  @apply mt-0 rounded-t-none;
-}
-
-.rehype-code-wrap--copy {
-  @apply absolute right-2 bottom-2 flex h-8 w-8 items-center justify-center;
-  @apply rounded-lg bg-neutral-700 text-xs text-neutral-400 opacity-0 transition-all hover:text-neutral-300;
-}
-.rehype-code-wrap:hover .rehype-code-wrap--copy {
-  @apply opacity-100;
-}
-.rehype-code-wrap--check-icon {
-  @apply hidden;
-}
-
 /* rehype-prism-plus */
 .code-line.inserted,
 .code-line.deleted,

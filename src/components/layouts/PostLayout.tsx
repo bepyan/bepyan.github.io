@@ -5,9 +5,7 @@ import { useMDXComponent } from 'next-contentlayer/hooks';
 
 import { siteConfig } from '~/config';
 import { fadeInHalf, staggerHalf } from '~/constants/animations';
-import { useRehypeCodeCopy } from '~/libs/rehypeCodeWrap';
 import { Post, Series, TableOfContents } from '~/libs/types';
-import useMediumZoom from '~/libs/useMediumZoom';
 
 import AuthorContacts from '../common/AuthorContacts';
 import Hr from '../common/Hr';
@@ -17,6 +15,8 @@ import Title from '../common/Title';
 import Giscus from '../Giscus';
 import CalenderIcon from '../icons/CalenderIcon';
 import ClockIcon from '../icons/ClockIcon';
+import CodeBlock from '../mdx/CodeBlock';
+import ZoomImage from '../mdx/ZoomImage';
 import ReadingProgressBar from '../ReadingProgressBar';
 import { BlogSEO } from '../SEO';
 import SeriesCard from '../SeriesCard';
@@ -32,19 +32,21 @@ export type PostLayoutProps = {
   tableOfContents: TableOfContents;
 };
 
+const mdxComponents = {
+  img: ZoomImage,
+  pre: CodeBlock,
+};
+
 export default function PostLayout({
   post,
   series,
   postFooterProps,
   tableOfContents,
 }: PostLayoutProps) {
-  useRehypeCodeCopy();
-  useMediumZoom();
-
   const headerTagTitle = series?.title ?? post.snippetName;
   const headerTagSlug = series?.slug ?? `/snippets?key=${post.snippetName ?? 'all'}`;
 
-  const Component = useMDXComponent(post.body.code);
+  const MDXContent = useMDXComponent(post.body.code);
 
   return (
     <Layout>
@@ -82,7 +84,7 @@ export default function PostLayout({
         <motion.div variants={fadeInHalf} className="relative gap-8 lg:flex">
           <div className="prose prose-neutral w-full max-w-3xl font-spoqa dark:prose-dark">
             <TocTop className="lg:hidden" tableOfContents={tableOfContents} />
-            <Component components={{}} />
+            <MDXContent components={mdxComponents} />
           </div>
 
           <div className="mt-12 ml-auto">

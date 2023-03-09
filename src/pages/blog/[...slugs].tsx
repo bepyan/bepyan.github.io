@@ -40,12 +40,6 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
 
   if (post.seriesName) {
     series = allSeries.find((series) => series.slug.startsWith(`/blog/${post.seriesName}`)) ?? null;
-
-    if (series) {
-      const postI = series.posts.findIndex((v) => v.slug === slug);
-      postFooterProps.prevPost = postI - 1 >= 0 ? series.posts.at(postI - 1) ?? null : null;
-      postFooterProps.nextPost = series.posts.at(postI + 1) ?? null;
-    }
   }
 
   const props: PostLayoutProps = {
