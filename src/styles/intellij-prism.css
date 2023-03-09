@@ -194,6 +194,10 @@ code.language-css .token.selector > .token.pseudo-element {
   background-color: rgba(239, 68, 68, 0.2);
 }
 
+.code-line.inserted > *:first-child {
+  user-select: none;
+}
+
 .line-number::before {
   display: inline-block;
   width: 1rem;
