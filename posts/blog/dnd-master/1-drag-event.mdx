@@ -2,7 +2,7 @@
 title: 'Drag 이벤트 뽀개기'
 description: '라이브러리 없이 React에서 element를 커서로 움직이게 하자!!!'
 tags:
-  - Next.js
+  - next.js
   - React
   - DOM
 draft: false
@@ -19,6 +19,7 @@ drag관련해서 좋은 라이브러리들이 있지만 순수하게 구현해�
 ---
 
 ## TL;DR
+
 > `mousedown`에서 `mousemove` `mouseup` 이벤트를 등록한다.
 > `mousemove`에서 `event.pageX`와 `mousedown`의 `event.pageX` 차이를 활용해 엘리먼트를 이동시킨다.
 > `mouseup`에서 `mousemove` 이벤트를 해제시킨다.

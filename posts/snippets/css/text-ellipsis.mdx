@@ -1,0 +1,77 @@
+---
+title: '(css) text ellipsis'
+description: ''
+icon: ''
+image: ''
+tags:
+  - css
+  - tailwindcss
+  - ellipsis
+  - line clamp
+draft: false
+date: 2023-03-09 19:44:19
+---
+
+## 텍스트 말줄임 처리
+
+```css
+.ellipsis {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  word-break: break-all;
+}
+```
+
+`word-break: break-all;` 문자 단위로 끊어서 줄바꿈
+`word-break: keep-all;` 문단 단위로 끊어서 줄바꿈
+
+### 여러 줄 허용하고 말줄임 처리
+
+[`line-clamp`](https://developer.mozilla.org/en-US/docs/Web/CSS/-webkit-line-clamp)을 활용하면 된다.
+[`webkit` 기반 브라우저](https://caniuse.com/mdn-css_properties_-webkit-line-clamp)에서 동작한다. ~~아쉽지만 IE는 지원하지 안한다.~~
+
+```css
+.ellipsis-2 {
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+}
+```
+
+---
+
+## `tailwind`에서의 적용 법
+
+자주 활용되는 기능인 만큼 [`truncate`](https://tailwindcss.com/docs/text-overflow)라는 클래스를 제공해준다.
+
+```html
+// overflow-hidden text-ellipsis whitespace-nowrap
+<div className="truncate break-words" />
+```
+
+여러 줄을 줄일은 [`@tailwindcss/line-clamp`](https://github.com/tailwindlabs/tailwindcss-line-clamp)을 활용해야 한다.
+
+```shell
+yarn add -D @tailwindcss/line-clamp
+```
+
+```js:tailwind.config.js
+module.exports = {
+  theme: {
+    // ...
+  },
+  plugins: [
+    require('@tailwindcss/line-clamp'),
+    // ...
+  ],
+}
+```
+
+```html
+<p class="line-clamp-2">
+  Et molestiae hic earum repellat aliquid est doloribus delectus. Enim illum odio porro ut omnis
+  dolor debitis natus. Voluptas possimus deserunt sit delectus est saepe nihil. Qui voluptate
+  possimus et quia. Eligendi voluptas voluptas dolor cum. Rerum est quos quos id ut molestiae fugit.
+</p>
+```

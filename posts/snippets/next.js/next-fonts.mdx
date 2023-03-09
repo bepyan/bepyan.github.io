@@ -1,0 +1,100 @@
+---
+title: '(Next.js) @next/fonts'
+description: ''
+icon: ''
+image: ''
+tags:
+  - next.js
+  - css
+  - tailwindcss
+draft: false
+date: 2023-03-07 21:29:20
+---
+
+`@next/font`를 지원하는 폰트, 로컬에 있는 폰트를 적용해보자.
+
+---
+
+[`variable fonts`](https://fonts.google.com/variablefonts)를 사용하는 것이 성능상 베스트이지만, 아직 한글 폰트가 없다는 사실...
+https://noonnu.cc/ 에서 마음에 드는 폰트를 다운 받아서 사용해보자.
+
+```shell
+yarn add @next/font
+```
+
+```tsx:components/Fonts.tsx
+import { JetBrains_Mono as FontMono } from '@next/font/google';
+import localFont from '@next/font/local';
+
+const fontSans = localFont({
+  variable: '--font-sans',
+  src: [
+    {
+      path: '../assets/fonts/NotoSansKR-Regular.otf',
+      weight: '400',
+      style: 'normal',
+    },
+    {
+      path: '../assets/fonts/NotoSansKR-Medium.otf',
+      weight: '500',
+      style: 'normal',
+    },
+    {
+      path: '../assets/fonts/NotoSansKR-Bold.otf',
+      weight: '700',
+      style: 'normal',
+    },
+  ],
+});
+
+export const fontMono = FontMono({
+  subsets: ['latin'],
+  variable: '--font-mono',
+  display: 'swap',
+});
+
+
+export default function Fonts() {
+  return (
+    <style jsx global>{`
+      :root {
+        --font-sans: ${fontSans.style.fontFamily};
+        --font-mono: ${fontMono.style.fontFamily};
+      }
+    `}</style>
+  );
+}
+```
+
+```ts:tailwind.config.js
+const { fontFamily } = require('tailwindcss/defaultTheme');
+
+/** @type {import('tailwindcss').Config} */
+module.exports = {
+  // ...,
+  theme: {
+    extend: {
+      fontFamily: {
+        sans: ['var(--font-sans)', ...fontFamily.sans],
+        mono: ['var(--font-mono)', ...fontFamily.mono],
+      },
+    }
+  }
+}
+```
+
+```tsx:_app.tsx
+export default function MyApp({ Component, pageProps }: AppProps) {
+  return (
+    <>
+      <Fonts />
+      <div className='font-sans'>
+        <Component {...pageProps} />
+        <code className="font-mono">
+          {...}
+        </code>
+      </div>
+    </>
+  )
+}
+```

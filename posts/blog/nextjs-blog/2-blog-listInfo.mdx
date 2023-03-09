@@ -2,7 +2,7 @@
 title: Next.js 블로그 글의 추가 정보 파싱하기
 description: gray-matter, reading-time 등을 활용하여 글에 대한 추가 정보를 알아내자.
 tags:
-  - Next.js
+  - next.js
   - Blog
 date: 2022-11-11
 ---
@@ -111,14 +111,14 @@ type PostMatter = {
   tags: string[];
   draft?: boolean;
   date: string;
-}
+};
 
 type Post = PostMatter & {
   slug: string;
   content: string;
   readingMinutes: number;
   wordCount: number;
-}
+};
 ```
 
 ---
@@ -216,6 +216,5 @@ vscode에 `custom snippets`을 추가해두면 도움이 될 것입니다.
   }
 }
 ```
-
 
 ![예시](https://user-images.githubusercontent.com/65283190/211207259-793fe7a0-c9b1-4bfd-b444-93eca7e9dc1e.gif)

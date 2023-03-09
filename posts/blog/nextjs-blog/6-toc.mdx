@@ -2,7 +2,7 @@
 title: 'Next.js 블로그 TOC 배너 만들기'
 description: '목차를 만들자.'
 tags:
-  - Next.js
+  - next.js
   - Blog
   - Toc
 draft: true
@@ -23,20 +23,18 @@ date: 2022-11-19 16:33:14
    - scroll-margin-top을 element margin-top에 맞추면 보기 좋게
 6. 스크롤에 따라 현재 headings에 하이라이트한다.
 
-
-
 배너 만드는 방법
 
 1. `absolute`속성에 `left-full`로 레이아웃 잡기
 
 ```tsx
 <div className="absolute left-full">
-   <div className="fixed top-12 w-80 bottom-0 ml-8 h-full overflow-y-auto p-8">
-      <TocBanner tableOfContents={tableOfContents} />
-      <div className="">
-         <ThemeSwitch />
-      </div>
-   </div>
+  <div className="fixed top-12 bottom-0 ml-8 h-full w-80 overflow-y-auto p-8">
+    <TocBanner tableOfContents={tableOfContents} />
+    <div className="">
+      <ThemeSwitch />
+    </div>
+  </div>
 </div>
 ```
 
@@ -44,11 +42,11 @@ date: 2022-11-19 16:33:14
 
 ```tsx
 <div className="fixed top-[3.8125rem] bottom-0 right-[max(0px,calc(50%-45rem))] z-20 hidden w-[19.5rem] overflow-y-auto py-10 xl:block">
-   <div className="">
-      <TocBanner tableOfContents={tableOfContents} />
-      <div className="">
-         <ThemeSwitch />
-      </div>
-   </div>
+  <div className="">
+    <TocBanner tableOfContents={tableOfContents} />
+    <div className="">
+      <ThemeSwitch />
+    </div>
+  </div>
 </div>
 ```
