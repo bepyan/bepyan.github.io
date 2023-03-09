@@ -17,7 +17,7 @@ ${PostJson.map(
 ).join('\n')}
 </urlset>`;
 
-  writeFileSync('public/sitemap.xml', sitemap, 'utf-8');
+  writeFileSync('out/sitemap.xml', sitemap, 'utf-8');
 };
 
 const createRobotsTxt = () => {
@@ -30,7 +30,7 @@ Sitemap: ${siteUrl}/sitemap.xml
 Host: ${siteUrl}
 `;
 
-  writeFileSync('public/robots.txt', text.trim(), 'utf-8');
+  writeFileSync('out/robots.txt', text.trim(), 'utf-8');
 };
 
 (() => {
