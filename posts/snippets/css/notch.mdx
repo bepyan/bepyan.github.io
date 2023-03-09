@@ -1,0 +1,73 @@
+---
+title: '(css) 노치 영역 대응'
+description: ''
+icon: ''
+image: ''
+tags:
+  - css
+  - notch
+draft: false
+date: 2023-03-09 21:12:38
+---
+
+아이폰 X부터 `노치(notch)`라는 영역이 생겼다.
+그리고 **가로모드**가 우릴 미치게 만든다.
+
+![230309-213220](/images/posts/notch/230309-213220.png)
+
+https://webkit.org/blog/7929/designing-websites-for-iphone-x/
+
+하지만 두려워 마라! 이를 쉽게 대응할 수 있다.
+
+---
+
+## 1. viewport-fit=cover
+
+```html
+<meta name="viewport" content="... viewport-fit=cover" />
+```
+
+take care of any padding necessary to prevent text from going right up to the edge of the display, or be obscured by the notch.
+
+---
+
+## 2. env()
+
+css의 [`env()`](https://developer.mozilla.org/en-US/docs/Web/CSS/env) 문법을 통해서 `Safe Areas` 영역을 보장 받을 수 있다.
+브라우저의 `userAgent`으로부터 기기 환경 변수를 얻는다고 한다.
+
+![230309-225807](/images/posts/notch/230309-225807.png)
+
+```css
+.post {
+  padding-left: env(safe-area-inset-left);
+  padding-right: env(safe-area-inset-right);
+}
+```
+
+노치가 없을 때, 엘리먼트 `padding`이 `0`으로 덮여지지 않도록 유의해야 한다.
+
+```css
+.post {
+  padding-left: env(safe-area-inset-left, 12px);
+  padding-left: max(12px, env(safe-area-inset-left));
+}
+```
+
+가로모드일 때만 따로 관리하는 방법도 있다.
+`clac()`도 활용하여 상황에 맞게 레이아웃을 잘 지켜내자.
+
+```css
+@media only screen and (orientation: landscape) {
+  .post {
+    padding-left: calc(12px + env(safe-area-inset-left));
+    padding-right: calc(12px + env(safe-area-inset-right));
+  }
+}
+```
+
+---
+
+![230309-213927](/images/posts/notch/230309-213927.png)
+
+편안 ✨
