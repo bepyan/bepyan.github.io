@@ -1,0 +1,90 @@
+---
+title: 'preact을 시작해보자. vite와 함께.'
+description: ''
+icon: ''
+image: ''
+tags:
+  - preact
+  - vite
+  - typescript
+draft: false
+date: 2023-03-13 17:52:39
+---
+
+## [preact](https://preactjs.com/)란?
+
+**가볍고 빠르다.**
+그 핵심은 `Preact does not implement a synthetic event system`이라고 한다.
+가능한 `Virtual DOM` 추상화 수준을 낮춰서 더욱 직접적으로 `DOM`을 다루게 된다.
+따라서 기존 `react`와 문법이 조금 다른 부분이 있다.
+
+물론 `preact/compat`을 활용하면 문법적으로 `react`와 `100%` 호환이 된다.
+
+---
+
+## 기본 세팅
+
+`vite`을 활용해서 쉽게 프로젝트 세팅을 할 수 있다.
+
+```shell
+yarn create vite project-name --template preact-ts
+```
+
+기본적으로 `react`와 똑같다.
+
+```tsx:index.tsx
+import './index.css';
+import { render } from 'preact';
+
+import App from './App';
+
+render(<App />, document.getElementById('app') as HTMLElement);
+```
+
+이어서 [tailwindcss](./tailwindcss) [eslint](./eslint) 등 설정을 이어서 하면 된다.
+
+---
+
+## 라우팅
+
+기본적으로 [**`preact-router`**](https://github.com/preactjs/preact-router)라는 선택지가 있지만, 이는 단순한 라우팅만 지원된다.
+복잡하게 컴포넌트를 조합 해야할 경우 [`react-router`](https://github.com/remix-run/react-router)을 사용하도록 권장되어 있다.
+
+```shell
+yarn add react-router-dom
+```
+
+```ts:vite.config.ts
+import preact from '@preact/preset-vite';
+import { defineConfig } from 'vite';
+
+// https://vitejs.dev/config/
+export default defineConfig({
+  plugins: [preact()],
+  resolve: {
+    alias: {
+      react: 'preact/compat',
+    },
+  },
+});
+```
+
+```tsx:App.tsx
+import { BrowserRouter, Route, Routes, useParams } from 'react-router-dom';
+
+export default function App() {
+  return (
+    <BrowserRouter>
+      <Routes>
+        <Route path="/" element={<Slug />} />
+        <Route path=":slug" element={<Slug />} />
+      </Routes>
+    </BrowserRouter>
+  );
+}
+
+function Slug() {
+  const { slug } = useParams();
+  return <div>{slug}</div>;
+}
+```
