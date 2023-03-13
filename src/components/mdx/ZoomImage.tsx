@@ -2,7 +2,7 @@ import mediumZoom, { Zoom } from 'medium-zoom';
 import { useTheme } from 'next-themes';
 import { useEffect, useRef, useState } from 'react';
 
-export default function ZoomImage({ src, alt }: React.ComponentProps<'img'>) {
+export default function ZoomImage({ src, alt, ...props }: React.ComponentProps<'img'>) {
   const ref = useRef<HTMLImageElement>(null);
   const [zoom, setZoom] = useState<Zoom>();
 
@@ -19,5 +19,5 @@ export default function ZoomImage({ src, alt }: React.ComponentProps<'img'>) {
     zoom?.update({ background });
   }, [background]);
 
-  return <img ref={ref} src={src} alt={alt} />;
+  return <img ref={ref} src={src} alt={alt} {...props} />;
 }
