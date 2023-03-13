@@ -6,7 +6,11 @@ export const parseToc = (source: string) => {
     .filter((line) => line.match(/(^#{1,3})\s/))
     .reduce<TableOfContents>((ac, rawHeading) => {
       const nac = [...ac];
-      const removeMdx = rawHeading.replace(/^##*\s/, '').replace(/[\*,\~]{2,}/g, '');
+      const removeMdx = rawHeading
+        .replace(/^##*\s/, '')
+        .replace(/[\*,\~]{2,}/g, '')
+        .replace(/(?<=\])\((.*?)\)/g, '')
+        .replace(/(?<!\S)((http)(s?):\/\/|www\.).+?(?=\s)/g, '');
 
       const section = {
         slug: removeMdx
