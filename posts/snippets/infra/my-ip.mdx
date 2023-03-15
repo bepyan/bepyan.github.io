@@ -1,0 +1,45 @@
+---
+title: 'MAC에서 내 IP 확인하기'
+description: ''
+icon: ''
+image: ''
+tags:
+  - infra
+draft: false
+date: 2023-03-15 17:20:20
+---
+
+## 방법 1
+
+리눅스 네트워크 관리에 필요한 `ifconfig`를 활용해서 알아낼 수 있습니다.
+
+```shell
+ifconfig | grep netmask
+```
+
+![230315-172311](/images/posts/my-ip/230315-172311.png)
+
+`inet` 이란?
+네트워크 인터페이스에 할당된 IP 주소를 추출한다.
+
+`vpn`이 적용 현황까지 알 수 있다.
+
+---
+
+## 방법 2
+
+[DAUM에서 내 IP 주소 확인](https://search.daum.net/search?w=tot&m=&q=%EB%82%B4%20ip%EC%A3%BC%EC%86%8C%20%ED%99%95%EC%9D%B8&nzq=%EB%82%B4%20ip&DA=NSJ)
+
+![230315-172424](/images/posts/my-ip/230315-172424.png)
+
+---
+
+## 번외
+
+### 내 WIFI IP를 알고 싶다면?
+
+Wi-Fi 설정 > 연결된 Wi-Fi > 세부사항
+
+![230315-172803](/images/posts/my-ip/230315-172803.png)
+
+![230315-172711](/images/posts/my-ip/230315-172711.png)
