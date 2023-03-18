@@ -107,8 +107,9 @@ export default function PostLayout({
               <div>
                 <img
                   src={siteConfig.author.photo}
-                  className="h-24 w-24 overflow-hidden rounded-full"
+                  className="h-24 w-24 select-none overflow-hidden rounded-full"
                   alt="프로필 사진"
+                  draggable={false}
                 />
               </div>
               <div>

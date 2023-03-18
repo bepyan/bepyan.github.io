@@ -6,8 +6,9 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build && next export",
-    "postBuild": "yarn sitemap",
+    "postBuild": "yarn sitemap && yarn rss",
     "sitemap": "ts-node --project tsconfig.node.json ./scripts/generate-static.ts",
+    "rss": "ts-node --project tsconfig.node.json ./scripts/generate-rss.ts",
     "serve": "npx http-server out",
     "lint": "eslint \"**/*.{js,cjs,ejs,ts,tsx}\" --fix"
   },
@@ -15,6 +16,7 @@
     "@headlessui/react": "^1.7.5",
     "@next/font": "^13.1.6",
     "dayjs": "^1.11.6",
+    "feed": "^4.2.2",
     "framer-motion": "^8.4.2",
     "gsap": "^3.11.3",
     "kbar": "^0.1.0-beta.40",

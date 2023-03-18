@@ -15,12 +15,9 @@ export default function MyDocument() {
         <meta name="theme-color" content="#fafafa" media="(prefers-color-scheme: light)" />
         <meta name="theme-color" content="#131313" media="(prefers-color-scheme: dark)" />
 
-        <link rel="preconnect" href="https://fonts.googleapis.com" />
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
-        <link
-          href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap"
-          rel="stylesheet"
-        />
+        <link rel="alternate" type="application/rss+xml" href="/rss.xml" title="RSS" />
+        <link rel="alternate" type="application/atom+xml" href="/rss-atom.xml" title="RSS Atom" />
+        <link rel="alternate" type="application/json" href="/feed.json" title="JSON Feed" />
       </Head>
       <body className="text-primary bg-primary transition-[background]">
         <Main />

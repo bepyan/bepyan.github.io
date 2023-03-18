@@ -1,0 +1,159 @@
+---
+title: '블로그에 RSS, JSON Feed 추가하기'
+description: ''
+icon: ''
+image: ''
+tags:
+  - next.js
+  - rss
+  - json feed
+  - atom
+  - xml
+draft: false
+date: 2023-03-17 17:37:20
+---
+
+`RSS`와 `JSON Feed`는 **웹사이트의 콘텐츠를 손쉽게 구독**할 수 있게 해주는 기술이다.
+모두 웹사이트의 업데이트를 손쉽게 확인하고, 원하는 콘텐츠를 효율적으로 모아볼 수 있는 기능을 제공한다.
+
+---
+
+## RSS (Really Simple Syndication)
+
+`RSS`는 `XML` 기반으로 웹 콘텐츠를 제공해준다.
+사용자는 [RSS 리더](https://rssviewer.app/)를 통해 여러 사이트의 RSS를 통해 피드들을 한 눈에 볼 수 있다.
+
+추가로 `Atom`이라는 `XML` 기반의 표준도 있다.
+`RSS`보다 더 확장성이 있고 더욱 상세한 정보를 기입할 수 있다.
+
+---
+
+## JSON Feed
+
+`JSON Feed`는 이름대로 `JSON` 기반으로 웹 콘텐츠를 구독한다.
+`JSON`이기 때문에 파싱이 쉽고, 가독성이 좋고, 가볍고... `XML`보다 이점을 많이 갖고 있다.
+
+---
+
+## 블로그에 적용하기
+
+`JSON Feed`가 성능상 이점이 있지만 오랫동안 사용되어 온 `RSS`를 내려놓기 어렵다.
+하지만 꼭 하나만 선택할 필요는 없다. `RSS`, `JSON Feed` 모두 제공해주면 된다.
+
+[**`feed`**](https://github.com/jpmonette/feed)를 활용해서 구현해보자.
+`typescript` 기반으로 구현된 라이브러리이며 `RSS` `Atom` `JSON Feed`를 모두 생성할 수 있다.
+
+```shell
+yarn add feed
+```
+
+### 데이터 생성하기
+
+해당 블로그에서 적용한 방법이다.
+빌드시 `rss.xml` `feed.json` 정적 파일을 생성하여 `github pages`에 배포하는 방식이다.
+
+```ts:scripts/generate-rss.ts
+import { Feed } from 'feed';
+import { writeFileSync } from 'fs';
+
+import PostJson from '../.contentlayer/generated/Post/_index.json';
+import { siteConfig } from '../src/config';
+
+const master = {
+  name: siteConfig.author.name,
+  email: siteConfig.author.contacts.email,
+  link: siteConfig.url,
+};
+
+const feed = new Feed({
+  title: siteConfig.title,
+  description: siteConfig.description,
+  id: siteConfig.url,
+  link: siteConfig.url,
+  language: 'ko',
+  image: `${siteConfig.url}/images/base.jpg`,
+  favicon: `${siteConfig.url}/favicon.ico`,
+  copyright: `All rights reserved since ${siteConfig.since}, ${master.name}`,
+  generator: 'generate-rss',
+  feedLinks: {
+    json: `${siteConfig.url}/json`,
+    atom: `${siteConfig.url}/atom`,
+  },
+  author: master,
+});
+
+PostJson.forEach((post) => {
+  feed.addItem({
+    title: post.title,
+    id: post.slug,
+    link: `${siteConfig.url}${post.slug}`,
+    description: post.description,
+    content: post.body.raw,
+    author: [master],
+    contributor: [master],
+    date: new Date(post.date),
+    image: post.image,
+    category: post.tags.map((tag) => ({ name: tag })),
+  });
+});
+
+feed.addCategory('Technologies');
+
+// Output: RSS 2.0
+writeFileSync('out/rss.xml', feed.rss2(), 'utf-8');
+// Output: Atom 1.0
+writeFileSync('out/rss-atom.xml', feed.atom1(), 'utf-8');
+// Output: JSON Feed 1.0
+writeFileSync('out/feed.json', feed.json1(), 'utf-8');
+```
+
+속성들은 직관적이기 때문에 어렵지 않게 자신 환경에 맞춰 작성할 수 있을 것이다.
+만들어진 데이터를 `writeFileSync` 통해 파일로 생성하면 된다.
+
+사실 꼭 정적인 파일을 생성할 필요는 없다. `api`를 통해서 응답을 받게 해도 된다.
+
+```ts:pages/api/rss.ts
+import { Feed } from 'rss';
+// ... (생성한 feed 코드 삽입)
+
+export default async (req, res) => {
+  res.setHeader('Content-Type', 'application/rss+xml');
+  res.write(feed.rss2());
+  res.end();
+};
+```
+
+### 배포하기
+
+빌드시 최종적으로
+
+```json:package.json
+{
+  //...
+  "homepage": "https://bepyan.github.io/",
+  "scripts": {
+    //...
+    "build": "next build && next export && yarn rss",
+    "rss": "ts-node --project tsconfig.node.json ./scripts/generate-rss.ts",
+  },
+}
+```
+
+```json:tsconfig.node.json
+{
+  "extends": "./tsconfig.json",
+  "compilerOptions": {
+    "module": "commonjs",
+  }
+}
+```
+
+### 웹사이트에 링크 추가하기
+
+```html:_document.tsx
+<Head>
+  <link rel="alternate" type="application/rss+xml" href="/rss.xml" title="RSS" />
+  <link rel="alternate" type="application/atom+xml" href="/rss-atom.xml" title="RSS Atom" />
+  <link rel="alternate" type="application/json" href="/feed.json" title="JSON Feed" />
+</Head>
+```
