@@ -4,7 +4,7 @@ description: ''
 icon: ''
 image: ''
 tags:
-  - Javascript
+  - javascript
   - clipboard
 draft: false
 date: 2022-09-19 20:15:23
@@ -31,14 +31,14 @@ https://web.dev/i18n/ko/async-clipboard/
 ```tsx
 export const copyURL = () => {
   let currentUrl = window.document.location.href;
-  let t = document.createElement("textarea");
+  let t = document.createElement('textarea');
   document.body.appendChild(t);
   t.value = currentUrl;
   t.select();
-  document.execCommand("copy");
+  document.execCommand('copy');
   document.body.removeChild(t);
 
-  alert("링크가 복사되었습니다.");
+  alert('링크가 복사되었습니다.');
 };
 ```
 
