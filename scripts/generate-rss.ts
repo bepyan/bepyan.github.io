@@ -3,6 +3,7 @@ import { writeFileSync } from 'fs';
 
 import PostJson from '../.contentlayer/generated/Post/_index.json';
 import { siteConfig } from '../src/config';
+import { contentToDescription } from '../src/libs/post';
 
 const master = {
   name: siteConfig.author.name,
@@ -33,7 +34,7 @@ PostJson.forEach((post) => {
     id: post.slug,
     link: `${siteConfig.url}${post.slug}`,
     description: post.description,
-    content: post.body.raw,
+    content: contentToDescription(post.body.raw),
     author: [master],
     contributor: [master],
     date: new Date(post.date),
@@ -47,6 +48,6 @@ feed.addCategory('Technologies');
 // Output: RSS 2.0
 writeFileSync('out/rss.xml', feed.rss2(), 'utf-8');
 // Output: Atom 1.0
-writeFileSync('out/atom.xml', feed.atom1(), 'utf-8');
+writeFileSync('out/rss-atom.xml', feed.atom1(), 'utf-8');
 // Output: JSON Feed 1.0
 writeFileSync('out/feed.json', feed.json1(), 'utf-8');

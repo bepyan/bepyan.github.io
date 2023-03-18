@@ -22,6 +22,7 @@ date: 2023-03-17 17:37:20
 
 `RSS`는 `XML` 기반으로 웹 콘텐츠를 제공해준다.
 사용자는 [RSS 리더](https://rssviewer.app/)를 통해 여러 사이트의 RSS를 통해 피드들을 한 눈에 볼 수 있다.
+자신이 좋아하는 블로그들의 글을 웹사이트 돌아다닐 필요 없이 한 페이지에서 모아 볼 수 있게 된다!
 
 추가로 `Atom`이라는 `XML` 기반의 표준도 있다.
 `RSS`보다 더 확장성이 있고 더욱 상세한 정보를 기입할 수 있다.
@@ -110,22 +111,7 @@ writeFileSync('out/feed.json', feed.json1(), 'utf-8');
 속성들은 직관적이기 때문에 어렵지 않게 자신 환경에 맞춰 작성할 수 있을 것이다.
 만들어진 데이터를 `writeFileSync` 통해 파일로 생성하면 된다.
 
-사실 꼭 정적인 파일을 생성할 필요는 없다. `api`를 통해서 응답을 받게 해도 된다.
-
-```ts:pages/api/rss.ts
-import { Feed } from 'rss';
-// ... (생성한 feed 코드 삽입)
-
-export default async (req, res) => {
-  res.setHeader('Content-Type', 'application/rss+xml');
-  res.write(feed.rss2());
-  res.end();
-};
-```
-
-### 배포하기
-
-빌드시 최종적으로
+이제 빌드시점에서 파일들이 생성되도록 `package.json`에 스크립트를 추가한다.
 
 ```json:package.json
 {
@@ -148,7 +134,10 @@ export default async (req, res) => {
 }
 ```
 
-### 웹사이트에 링크 추가하기
+### 웹사이트에 심기
+
+`<link>` 태그를 활용하여 `RSS` `JSON Feed` 피드 존재를 드러낼 수 있다.
+브라우저는 피드를 인식하고 사용자에게 구독 옵션을 제공할 수 있게 된다.
 
 ```html:_document.tsx
 <Head>
@@ -156,4 +145,25 @@ export default async (req, res) => {
   <link rel="alternate" type="application/atom+xml" href="/rss-atom.xml" title="RSS Atom" />
   <link rel="alternate" type="application/json" href="/feed.json" title="JSON Feed" />
 </Head>
+```
+
+`rel` 속성은 현재 문서와 연결된 리소스 간의 관계를 설명하고,
+`alternate` 값은 대체 콘텐츠를 제공하는 연결된 리소스를 나타낸다.
+
+추가로 이는 PC, Mobile 페이지, 다국 언어 페이지 리소스를 연결 해주기도 한다.
+
+### 다른 방법 - API
+
+사실 꼭 정적인 파일을 생성할 필요는 없다.
+`api`를 통해서 응답을 줘도 된다!
+
+```ts:pages/api/rss.ts
+import { Feed } from 'rss';
+// ... (생성한 feed 코드 삽입)
+
+export default async (req, res) => {
+  res.setHeader('Content-Type', 'application/rss+xml');
+  res.write(feed.rss2());
+  res.end();
+};
 ```
