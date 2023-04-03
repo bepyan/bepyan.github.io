@@ -1,0 +1,95 @@
+---
+title: 'SWR 그리고 React Query 세팅'
+description: ''
+icon: ''
+image: ''
+tags:
+  - react
+  - swr
+  - react-query
+  - tanstack-query
+draft: false
+date: 2023-03-28 22:53:13
+---
+
+`SWR`와 `React Query`에 대해 알아보고 쉽고 빠르게 세팅해보자.
+
+---
+
+## SWR vs React Query
+
+둘다 `React` 환경에서 API 요청을 쉽게 다루기 위한 라이브러리이다.
+데이터 요청 관련 `loading`, `error` 등 상태를 쉽게 관리해주고, `cache` 기능을 제공하여 불필요한 요청을 줄여준다.
+
+그렇다면 이 둘은 어떤 차이가 있고 언제 어떤 라이브러리를 사용해야 할까?
+
+한 마디로 정리하자면, **`GET` 요청만 다룬다면 `SWR`, `POST` 등 요청까지 다룬다면 `React Query`을 사용하자.**
+
+`SWR`는 주로 데이터를 가져오는 것에 설계되었기에 설정이 단순하고 라이브러리가 가볍다.
+`SWR`의 번들 사이즈는 4.3KB 이며 `React Query`는 13KB 크기이다.
+`React Query`는 더 다양한 캐싱전략을 보유하며 더 고도화된 커스터마이징 기능을 제공한다.
+
+---
+
+## SWR 세팅
+
+```shell
+yarn add swr
+```
+
+```tsx
+import type { AppProps } from 'next/app';
+import { SWRConfig } from 'swr';
+
+export default function App({ Component, pageProps }: AppProps) {
+  return (
+    <>
+      <SWRConfig
+        value={{
+          fetcher: (resource, init) => fetch(resource, init).then((res) => res.json()),
+        }}
+      >
+        <Component {...pageProps} />
+      </SWRConfig>
+    </>
+  );
+}
+```
+
+```tsx
+import useSWR from 'swr';
+
+function Profile() {
+  const { data, error, isLoading } = useSWR('/api/user');
+
+  if (error) return <div>failed to load</div>;
+  if (isLoading) return <div>loading...</div>;
+  return <div>hello {data.name}!</div>;
+}
+```
+
+---
+
+## React Query 세팅
+
+참고로 v4부터 패키지명은 `react-query`가 아닌 `@tanstack/react-query`이다.
+
+```shell
+yarn add @tanstack/react-query
+```
+
+```tsx:_app.tsx
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
+import type { AppProps } from 'next/app';
+
+const queryClient = new QueryClient();
+export default function MyApp({ Component, pageProps }: AppProps) {
+  return (
+    <>
+      <QueryClientProvider client={queryClient}>
+        <Component {...pageProps} />
+      </QueryClientProvider>
+    </>
+  );
+}
+```

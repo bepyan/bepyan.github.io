@@ -48,6 +48,7 @@ tailwindlabs에서 공식으로 지원하는 플러그인.
 
 [`eslint-plugin-tailwindcss`](https://github.com/francoismassart/eslint-plugin-tailwindcss) ✨
 prettier 의존성을 벗어남은 물론 몇몇 추가 기능을 제공하는 플러그인.
+아쉽게도 `svelte`에서는 완벽히 호환이 되진 않는다. [참고](https://github.com/francoismassart/eslint-plugin-tailwindcss/issues/214)
 
 [`headwind`](https://marketplace.visualstudio.com/items?itemName=heybourn.headwind)
 vscode 플러그인.
@@ -59,7 +60,7 @@ vscode 플러그인.
 tailwind는 뒤에 클래스명을 선언한다고 해서 덮여 씌워지지 않는다.
 
 ```shell
-yarn add -D clsx tailwind-merge
+yarn add clsx tailwind-merge
 ```
 
 ```ts:libs/utils

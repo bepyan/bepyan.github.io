@@ -1,0 +1,35 @@
+---
+title: '(TS) NodeJS 글로벌 변수 타입 추가하기'
+description: ''
+icon: ''
+image: ''
+tags:
+  - typescript
+  - nodejs
+draft: false
+date: 2023-04-03 19:15:47
+---
+
+```
+Element implicitly has an 'any' type because type 'typeof globalThis' has no index signature.
+```
+
+위와 같은 에러가 발생하면서 글로벌 변수를 사용할 수 없는 경우가 있다.
+
+```ts:index.d.ts
+import { Mongoose } from 'mongoose';
+
+declare global {
+  namespace NodeJS {
+    interface Global {
+      mongoose: Mongoose;
+    }
+  }
+}
+```
+
+---
+
+**참고 자료**
+
+- https://www.prisma.io/docs/guides/database/troubleshooting-orm/help-articles/nextjs-prisma-client-dev-practices

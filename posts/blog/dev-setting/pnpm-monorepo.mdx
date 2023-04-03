@@ -1,0 +1,168 @@
+---
+title: 'pnpm으로 모노레포 환경 구축하기'
+description: ''
+icon: ''
+image: ''
+tags:
+  - pnpm
+  - mono repo
+draft: false
+date: 2023-03-21 15:22:53
+---
+
+**`pnpm`**은 `Node.js` 패키지 매니저로, `npm`과 `yarn`과 같은 다른 패키지 매니저들과 비슷한 기능을 제공한다.
+알고보니 `pnpm`의 뜻이 `perfomace npm`이라는 사실?!
+[2022 stateofjs](https://2022.stateofjs.com/en-US/libraries/monorepo-tools/) 모노레포 도구 중에서 retenion이 가장 높아서 사용해보기로 했다.
+
+---
+
+## `pnpm`의 특징
+
+`pnpm`의 주요 목표는 **효율적인 패키지 설치 및 관리를 제공**하는 것이다.
+공식문서의 [Motivation](https://pnpm.io/motivation)에서 이를 더 자세히 알 수 있다.
+
+### 공간 효율성
+
+`pnpm`은 패키지를 글로벌 저장소에 한 번만 저장하고, 프로젝트에 필요한 패키지에 대한 심볼릭 링크를 생성한다.
+이를 통해 디스크 공간 사용을 최소화하고 중복 패키지 설치를 방지한다.
+
+### 빠른 설치 속도
+
+`pnpm`은 병렬 다운로드 및 심볼릭 링크를 사용하여 빠르게 패키지를 설치할 수 있다.
+또한 파일 복사를 최소화하기에 설치 속도가 빠르다.
+
+### `yarn`과의 비교
+
+`pnpm` 모노레포 설정, 패키지 종속성을 추적하는 방법은 `yarn`과 유사하다.
+따라서 사실 `pnpm`은 **디스크 공간 및 설치 속도**에 중점을 둔 프로젝트에 적합하다.
+`yarn`에 비해 상대적으로 덜 널리 사용되기 때문에, 통합 도구에 대한 커뮤니티 지원이 제한적일 수 있다.
+
+---
+
+## `pnpm` 설치
+
+```shell
+npm install -g pnpm
+# or brew install pnpm
+```
+
+`pnpm`은 타이핑하기 귀찮으니 단축키 `pn`를 설정해주자.
+
+```shell:.zshrc
+alias pn=pnpm
+```
+
+---
+
+## 모노레포 설정
+
+```shell
+mkdir my-monorepo
+cd my-monorepo
+pn init
+```
+
+```yaml:pnpm-workspace.yaml
+packages:
+  - 'packages/*'
+```
+
+```shell
+mkdir packages
+mkdir packages/shared
+mkdir packages/front
+mkdir packages/backend
+```
+
+```json:packages/shared/package.json
+{
+  "name": "@my-monorepo/shared",
+  // ...
+  "main": "src/index.ts",
+  "scripts": {
+    "build": "tsc"
+  }
+}
+```
+
+```json:packages/front/package.json
+{
+  "name": "@my-monorepo/front",
+  // ...
+  "scripts": {
+    "dev": "vite"
+  }
+}
+```
+
+```json:packages/backend/package.json
+{
+  "name": "@my-monorepo/backend",
+  // ...
+  "scripts": {
+    "dev": "ts-node src/index.ts",
+  }
+}
+```
+
+```json:package.json
+{
+  "name": "my-monorepo",
+  "version": "1.0.0",
+  "description": "",
+  "scripts": {
+    "shared": "pnpm -F @my-monorepo/shared",
+    "front": "pnpm -F @my-monorepo/front",
+    "backend": "pnpm -F @my-monorepo/backend",
+    "dev": "pnpm -r dev"
+  },
+  "license": "ISC"
+}
+```
+
+`-F` 옵션은 `filter`의 약자로, 특정 패키지에 대해서만 스크립트를 실행한다.
+ex. `pn front dev` `pn front add react`
+
+`-r` 옵션은 `recursive`의 약자로, 모든 패키지에 대해 스크립트를 실행한다.
+ex. `pn dev`하면 하위 패키지 중 `dev` `script`가 있으면 이를 실행한다.
+
+![230321-225442](/images/posts/pnpm-monorepo/230321-225442.png)
+
+아주 깔끔하게 맘에 든다 ✨
+
+---
+
+## 공통 모듈 공유하기
+
+`front`와 `backend`가 같은 타입을 공유할 때가 있다.
+이를 `shared`에 정의하고 각 패키지에서 `import`하면 된다.
+
+```shell
+pn front add @my-monorepo/shared
+pn backed add @my-monorepo/shared
+```
+
+---
+
+## eslint 설정
+
+`eslint`는 기본적으로 `package.json`기점으로 상위 `root`설정을 탐색하게 된다.
+따라서 `root`에 공통 `eslint` 설정을 하면 된다.
+
+```shell
+pn add -w -D eslint
+touch .eslintrc.js
+```
+
+상세 설정은 [내가 좋아하는 `eslint` 설정](/blog/dev-setting/eslint)을 참고하자.
+
+```js:.eslintrc.js
+module.exports = {
+  root: true,
+  extends: [],
+  plugins: [],
+  parser: '',
+  rules: {
+  },
+}
+```
