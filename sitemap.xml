@@ -16,7 +16,9 @@
 <url><loc>https://bepyan.github.io/blog/dev-setting/eslint</loc><changefreq>daily</changefreq></url>
 <url><loc>https://bepyan.github.io/blog/dev-setting</loc><changefreq>daily</changefreq></url>
 <url><loc>https://bepyan.github.io/blog/dev-setting/m1-muti-terminal-architecture</loc><changefreq>daily</changefreq></url>
+<url><loc>https://bepyan.github.io/blog/dev-setting/pnpm-monorepo</loc><changefreq>daily</changefreq></url>
 <url><loc>https://bepyan.github.io/blog/dev-setting/preact</loc><changefreq>daily</changefreq></url>
+<url><loc>https://bepyan.github.io/blog/dev-setting/swr-tanstack-query</loc><changefreq>daily</changefreq></url>
 <url><loc>https://bepyan.github.io/blog/dev-setting/tailwindcss</loc><changefreq>daily</changefreq></url>
 <url><loc>https://bepyan.github.io/blog/dev-setting/vscode-eslint-prettier</loc><changefreq>daily</changefreq></url>
 <url><loc>https://bepyan.github.io/blog/dnd-master/1-drag-event</loc><changefreq>daily</changefreq></url>
@@ -77,5 +79,6 @@
 <url><loc>https://bepyan.github.io/snippets/react/react-hot-toast</loc><changefreq>daily</changefreq></url>
 <url><loc>https://bepyan.github.io/snippets/react/reading-progress-bar</loc><changefreq>daily</changefreq></url>
 <url><loc>https://bepyan.github.io/snippets/react/use-media-query</loc><changefreq>daily</changefreq></url>
+<url><loc>https://bepyan.github.io/snippets/typescript/node-global</loc><changefreq>daily</changefreq></url>
 <url><loc>https://bepyan.github.io/snippets/typescript/remove-promise</loc><changefreq>daily</changefreq></url>
 </urlset>

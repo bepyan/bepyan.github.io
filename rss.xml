@@ -4,7 +4,7 @@
         <title>bepyan blog</title>
         <link>https://bepyan.github.io</link>
         <description>개발하면서 탐구한 것을 소소하게 기록하는 공간입니다.</description>
-        <lastBuildDate>Sat, 18 Mar 2023 09:00:13 GMT</lastBuildDate>
+        <lastBuildDate>Mon, 03 Apr 2023 12:00:40 GMT</lastBuildDate>
         <docs>https://validator.w3.org/feed/docs/rss2.html</docs>
         <generator>generate-rss</generator>
         <language>ko</language>
@@ -141,6 +141,16 @@
             <category>infra</category>
         </item>
         <item>
+            <title><![CDATA[pnpm으로 모노레포 환경 구축하기]]></title>
+            <link>https://bepyan.github.io/blog/dev-setting/pnpm-monorepo</link>
+            <guid>/blog/dev-setting/pnpm-monorepo</guid>
+            <pubDate>Tue, 21 Mar 2023 15:22:53 GMT</pubDate>
+            <content:encoded><![CDATA[`pnpm`은 `Node.js` 패키지 매니저로, `npm`과 `yarn`과 같은 다른 패키지 매니저들과 비슷한 기능을 제공한다. 알고보니 `pnpm`의 뜻이 `perfomace npm`이라는 사실?! 2022 stateofjs 모노...]]></content:encoded>
+            <author>bepyan@naver.com (Edward Kim)</author>
+            <category>pnpm</category>
+            <category>mono repo</category>
+        </item>
+        <item>
             <title><![CDATA[preact을 시작해보자. vite와 함께.]]></title>
             <link>https://bepyan.github.io/blog/dev-setting/preact</link>
             <guid>/blog/dev-setting/preact</guid>
@@ -150,6 +160,18 @@
             <category>preact</category>
             <category>vite</category>
             <category>typescript</category>
+        </item>
+        <item>
+            <title><![CDATA[SWR 그리고 React Query 세팅]]></title>
+            <link>https://bepyan.github.io/blog/dev-setting/swr-tanstack-query</link>
+            <guid>/blog/dev-setting/swr-tanstack-query</guid>
+            <pubDate>Tue, 28 Mar 2023 22:53:13 GMT</pubDate>
+            <content:encoded><![CDATA[`SWR`와 `React Query`에 대해 알아보고 쉽고 빠르게 세팅해보자. SWR vs React Query 둘다 `React` 환경에서 API 요청을 쉽게 다루기 위한 라이브러리이다. 데이터 요청 관련 `loading`, `er...]]></content:encoded>
+            <author>bepyan@naver.com (Edward Kim)</author>
+            <category>react</category>
+            <category>swr</category>
+            <category>react-query</category>
+            <category>tanstack-query</category>
         </item>
         <item>
             <title><![CDATA[tailwindcss 완벽 세팅 (feat Next.js)]]></title>
@@ -802,6 +824,16 @@
             <category>typescript</category>
             <category>hook</category>
             <category>css</category>
+        </item>
+        <item>
+            <title><![CDATA[(TS) NodeJS 글로벌 변수 타입 추가하기]]></title>
+            <link>https://bepyan.github.io/snippets/typescript/node-global</link>
+            <guid>/snippets/typescript/node-global</guid>
+            <pubDate>Mon, 03 Apr 2023 19:15:47 GMT</pubDate>
+            <content:encoded><![CDATA[Element implicitly has an 'any' type because type 'typeof globalThis' has no index signature. 위와 같은 에러가 발생하면서 글로벌 변수를 사용할 수 없는 경우가...]]></content:encoded>
+            <author>bepyan@naver.com (Edward Kim)</author>
+            <category>typescript</category>
+            <category>nodejs</category>
         </item>
         <item>
             <title><![CDATA[(TS) Type에서 Promise 제거하기]]></title>

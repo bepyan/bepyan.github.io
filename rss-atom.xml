@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://bepyan.github.io</id>
     <title>bepyan blog</title>
-    <updated>2023-03-18T09:00:13.016Z</updated>
+    <updated>2023-04-03T12:00:40.493Z</updated>
     <generator>generate-rss</generator>
     <author>
         <name>Edward Kim</name>
@@ -250,6 +250,25 @@
         </contributor>
     </entry>
     <entry>
+        <title type="html"><![CDATA[pnpm으로 모노레포 환경 구축하기]]></title>
+        <id>/blog/dev-setting/pnpm-monorepo</id>
+        <link href="https://bepyan.github.io/blog/dev-setting/pnpm-monorepo"/>
+        <updated>2023-03-21T15:22:53.000Z</updated>
+        <content type="html"><![CDATA[`pnpm`은 `Node.js` 패키지 매니저로, `npm`과 `yarn`과 같은 다른 패키지 매니저들과 비슷한 기능을 제공한다. 알고보니 `pnpm`의 뜻이 `perfomace npm`이라는 사실?! 2022 stateofjs 모노...]]></content>
+        <author>
+            <name>Edward Kim</name>
+            <email>bepyan@naver.com</email>
+            <uri>https://bepyan.github.io</uri>
+        </author>
+        <category label="pnpm"/>
+        <category label="mono repo"/>
+        <contributor>
+            <name>Edward Kim</name>
+            <email>bepyan@naver.com</email>
+            <uri>https://bepyan.github.io</uri>
+        </contributor>
+    </entry>
+    <entry>
         <title type="html"><![CDATA[preact을 시작해보자. vite와 함께.]]></title>
         <id>/blog/dev-setting/preact</id>
         <link href="https://bepyan.github.io/blog/dev-setting/preact"/>
@@ -263,6 +282,27 @@
         <category label="preact"/>
         <category label="vite"/>
         <category label="typescript"/>
+        <contributor>
+            <name>Edward Kim</name>
+            <email>bepyan@naver.com</email>
+            <uri>https://bepyan.github.io</uri>
+        </contributor>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[SWR 그리고 React Query 세팅]]></title>
+        <id>/blog/dev-setting/swr-tanstack-query</id>
+        <link href="https://bepyan.github.io/blog/dev-setting/swr-tanstack-query"/>
+        <updated>2023-03-28T22:53:13.000Z</updated>
+        <content type="html"><![CDATA[`SWR`와 `React Query`에 대해 알아보고 쉽고 빠르게 세팅해보자. SWR vs React Query 둘다 `React` 환경에서 API 요청을 쉽게 다루기 위한 라이브러리이다. 데이터 요청 관련 `loading`, `er...]]></content>
+        <author>
+            <name>Edward Kim</name>
+            <email>bepyan@naver.com</email>
+            <uri>https://bepyan.github.io</uri>
+        </author>
+        <category label="react"/>
+        <category label="swr"/>
+        <category label="react-query"/>
+        <category label="tanstack-query"/>
         <contributor>
             <name>Edward Kim</name>
             <email>bepyan@naver.com</email>
@@ -1455,6 +1495,25 @@
         <category label="typescript"/>
         <category label="hook"/>
         <category label="css"/>
+        <contributor>
+            <name>Edward Kim</name>
+            <email>bepyan@naver.com</email>
+            <uri>https://bepyan.github.io</uri>
+        </contributor>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[(TS) NodeJS 글로벌 변수 타입 추가하기]]></title>
+        <id>/snippets/typescript/node-global</id>
+        <link href="https://bepyan.github.io/snippets/typescript/node-global"/>
+        <updated>2023-04-03T19:15:47.000Z</updated>
+        <content type="html"><![CDATA[Element implicitly has an 'any' type because type 'typeof globalThis' has no index signature. 위와 같은 에러가 발생하면서 글로벌 변수를 사용할 수 없는 경우가...]]></content>
+        <author>
+            <name>Edward Kim</name>
+            <email>bepyan@naver.com</email>
+            <uri>https://bepyan.github.io</uri>
+        </author>
+        <category label="typescript"/>
+        <category label="nodejs"/>
         <contributor>
             <name>Edward Kim</name>
             <email>bepyan@naver.com</email>

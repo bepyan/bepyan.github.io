@@ -196,6 +196,21 @@
             ]
         },
         {
+            "id": "/blog/dev-setting/pnpm-monorepo",
+            "content_html": "`pnpm`은 `Node.js` 패키지 매니저로, `npm`과 `yarn`과 같은 다른 패키지 매니저들과 비슷한 기능을 제공한다. 알고보니 `pnpm`의 뜻이 `perfomace npm`이라는 사실?! 2022 stateofjs 모노...",
+            "url": "https://bepyan.github.io/blog/dev-setting/pnpm-monorepo",
+            "title": "pnpm으로 모노레포 환경 구축하기",
+            "date_modified": "2023-03-21T15:22:53.000Z",
+            "author": {
+                "name": "Edward Kim",
+                "url": "https://bepyan.github.io"
+            },
+            "tags": [
+                "pnpm",
+                "mono repo"
+            ]
+        },
+        {
             "id": "/blog/dev-setting/preact",
             "content_html": "preact란? 가볍고 빠르다. 그 핵심은 `Preact does not implement a synthetic event system`이라고 한다. 가능한 `Virtual DOM` 추상화 수준을 낮춰서 더욱 직접적으로 `DOM`을 ...",
             "url": "https://bepyan.github.io/blog/dev-setting/preact",
@@ -209,6 +224,23 @@
                 "preact",
                 "vite",
                 "typescript"
+            ]
+        },
+        {
+            "id": "/blog/dev-setting/swr-tanstack-query",
+            "content_html": "`SWR`와 `React Query`에 대해 알아보고 쉽고 빠르게 세팅해보자. SWR vs React Query 둘다 `React` 환경에서 API 요청을 쉽게 다루기 위한 라이브러리이다. 데이터 요청 관련 `loading`, `er...",
+            "url": "https://bepyan.github.io/blog/dev-setting/swr-tanstack-query",
+            "title": "SWR 그리고 React Query 세팅",
+            "date_modified": "2023-03-28T22:53:13.000Z",
+            "author": {
+                "name": "Edward Kim",
+                "url": "https://bepyan.github.io"
+            },
+            "tags": [
+                "react",
+                "swr",
+                "react-query",
+                "tanstack-query"
             ]
         },
         {
@@ -1157,6 +1189,21 @@
                 "typescript",
                 "hook",
                 "css"
+            ]
+        },
+        {
+            "id": "/snippets/typescript/node-global",
+            "content_html": "Element implicitly has an 'any' type because type 'typeof globalThis' has no index signature. 위와 같은 에러가 발생하면서 글로벌 변수를 사용할 수 없는 경우가...",
+            "url": "https://bepyan.github.io/snippets/typescript/node-global",
+            "title": "(TS) NodeJS 글로벌 변수 타입 추가하기",
+            "date_modified": "2023-04-03T19:15:47.000Z",
+            "author": {
+                "name": "Edward Kim",
+                "url": "https://bepyan.github.io"
+            },
+            "tags": [
+                "typescript",
+                "nodejs"
             ]
         },
         {
