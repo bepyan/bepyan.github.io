@@ -1,0 +1,37 @@
+---
+title: 'java.rmi.server.ExportException: Port already in use: 18080'
+description: ''
+icon: ''
+image: ''
+tags:
+  - infra
+  - troubleshooting
+draft: false
+date: 2023-04-05 09:07:31
+---
+
+`IntelliJ`를 강제 종료하면 실행중이던 톰캣 서버가 정상 종료되지 않는다.
+다시 톰캣 서버를 구동하면 아래 오류 메시지를 확인할 수 있다.
+
+```
+오류: 에이전트에 예외사항이 발생했습니다.
+java.rmi.server.ExportException: Port already in use: 18080;
+nested exception is: java.net.BindException: Address already in use (Bind failed)
+```
+
+MAC OS에서는 `lsof` 명령어를 통해 해당 포트를 사용하고 있는 프로세스를 확인할 수 있다.
+
+```shell
+sudo lsof -i:18080
+```
+
+```
+COMMAND   PID      USER   FD   TYPE  DEVICE SIZE/OFF NODE NAME
+java    13248 edward.kk   23u  IPv6  ...    0t0  TCP *:18081 (LISTEN)
+```
+
+위와 같이 출력이 되는데 `PID`를 확인하고 해당 프로세스를 종료시키면 된다.
+
+```shell
+kill -9 13248
+```

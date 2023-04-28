@@ -1,0 +1,83 @@
+---
+title: '(svelte) class 속성 props로 활용하기'
+description: ''
+icon: ''
+image: ''
+tags:
+  - svelte
+draft: false
+date: 2023-04-29 00:21:47
+---
+
+## 문제점
+
+`svelte`는 `jsx` 문법이 아니기에 `className`이 아닌 `class`를 사용해야 한다.
+하지만 `class`를 `props`으로 전달해줄 때 문제가 발생한다.
+
+```html
+<script>
+  export let class = "";
+</script>
+
+<div {class}>...</div>
+```
+
+`Parsing error: 'class' is not allowed as a variable declaration name`
+`Variable declaration not allowed at this location.`
+에러가 뜨면서 난리가 난다.
+
+이유는 `class`는 클래스 객체를 생성하기 위한 [선언 명령어](https://developer.mozilla.org/ko/docs/Web/JavaScript/Reference/Statements/class)이기 때문이다.
+
+## 방법 1
+
+`class`를 `className`으로 별칭을 지어주면 된다.
+
+```html
+<script>
+  let className = '';
+  export { className as class };
+</script>
+
+<div class="{className}">...</div>
+```
+
+무난하게 이 이슈를 대응할 수 있지만 `className` 변수를 생성하는 그 자체가 마음에 들지 않을 수 있다.
+
+## 방법 2
+
+`$$props` 혹은 `$$restProps`을 사용한다.
+
+```html
+<div class="{$$props.class}">...</div>
+```
+
+⚠️ **주의 점**
+`$$restProps`는 `class`를 포함하기 때문에 `class`를 덮어쓰게 된다.
+
+이는 `{...$$restProps}`를 `class` 선언부 앞에 위치시켜 해결할 수 있다.
+실수할 수도 있기 때문에 더 명시적인 방법이 필요할 수도 있다.
+
+```html
+<div {...$$restProps} class="{$$props.class}">...</div>
+```
+
+## 방법 3
+
+`$$restProps`에서 `class` 속성을 제거해서 사용한다.
+결국 코드가 길어지지만 나름 깔끔한 방법이다.
+
+```html
+<script>
+  function prunedRestProps() {
+    delete $$restProps.class;
+    return $$restProps;
+  }
+</script>
+
+<div class="{$$props.class}" {...prunedRestProps()}>...</div>
+```
+
+## 결론
+
+생각보다 우회할 수 있는 방법들은 많고, 코드 환경과 개발팀 입맛에 맞게 사용하면 될 것 같다.
+개인적으론 2번 방법을 선호한다 🤔 ~~숏코딩~~

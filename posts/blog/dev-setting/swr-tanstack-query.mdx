@@ -93,3 +93,10 @@ export default function MyApp({ Component, pageProps }: AppProps) {
   );
 }
 ```
+
+```tsx
+const { data, isLoading, isError, error } = useQuery({
+  queryKey: ['todos', todoId],
+  queryFn: () => todoId && axios(`/api/todos/${todoId}`).then((res) => res.data),
+});
+```
