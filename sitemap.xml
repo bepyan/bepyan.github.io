@@ -59,6 +59,7 @@
 <url><loc>https://bepyan.github.io/snippets/css/remove-scrollbar</loc><changefreq>daily</changefreq></url>
 <url><loc>https://bepyan.github.io/snippets/css/safari-drop-shadow</loc><changefreq>daily</changefreq></url>
 <url><loc>https://bepyan.github.io/snippets/css/text-ellipsis</loc><changefreq>daily</changefreq></url>
+<url><loc>https://bepyan.github.io/snippets/infra/kill-tomcat</loc><changefreq>daily</changefreq></url>
 <url><loc>https://bepyan.github.io/snippets/infra/my-ip</loc><changefreq>daily</changefreq></url>
 <url><loc>https://bepyan.github.io/snippets/javascript/clipboard</loc><changefreq>daily</changefreq></url>
 <url><loc>https://bepyan.github.io/snippets/javascript/console</loc><changefreq>daily</changefreq></url>
@@ -79,6 +80,7 @@
 <url><loc>https://bepyan.github.io/snippets/react/react-hot-toast</loc><changefreq>daily</changefreq></url>
 <url><loc>https://bepyan.github.io/snippets/react/reading-progress-bar</loc><changefreq>daily</changefreq></url>
 <url><loc>https://bepyan.github.io/snippets/react/use-media-query</loc><changefreq>daily</changefreq></url>
+<url><loc>https://bepyan.github.io/snippets/svelte/export-class</loc><changefreq>daily</changefreq></url>
 <url><loc>https://bepyan.github.io/snippets/typescript/node-global</loc><changefreq>daily</changefreq></url>
 <url><loc>https://bepyan.github.io/snippets/typescript/remove-promise</loc><changefreq>daily</changefreq></url>
 </urlset>

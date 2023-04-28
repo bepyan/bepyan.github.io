@@ -886,6 +886,21 @@
             ]
         },
         {
+            "id": "/snippets/infra/kill-tomcat",
+            "content_html": "`IntelliJ`를 강제 종료하면 실행중이던 톰캣 서버가 정상 종료되지 않는다. 다시 톰캣 서버를 구동하면 아래 오류 메시지를 확인할 수 있다. 오류: 에이전트에 예외사항이 발생했습니다. java.rmi.server.ExportEx...",
+            "url": "https://bepyan.github.io/snippets/infra/kill-tomcat",
+            "title": "java.rmi.server.ExportException: Port already in use: 18080",
+            "date_modified": "2023-04-05T09:07:31.000Z",
+            "author": {
+                "name": "Edward Kim",
+                "url": "https://bepyan.github.io"
+            },
+            "tags": [
+                "infra",
+                "troubleshooting"
+            ]
+        },
+        {
             "id": "/snippets/infra/my-ip",
             "content_html": "방법 1 리눅스 네트워크 관리에 필요한 `ifconfig`를 활용해서 알아낼 수 있습니다. ifconfig grep netmask !230315-172311 `inet` 이란? 네트워크 인터페이스에 할당된 IP 주소를 추출한다. `v...",
             "url": "https://bepyan.github.io/snippets/infra/my-ip",
@@ -1189,6 +1204,20 @@
                 "typescript",
                 "hook",
                 "css"
+            ]
+        },
+        {
+            "id": "/snippets/svelte/export-class",
+            "content_html": "문제점 `svelte`는 `jsx` 문법이 아니기에 `className`이 아닌 `class`를 사용해야 한다. 하지만 `class`를 `props`으로 전달해줄 때 문제가 발생한다. <script> export let class =...",
+            "url": "https://bepyan.github.io/snippets/svelte/export-class",
+            "title": "(svelte) class 속성 props로 활용하기",
+            "date_modified": "2023-04-29T00:21:47.000Z",
+            "author": {
+                "name": "Edward Kim",
+                "url": "https://bepyan.github.io"
+            },
+            "tags": [
+                "svelte"
             ]
         },
         {

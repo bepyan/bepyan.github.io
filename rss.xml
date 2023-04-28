@@ -4,7 +4,7 @@
         <title>bepyan blog</title>
         <link>https://bepyan.github.io</link>
         <description>개발하면서 탐구한 것을 소소하게 기록하는 공간입니다.</description>
-        <lastBuildDate>Mon, 03 Apr 2023 12:00:40 GMT</lastBuildDate>
+        <lastBuildDate>Fri, 28 Apr 2023 15:50:36 GMT</lastBuildDate>
         <docs>https://validator.w3.org/feed/docs/rss2.html</docs>
         <generator>generate-rss</generator>
         <language>ko</language>
@@ -620,6 +620,16 @@
             <category>line clamp</category>
         </item>
         <item>
+            <title><![CDATA[java.rmi.server.ExportException: Port already in use: 18080]]></title>
+            <link>https://bepyan.github.io/snippets/infra/kill-tomcat</link>
+            <guid>/snippets/infra/kill-tomcat</guid>
+            <pubDate>Wed, 05 Apr 2023 09:07:31 GMT</pubDate>
+            <content:encoded><![CDATA[`IntelliJ`를 강제 종료하면 실행중이던 톰캣 서버가 정상 종료되지 않는다. 다시 톰캣 서버를 구동하면 아래 오류 메시지를 확인할 수 있다. 오류: 에이전트에 예외사항이 발생했습니다. java.rmi.server.ExportEx...]]></content:encoded>
+            <author>bepyan@naver.com (Edward Kim)</author>
+            <category>infra</category>
+            <category>troubleshooting</category>
+        </item>
+        <item>
             <title><![CDATA[MAC에서 내 IP 확인하기]]></title>
             <link>https://bepyan.github.io/snippets/infra/my-ip</link>
             <guid>/snippets/infra/my-ip</guid>
@@ -824,6 +834,15 @@
             <category>typescript</category>
             <category>hook</category>
             <category>css</category>
+        </item>
+        <item>
+            <title><![CDATA[(svelte) class 속성 props로 활용하기]]></title>
+            <link>https://bepyan.github.io/snippets/svelte/export-class</link>
+            <guid>/snippets/svelte/export-class</guid>
+            <pubDate>Sat, 29 Apr 2023 00:21:47 GMT</pubDate>
+            <content:encoded><![CDATA[문제점 `svelte`는 `jsx` 문법이 아니기에 `className`이 아닌 `class`를 사용해야 한다. 하지만 `class`를 `props`으로 전달해줄 때 문제가 발생한다. <script> export let class =...]]></content:encoded>
+            <author>bepyan@naver.com (Edward Kim)</author>
+            <category>svelte</category>
         </item>
         <item>
             <title><![CDATA[(TS) NodeJS 글로벌 변수 타입 추가하기]]></title>
