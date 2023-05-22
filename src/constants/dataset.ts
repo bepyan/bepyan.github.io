@@ -10,7 +10,9 @@ export const allSeriesName = allPosts
 export const allBlogPosts: Post[] = allPosts
   .filter(
     (post) =>
-      post._raw.sourceFilePath.includes('blog') && !post._raw.sourceFilePath.includes('/index.mdx'),
+      !post.draft &&
+      post._raw.sourceFilePath.includes('blog') &&
+      !post._raw.sourceFilePath.includes('/index.mdx'),
   )
   .map((post) => ({
     ...post,
