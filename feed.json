@@ -426,7 +426,7 @@
             "url": "https://bepyan.github.io/blog/nextjs-blog/1-boilerplate",
             "title": "기술 블로그를 만들 때 고려해야 할 점",
             "summary": "블로그를 만들 때 어떤 것들을 고려해야 할까? 🤔",
-            "date_modified": "2022-11-11T00:00:00.000Z",
+            "date_modified": "2022-11-11T00:00:01.000Z",
             "author": {
                 "name": "Edward Kim",
                 "url": "https://bepyan.github.io"
@@ -442,7 +442,7 @@
             "url": "https://bepyan.github.io/blog/nextjs-blog/2-blog-list",
             "title": "Next.js 블로그 글 페이지 만들기",
             "summary": "glob를 활용하여 디랙토리 기반으로 페이지들을 생성해보자 🤔",
-            "date_modified": "2022-11-11T00:00:00.000Z",
+            "date_modified": "2022-11-11T00:00:02.000Z",
             "author": {
                 "name": "Edward Kim",
                 "url": "https://bepyan.github.io"
@@ -459,7 +459,7 @@
             "url": "https://bepyan.github.io/blog/nextjs-blog/2-blog-listInfo",
             "title": "Next.js 블로그 글의 추가 정보 파싱하기",
             "summary": "gray-matter, reading-time 등을 활용하여 글에 대한 추가 정보를 알아내자.",
-            "date_modified": "2022-11-11T00:00:00.000Z",
+            "date_modified": "2022-11-11T00:00:03.000Z",
             "author": {
                 "name": "Edward Kim",
                 "url": "https://bepyan.github.io"
@@ -475,7 +475,7 @@
             "url": "https://bepyan.github.io/blog/nextjs-blog/3-mdx-plugin",
             "title": "Next.js mdx plugin",
             "summary": "`next-mdx-remote`에서 플로그인으로 이쁜 결과물을 만들자.",
-            "date_modified": "2022-11-11T00:00:00.000Z",
+            "date_modified": "2022-11-11T00:00:04.000Z",
             "author": {
                 "name": "Edward Kim",
                 "url": "https://bepyan.github.io"
@@ -491,7 +491,7 @@
             "url": "https://bepyan.github.io/blog/nextjs-blog/4-deploy",
             "title": "Next.js 블로그 Github Pages에 자동 배포하기",
             "summary": "Github Action을 활용하여 자동으로 Github Pages에 배포되도록 하자.",
-            "date_modified": "2022-11-12T00:00:00.000Z",
+            "date_modified": "2022-11-12T00:00:01.000Z",
             "author": {
                 "name": "Edward Kim",
                 "url": "https://bepyan.github.io"
@@ -509,7 +509,7 @@
             "url": "https://bepyan.github.io/blog/nextjs-blog/5-create-sitemap",
             "title": "Next.js 블로그 sitemap 생성, 검색엔진 등록",
             "summary": "`next-sitemap` 라이브러리를 사용해서 쉽게 sitemap 만들고 검색엔진에 등록하자.",
-            "date_modified": "2022-11-15T22:24:41.000Z",
+            "date_modified": "2022-11-12T10:24:41.000Z",
             "author": {
                 "name": "Edward Kim",
                 "url": "https://bepyan.github.io"
@@ -526,7 +526,7 @@
             "url": "https://bepyan.github.io/blog/nextjs-blog/5-google-analytics",
             "title": "Next.js 블로그 Google Analytics 연동하기",
             "summary": "블로그에 Google Analytics v4를 심어주자!",
-            "date_modified": "2022-11-16T12:15:23.000Z",
+            "date_modified": "2022-11-12T12:15:23.000Z",
             "author": {
                 "name": "Edward Kim",
                 "url": "https://bepyan.github.io"

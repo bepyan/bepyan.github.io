@@ -4,7 +4,7 @@
         <title>bepyan blog</title>
         <link>https://bepyan.github.io</link>
         <description>개발하면서 탐구한 것을 소소하게 기록하는 공간입니다.</description>
-        <lastBuildDate>Mon, 22 May 2023 15:37:43 GMT</lastBuildDate>
+        <lastBuildDate>Mon, 22 May 2023 15:55:23 GMT</lastBuildDate>
         <docs>https://validator.w3.org/feed/docs/rss2.html</docs>
         <generator>generate-rss</generator>
         <language>ko</language>
@@ -301,7 +301,7 @@
             <title><![CDATA[기술 블로그를 만들 때 고려해야 할 점]]></title>
             <link>https://bepyan.github.io/blog/nextjs-blog/1-boilerplate</link>
             <guid>/blog/nextjs-blog/1-boilerplate</guid>
-            <pubDate>Fri, 11 Nov 2022 00:00:00 GMT</pubDate>
+            <pubDate>Fri, 11 Nov 2022 00:00:01 GMT</pubDate>
             <description><![CDATA[블로그를 만들 때 어떤 것들을 고려해야 할까? 🤔]]></description>
             <content:encoded><![CDATA[블로그를 만드는데 생각보다 고려해야할 사항이 많습니다. 어떤 레이아웃을 갖어야 할지, 기능을 어디까지 제공해줘야 할지, 리소스를 어떻게 관리할지... 그 중 SEO를 잘 처리하는 것이 가장 중요한 것 같습니다. 사람들이 검색을 통해서...]]></content:encoded>
             <author>bepyan@naver.com (Edward Kim)</author>
@@ -312,7 +312,7 @@
             <title><![CDATA[Next.js 블로그 글 페이지 만들기]]></title>
             <link>https://bepyan.github.io/blog/nextjs-blog/2-blog-list</link>
             <guid>/blog/nextjs-blog/2-blog-list</guid>
-            <pubDate>Fri, 11 Nov 2022 00:00:00 GMT</pubDate>
+            <pubDate>Fri, 11 Nov 2022 00:00:02 GMT</pubDate>
             <description><![CDATA[glob를 활용하여 디랙토리 기반으로 페이지들을 생성해보자 🤔]]></description>
             <content:encoded><![CDATA[glob patterns를 활용하여 쉽게 파일을 탐색할 수 있습니다. 터미널에서 `ls src//.tsx`을 입력하면 어떤 결과가 나올지 쉽게 유추하실 수 있을 것입니다. 다양한 언어에서 이를 지원하고 있으며 NodeJS 환경에서도 ...]]></content:encoded>
             <author>bepyan@naver.com (Edward Kim)</author>
@@ -324,7 +324,7 @@
             <title><![CDATA[Next.js 블로그 글의 추가 정보 파싱하기]]></title>
             <link>https://bepyan.github.io/blog/nextjs-blog/2-blog-listInfo</link>
             <guid>/blog/nextjs-blog/2-blog-listInfo</guid>
-            <pubDate>Fri, 11 Nov 2022 00:00:00 GMT</pubDate>
+            <pubDate>Fri, 11 Nov 2022 00:00:03 GMT</pubDate>
             <description><![CDATA[gray-matter, reading-time 등을 활용하여 글에 대한 추가 정보를 알아내자.]]></description>
             <content:encoded><![CDATA[다양한 플랫폼을 참고해보면 글 리스트에서 다양한 데이터가 첨부되어 있습니다. !230109-010815 - 글 제목 - 글 설명 - 글 작성 시간 - 태그 - ... 사용하게 될 라이브러리 소개 yarn add dayjs yarn a...]]></content:encoded>
             <author>bepyan@naver.com (Edward Kim)</author>
@@ -335,7 +335,7 @@
             <title><![CDATA[Next.js mdx plugin]]></title>
             <link>https://bepyan.github.io/blog/nextjs-blog/3-mdx-plugin</link>
             <guid>/blog/nextjs-blog/3-mdx-plugin</guid>
-            <pubDate>Fri, 11 Nov 2022 00:00:00 GMT</pubDate>
+            <pubDate>Fri, 11 Nov 2022 00:00:04 GMT</pubDate>
             <description><![CDATA[`next-mdx-remote`에서 플로그인으로 이쁜 결과물을 만들자.]]></description>
             <content:encoded><![CDATA[기본 사용법 ✨ next-mdx-remote를 활용하여 markdown파일을 이쁜 HTML 코드로 변환해줍니다. 추가로 markdown 파일에서 React 컴포넌트를 사용할 수 있는 이점이 있습니다. yarn add next-mdx-...]]></content:encoded>
             <author>bepyan@naver.com (Edward Kim)</author>
@@ -346,7 +346,7 @@
             <title><![CDATA[Next.js 블로그 Github Pages에 자동 배포하기]]></title>
             <link>https://bepyan.github.io/blog/nextjs-blog/4-deploy</link>
             <guid>/blog/nextjs-blog/4-deploy</guid>
-            <pubDate>Sat, 12 Nov 2022 00:00:00 GMT</pubDate>
+            <pubDate>Sat, 12 Nov 2022 00:00:01 GMT</pubDate>
             <description><![CDATA[Github Action을 활용하여 자동으로 Github Pages에 배포되도록 하자.]]></description>
             <content:encoded><![CDATA[레포 준비 `github pages`에 배포할 것익기 때문에 공식 문서 가이드에 따라 진행하면 됩니다. 아래 사항들을 주의하면 됩니다. 1. 기본적으로 github `username` 기반으로 도메인 하위에 생성된다. ex `bepy...]]></content:encoded>
             <author>bepyan@naver.com (Edward Kim)</author>
@@ -359,7 +359,7 @@
             <title><![CDATA[Next.js 블로그 sitemap 생성, 검색엔진 등록]]></title>
             <link>https://bepyan.github.io/blog/nextjs-blog/5-create-sitemap</link>
             <guid>/blog/nextjs-blog/5-create-sitemap</guid>
-            <pubDate>Tue, 15 Nov 2022 22:24:41 GMT</pubDate>
+            <pubDate>Sat, 12 Nov 2022 10:24:41 GMT</pubDate>
             <description><![CDATA[`next-sitemap` 라이브러리를 사용해서 쉽게 sitemap 만들고 검색엔진에 등록하자.]]></description>
             <content:encoded><![CDATA[검색엔진에 노출되기 위해선 봇들에게 우리 블로그에 어떤 페이지가 있는지 알려줘야 합니다. ✨ next-sitemap 라이브러리를 통해서 모든 정적 페이지 정보가 담긴 `sitemap.xml`를 만들어 봅시다. sitemap 생성 ya...]]></content:encoded>
             <author>bepyan@naver.com (Edward Kim)</author>
@@ -371,7 +371,7 @@
             <title><![CDATA[Next.js 블로그 Google Analytics 연동하기]]></title>
             <link>https://bepyan.github.io/blog/nextjs-blog/5-google-analytics</link>
             <guid>/blog/nextjs-blog/5-google-analytics</guid>
-            <pubDate>Wed, 16 Nov 2022 12:15:23 GMT</pubDate>
+            <pubDate>Sat, 12 Nov 2022 12:15:23 GMT</pubDate>
             <description><![CDATA[블로그에 Google Analytics v4를 심어주자!]]></description>
             <content:encoded><![CDATA[✨ google analytics 2020년도에 공식 릴리즈된 web-based 사용자 행동 분석 서비스입니다. 사용자의 유입, 스크롤, 검색, 클릭 등 이벤트를 자도으로 수집해줍니다. 참고로 firebase analytics는 ap...]]></content:encoded>
             <author>bepyan@naver.com (Edward Kim)</author>
