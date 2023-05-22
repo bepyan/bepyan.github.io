@@ -1,0 +1,124 @@
+---
+title: '다크모드, 더 프로처럼 활용하기'
+description: ''
+icon: ''
+image: ''
+tags:
+  - darkmode
+  - css
+draft: false
+date: 2023-05-22 23:19:24
+---
+
+개인적으로 다크모드를 접하면서 경험한 것을 정리해 보았다.
+`css` 트릭 위주로 자료를 정리했다.
+
+## 다크모드 지원하는 방법
+
+단순한 방법에서 부터 멋지게 적용하는 방법까지 나열을 해보면 아래와 같다.
+
+### (초급) 미디어 쿼리 활용하기
+
+```css
+.txt_g {
+  color: #111;
+}
+
+@media (prefers-color-scheme: dark) .txt_g {
+  color: #fff;
+}
+```
+
+[**`prefers-color-scheme`**](https://developer.mozilla.org/en-US/docs/Web/CSS/@media/prefers-color-scheme)은 사용자(브라우저) 환경에 따라 다크모드를 적용할 수 있도록 해준다.
+
+### (중급) `dark`로 덮어 씌우기
+
+```css
+.txt_g {
+  color: #111;
+}
+
+.dark .txt_g {
+  color: #fff;
+}
+```
+
+`body` 혹은 `html` 태그에 `dark` 클래스를 추가하여 스타일을 적용하는 방법이다.
+여기서 주의할 점은 **css 적용 우선 순위**를 잘 고려해야 한다는 것이다.
+
+```css
+/* .dark를 덮어씌우게 된다.. */
+.tit_cont .txt_g {
+  color: #000;
+}
+```
+
+**참고 자료**
+
+- https://tailwindcss.com/docs/dark-mode#supporting-system-preference-and-manual-selection
+
+### (고급) `css` 변수 사용하기
+
+```css
+:root {
+  --foreground: 222.2 47.4% 11.2%;
+}
+
+.dark {
+  --foreground: 213 31% 91%;
+}
+
+.txt_g {
+  color: hsl(var(--foreground));
+}
+```
+
+기존 설정에 비해 훨씬 간편하다. 초기 색상 변수만 선언해두면 개별적인 css 작업이 필요 없다.
+다만, **디자인 시스템**이 **필수**로 구축 되어야 한다.
+사이트에는 생각보다 많은 색상 코드를 사용하기 때문에 초기에 이를 잘 구축하지 못한다면 이후 꽤나 고생할 수 있다.
+
+**참고 자료**
+
+- https://ui.shadcn.com/docs/theming
+
+---
+
+## 다크모드 무효화 지대
+
+특정 영역만 다크모드를 적용되지 않도록 하고 싶을 때가 있다.
+그 핵심은 바로 [**`:where()`**](https://developer.mozilla.org/en-US/docs/Web/CSS/:where)을 사용하는 것.
+
+```css
+.dark .txt_g:not(:where([class~='no-dark'] *)) {
+  color: #fff;
+}
+```
+
+생각보다 css 지원 범위가 제한적인 것이 흠이다. https://caniuse.com/?search=%3Awhere
+~~물론 전세계 92% 브라우저 지원~~
+
+**참고 자료**
+
+- https://github.com/tailwindlabs/tailwindcss-typography/issues/32
+- https://github.com/tailwindlabs/tailwindcss-typography/pull/205/files
+
+---
+
+## 페이지 이동시 화면 번쩍임
+
+라이브러리를 활용한다면 아래 기능을 제공해주는 것을 확인할 수 있다.
+`No flash on load (both SSR and SSG)`
+
+그 핵심은 바로 **화면을 그리기 전에 다크모드 관련 설정을 적용**하는 것이다.
+`<head>` 태그에서 혹은 `<body>` 태그 최상단에서 다크모드를 여부 설정을 적용하면 된다.
+
+**참고 자료**
+
+- https://github.com/pacocoursey/next-themes
+
+---
+
+## 🌙 번외
+
+멋진 다크모드 사이트 탐방하기
+https://www.darkmodedesign.com/
