@@ -4,7 +4,7 @@
         <title>bepyan blog</title>
         <link>https://bepyan.github.io</link>
         <description>개발하면서 탐구한 것을 소소하게 기록하는 공간입니다.</description>
-        <lastBuildDate>Fri, 28 Apr 2023 15:50:36 GMT</lastBuildDate>
+        <lastBuildDate>Mon, 22 May 2023 15:37:43 GMT</lastBuildDate>
         <docs>https://validator.w3.org/feed/docs/rss2.html</docs>
         <generator>generate-rss</generator>
         <language>ko</language>
@@ -101,6 +101,16 @@
             <content:encoded><![CDATA[번들러 란? 간단하게 설명하자면 여러개의 파일들을 하나의 파일로 묶어주는 도구입니다. 프론트엔드에서 번들러의 역사가 길다면 길고 짧다고 하면 짧다고할 수 있을 것 같습니다. 지금은 너무나도 당연하게 `webpack` `vite` 같은...]]></content:encoded>
             <author>bepyan@naver.com (Edward Kim)</author>
             <category>bundler</category>
+        </item>
+        <item>
+            <title><![CDATA[다크모드, 더 프로처럼 활용하기]]></title>
+            <link>https://bepyan.github.io/blog/2023/darkmode</link>
+            <guid>/blog/2023/darkmode</guid>
+            <pubDate>Mon, 22 May 2023 23:19:24 GMT</pubDate>
+            <content:encoded><![CDATA[개인적으로 다크모드를 접하면서 경험한 것을 정리해 보았다. `css` 트릭 위주로 자료를 정리했다. 다크모드 지원하는 방법 단순한 방법에서 부터 멋지게 적용하는 방법까지 나열을 해보면 아래와 같다. (초급) 미디어 쿼리 활용하기 .t...]]></content:encoded>
+            <author>bepyan@naver.com (Edward Kim)</author>
+            <category>darkmode</category>
+            <category>css</category>
         </item>
         <item>
             <title><![CDATA[안드로이드에서 브라우저 디버깅하는 방법 (feat. 크롬, 삼성 브라우저)]]></title>
