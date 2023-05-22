@@ -9,7 +9,13 @@ import CalenderIcon from '~/components/icons/CalenderIcon';
 import ListIcon from '~/components/icons/ListIcon';
 import Layout from '~/components/layouts/Layout';
 import { PageSEO } from '~/components/SEO';
-import { fadeIn, fadeInSlideToLeft, fadeInUp, staggerTwo } from '~/constants/animations';
+import {
+  fadeIn,
+  fadeInSlideToLeft,
+  fadeInUp,
+  staggerOne,
+  staggerTwo,
+} from '~/constants/animations';
 import { allSeries, allSeriesName } from '~/constants/dataset';
 import { Series } from '~/libs/types';
 
@@ -67,7 +73,12 @@ export default function PostPage({ series }: { series: Series }) {
               </div>
             </motion.div>
 
-            <div className="mt-16 space-y-4">
+            <motion.section
+              className="mt-16 space-y-4"
+              variants={staggerOne}
+              initial="initial"
+              animate="animate"
+            >
               {series.posts.map((post, i) => (
                 <motion.div key={post.slug} variants={fadeInUp}>
                   <div className="flex space-x-6">
@@ -76,7 +87,7 @@ export default function PostPage({ series }: { series: Series }) {
                   </div>
                 </motion.div>
               ))}
-            </div>
+            </motion.section>
           </div>
         </div>
       </motion.section>
