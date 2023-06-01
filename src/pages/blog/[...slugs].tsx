@@ -32,8 +32,8 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
   }
 
   const postFooterProps: PostFooterProps = {
-    prevPost: allBlogPosts.at(postIndex - 1) ?? null,
-    nextPost: allBlogPosts.at(postIndex + 1) ?? null,
+    prevPost: allBlogPosts.at(postIndex + 1) ?? null,
+    nextPost: allBlogPosts.at(postIndex - 1) ?? null,
   };
 
   let series: Series | null = null;
