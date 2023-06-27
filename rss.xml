@@ -4,7 +4,7 @@
         <title>bepyan blog</title>
         <link>https://bepyan.github.io</link>
         <description>개발하면서 탐구한 것을 소소하게 기록하는 공간입니다.</description>
-        <lastBuildDate>Thu, 01 Jun 2023 16:55:54 GMT</lastBuildDate>
+        <lastBuildDate>Tue, 27 Jun 2023 04:50:30 GMT</lastBuildDate>
         <docs>https://validator.w3.org/feed/docs/rss2.html</docs>
         <generator>generate-rss</generator>
         <language>ko</language>
@@ -694,6 +694,15 @@
             <guid>/snippets/javascript/txt-file</guid>
             <pubDate>Sat, 03 Sep 2022 19:14:23 GMT</pubDate>
             <content:encoded><![CDATA[blob을 활용 const blob = new Blob(JSON.stringify(data), { type: 'text/plain' }); const textFile = window.URL.createObjectURL(blob); w...]]></content:encoded>
+            <author>bepyan@naver.com (Edward Kim)</author>
+            <category>javascript</category>
+        </item>
+        <item>
+            <title><![CDATA[(JS) 배열에서 중복된 객체 제거하기]]></title>
+            <link>https://bepyan.github.io/snippets/javascript/uniq-list</link>
+            <guid>/snippets/javascript/uniq-list</guid>
+            <pubDate>Tue, 27 Jun 2023 10:35:55 GMT</pubDate>
+            <content:encoded><![CDATA[배열에서 중복된 값을 제거하고 싶을 때가 있습니다. 단순하게는 `Set`을 활용하여 쉽게 중복을 제거할 수 있습니다. const list = 1, 1, 2, 2, 3; console.log(...new Set(...list)); //...]]></content:encoded>
             <author>bepyan@naver.com (Edward Kim)</author>
             <category>javascript</category>
         </item>

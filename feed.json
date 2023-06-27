@@ -1004,6 +1004,20 @@
             ]
         },
         {
+            "id": "/snippets/javascript/uniq-list",
+            "content_html": "배열에서 중복된 값을 제거하고 싶을 때가 있습니다. 단순하게는 `Set`을 활용하여 쉽게 중복을 제거할 수 있습니다. const list = 1, 1, 2, 2, 3; console.log(...new Set(...list)); //...",
+            "url": "https://bepyan.github.io/snippets/javascript/uniq-list",
+            "title": "(JS) 배열에서 중복된 객체 제거하기",
+            "date_modified": "2023-06-27T10:35:55.000Z",
+            "author": {
+                "name": "Edward Kim",
+                "url": "https://bepyan.github.io"
+            },
+            "tags": [
+                "javascript"
+            ]
+        },
+        {
             "id": "/snippets/javascript/version-regex",
             "content_html": "const REGEX = /\\d+(\\.\\d+)+/gi; console.log(''.match(REGEX)); 네이버 userAgent에서 네이버 버전 추출하기 const NAVER_USERAGENT_REGEX = /\\d+(\\.\\d+)...",
             "url": "https://bepyan.github.io/snippets/javascript/version-regex",

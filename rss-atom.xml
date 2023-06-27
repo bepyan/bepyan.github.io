@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://bepyan.github.io</id>
     <title>bepyan blog</title>
-    <updated>2023-06-01T16:55:54.007Z</updated>
+    <updated>2023-06-27T04:50:30.754Z</updated>
     <generator>generate-rss</generator>
     <author>
         <name>Edward Kim</name>
@@ -1253,6 +1253,24 @@
         <link href="https://bepyan.github.io/snippets/javascript/txt-file"/>
         <updated>2022-09-03T19:14:23.000Z</updated>
         <content type="html"><![CDATA[blob을 활용 const blob = new Blob(JSON.stringify(data), { type: 'text/plain' }); const textFile = window.URL.createObjectURL(blob); w...]]></content>
+        <author>
+            <name>Edward Kim</name>
+            <email>bepyan@naver.com</email>
+            <uri>https://bepyan.github.io</uri>
+        </author>
+        <category label="javascript"/>
+        <contributor>
+            <name>Edward Kim</name>
+            <email>bepyan@naver.com</email>
+            <uri>https://bepyan.github.io</uri>
+        </contributor>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[(JS) 배열에서 중복된 객체 제거하기]]></title>
+        <id>/snippets/javascript/uniq-list</id>
+        <link href="https://bepyan.github.io/snippets/javascript/uniq-list"/>
+        <updated>2023-06-27T10:35:55.000Z</updated>
+        <content type="html"><![CDATA[배열에서 중복된 값을 제거하고 싶을 때가 있습니다. 단순하게는 `Set`을 활용하여 쉽게 중복을 제거할 수 있습니다. const list = 1, 1, 2, 2, 3; console.log(...new Set(...list)); //...]]></content>
         <author>
             <name>Edward Kim</name>
             <email>bepyan@naver.com</email>
