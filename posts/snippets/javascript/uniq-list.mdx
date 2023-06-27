@@ -1,0 +1,104 @@
+---
+title: '(JS) 배열에서 중복된 객체 제거하기'
+description: ''
+icon: ''
+image: ''
+tags:
+  - javascript
+draft: false
+date: 2023-06-27 10:35:55
+---
+
+배열에서 중복된 값을 제거하고 싶을 때가 있습니다.
+
+단순하게는 `Set`을 활용하여 쉽게 중복을 제거할 수 있습니다.
+
+```js
+const list = [1, 1, 2, 2, 3];
+console.log([...new Set([...list])]);
+// [1, 2, 3]
+```
+
+```js
+const commentList = [
+  { id: '1', userId: 'x', name: 'xx' },
+  { id: '2', userId: 'x', name: 'xxx' },
+  { id: '3', userId: 'y', name: 'yy' },
+  { id: '4', userId: 'z', name: 'zz' },
+];
+
+console.log([...new Set([...commentList.map((comment) => comment.userId)])]);
+// [x, y, z]
+```
+
+하지만 객체의 원본 그대로 유지
+
+---
+
+### filter 사용법
+
+배열의 순서를 활용하는 방법입니다.
+특정 키를 갖는 원소를 탐색하면 항상 같은 위치로 응답을 받기 때문입니다.
+
+```js
+list.filter((item, index, self) => {
+  return index === self.findIndex((v) => v.userId === item.userId);
+});
+```
+
+아무래도 원소마다 배열을 탐색해야하기 때문에 시간 복잡도는 `n^2`으로 조금은 비효율적이라고 느껴집니다.
+
+---
+
+### Map 사용법
+
+해시맵 자료구조를 활용하는 방법도 있습니다.
+
+```js
+[...new Map(list.map((item) => [item.userId, item])).values()];
+```
+
+[`Map`](https://developer.mozilla.org/ko/docs/Web/JavaScript/Reference/Global_Objects/Map/Map)의 문법은 조금 익숙치 않을 수 있지만,
+시간 복잡도는 `n`으로 더 깔쌈하게 느껴집니다 ✨
+
+이를 유틸로 만들어서 쉽게 사용할 수도 있습니다.
+
+```ts
+const getUniqueListBy = <T>(list: T[], key: keyof T) => {
+  return [...new Map(list.map((item) => [item[key], item])).values()];
+};
+```
+
+```ts
+const commentList = [
+  { id: '1', userId: 'x', name: 'xx' },
+  { id: '2', userId: 'x', name: 'xxx' },
+  { id: '3', userId: 'y', name: 'yy' },
+  { id: '4', userId: 'z', name: 'zz' },
+];
+
+console.log(getUniqueListBy(commentList, 'userId'));
+// [
+//     {
+//         "id": "2",
+//         "userId": "x",
+//         "name": "xxx"
+//     },
+//     {
+//         "id": "3",
+//         "userId": "y",
+//         "name": "yy"
+//     },
+//     {
+//         "id": "4",
+//         "userId": "z",
+//         "name": "zz"
+//     }
+// ]
+```
+
+---
+
+**참고 자료**
+
+- https://stackoverflow.com/questions/2218999/how-to-remove-all-duplicates-from-an-array-of-objects
