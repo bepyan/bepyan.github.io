@@ -13,6 +13,7 @@ import { Toaster } from 'react-hot-toast';
 
 import FloatScrollUpButton from '~/components/FloatScrollUpButton';
 import Fonts from '~/components/Fonts';
+import TopBanner from '~/components/TopBanner';
 import { seoConfig } from '~/config';
 import { $, isDev } from '~/libs/core';
 import * as gtag from '~/libs/gtag';
@@ -35,6 +36,7 @@ export default function App({ Component, pageProps }: AppProps) {
       <DefaultSeo {...seoConfig} />
       <KBarProvider actions={actions} options={{ enableHistory: true }}>
         <Fonts />
+        <TopBanner />
         <div className={$('font-sans')}>
           <Component {...pageProps} />
           <FloatScrollUpButton />
