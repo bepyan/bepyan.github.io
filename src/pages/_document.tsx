@@ -4,7 +4,7 @@ import { isDev } from '~/libs/core';
 
 export default function MyDocument() {
   return (
-    <Html lang="ko" className="[--scroll-mt:2rem]">
+    <Html lang="ko" className="[--scroll-mt:4rem]">
       <Head>
         <meta
           name="google-site-verification"
