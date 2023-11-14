@@ -1,37 +1,40 @@
 ---
 title: '다크모드, 더 프로처럼 활용하기'
 description: ''
-icon: ''
 image: ''
+draft: false
+date: 2023-05-22 23:19:24
 tags:
   - darkmode
   - css
-draft: false
-date: 2023-05-22 23:19:24
+  - tailwind
 ---
 
-개인적으로 다크모드를 접하면서 경험한 것을 정리해 보았다.
-`css` 트릭 위주로 자료를 정리했다.
+개인적으로 다크모드를 접하면서 경험한 것을 전체적으로 정리해 보았습니다.
 
-## 다크모드 지원하는 방법
+## 다크모드 CSS
 
-단순한 방법에서 부터 멋지게 적용하는 방법까지 나열을 해보면 아래와 같다.
+다양한 방식으로 다크모드를 다룰 수 있습니다.
+서비스 상황에 맞춰 적절한 방법을 선택하는 것이 좋습니다.
 
 ### (초급) 미디어 쿼리 활용하기
 
-```css
+```scss
 .txt_g {
   color: #111;
 }
 
-@media (prefers-color-scheme: dark) .txt_g {
-  color: #fff;
+@media (prefers-color-scheme: dark) {
+  .txt_g {
+    color: #fff;
+  }
 }
 ```
 
-[**`prefers-color-scheme`**](https://developer.mozilla.org/en-US/docs/Web/CSS/@media/prefers-color-scheme)은 사용자(브라우저) 환경에 따라 다크모드를 적용할 수 있도록 해준다.
+[**`prefers-color-scheme`**](https://developer.mozilla.org/en-US/docs/Web/CSS/@media/prefers-color-scheme)를 통해서 사용자의 기기 환경이 다크모드인지 알 수 있습니다.
+css 만으로 손쉽게 사이트에 다크모드를 적용할 수 있습니다.
 
-### (중급) `dark`로 덮어 씌우기
+### (중급) `.dark` 활용하기
 
 ```css
 .txt_g {
@@ -43,50 +46,62 @@ date: 2023-05-22 23:19:24
 }
 ```
 
-`body` 혹은 `html` 태그에 `dark` 클래스를 추가하여 스타일을 적용하는 방법이다.
-여기서 주의할 점은 **css 적용 우선 순위**를 잘 고려해야 한다는 것이다.
+`body` 혹은 `html` 태그에 `dark` 클래스를 추가하여 스타일을 적용하는 방법입니다.
+`js`의 도움을 받아 동적으로 다크모드를 설정할 수 있습니다.
+
+유의할 점은 css 작성할 때 **css 적용 우선 순위**를 고려해야 합니다.
 
 ```css
-/* .dark를 덮어씌우게 된다.. */
-.tit_cont .txt_g {
+/* .dark로 선언한 스타일을 덮어씌우게 된다.. */
+.main_section .tit_cont .txt_g {
   color: #000;
 }
 ```
-
-**참고 자료**
-
-- https://tailwindcss.com/docs/dark-mode#supporting-system-preference-and-manual-selection
 
 ### (고급) `css` 변수 사용하기
 
 ```css
 :root {
-  --foreground: 222.2 47.4% 11.2%;
+  --foreground: #111;
 }
 
 .dark {
-  --foreground: 213 31% 91%;
+  --foreground: #fff;
 }
 
 .txt_g {
-  color: hsl(var(--foreground));
+  color: var(--foreground);
 }
 ```
 
-기존 설정에 비해 훨씬 간편하다. 초기 색상 변수만 선언해두면 개별적인 css 작업이 필요 없다.
-다만, **디자인 시스템**이 **필수**로 구축 되어야 한다.
-사이트에는 생각보다 많은 색상 코드를 사용하기 때문에 초기에 이를 잘 구축하지 못한다면 이후 꽤나 고생할 수 있다.
+이전 설정에 비해 사용이 훨씬 간편해집니다.
+초기 색상 변수만 선언해두면, 추후 개별적로 css을 덮어 씌울 필요가 없습니다.
 
-**참고 자료**
+다만, **디자인 시스템**이 필수로 요구됩니다.
+같은 글을 어디서는 `#1f1f1f`을 쓰고 어디서는 `#ffffff`을 적용해야 한다면 꽤나 머리 아파집니다.
 
-- https://ui.shadcn.com/docs/theming
+추가적으로 `IE`에선 이를 지원하지 않는 점을 유의해야 합니다.
 
----
+- https://caniuse.com/css-variables
 
-## 다크모드 무효화 지대
+### (번외) `tailwindcss`
 
-특정 영역만 다크모드를 적용되지 않도록 하고 싶을 때가 있다.
-그 핵심은 바로 [**`:where()`**](https://developer.mozilla.org/en-US/docs/Web/CSS/:where)을 사용하는 것.
+별다른 설정 없이 `dark:text-white` 형태로 바로 스타일을 적용할 수 있습니다.
+기본으로 `media-query`문법으로 적용되지만, `.dark` 클래스명으로 적용하고 싶다면 아래 설정을 추가하면 됩니다.
+
+```js title="tailwind.config.js" {2}
+module.exports = {
+  darkMode: 'class',
+  // ...
+};
+```
+
+- https://tailwindcss.com/docs/dark-mode
+
+### (번외) 다크모드 무효화 지대
+
+특정 영역만 다크모드를 적용되지 않도록 하고 싶을 때가 있습니다.
+그 핵심은 바로 [**`:where()`**](https://developer.mozilla.org/en-US/docs/Web/CSS/:where)을 사용하는 것입니다.
 
 ```css
 .dark .txt_g:not(:where([class~='no-dark'] *)) {
@@ -94,31 +109,76 @@ date: 2023-05-22 23:19:24
 }
 ```
 
-생각보다 css 지원 범위가 제한적인 것이 흠이다. https://caniuse.com/?search=%3Awhere
-~~물론 전세계 92% 브라우저 지원~~
+생각보다 css 지원 범위가 제한적인 것이 흠입니다. ~~현재 기준으로 전세계 92% 브라우저 지원~~
 
-**참고 자료**
+- https://caniuse.com/?search=%3Awhere
+
+아래 글을 추가로 참고해보면 좋습니다.
 
 - https://github.com/tailwindlabs/tailwindcss-typography/issues/32
 - https://github.com/tailwindlabs/tailwindcss-typography/pull/205/files
 
----
+## 다크모드 JS
 
-## 페이지 이동시 화면 번쩍임
+`html`에 `dark` 클래스를 추가해주는 역할입니다.
+[미디어쿼리 API](https://developer.mozilla.org/ko/docs/Web/API/Window/matchMedia)를 활용하는 것이 핵심입니다.
 
-라이브러리를 활용한다면 아래 기능을 제공해주는 것을 확인할 수 있다.
-`No flash on load (both SSR and SSG)`
+```js
+window.matchMedia('(prefers-color-scheme: dark)').matches;
+```
 
-그 핵심은 바로 **화면을 그리기 전에 다크모드 관련 설정을 적용**하는 것이다.
-`<head>` 태그에서 혹은 `<body>` 태그 최상단에서 다크모드를 여부 설정을 적용하면 된다.
+```js
+function applyDarkMode(isDarkMode) {
+  if (isDarkMode) {
+    document.documentElement.classList.add('dark');
+  } else {
+    document.documentElement.classList.remove('dark');
+  }
+}
+```
 
-**참고 자료**
+```js
+function setDarkMode(mode) {
+  if (mode === 'system') {
+    localStorage.removeItem('theme');
+    // ...
+  } else {
+    localStorage.theme = mode;
+    applyDarkMode(mode === 'dark');
+  }
+}
+```
 
-- https://github.com/pacocoursey/next-themes
+### addEventListener
 
----
+safari 14 이하에서 `MediaQueryList.addEventListener`를 지원하지 않는 점을 주의해야 합니다.
 
-## 🌙 번외
+- https://caniuse.com/mdn-api_mediaquerylist_change_event
 
-멋진 다크모드 사이트 탐방하기
-https://www.darkmodedesign.com/
+```js
+function listenDarkMode(isDarkMode) {
+  const mediaQuery = window.matchMedia('(prefers-color-scheme: dark)');
+  mediaQuery.addEventListener
+    ? mediaQuery.addEventListener('change', (e) => handleMediaQuery(e.matches))
+    : mediaQuery.addListener((e) => handleMediaQuery(e.matches));
+}
+```
+
+### 페이지 이동시 화면 번쩍임 대응
+
+페이지 이동시 화면이 번쩍이는 현상이 발생될 수 있습니다.
+
+대응하는 핵심 방법은 바로 **화면을 그리기 전에 다크모드 관련 설정을 적용**하는 것입니다.
+`<head>` 태그에서 혹은 `<body>` 태그 최상단에서 다크모드를 여부 설정을 적용하면 됩니다.
+
+> No flash on load (both SSR and SSG)
+
+NextJS의 `next-themes`에서도 관련된 내용을 확인할 수 있습니다.
+
+- https://github.com/pacocoursey/next-themes/blob/main/packages/next-themes/src/index.tsx#L177
+
+## 번외
+
+멋진 다크모드 사이트 탐방해보면 많은 영감을 얻을 수 있습니다.
+
+- https://www.darkmodedesign.com/
