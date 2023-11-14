@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://bepyan.github.io</id>
     <title>bepyan blog</title>
-    <updated>2023-08-21T16:33:05.939Z</updated>
+    <updated>2023-11-14T15:47:01.611Z</updated>
     <generator>generate-rss</generator>
     <author>
         <name>Edward Kim</name>
@@ -180,7 +180,7 @@
         <id>/blog/2023/darkmode</id>
         <link href="https://bepyan.github.io/blog/2023/darkmode"/>
         <updated>2023-05-22T23:19:24.000Z</updated>
-        <content type="html"><![CDATA[개인적으로 다크모드를 접하면서 경험한 것을 정리해 보았다. `css` 트릭 위주로 자료를 정리했다. 다크모드 지원하는 방법 단순한 방법에서 부터 멋지게 적용하는 방법까지 나열을 해보면 아래와 같다. (초급) 미디어 쿼리 활용하기 .t...]]></content>
+        <content type="html"><![CDATA[개인적으로 다크모드를 접하면서 경험한 것을 전체적으로 정리해 보았습니다. 다크모드 CSS 다양한 방식으로 다크모드를 다룰 수 있습니다. 서비스 상황에 맞춰 적절한 방법을 선택하는 것이 좋습니다. (초급) 미디어 쿼리 활용하기 .txt...]]></content>
         <author>
             <name>Edward Kim</name>
             <email>bepyan@naver.com</email>
@@ -188,6 +188,7 @@
         </author>
         <category label="darkmode"/>
         <category label="css"/>
+        <category label="tailwind"/>
         <contributor>
             <name>Edward Kim</name>
             <email>bepyan@naver.com</email>
