@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://bepyan.github.io</id>
     <title>bepyan blog</title>
-    <updated>2024-02-23T14:25:07.569Z</updated>
+    <updated>2024-02-23T14:36:06.457Z</updated>
     <generator>generate-rss</generator>
     <author>
         <name>Edward Kim</name>
@@ -16,6 +16,83 @@
     <icon>https://bepyan.github.io/favicon.ico</icon>
     <rights>All rights reserved since 2022, Edward Kim</rights>
     <category term="Technologies"/>
+    <entry>
+        <title type="html"><![CDATA[프론트엔드 개발자 도구함]]></title>
+        <id>/blog/2023/2023-frontend-library</id>
+        <link href="https://bepyan.github.io/blog/2023/2023-frontend-library"/>
+        <updated>2023-01-30T14:08:18.000Z</updated>
+        <summary type="html"><![CDATA[직접 개발말고, 좋은 라이브러리를 씁시다!]]></summary>
+        <content type="html"><![CDATA[세상에는 좋은 라이브러리가 정말 많다! 100% 무료인 라이브러리들을 정리해봤다. 전부 써본 것은 아니고 필요할 때 써보면 좋겠다 싶은 것들만 정리했습니다. UI Design System `material-ui` `react` &nb...]]></content>
+        <author>
+            <name>Edward Kim</name>
+            <email>bepyan@naver.com</email>
+            <uri>https://bepyan.github.io</uri>
+        </author>
+        <category label="라이브러리"/>
+        <contributor>
+            <name>Edward Kim</name>
+            <email>bepyan@naver.com</email>
+            <uri>https://bepyan.github.io</uri>
+        </contributor>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[차세대 번들러 비교 및 분석 (feat. webpack, rollup, esbuild, vite)]]></title>
+        <id>/blog/2023/bundlers</id>
+        <link href="https://bepyan.github.io/blog/2023/bundlers"/>
+        <updated>2023-02-21T13:19:01.000Z</updated>
+        <summary type="html"><![CDATA[번들러가 왜 필요하고 어떻게 발전되고 가고 있을까?]]></summary>
+        <content type="html"><![CDATA[번들러 란? 간단하게 설명하자면 여러개의 파일들을 하나의 파일로 묶어주는 도구입니다. 프론트엔드에서 번들러의 역사가 길다면 길고 짧다고 하면 짧다고할 수 있을 것 같습니다. 지금은 너무나도 당연하게 `webpack` `vite` 같은...]]></content>
+        <author>
+            <name>Edward Kim</name>
+            <email>bepyan@naver.com</email>
+            <uri>https://bepyan.github.io</uri>
+        </author>
+        <category label="bundler"/>
+        <contributor>
+            <name>Edward Kim</name>
+            <email>bepyan@naver.com</email>
+            <uri>https://bepyan.github.io</uri>
+        </contributor>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[다크모드, 더 프로처럼 활용하기]]></title>
+        <id>/blog/2023/darkmode</id>
+        <link href="https://bepyan.github.io/blog/2023/darkmode"/>
+        <updated>2023-05-22T23:19:24.000Z</updated>
+        <content type="html"><![CDATA[개인적으로 다크모드를 접하면서 경험한 것을 전체적으로 정리해 보았습니다. 다크모드 CSS 다양한 방식으로 다크모드를 다룰 수 있습니다. 서비스 상황에 맞춰 적절한 방법을 선택하는 것이 좋습니다. (초급) 미디어 쿼리 활용하기 .txt...]]></content>
+        <author>
+            <name>Edward Kim</name>
+            <email>bepyan@naver.com</email>
+            <uri>https://bepyan.github.io</uri>
+        </author>
+        <category label="darkmode"/>
+        <category label="css"/>
+        <category label="tailwind"/>
+        <contributor>
+            <name>Edward Kim</name>
+            <email>bepyan@naver.com</email>
+            <uri>https://bepyan.github.io</uri>
+        </contributor>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[안드로이드에서 브라우저 디버깅하는 방법 (feat. 크롬, 삼성 브라우저)]]></title>
+        <id>/blog/2023/debug-in-android-web</id>
+        <link href="https://bepyan.github.io/blog/2023/debug-in-android-web"/>
+        <updated>2023-01-26T13:12:37.000Z</updated>
+        <content type="html"><![CDATA[안드로이드에서 브라우저 디버깅을 해야할 때가 있다. MAC 환경에서 어떻게 디버깅할 수 있는지 한번 정리해보자. 환경 세팅 brew install --cask android-platform-tools 안드로이드 개발자모드 설정 갤럭시...]]></content>
+        <author>
+            <name>Edward Kim</name>
+            <email>bepyan@naver.com</email>
+            <uri>https://bepyan.github.io</uri>
+        </author>
+        <category label="android"/>
+        <category label="debug"/>
+        <contributor>
+            <name>Edward Kim</name>
+            <email>bepyan@naver.com</email>
+            <uri>https://bepyan.github.io</uri>
+        </contributor>
+    </entry>
     <entry>
         <title type="html"><![CDATA[Github Action에서 Error: Cannot find module 에러 해결]]></title>
         <id>/blog/2022/cannot-find-module-in-github-action</id>
@@ -131,83 +208,6 @@
         </author>
         <category label="styled-components"/>
         <category label="emotion"/>
-        <contributor>
-            <name>Edward Kim</name>
-            <email>bepyan@naver.com</email>
-            <uri>https://bepyan.github.io</uri>
-        </contributor>
-    </entry>
-    <entry>
-        <title type="html"><![CDATA[프론트엔드 개발자 도구함]]></title>
-        <id>/blog/2023/2023-frontend-library</id>
-        <link href="https://bepyan.github.io/blog/2023/2023-frontend-library"/>
-        <updated>2023-01-30T14:08:18.000Z</updated>
-        <summary type="html"><![CDATA[직접 개발말고, 좋은 라이브러리를 씁시다!]]></summary>
-        <content type="html"><![CDATA[세상에는 좋은 라이브러리가 정말 많다! 100% 무료인 라이브러리들을 정리해봤다. 전부 써본 것은 아니고 필요할 때 써보면 좋겠다 싶은 것들만 정리했습니다. UI Design System `material-ui` `react` &nb...]]></content>
-        <author>
-            <name>Edward Kim</name>
-            <email>bepyan@naver.com</email>
-            <uri>https://bepyan.github.io</uri>
-        </author>
-        <category label="라이브러리"/>
-        <contributor>
-            <name>Edward Kim</name>
-            <email>bepyan@naver.com</email>
-            <uri>https://bepyan.github.io</uri>
-        </contributor>
-    </entry>
-    <entry>
-        <title type="html"><![CDATA[차세대 번들러 비교 및 분석 (feat. webpack, rollup, esbuild, vite)]]></title>
-        <id>/blog/2023/bundlers</id>
-        <link href="https://bepyan.github.io/blog/2023/bundlers"/>
-        <updated>2023-02-21T13:19:01.000Z</updated>
-        <summary type="html"><![CDATA[번들러가 왜 필요하고 어떻게 발전되고 가고 있을까?]]></summary>
-        <content type="html"><![CDATA[번들러 란? 간단하게 설명하자면 여러개의 파일들을 하나의 파일로 묶어주는 도구입니다. 프론트엔드에서 번들러의 역사가 길다면 길고 짧다고 하면 짧다고할 수 있을 것 같습니다. 지금은 너무나도 당연하게 `webpack` `vite` 같은...]]></content>
-        <author>
-            <name>Edward Kim</name>
-            <email>bepyan@naver.com</email>
-            <uri>https://bepyan.github.io</uri>
-        </author>
-        <category label="bundler"/>
-        <contributor>
-            <name>Edward Kim</name>
-            <email>bepyan@naver.com</email>
-            <uri>https://bepyan.github.io</uri>
-        </contributor>
-    </entry>
-    <entry>
-        <title type="html"><![CDATA[다크모드, 더 프로처럼 활용하기]]></title>
-        <id>/blog/2023/darkmode</id>
-        <link href="https://bepyan.github.io/blog/2023/darkmode"/>
-        <updated>2023-05-22T23:19:24.000Z</updated>
-        <content type="html"><![CDATA[개인적으로 다크모드를 접하면서 경험한 것을 전체적으로 정리해 보았습니다. 다크모드 CSS 다양한 방식으로 다크모드를 다룰 수 있습니다. 서비스 상황에 맞춰 적절한 방법을 선택하는 것이 좋습니다. (초급) 미디어 쿼리 활용하기 .txt...]]></content>
-        <author>
-            <name>Edward Kim</name>
-            <email>bepyan@naver.com</email>
-            <uri>https://bepyan.github.io</uri>
-        </author>
-        <category label="darkmode"/>
-        <category label="css"/>
-        <category label="tailwind"/>
-        <contributor>
-            <name>Edward Kim</name>
-            <email>bepyan@naver.com</email>
-            <uri>https://bepyan.github.io</uri>
-        </contributor>
-    </entry>
-    <entry>
-        <title type="html"><![CDATA[안드로이드에서 브라우저 디버깅하는 방법 (feat. 크롬, 삼성 브라우저)]]></title>
-        <id>/blog/2023/debug-in-android-web</id>
-        <link href="https://bepyan.github.io/blog/2023/debug-in-android-web"/>
-        <updated>2023-01-26T13:12:37.000Z</updated>
-        <content type="html"><![CDATA[안드로이드에서 브라우저 디버깅을 해야할 때가 있다. MAC 환경에서 어떻게 디버깅할 수 있는지 한번 정리해보자. 환경 세팅 brew install --cask android-platform-tools 안드로이드 개발자모드 설정 갤럭시...]]></content>
-        <author>
-            <name>Edward Kim</name>
-            <email>bepyan@naver.com</email>
-            <uri>https://bepyan.github.io</uri>
-        </author>
-        <category label="android"/>
-        <category label="debug"/>
         <contributor>
             <name>Edward Kim</name>
             <email>bepyan@naver.com</email>

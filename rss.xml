@@ -4,7 +4,7 @@
         <title>bepyan blog</title>
         <link>https://bepyan.github.io</link>
         <description>개발하면서 탐구한 것을 소소하게 기록하는 공간입니다.</description>
-        <lastBuildDate>Fri, 23 Feb 2024 14:25:07 GMT</lastBuildDate>
+        <lastBuildDate>Fri, 23 Feb 2024 14:36:06 GMT</lastBuildDate>
         <docs>https://validator.w3.org/feed/docs/rss2.html</docs>
         <generator>generate-rss</generator>
         <language>ko</language>
@@ -15,6 +15,47 @@
         </image>
         <copyright>All rights reserved since 2022, Edward Kim</copyright>
         <category>Technologies</category>
+        <item>
+            <title><![CDATA[프론트엔드 개발자 도구함]]></title>
+            <link>https://bepyan.github.io/blog/2023/2023-frontend-library</link>
+            <guid>/blog/2023/2023-frontend-library</guid>
+            <pubDate>Mon, 30 Jan 2023 14:08:18 GMT</pubDate>
+            <description><![CDATA[직접 개발말고, 좋은 라이브러리를 씁시다!]]></description>
+            <content:encoded><![CDATA[세상에는 좋은 라이브러리가 정말 많다! 100% 무료인 라이브러리들을 정리해봤다. 전부 써본 것은 아니고 필요할 때 써보면 좋겠다 싶은 것들만 정리했습니다. UI Design System `material-ui` `react` &nb...]]></content:encoded>
+            <author>bepyan@naver.com (Edward Kim)</author>
+            <category>라이브러리</category>
+        </item>
+        <item>
+            <title><![CDATA[차세대 번들러 비교 및 분석 (feat. webpack, rollup, esbuild, vite)]]></title>
+            <link>https://bepyan.github.io/blog/2023/bundlers</link>
+            <guid>/blog/2023/bundlers</guid>
+            <pubDate>Tue, 21 Feb 2023 13:19:01 GMT</pubDate>
+            <description><![CDATA[번들러가 왜 필요하고 어떻게 발전되고 가고 있을까?]]></description>
+            <content:encoded><![CDATA[번들러 란? 간단하게 설명하자면 여러개의 파일들을 하나의 파일로 묶어주는 도구입니다. 프론트엔드에서 번들러의 역사가 길다면 길고 짧다고 하면 짧다고할 수 있을 것 같습니다. 지금은 너무나도 당연하게 `webpack` `vite` 같은...]]></content:encoded>
+            <author>bepyan@naver.com (Edward Kim)</author>
+            <category>bundler</category>
+        </item>
+        <item>
+            <title><![CDATA[다크모드, 더 프로처럼 활용하기]]></title>
+            <link>https://bepyan.github.io/blog/2023/darkmode</link>
+            <guid>/blog/2023/darkmode</guid>
+            <pubDate>Mon, 22 May 2023 23:19:24 GMT</pubDate>
+            <content:encoded><![CDATA[개인적으로 다크모드를 접하면서 경험한 것을 전체적으로 정리해 보았습니다. 다크모드 CSS 다양한 방식으로 다크모드를 다룰 수 있습니다. 서비스 상황에 맞춰 적절한 방법을 선택하는 것이 좋습니다. (초급) 미디어 쿼리 활용하기 .txt...]]></content:encoded>
+            <author>bepyan@naver.com (Edward Kim)</author>
+            <category>darkmode</category>
+            <category>css</category>
+            <category>tailwind</category>
+        </item>
+        <item>
+            <title><![CDATA[안드로이드에서 브라우저 디버깅하는 방법 (feat. 크롬, 삼성 브라우저)]]></title>
+            <link>https://bepyan.github.io/blog/2023/debug-in-android-web</link>
+            <guid>/blog/2023/debug-in-android-web</guid>
+            <pubDate>Thu, 26 Jan 2023 13:12:37 GMT</pubDate>
+            <content:encoded><![CDATA[안드로이드에서 브라우저 디버깅을 해야할 때가 있다. MAC 환경에서 어떻게 디버깅할 수 있는지 한번 정리해보자. 환경 세팅 brew install --cask android-platform-tools 안드로이드 개발자모드 설정 갤럭시...]]></content:encoded>
+            <author>bepyan@naver.com (Edward Kim)</author>
+            <category>android</category>
+            <category>debug</category>
+        </item>
         <item>
             <title><![CDATA[Github Action에서 Error: Cannot find module 에러 해결]]></title>
             <link>https://bepyan.github.io/blog/2022/cannot-find-module-in-github-action</link>
@@ -81,47 +122,6 @@
             <author>bepyan@naver.com (Edward Kim)</author>
             <category>styled-components</category>
             <category>emotion</category>
-        </item>
-        <item>
-            <title><![CDATA[프론트엔드 개발자 도구함]]></title>
-            <link>https://bepyan.github.io/blog/2023/2023-frontend-library</link>
-            <guid>/blog/2023/2023-frontend-library</guid>
-            <pubDate>Mon, 30 Jan 2023 14:08:18 GMT</pubDate>
-            <description><![CDATA[직접 개발말고, 좋은 라이브러리를 씁시다!]]></description>
-            <content:encoded><![CDATA[세상에는 좋은 라이브러리가 정말 많다! 100% 무료인 라이브러리들을 정리해봤다. 전부 써본 것은 아니고 필요할 때 써보면 좋겠다 싶은 것들만 정리했습니다. UI Design System `material-ui` `react` &nb...]]></content:encoded>
-            <author>bepyan@naver.com (Edward Kim)</author>
-            <category>라이브러리</category>
-        </item>
-        <item>
-            <title><![CDATA[차세대 번들러 비교 및 분석 (feat. webpack, rollup, esbuild, vite)]]></title>
-            <link>https://bepyan.github.io/blog/2023/bundlers</link>
-            <guid>/blog/2023/bundlers</guid>
-            <pubDate>Tue, 21 Feb 2023 13:19:01 GMT</pubDate>
-            <description><![CDATA[번들러가 왜 필요하고 어떻게 발전되고 가고 있을까?]]></description>
-            <content:encoded><![CDATA[번들러 란? 간단하게 설명하자면 여러개의 파일들을 하나의 파일로 묶어주는 도구입니다. 프론트엔드에서 번들러의 역사가 길다면 길고 짧다고 하면 짧다고할 수 있을 것 같습니다. 지금은 너무나도 당연하게 `webpack` `vite` 같은...]]></content:encoded>
-            <author>bepyan@naver.com (Edward Kim)</author>
-            <category>bundler</category>
-        </item>
-        <item>
-            <title><![CDATA[다크모드, 더 프로처럼 활용하기]]></title>
-            <link>https://bepyan.github.io/blog/2023/darkmode</link>
-            <guid>/blog/2023/darkmode</guid>
-            <pubDate>Mon, 22 May 2023 23:19:24 GMT</pubDate>
-            <content:encoded><![CDATA[개인적으로 다크모드를 접하면서 경험한 것을 전체적으로 정리해 보았습니다. 다크모드 CSS 다양한 방식으로 다크모드를 다룰 수 있습니다. 서비스 상황에 맞춰 적절한 방법을 선택하는 것이 좋습니다. (초급) 미디어 쿼리 활용하기 .txt...]]></content:encoded>
-            <author>bepyan@naver.com (Edward Kim)</author>
-            <category>darkmode</category>
-            <category>css</category>
-            <category>tailwind</category>
-        </item>
-        <item>
-            <title><![CDATA[안드로이드에서 브라우저 디버깅하는 방법 (feat. 크롬, 삼성 브라우저)]]></title>
-            <link>https://bepyan.github.io/blog/2023/debug-in-android-web</link>
-            <guid>/blog/2023/debug-in-android-web</guid>
-            <pubDate>Thu, 26 Jan 2023 13:12:37 GMT</pubDate>
-            <content:encoded><![CDATA[안드로이드에서 브라우저 디버깅을 해야할 때가 있다. MAC 환경에서 어떻게 디버깅할 수 있는지 한번 정리해보자. 환경 세팅 brew install --cask android-platform-tools 안드로이드 개발자모드 설정 갤럭시...]]></content:encoded>
-            <author>bepyan@naver.com (Edward Kim)</author>
-            <category>android</category>
-            <category>debug</category>
         </item>
         <item>
             <title><![CDATA[내가 기본적으로 사용하는 ESLint 설정]]></title>
