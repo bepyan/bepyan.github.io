@@ -2,6 +2,12 @@ import { Post as TPost } from 'contentlayer/generated';
 
 export type Optional<Type, Key extends keyof Type> = Omit<Type, Key> & Partial<Pick<Type, Key>>;
 
+declare global {
+  interface Window {
+    adsbygoogle: any;
+  }
+}
+
 /**
  * 글 (posts + snippets)
  */

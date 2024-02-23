@@ -10,6 +10,7 @@ export default function MyDocument() {
           name="google-site-verification"
           content="IW87tE2IQja7BjGV4qw19t6Wk6Kcnmf-x-K5lrYWa28"
         />
+        <meta name="google-adsense-account" content="ca-pub-2820184336962070" />
         <meta name="naver-site-verification" content="3763a796b024affc5b7513ac77c47e6e03c8bdcf" />
 
         <meta name="theme-color" content="#fafafa" media="(prefers-color-scheme: light)" />
@@ -33,6 +34,14 @@ export default function MyDocument() {
             gtag('js', new Date());
           `,
             }}
+          />
+        )}
+        {/* Google AdSense */}
+        {!isDev && (
+          <script
+            async
+            src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2820184336962070"
+            crossOrigin="anonymous"
           />
         )}
       </body>

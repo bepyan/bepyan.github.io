@@ -32,7 +32,6 @@ export default function App({ Component, pageProps }: AppProps) {
     <ThemeProvider attribute="class">
       <Head>
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <meta name="google-adsense-account" content="ca-pub-2820184336962070" />
       </Head>
       <DefaultSeo {...seoConfig} />
       <KBarProvider actions={actions} options={{ enableHistory: true }}>

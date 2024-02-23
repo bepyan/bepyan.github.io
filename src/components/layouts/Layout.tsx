@@ -2,6 +2,7 @@ import { ReactNode, useMemo } from 'react';
 
 import { siteConfig } from '~/config';
 
+import AdSenseBanner from '../adsense/AdSenseBanner';
 import AuthorContacts from '../common/AuthorContacts';
 import Hr from '../common/Hr';
 import LinkExternal from '../common/LinkExternal';
@@ -23,6 +24,8 @@ export default function Layout({ children }: { children: ReactNode }) {
       <main className="relative pb-16">{children}</main>
       {/* --- */}
       <footer className="pb-8 text-sm text-neutral-800 dark:text-neutral-400">
+        <AdSenseBanner />
+
         <Hr className="mb-8" />
 
         <div className="flex flex-col items-end space-y-1">
