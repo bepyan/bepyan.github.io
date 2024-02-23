@@ -72,9 +72,16 @@ export default function App({ Component, pageProps }: AppProps) {
           />
           {/* Google AdSense */}
           <Script
+            id="adsbygoogle-init"
             async
             src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2820184336962070"
+            strategy="afterInteractive"
             crossOrigin="anonymous"
+          />
+          <Script
+            async
+            src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"
+            strategy="afterInteractive"
           />
         </>
       )}

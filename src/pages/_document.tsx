@@ -1,8 +1,20 @@
 import { Head, Html, Main, NextScript } from 'next/document';
+import { useEffect } from 'react';
 
 import { isDev } from '~/libs/core';
 
 export default function MyDocument() {
+  useEffect(() => {
+    const ads = document.getElementsByClassName('adsbygoogle').length;
+    console.log('ads', ads);
+
+    for (var i = 0; i < ads; i++) {
+      try {
+        (window.adsbygoogle = window.adsbygoogle || []).push({});
+      } catch (e) {}
+    }
+  }, []);
+
   return (
     <Html lang="ko" className="[--scroll-mt:4rem]">
       <Head>
