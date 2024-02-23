@@ -13,7 +13,6 @@
     "lint": "eslint \"**/*.{js,cjs,ejs,ts,tsx}\" --fix"
   },
   "dependencies": {
-    "@ctrl/react-adsense": "^1.7.0",
     "@headlessui/react": "^1.7.5",
     "@next/font": "^13.1.6",
     "dayjs": "^1.11.6",

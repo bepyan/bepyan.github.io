@@ -1,20 +1,8 @@
 import { Head, Html, Main, NextScript } from 'next/document';
-import { useEffect } from 'react';
 
 import { isDev } from '~/libs/core';
 
 export default function MyDocument() {
-  useEffect(() => {
-    const ads = document.getElementsByClassName('adsbygoogle').length;
-    console.log('ads', ads);
-
-    for (var i = 0; i < ads; i++) {
-      try {
-        (window.adsbygoogle = window.adsbygoogle || []).push({});
-      } catch (e) {}
-    }
-  }, []);
-
   return (
     <Html lang="ko" className="[--scroll-mt:4rem]">
       <Head>
@@ -31,6 +19,13 @@ export default function MyDocument() {
         <link rel="alternate" type="application/rss+xml" href="/rss.xml" title="RSS" />
         <link rel="alternate" type="application/atom+xml" href="/rss-atom.xml" title="RSS Atom" />
         <link rel="alternate" type="application/json" href="/feed.json" title="JSON Feed" />
+
+        <script
+          async
+          src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2820184336962070"
+          crossOrigin="anonymous"
+        />
+        <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js" />
       </Head>
       <body className="text-primary bg-primary transition-[background]">
         <Main />
