@@ -36,14 +36,6 @@ export default function MyDocument() {
             }}
           />
         )}
-        {/* Google AdSense */}
-        {!isDev && (
-          <script
-            async
-            src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2820184336962070"
-            crossOrigin="anonymous"
-          />
-        )}
       </body>
     </Html>
   );
