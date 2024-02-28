@@ -2,6 +2,7 @@ import { AnimatePresence, motion } from 'framer-motion';
 import Link from 'next/link';
 import React from 'react';
 
+import AdBanner from '~/components/AdBanner';
 import PlainText from '~/components/common/PlainText';
 import PostListItem from '~/components/common/PostListItem';
 import SearchInput from '~/components/common/SearchInput';
@@ -46,6 +47,16 @@ export default function PostPage({
   const filteredBlogPosts = postList.filter((post) =>
     post.title.toLowerCase().includes(searchValue.toLowerCase()),
   );
+
+  // 5개 글 당 광고 하나
+  const withAdsList = filteredBlogPosts.reduce<(ReducedPost | false)[]>((acc, v, idx) => {
+    if ((idx + 1) % 5 === 0) {
+      acc.push(false);
+    } else {
+      acc.push(v);
+    }
+    return acc;
+  }, []);
 
   return (
     <Layout>
@@ -102,19 +113,28 @@ export default function PostPage({
           className="mt-12 grid w-full gap-8 lg:grid-cols-2 lg:gap-12"
           variants={staggerHalf}
         >
-          {filteredBlogPosts.map((post) => (
-            <motion.div key={post.slug} variants={fadeInUp}>
-              <motion.div
-                variants={fadeIn}
-                initial="initial"
-                whileInView="animate"
-                exit="exit"
-                viewport={{ amount: 0.6, once: true }}
-              >
-                <PostListItem post={post} />
+          {withAdsList.map((post, index) =>
+            post ? (
+              <motion.div key={post.slug} variants={fadeInUp}>
+                <motion.div
+                  variants={fadeIn}
+                  initial="initial"
+                  whileInView="animate"
+                  exit="exit"
+                  viewport={{ amount: 0.6, once: true }}
+                >
+                  <PostListItem post={post} />
+                </motion.div>
               </motion.div>
-            </motion.div>
-          ))}
+            ) : (
+              <AdBanner
+                key={`ads-${index}`}
+                data-ad-format="fluid"
+                data-ad-layout-key="-gw-3+1f-3d+2z"
+                data-ad-slot="6066641869"
+              />
+            ),
+          )}
         </motion.div>
       </motion.div>
     </Layout>
