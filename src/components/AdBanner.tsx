@@ -13,13 +13,14 @@ export default function AdBanner(props: React.ComponentProps<'ins'>) {
 
   return (
     <ins
-      className={$('adsbygoogle', !isDev && 'data-[ad-status=unfilled]:hidden')}
+      {...props}
+      className={$('adsbygoogle', !isDev && 'data-[ad-status=unfilled]:hidden', props.className)}
       style={{
+        ...props.style,
         display: 'block',
         overflow: 'hidden',
       }}
       data-ad-client="ca-pub-2820184336962070"
-      {...props}
     />
   );
 }
