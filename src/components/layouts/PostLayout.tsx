@@ -7,6 +7,7 @@ import { siteConfig } from '~/config';
 import { fadeInHalf, staggerHalf } from '~/constants/animations';
 import { Post, Series, TableOfContents } from '~/libs/types';
 
+import AdBanner from '../AdBanner';
 import AuthorContacts from '../common/AuthorContacts';
 import Hr from '../common/Hr';
 import IconText from '../common/IconText';
@@ -90,6 +91,7 @@ export default function PostLayout({
           <div className="mt-12 ml-auto">
             <div className="sticky top-[120px] hidden min-w-[240px] max-w-[260px] self-start lg:block">
               <TocBanner tableOfContents={tableOfContents} />
+              <AdBanner className="mt-12" data-ad-format="autorelaxed" data-ad-slot="3425974571" />
             </div>
           </div>
         </motion.div>
