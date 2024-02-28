@@ -33,8 +33,3 @@ body,
 .kbar-scrollbar > div::-webkit-scrollbar-thumb {
   @apply bg-neutral-200 hover:bg-opacity-70 dark:bg-neutral-600 dark:hover:bg-opacity-70;
 }
-
-/* 
-ins.adsbygoogle[data-ad-status='unfilled'] {
-  display: none !important;
-} */

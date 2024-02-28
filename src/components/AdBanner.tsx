@@ -1,5 +1,7 @@
 import { useEffect } from 'react';
 
+import { $, isDev } from '~/libs/core';
+
 export default function AdBanner(props: React.ComponentProps<'ins'>) {
   useEffect(() => {
     try {
@@ -11,7 +13,7 @@ export default function AdBanner(props: React.ComponentProps<'ins'>) {
 
   return (
     <ins
-      className="adsbygoogle"
+      className={$('adsbygoogle', !isDev && 'data-[ad-status=unfilled]:hidden')}
       style={{
         display: 'block',
         overflow: 'hidden',
