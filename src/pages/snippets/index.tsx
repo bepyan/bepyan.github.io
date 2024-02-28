@@ -4,6 +4,7 @@ import Link from 'next/link';
 import { useRouter } from 'next/router';
 import title from 'title';
 
+import AdBanner from '~/components/AdBanner';
 import Pill from '~/components/common/Pill';
 import PlainText from '~/components/common/PlainText';
 import SnippetListItem from '~/components/common/SnippetListItem';
@@ -99,6 +100,12 @@ export default function Snippets({ snippetList }: { snippetList: Snippet[] }) {
             </motion.div>
           ))}
         </motion.div>
+
+        <AdBanner
+          data-ad-slot="5794684285"
+          data-ad-format="auto"
+          data-full-width-responsive="true"
+        />
 
         <div className="mt-8 space-y-16">
           {filteredSnippetList.map(({ key, postList }) => {

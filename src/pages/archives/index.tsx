@@ -2,6 +2,7 @@ import dayjs from 'dayjs';
 import { motion } from 'framer-motion';
 import Link from 'next/link';
 
+import AdBanner from '~/components/AdBanner';
 import Hr from '~/components/common/Hr';
 import IconText from '~/components/common/IconText';
 import LinkHover from '~/components/common/LinkHover';
@@ -109,6 +110,14 @@ export default function Archives({
             ))}
           </div>
         </motion.div>
+
+        <Hr className="my-8" />
+
+        <AdBanner
+          data-ad-slot="5794684285"
+          data-ad-format="auto"
+          data-full-width-responsive="true"
+        />
 
         <Hr className="my-8" />
 
