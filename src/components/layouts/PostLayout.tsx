@@ -92,7 +92,7 @@ export default function PostLayout({
             <div className="sticky top-[120px] hidden min-w-[240px] max-w-[260px] self-start lg:block">
               <TocBanner tableOfContents={tableOfContents} />
               <AdBanner
-                className="mt-12"
+                className="mt-6"
                 style={{ width: '240px', height: '200px' }}
                 data-ad-slot="5629805393"
               />

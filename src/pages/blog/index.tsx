@@ -48,13 +48,15 @@ export default function PostPage({
     post.title.toLowerCase().includes(searchValue.toLowerCase()),
   );
 
-  // 5개 글 당 광고 하나
   const withAdsList = filteredBlogPosts.reduce<(ReducedPost | false)[]>((acc, v, idx) => {
-    if ((idx + 1) % 5 === 0) {
+    const ads = acc.filter((v) => v === false).length;
+
+    if (idx === 5 + ads * 10) {
       acc.push(false);
-    } else {
-      acc.push(v);
     }
+
+    acc.push(v);
+
     return acc;
   }, []);
 
