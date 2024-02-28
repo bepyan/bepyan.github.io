@@ -36,7 +36,9 @@ export default function Layout({ children }: { children: ReactNode }) {
           <AuthorContacts />
           <p>
             <span>© {since} </span>
-            <LinkExternal href={siteConfig.author.contacts.github}>{siteConfig.title}</LinkExternal>
+            <LinkExternal href="https://github.com/bepyan/bepyan.github.io">
+              {siteConfig.title}
+            </LinkExternal>
             <span> Powered by </span>
             <LinkExternal href="https://nextjs.org/">Next.js</LinkExternal>
             <span>, </span>
