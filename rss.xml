@@ -4,7 +4,7 @@
         <title>bepyan blog</title>
         <link>https://bepyan.github.io</link>
         <description>개발하면서 탐구한 것을 소소하게 기록하는 공간입니다.</description>
-        <lastBuildDate>Tue, 09 Jul 2024 05:21:20 GMT</lastBuildDate>
+        <lastBuildDate>Thu, 11 Jul 2024 06:54:07 GMT</lastBuildDate>
         <docs>https://validator.w3.org/feed/docs/rss2.html</docs>
         <generator>generate-rss</generator>
         <language>ko</language>
@@ -133,6 +133,17 @@
             <author>bepyan@naver.com (Edward Kim)</author>
             <category>css</category>
             <category>flexbox</category>
+        </item>
+        <item>
+            <title><![CDATA[transition의 벤더 프리픽스가 필요할까? (feat. -webkit-box, -ms-flexbox, -o-transition, -ms-transition)]]></title>
+            <link>https://bepyan.github.io/blog/2024/transition-history</link>
+            <guid>/blog/2024/transition-history</guid>
+            <pubDate>Wed, 10 Jul 2024 14:29:14 GMT</pubDate>
+            <description><![CDATA[-webkit-box, -ms-flexbox 같은 속성은 뭐고 어떻게 다뤄야 할까?]]></description>
+            <content:encoded><![CDATA[웹 개발을 하다 보면 CSS 속성에 `-webkit-`, `-moz-`, `-o-`, `-ms-` 등의 접두사를 본 적이 있을 것입니다. 이러한 접두사를 "벤더 프리픽스"라고 부르는데, 과연 2024년 현재에도 이들이 필요할까요? 오...]]></content:encoded>
+            <author>bepyan@naver.com (Edward Kim)</author>
+            <category>css</category>
+            <category>transition</category>
         </item>
         <item>
             <title><![CDATA[내가 기본적으로 사용하는 ESLint 설정]]></title>

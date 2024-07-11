@@ -185,6 +185,22 @@
             ]
         },
         {
+            "id": "/blog/2024/transition-history",
+            "content_html": "웹 개발을 하다 보면 CSS 속성에 `-webkit-`, `-moz-`, `-o-`, `-ms-` 등의 접두사를 본 적이 있을 것입니다. 이러한 접두사를 \"벤더 프리픽스\"라고 부르는데, 과연 2024년 현재에도 이들이 필요할까요? 오...",
+            "url": "https://bepyan.github.io/blog/2024/transition-history",
+            "title": "transition의 벤더 프리픽스가 필요할까? (feat. -webkit-box, -ms-flexbox, -o-transition, -ms-transition)",
+            "summary": "-webkit-box, -ms-flexbox 같은 속성은 뭐고 어떻게 다뤄야 할까?",
+            "date_modified": "2024-07-10T14:29:14.000Z",
+            "author": {
+                "name": "Edward Kim",
+                "url": "https://bepyan.github.io"
+            },
+            "tags": [
+                "css",
+                "transition"
+            ]
+        },
+        {
             "id": "/blog/dev-setting/eslint",
             "content_html": "> 사심 ❤️을 넘치게 담아서 기록한 eslint 설정입니다. 사용 환경 - typescript - tailwindcss yarn add -D eslint @typescript-eslint/parser yarn add -D eslin...",
             "url": "https://bepyan.github.io/blog/dev-setting/eslint",
